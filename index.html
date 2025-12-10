@@ -28,6 +28,8 @@
             color: #ffffff;
             overflow-x: hidden;
         }
+        
+        body.is-intro { overflow: hidden; height: 100dvh; }
 
         h1, h2, h3, .font-luxury { font-family: 'Cinzel', serif; }
 
@@ -37,34 +39,26 @@
             position: relative;
         }
         .bg-luxury-clean::before {
-            content: "";
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
+            content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
-            pointer-events: none;
-            z-index: 999;
+            pointer-events: none; z-index: 999;
         }
 
         /* TIPOGRAFIA DE GRIFE */
         .text-gold {
-            background: var(--gold-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            background: var(--gold-gradient); -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent; background-clip: text;
         }
 
-        /* HEADER & NAV */
+        /* HEADER */
         .nav-glass {
             background: linear-gradient(to bottom, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.8) 50%, rgba(0,0,0,0) 100%);
             transition: all 0.8s ease;
         }
 
         .nav-link {
-            position: relative;
-            color: rgba(255,255,255,0.6);
-            font-size: 10px;
-            letter-spacing: 0.25em;
-            text-transform: uppercase;
+            position: relative; color: rgba(255,255,255,0.7);
+            font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
             transition: color 0.4s ease;
         }
         .nav-link:hover, .nav-link.active { color: var(--gold-primary); }
@@ -77,82 +71,73 @@
 
         /* BOTÕES */
         .btn-griffe {
-            background: transparent; color: #fff; border: 1px solid rgba(255,255,255,0.3);
-            padding: 1.2rem 3rem; font-family: 'Montserrat', sans-serif; font-size: 10px;
-            letter-spacing: 0.3em; text-transform: uppercase; transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-            position: relative; overflow: hidden;
+            background: rgba(255, 255, 255, 0.03); color: #fff; 
+            border: 1px solid rgba(255,255,255,0.4); padding: 1.2rem 2.5rem; 
+            font-family: 'Montserrat', sans-serif; font-size: 12px; letter-spacing: 0.25em; 
+            text-transform: uppercase; transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative; overflow: hidden; backdrop-filter: blur(5px);
         }
         .btn-griffe:hover, .btn-griffe.active-state {
-            border-color: var(--gold-primary); background: rgba(229, 201, 136, 0.05);
-            letter-spacing: 0.4em; color: var(--gold-primary);
+            border-color: var(--gold-primary); background: rgba(229, 201, 136, 0.1);
+            letter-spacing: 0.35em; color: var(--gold-primary);
         }
 
         .btn-gold-solid {
             background: var(--gold-primary); color: #000; padding: 1rem 2rem;
-            font-size: 10px; letter-spacing: 0.2em; font-weight: 600;
+            font-size: 11px; letter-spacing: 0.2em; font-weight: 600;
             text-transform: uppercase; transition: all 0.4s ease;
         }
         .btn-gold-solid:hover, .btn-gold-solid.active-state { background: #fff; transform: translateY(-2px); }
 
         .btn-outline {
-            background: transparent;
-            border: 1px solid rgba(212, 175, 55, 0.4);
-            color: #D4AF37;
-            padding: 1rem 2rem;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            font-weight: 600;
-            transition: all 0.4s ease;
+            background: transparent; border: 1px solid rgba(212, 175, 55, 0.4);
+            color: #D4AF37; padding: 1rem 2rem; text-transform: uppercase;
+            letter-spacing: 0.15em; font-size: 11px; font-weight: 500;
+            transition: all 0.4s ease; cursor: pointer;
         }
         .btn-outline:hover, .btn-outline.active-state {
-            border-color: #D4AF37;
-            background: rgba(212, 175, 55, 0.05);
-            color: #FFF;
-            box-shadow: 0 0 20px rgba(212, 175, 55, 0.1);
+            border-color: #D4AF37; background: rgba(212, 175, 55, 0.05);
+            color: #FFF; box-shadow: 0 0 20px rgba(212, 175, 55, 0.1);
         }
 
-        /* MONOLITO FLUTUANTE (GLASSMORPHISM) */
+        /* MONOLITO FLUTUANTE */
         .card-monolith {
             background: rgba(255, 255, 255, 0.03); 
             backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.08);
-            transition: all 0.8s cubic-bezier(0.25, 0.8, 0.25, 1); /* Transição mais lenta para o scroll */
+            transition: all 0.8s cubic-bezier(0.25, 0.8, 0.25, 1);
             position: relative; overflow: hidden;
         }
-        /* Aplica o efeito tanto no hover (desktop) quanto no active-state (mobile scroll) */
         .card-monolith:hover, .card-monolith.active-state {
-            border-color: var(--gold-primary); 
-            background: rgba(255, 255, 255, 0.06);
-            transform: translateY(-8px); 
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+            border-color: var(--gold-primary); background: rgba(255, 255, 255, 0.06);
+            transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
         }
 
-        /* REGRAS ESPECÍFICAS PARA ELEMENTOS INTERNOS NO MOBILE SCROLL */
-        /* Faz os ícones e textos internos reagirem quando o pai tem active-state */
+        /* Regras Active State (Mobile Scroll) */
         .card-monolith.active-state .opacity-80 { opacity: 1; }
-        .card-monolith.active-state .text-white\/30 { color: #E5C988; } /* Ícones mais brilhantes */
-        
-        .group.active-state h4, 
-        .group.active-state i,
-        .group.active-state .text-white\/20,
-        .group.active-state .text-5xl {
-             color: #E5C988; /* Acende títulos e ícones */
-        }
+        .card-monolith.active-state .text-white\/30 { color: #E5C988; } 
+        .group.active-state h4, .group.active-state i, .group.active-state .text-white\/20, .group.active-state .text-5xl { color: #E5C988; }
         .group.active-state .opacity-70 { opacity: 1; }
+        .group.active-state img { transform: scale(1.05); opacity: 1; }
+        .group.active-state .grayscale { filter: grayscale(0); }
+        .group.active-state .opacity-0 { opacity: 1; transform: translateY(0); }
 
         /* Utilitários & Animações */
-        .img-luxury-frame { border: 1px solid rgba(255,255,255,0.05); transition: all 0.7s ease; }
-        .img-luxury-frame:hover, .img-luxury-frame.active-state { border-color: rgba(229, 201, 136, 0.4); transform: scale(1.01); }
-
-        /* Faz imagens internas reagirem ao scroll */
-        .group.active-state img {
-            transform: scale(1.05);
-            opacity: 1;
+        .img-luxury-frame { 
+            transition: all 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            background: radial-gradient(circle at center, rgba(255,255,255,0.03) 0%, transparent 70%);
         }
-        .group.active-state .grayscale { filter: grayscale(0); }
-        
-        /* Botões internos de "Comprar" ou "Agendar" aparecendo */
-        .group.active-state .opacity-0 { opacity: 1; transform: translateY(0); }
+        .img-luxury-frame:hover, .img-luxury-frame.active-state { 
+            transform: scale(1.02); box-shadow: 0 20px 40px -10px rgba(0,0,0,0.5);
+        }
+        .img-luxury-frame::after {
+            content: ''; position: absolute; inset: 0; border-radius: inherit;
+            box-shadow: inset 0 0 20px rgba(229, 201, 136, 0);
+            transition: box-shadow 0.7s ease; pointer-events: none;
+        }
+        .img-luxury-frame:hover::after, .img-luxury-frame.active-state::after {
+            box-shadow: inset 0 0 20px rgba(229, 201, 136, 0.05);
+        }
 
         .view-section { display: none; opacity: 0; transition: opacity 1s ease; }
         .view-active { display: block; opacity: 1; }
@@ -164,165 +149,269 @@
         .opacity-100-forced { opacity: 1 !important; pointer-events: auto; }
         .transition-opacity-slow { transition: opacity 1s ease; }
 
-        /* Ajuste de Texto Responsivo para Título */
-        .text-fluid-title {
-            font-size: clamp(2.5rem, 10vw, 6rem); /* Garante que fique em uma linha no mobile */
+        .text-fluid-title { font-size: clamp(3rem, 12vw, 8rem); }
+
+        .faq-item { border-bottom: 1px solid rgba(255,255,255,0.1); padding: 1.5rem 0; cursor: pointer; }
+        .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.5s ease; }
+        .faq-item.active .faq-answer { max-height: 300px; }
+        .faq-icon { transition: transform 0.3s ease; }
+        .faq-item.active .faq-icon { transform: rotate(45deg); color: #E5C988; }
+        
+        .hidden-on-intro { display: none; }
+        p { font-weight: 300; }
+
+        /* --- MODAL DE SENHA DE LUXO --- */
+        .password-modal-overlay {
+            position: fixed; inset: 0; background: rgba(0,0,0,0.95); backdrop-filter: blur(20px);
+            z-index: 9999; display: flex; align-items: center; justify-content: center;
+            opacity: 0; pointer-events: none; transition: opacity 0.5s ease;
         }
+        .password-modal-overlay.open { opacity: 1; pointer-events: auto; }
+        
+        .password-box {
+            background: #0f0f0f; border: 1px solid rgba(229, 201, 136, 0.3);
+            padding: 3rem; text-align: center; max-width: 400px; width: 90%;
+            transform: scale(0.9); transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 0 60px rgba(229, 201, 136, 0.1);
+        }
+        .password-modal-overlay.open .password-box { transform: scale(1); }
+
+        .password-input {
+            background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+            color: #E5C988; font-family: 'Cinzel', serif; letter-spacing: 0.2em;
+            text-align: center; font-size: 1.2rem; padding: 1rem; width: 100%;
+            margin-bottom: 2rem; outline: none; transition: border-color 0.3s;
+        }
+        .password-input:focus { border-color: #E5C988; }
+        .password-input::placeholder { color: rgba(255,255,255,0.2); font-family: 'Montserrat', sans-serif; font-size: 0.8rem; letter-spacing: 0.1em; }
+
+        /* Animação de Erro */
+        .shake { animation: shake 0.5s; border-color: #ff4444 !important; }
+        @keyframes shake {
+            0% { transform: translateX(0); } 25% { transform: translateX(-5px); }
+            50% { transform: translateX(5px); } 75% { transform: translateX(-5px); } 100% { transform: translateX(0); }
+        }
+
     </style>
 </head>
-<body class="bg-luxury-clean min-h-screen text-gray-200 selection:bg-[#E5C988] selection:text-black">
+<body class="bg-luxury-clean min-h-screen text-gray-200 selection:bg-[#E5C988] selection:text-black is-intro">
 
     <!-- 3. HEADER FLUTUANTE -->
     <nav class="fixed top-0 w-full z-50 nav-glass px-8 py-8 md:px-16">
         <div class="max-w-[1920px] mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
             
-            <!-- Menu Esquerda (INICIALMENTE OCULTO NA CAPA) -->
             <div id="menu-left" class="hidden md:flex gap-12 order-2 md:order-1 opacity-0-forced transition-opacity-slow">
                 <button onclick="switchView('intro')" id="nav-intro" class="nav-link cursor-pointer hover:text-[#E5C988] transition-colors">INÍCIO</button>
-                <button onclick="switchView('client')" id="nav-client" class="nav-link cursor-pointer hover:text-[#E5C988] transition-colors">RITUAIS</button>
+                <button onclick="switchView('client')" id="nav-client" class="nav-link cursor-pointer hover:text-[#E5C988] transition-colors">O RITUAL</button>
             </div>
 
-            <!-- Logo Central -->
             <div onclick="switchView('intro')" id="nav-brand-container" class="cursor-pointer order-1 md:order-2 text-center group opacity-0-forced transition-opacity-slow hover:opacity-80">
                 <span id="brand-logo" class="font-luxury text-xl md:text-2xl tracking-[0.3em] text-white group-hover:text-[#E5C988] transition duration-700 block">
                     A GATA LAMBEU
                 </span>
             </div>
             
-            <!-- Menu Direita (INICIALMENTE OCULTO NA CAPA) -->
             <div id="menu-right" class="hidden md:flex gap-12 order-3 justify-end items-center opacity-0-forced transition-opacity-slow">
-                <button onclick="switchView('pro')" id="nav-pro" class="nav-link cursor-pointer hover:text-[#E5C988] transition-colors">PROFISSIONAL</button>
+                <button onclick="switchView('pro')" id="nav-pro" class="nav-link cursor-pointer hover:text-[#E5C988] transition-colors">BUSINESS</button>
                 <button class="text-white/50 hover:text-[#E5C988] transition"><i data-lucide="search" class="w-3 h-3"></i></button>
             </div>
 
-            <!-- Menu Mobile (INICIALMENTE OCULTO NA CAPA) - ADICIONADO BOTÃO INÍCIO -->
-            <div id="menu-mobile" class="flex md:hidden gap-6 order-3 text-[9px] tracking-widest text-gray-400 opacity-0-forced transition-opacity-slow justify-center w-full">
-                <button onclick="switchView('intro')" class="hover:text-[#E5C988]">INÍCIO</button>
-                <button onclick="switchView('client')" class="hover:text-[#E5C988]">RITUAIS</button>
-                <button onclick="switchView('pro')" class="hover:text-[#E5C988]">PRO</button>
+            <div id="menu-mobile" class="flex md:hidden gap-8 order-3 text-[10px] tracking-widest text-gray-300 opacity-0-forced transition-opacity-slow justify-center w-full uppercase">
+                <button onclick="switchView('intro')" class="hover:text-[#E5C988]">Início</button>
+                <button onclick="switchView('client')" class="hover:text-[#E5C988]">Rituais</button>
+                <button onclick="switchView('pro')" class="hover:text-[#E5C988]">Business</button>
             </div>
         </div>
     </nav>
 
+    <!-- === MODAL DE SENHA DE LUXO (GATEKEEPER) === -->
+    <div id="password-modal" class="password-modal-overlay">
+        <div class="password-box">
+            <div class="text-[#E5C988] mb-6"><i data-lucide="lock" class="w-10 h-10 mx-auto"></i></div>
+            <h3 class="font-luxury text-2xl text-white mb-2">ACESSO RESTRITO</h3>
+            <p class="text-[10px] text-gray-400 uppercase tracking-widest mb-8">Área exclusiva para membros</p>
+            
+            <input type="password" id="business-password" class="password-input" placeholder="CHAVE DE ACESSO" onkeypress="handlePasswordEnter(event)">
+            
+            <button onclick="verifyPassword()" class="btn-gold-solid w-full mb-6">DESBLOQUEAR CONTEÚDO</button>
+            
+            <div class="border-t border-white/10 pt-4">
+                <p class="text-[9px] text-gray-500 mb-2">Ainda não tem a chave?</p>
+                <a href="https://wa.me/554900000000?text=Olá,%20sou%20profissional%20e%20gostaria%20da%20chave%20de%20acesso%20para%20Treinamentos" target="_blank" class="text-[10px] text-[#E5C988] border-b border-[#E5C988]/50 pb-1 hover:text-white transition uppercase tracking-widest">
+                    Solicitar ao Concierge
+                </a>
+            </div>
+            
+            <button onclick="closePasswordModal()" class="absolute top-4 right-4 text-gray-500 hover:text-white transition"><i data-lucide="x" class="w-5 h-5"></i></button>
+        </div>
+    </div>
+
     <!-- =========================================================================
          VISÃO 1: CAPA ABERTURA
          ========================================================================= -->
-    <main id="view-intro" class="view-section view-active h-screen w-full relative flex flex-col justify-center items-center">
-        <div class="absolute inset-0 z-0">
+    <main id="view-intro" class="view-section view-active h-[100dvh] w-full relative flex flex-col justify-center items-center">
+         <div class="absolute inset-0 z-0">
             <div class="absolute inset-0 bg-black/40 z-10"></div>
             <div class="absolute inset-0 bg-gradient-to-t from-[#050505] via-transparent to-[#050505]/60 z-10"></div>
-            <video autoplay loop muted playsinline class="w-full h-full object-cover opacity-80 scale-105">
+            <video autoplay loop muted playsinline preload="auto" poster="https://res.cloudinary.com/dh4ekg6f2/image/upload/v1765334678/Gemini_Generated_Image_qfrznfqfrznfqfrz_uphgnj.png" class="w-full h-full object-cover opacity-80 scale-105">
                 <source src="https://teste333.carrd.co/assets/videos/video01.mp4?v=4b1f8939" type="video/mp4">
             </video>
         </div>
 
-        <div class="relative z-20 text-center w-full max-w-5xl px-6">
-            <!-- Título em Linha Única (Fluid Text) e com Efeito Restaurado -->
+        <div class="relative z-20 text-center w-full max-w-5xl px-6 flex flex-col items-center justify-center h-full pb-20">
+            <p class="text-[#E5C988] text-[10px] md:text-sm tracking-[0.25em] font-bold mb-8 uppercase slide-up text-center w-full">
+                O Frizz não é um erro. É o seu sabotador de presença.
+            </p>
             <h1 class="text-fluid-title text-white font-luxury mb-8 leading-none reveal-text mix-blend-overlay whitespace-nowrap" style="animation-delay: 0.2s; font-weight: 400;">
                 A GATA <span class="text-gold italic">LAMBEU</span>
             </h1>
-
-            <p class="text-gray-200 text-[10px] md:text-xs tracking-[0.4em] uppercase mb-12 font-light reveal-text opacity-80" style="animation-delay: 0.4s">
-                Alta Tecnologia Capilar Híbrida
-            </p>
-
-            <!-- Três Palavras -->
-            <div class="flex justify-center items-center gap-4 md:gap-8 text-[10px] md:text-xs tracking-[0.3em] text-gray-300 mb-8 slide-up uppercase font-medium" style="animation-delay: 0.6s">
+            <div class="flex justify-center items-center gap-6 md:gap-10 text-xs md:text-sm tracking-[0.25em] text-gray-300 mb-10 slide-up uppercase font-medium" style="animation-delay: 0.4s">
                 <span>Confiança</span>
                 <span class="w-1 h-1 bg-[#E5C988] rounded-full"></span>
                 <span>Poder</span>
                 <span class="w-1 h-1 bg-[#E5C988] rounded-full"></span>
                 <span>Atitude</span>
             </div>
-
-            <!-- Tagline Restaurada -->
-            <p class="text-gray-400 text-[10px] md:text-sm font-light italic mb-16 max-w-2xl mx-auto leading-relaxed slide-up" style="animation-delay: 0.7s">
-                "A fusão definitiva entre o liso absoluto e a integridade total do fio."
-            </p>
-
-            <div class="reveal-text" style="animation-delay: 0.8s">
-                <button onclick="switchView('client')" class="btn-griffe">
-                    DESCUBRA A COLEÇÃO
-                </button>
+            <div class="reveal-text mb-12" style="animation-delay: 0.6s">
+                <button onclick="switchView('client')" class="btn-griffe">DESVENDAR A JORNADA</button>
             </div>
-        </div>
-
-        <div class="absolute bottom-10 left-0 w-full flex justify-center text-[9px] tracking-[0.2em] text-white/40 uppercase reveal-text" style="animation-delay: 1.2s">
-            <div class="flex flex-col items-center gap-2 cursor-pointer animate-pulse" onclick="switchView('client')">
-                <span>Explore</span>
-                <div class="h-8 w-px bg-white/30"></div>
+            <div class="flex gap-12 text-[11px] tracking-[0.2em] text-gray-400 uppercase slide-up z-50 cursor-pointer" style="animation-delay: 0.8s">
+                <div onclick="switchView('client')" class="hover:text-[#E5C988] transition transform hover:scale-105 border-b border-transparent hover:border-[#E5C988] pb-1">Sou Cliente</div>
+                <span class="text-[#E5C988] opacity-50">|</span>
+                <div onclick="switchView('pro')" class="hover:text-[#E5C988] transition transform hover:scale-105 border-b border-transparent hover:border-[#E5C988] pb-1">Sou Profissional</div>
             </div>
         </div>
     </main>
 
     <!-- =========================================================================
-         VISÃO 2: ÁREA PROFISSIONAL (B2B REFINADO)
+         VISÃO 2: ÁREA PROFISSIONAL (BUSINESS ECOSYSTEM)
          ========================================================================= -->
-    <main id="view-pro" class="view-section min-h-screen pt-40 pb-20">
+    <main id="view-pro" class="view-section min-h-screen pt-32 md:pt-40 pb-20">
         <div class="max-w-[1400px] mx-auto px-6 md:px-16">
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 mb-24 items-end slide-up">
+             <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 mb-12 items-end slide-up">
                 <div class="lg:col-span-8">
-                    <span class="text-[#E5C988] text-[9px] font-bold tracking-[0.3em] uppercase mb-4 block">Acesso Restrito</span>
+                    <span class="text-[#E5C988] text-[10px] font-bold tracking-[0.3em] uppercase mb-4 block">Acesso Liberado • Business</span>
                     <h2 class="font-luxury text-4xl md:text-6xl text-white leading-tight">INTELIGÊNCIA DE <br><span class="text-gold italic">NEGÓCIOS</span></h2>
                 </div>
             </div>
 
+            <!-- SUB-MENU (SUBTITLES CLEAN) -->
+            <div class="flex flex-wrap justify-center md:justify-start gap-8 md:gap-12 mb-20 border-b border-white/10 pb-6 text-[#E5C988]/70 font-light text-[10px] md:text-xs tracking-[0.2em] uppercase slide-up">
+                <button onclick="scrollToElement('shop-section')" class="hover:text-[#E5C988] transition hover:scale-105">Loja Oficial</button>
+                <button onclick="openPasswordModal('catalog')" class="hover:text-[#E5C988] transition hover:scale-105 flex items-center gap-2"><i data-lucide="lock" class="w-3 h-3"></i> Materiais</button>
+                <button onclick="openPasswordModal('academy')" class="hover:text-[#E5C988] transition hover:scale-105 flex items-center gap-2"><i data-lucide="lock" class="w-3 h-3"></i> Academy</button>
+                <button onclick="openPasswordModal('workshops')" class="hover:text-[#E5C988] transition hover:scale-105 flex items-center gap-2"><i data-lucide="lock" class="w-3 h-3"></i> Workshops</button>
+            </div>
+
             <section class="grid grid-cols-1 lg:grid-cols-2 gap-20 mb-32 items-center">
                 <div class="relative group flex justify-center lg:block">
-                    <div class="relative bg-[#0a0a0a] aspect-[4/5] w-3/4 mx-auto flex items-center justify-center overflow-hidden border border-white/5 img-luxury-frame observe-me">
-                        <img src="https://res.cloudinary.com/dh4ekg6f2/image/upload/v1765327213/unnamed_k0lpmx.jpg" alt="Gloss Premium" class="h-[80%] w-auto object-contain drop-shadow-2xl transition-transform duration-1000 group-hover:scale-105">
+                    <!-- FOTO NOVA (PNG) NA ÁREA PRO -->
+                    <div class="relative bg-[#0a0a0a] aspect-[4/5] w-3/4 mx-auto flex items-center justify-center overflow-hidden border border-white/5 img-luxury-frame observe-me rounded-lg">
+                        <div class="absolute inset-0 bg-gradient-to-b from-[#E5C988]/5 to-transparent opacity-30"></div>
+                        <img loading="lazy" width="800" height="1000" src="https://res.cloudinary.com/dh4ekg6f2/image/upload/v1765334678/Gemini_Generated_Image_qfrznfqfrznfqfrz_uphgnj.png" alt="Plástica Híbrida - Gloss Premium" class="relative z-10 h-auto w-full object-cover drop-shadow-2xl transition-transform duration-1000 group-hover:scale-105">
                     </div>
                     <div class="absolute -bottom-6 right-10 text-right z-20">
-                        <p class="text-[100px] font-luxury text-white/5 leading-none select-none">PRO</p>
+                        <p class="text-[80px] md:text-[100px] font-luxury text-white/5 leading-none select-none">PRO</p>
                     </div>
                 </div>
 
                 <div class="space-y-12">
                     <div>
-                        <h3 class="font-luxury text-3xl text-white mb-2">GLOSS PREMIUM</h3>
-                        <p class="text-[#E5C988] text-[10px] tracking-[0.3em] uppercase mb-6">Plástica Capilar Híbrida • 1L</p>
+                        <h3 class="font-luxury text-3xl text-white mb-2">PLÁSTICA HÍBRIDA <span class="text-lg text-gray-500 font-light align-middle ml-2">(Gloss Premium 1L)</span></h3>
+                        <p class="text-[#E5C988] text-[11px] tracking-[0.3em] uppercase mb-6">Ativo Financeiro de Alta Performance</p>
                         <div class="w-12 h-px bg-[#E5C988] mb-8"></div>
-                        <p class="text-gray-300 font-light text-sm leading-relaxed text-justify mb-8">
-                            Um ativo, duas estratégias de faturamento. Nossa <strong>Engenharia Molecular</strong> permite aplicar o produto em todo o cabelo para ambos os protocolos, entregando resultados distintos através do tempo de pausa.
+                        <p class="text-gray-300 font-light text-sm md:text-base leading-relaxed text-justify mb-8">
+                            Não vendemos apenas um produto. Oferecemos uma licença de faturamento. Nossa fórmula híbrida permite maximizar sua agenda com o <strong>Ritual Express</strong> ou elevar seu ticket médio com o <strong>Liso Blindado</strong>. Um único estoque, duas máquinas de receita.
                         </p>
                         
-                        <!-- MONOLITO FLUTUANTE -->
-                        <div class="card-monolith p-8 rounded-sm mb-8 observe-me">
-                            <h4 class="font-luxury text-lg mb-2 text-white">GESTÃO DE ALTA PERFORMANCE</h4>
-                            <p class="text-[9px] text-gray-500 uppercase tracking-widest mb-6 border-b border-white/10 pb-4">Rendimento Médio: ~15 Aplicações/Litro</p>
+                        <div class="card-monolith p-8 rounded-sm mb-8 observe-me border border-[#E5C988]/20">
+                            <h4 class="font-luxury text-lg mb-2 text-white">PROJEÇÃO DE FATURAMENTO</h4>
+                            <p class="text-[9px] text-gray-500 uppercase tracking-widest mb-6 border-b border-white/10 pb-4">Transforme seu investimento em lucro líquido</p>
                             
-                            <div class="space-y-8">
+                            <div class="space-y-6">
                                 <div class="flex justify-between items-center group cursor-pointer observe-me">
                                     <div>
-                                        <p class="text-[#E5C988] text-[10px] tracking-widest uppercase font-bold mb-1">Estratégia de Giro (15min)</p>
-                                        <p class="text-white text-sm">Flash Ritual</p>
+                                        <p class="text-[#E5C988] text-[11px] tracking-widest uppercase font-bold mb-1">Rendimento Médio</p>
+                                        <p class="text-white text-sm">~15 Aplicações Totais</p>
                                     </div>
                                     <div class="text-right">
-                                        <p class="text-xs text-gray-400 uppercase tracking-widest">Vantagem</p>
-                                        <p class="text-white font-luxury">Rotatividade Máxima</p>
+                                        <p class="text-[10px] text-gray-400 uppercase tracking-widest">Retorno Estimado</p>
+                                        <p class="text-2xl md:text-3xl font-luxury text-[#E5C988]">R$ 10.000+</p>
                                     </div>
                                 </div>
-                                <div class="flex justify-between items-center group cursor-pointer observe-me">
-                                    <div>
-                                        <p class="text-[#E5C988] text-[10px] tracking-widest uppercase font-bold mb-1">Estratégia de Valor (40min)</p>
-                                        <p class="text-white text-sm">Liso Blindado</p>
-                                    </div>
-                                    <div class="text-right">
-                                        <p class="text-xs text-gray-400 uppercase tracking-widest">Vantagem</p>
-                                        <p class="text-white font-luxury">Ticket Alto</p>
-                                    </div>
-                                </div>
+                                <p class="text-[10px] text-gray-500 italic mt-4">*Baseado em um ticket médio de R$ 600,00 - R$ 800,00 por aplicação de Liso Blindado.</p>
                             </div>
                         </div>
                     </div>
                     <div class="flex flex-col gap-4">
-                        <a href="https://wa.me/554900000000?text=Olá,%20sou%20profissional%20e%20quero%20o%20Híbrido" target="_blank" class="btn-gold-solid text-center w-full md:w-auto observe-me">
-                            SOLICITAR ESTOQUE B2B
+                        <a href="https://wa.me/554900000000?text=Olá,%20quero%20solicitar%20minha%20cotação%20Business" target="_blank" class="btn-gold-solid text-center w-full md:w-auto observe-me">
+                            SOLICITAR COTAÇÃO EXCLUSIVA
                         </a>
                     </div>
                 </div>
             </section>
+            
+            <!-- HOME CARE B2B -->
+            <div id="shop-section" class="mb-24 text-center slide-up pt-20">
+                <span class="text-[#E5C988] text-[10px] font-bold tracking-[0.3em] uppercase mb-4 block">Lucratividade Recorrente</span>
+                <h2 class="font-luxury text-3xl md:text-5xl text-white mb-6">REVENDA <span class="text-gold italic">HOME CARE</span></h2>
+                <div class="w-16 h-px bg-[#E5C988] mx-auto mb-8 opacity-60"></div>
+                <p class="text-gray-400 max-w-2xl mx-auto font-light text-sm tracking-wide leading-relaxed">
+                    Transforme a manutenção da sua cliente em uma nova fonte de receita. Garanta a durabilidade do liso e a fidelização através da revenda da linha completa no seu salão.
+                </p>
+            </div>
 
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
+                <div class="card-monolith p-8 group hover:border-[#E5C988]/40 transition-colors observe-me text-center flex flex-col h-full">
+                    <div class="relative w-full max-w-[200px] mx-auto mb-6 overflow-hidden rounded-lg img-luxury-frame">
+                         <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-50"></div>
+                         <img loading="lazy" src="https://agatalambeu.com.br/assets/images/image01.jpg?v=c6206b86" class="w-full h-auto object-cover opacity-90 group-hover:scale-105 transition duration-700" alt="Bain Reconstrutor">
+                    </div>
+                    <h4 class="font-luxury text-lg text-white mb-2">BAIN RECONSTRUTOR</h4>
+                    <p class="text-[10px] text-[#E5C988] uppercase tracking-widest mb-4">Shampoo Pós-Química</p>
+                    <p class="text-xs text-gray-400 mb-6 font-light flex-grow leading-relaxed">Indispensável para a cliente manter o pH equilibrado e a cutícula selada em casa.</p>
+                    <div class="border-t border-white/10 pt-4 mt-auto">
+                         <span class="text-[9px] text-gray-500 uppercase tracking-widest block mb-1">Potencial de Giro</span>
+                         <span class="text-white font-bold text-xs">ALTO (Uso Diário)</span>
+                    </div>
+                </div>
+
+                <div class="card-monolith p-8 group hover:border-[#E5C988]/40 transition-colors observe-me text-center flex flex-col h-full">
+                     <div class="relative w-full max-w-[200px] mx-auto mb-6 overflow-hidden rounded-lg img-luxury-frame">
+                         <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-50"></div>
+                         <img loading="lazy" src="https://agatalambeu.com.br/assets/images/image02.jpg?v=624d4663" class="w-full h-auto object-cover opacity-90 group-hover:scale-105 transition duration-700" alt="Gold Infusion">
+                    </div>
+                    <h4 class="font-luxury text-lg text-white mb-2">GOLD INFUSION</h4>
+                    <p class="text-[10px] text-[#E5C988] uppercase tracking-widest mb-4">Ampola Power Dose</p>
+                    <p class="text-xs text-gray-400 mb-6 font-light flex-grow leading-relaxed">Tratamento de choque para recuperação instantânea. O "S.O.S" de luxo.</p>
+                    <div class="border-t border-white/10 pt-4 mt-auto">
+                         <span class="text-[9px] text-gray-500 uppercase tracking-widest block mb-1">Valor Agregado</span>
+                         <span class="text-white font-bold text-xs">PREMIUM</span>
+                    </div>
+                </div>
+
+                <div class="card-monolith p-8 group hover:border-[#E5C988]/40 transition-colors observe-me text-center flex flex-col h-full">
+                     <div class="relative w-full max-w-[200px] mx-auto mb-6 overflow-hidden rounded-lg img-luxury-frame">
+                         <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-50"></div>
+                         <img loading="lazy" src="https://agatalambeu.com.br/assets/images/image03.jpg?v=624d4663" class="w-full h-auto object-cover opacity-90 group-hover:scale-105 transition duration-700" alt="Blindagem Queen">
+                    </div>
+                    <h4 class="font-luxury text-lg text-white mb-2">BLINDAGEM QUEEN</h4>
+                    <p class="text-[10px] text-[#E5C988] uppercase tracking-widest mb-4">BB Finalizador</p>
+                    <p class="text-xs text-gray-400 mb-6 font-light flex-grow leading-relaxed">Proteção térmica e solar. A "garantia estendida" do liso perfeito.</p>
+                    <div class="border-t border-white/10 pt-4 mt-auto">
+                         <span class="text-[9px] text-gray-500 uppercase tracking-widest block mb-1">Recorrência</span>
+                         <span class="text-white font-bold text-xs">ALTA (Finalização)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CTA Resale (AGORA COM SENHA) -->
+            <div class="text-center mb-32 observe-me">
+                 <button onclick="openPasswordModal('catalog')" class="btn-outline px-12 py-4 text-xs tracking-[0.2em] hover:bg-[#E5C988] hover:text-black hover:border-[#E5C988] transition-all duration-500">
+                    BAIXAR CATÁLOGO DE REVENDA (ACESSO RESTRITO)
+                </button>
+            </div>
+            
             <div class="mb-12 text-center">
                 <span class="text-[#E5C988] text-[10px] tracking-[0.3em] uppercase">Engenharia Molecular</span>
                 <h3 class="font-luxury text-3xl text-white mt-4">BIO-ARQUITETURA CAPILAR</h3>
@@ -358,287 +447,447 @@
                 </div>
             </section>
 
-            <!-- Back to Home -->
             <div class="text-center py-8">
-                <button onclick="switchView('intro')" class="text-[9px] text-gray-500 hover:text-[#E5C988] tracking-widest uppercase transition border-b border-transparent hover:border-[#E5C988] pb-1">Voltar ao Início</button>
+                <button onclick="switchView('intro')" class="text-[11px] text-gray-500 hover:text-[#E5C988] tracking-widest uppercase transition border-b border-transparent hover:border-[#E5C988] pb-1">Voltar ao Início</button>
             </div>
         </div>
     </main>
+    
+    <!-- =========================================================================
+         VISÃO 4: CATÁLOGO SECRETO (SÓ ACESSÍVEL VIA SENHA)
+         ========================================================================= -->
+    <main id="view-catalog" class="view-section min-h-screen pt-40 pb-20">
+         <div class="max-w-4xl mx-auto px-6 text-center">
+            <div class="mb-12">
+                <i data-lucide="unlock" class="w-12 h-12 text-[#E5C988] mx-auto mb-6"></i>
+                <h2 class="font-luxury text-4xl text-white mb-4">ACESSO CONCEDIDO</h2>
+                <p class="text-gray-400 text-sm">Bem-vindo à área exclusiva de parceiros A Gata Lambeu.</p>
+            </div>
+            
+            <div class="bg-[#0f0f0f] border border-[#E5C988]/30 p-12 rounded-lg shadow-2xl relative overflow-hidden group">
+                <div class="absolute inset-0 bg-gradient-to-b from-[#E5C988]/5 to-transparent"></div>
+                
+                <h3 class="font-luxury text-2xl text-white mb-8 relative z-10">CATÁLOGO OFICIAL 2025</h3>
+                
+                <!-- PLACEHOLDER DO PDF/IMAGEM -->
+                <div class="aspect-[16/9] bg-black mb-8 border border-white/10 flex items-center justify-center relative z-10">
+                    <p class="text-gray-500 text-xs tracking-widest uppercase">[ Visualização do Catálogo Aqui ]</p>
+                </div>
+                
+                <div class="flex flex-col md:flex-row justify-center gap-6 relative z-10">
+                    <a href="#" class="btn-gold-solid flex items-center gap-2 justify-center">
+                        <i data-lucide="download" class="w-4 h-4"></i> BAIXAR PDF COMPLETO
+                    </a>
+                    <button onclick="switchView('pro')" class="btn-outline flex items-center gap-2 justify-center">
+                        VOLTAR PARA BUSINESS
+                    </button>
+                </div>
+            </div>
+         </div>
+    </main>
+    
+    <!-- =========================================================================
+         VISÃO 5: ÁREA ACADEMY (EM BREVE - PROTEGIDA)
+         ========================================================================= -->
+    <main id="view-academy" class="view-section min-h-screen pt-40 pb-20">
+         <div class="max-w-4xl mx-auto px-6 text-center flex flex-col items-center justify-center h-[60vh]">
+            <i data-lucide="graduation-cap" class="w-16 h-16 text-[#E5C988] mb-8 opacity-80"></i>
+            <h2 class="font-luxury text-4xl md:text-6xl text-white mb-6">GATA ACADEMY</h2>
+            <div class="w-24 h-px bg-[#E5C988] mx-auto mb-8 opacity-60"></div>
+            <p class="text-gray-400 text-sm md:text-base max-w-xl mx-auto leading-relaxed mb-12">
+                A plataforma educacional definitiva está sendo forjada. Em breve, acesso exclusivo a masterclasses com Jô Manto e Tiago Grabski.
+            </p>
+            <div class="flex flex-col gap-4">
+                <span class="text-[#E5C988] text-[10px] tracking-[0.3em] uppercase animate-pulse">Aguarde o Lançamento</span>
+                <button onclick="switchView('pro')" class="btn-outline mt-4">VOLTAR AO HUB</button>
+            </div>
+         </div>
+    </main>
 
     <!-- =========================================================================
-         VISÃO 3: ÁREA CLIENTE (RITUAIS)
+         VISÃO 6: ÁREA WORKSHOPS (EM BREVE - PROTEGIDA)
+         ========================================================================= -->
+    <main id="view-workshops" class="view-section min-h-screen pt-40 pb-20">
+         <div class="max-w-4xl mx-auto px-6 text-center flex flex-col items-center justify-center h-[60vh]">
+            <i data-lucide="ticket" class="w-16 h-16 text-[#E5C988] mb-8 opacity-80"></i>
+            <h2 class="font-luxury text-4xl md:text-6xl text-white mb-6">AGENDA ELITE</h2>
+            <div class="w-24 h-px bg-[#E5C988] mx-auto mb-8 opacity-60"></div>
+            <p class="text-gray-400 text-sm md:text-base max-w-xl mx-auto leading-relaxed mb-12">
+                Imersões presenciais e eventos exclusivos. O calendário oficial de workshops será revelado em breve para parceiros credenciados.
+            </p>
+            <div class="flex flex-col gap-4">
+                <span class="text-[#E5C988] text-[10px] tracking-[0.3em] uppercase animate-pulse">Em Breve</span>
+                <button onclick="switchView('pro')" class="btn-outline mt-4">VOLTAR AO HUB</button>
+            </div>
+         </div>
+    </main>
+
+    <!-- =========================================================================
+         VISÃO 3: ÁREA CLIENTE (O RITUAL) - MANTIDA
          ========================================================================= -->
     <main id="view-client" class="view-section min-h-screen pt-40 pb-20">
-        <div class="max-w-[1400px] mx-auto px-6 md:px-16">
-            
+         <!-- ... (Conteúdo Cliente Mantido igual ao anterior) ... -->
+         <div class="max-w-[1400px] mx-auto px-6 md:px-16">
             <header class="text-center mb-32 slide-up">
-                <span class="text-[#E5C988] text-[9px] font-bold tracking-[0.4em] mb-6 block uppercase">Sua Jornada Pessoal</span>
-                <h2 class="font-luxury text-5xl md:text-7xl text-white mb-8 font-light">RITUAIS DE <span class="italic font-normal">PODER</span></h2>
+                <span class="text-[#E5C988] text-[10px] font-bold tracking-[0.4em] mb-6 block uppercase">Sua Jornada Pessoal</span>
+                <h2 class="font-luxury text-5xl md:text-7xl text-white mb-8 font-light">MINHA TRANSFORMAÇÃO <span class="italic font-normal">IMPECÁVEL</span></h2>
                 <div class="w-24 h-px bg-[#E5C988] mx-auto mb-8 opacity-50"></div>
-                <p class="text-gray-400 max-w-md mx-auto font-light text-xs tracking-wide leading-relaxed">A tecnologia de salão traduzida para o seu santuário particular.</p>
+                <p class="text-gray-400 max-w-md mx-auto font-light text-sm tracking-wide leading-relaxed">Sua beleza é um investimento, não uma rotina.</p>
             </header>
 
-            <!-- O PROTAGONISTA -->
+            <!-- O PRODUTO HERO CLIENTE -->
             <section class="grid grid-cols-1 lg:grid-cols-2 gap-16 mb-40 items-center border-b border-white/5 pb-20">
                 <div class="relative group flex justify-center lg:block">
-                     <div class="relative bg-[#0a0a0a] aspect-[4/5] w-3/4 mx-auto flex items-center justify-center overflow-hidden border border-white/5 img-luxury-frame observe-me">
-                        <img src="https://res.cloudinary.com/dh4ekg6f2/image/upload/v1765327213/unnamed_k0lpmx.jpg" alt="Plástica Capilar Híbrida" class="h-[80%] w-auto object-contain drop-shadow-2xl transition-transform duration-1000 group-hover:scale-105">
+                     <!-- AJUSTE: Imagem Hero Cliente contida e elegante -->
+                     <div class="relative bg-[#0a0a0a] aspect-[4/5] w-3/4 mx-auto flex items-center justify-center overflow-hidden border border-white/5 img-luxury-frame observe-me rounded-lg">
+                        <div class="absolute inset-0 bg-gradient-to-b from-[#E5C988]/5 to-transparent opacity-30"></div>
+                        <!-- FOTO NOVA (PNG) NA ÁREA CLIENTE TAMBÉM -->
+                        <img loading="lazy" width="800" height="1000" src="https://res.cloudinary.com/dh4ekg6f2/image/upload/v1765334678/Gemini_Generated_Image_qfrznfqfrznfqfrz_uphgnj.png" alt="Plástica Capilar Híbrida" class="relative z-10 h-[85%] w-auto object-contain drop-shadow-2xl transition-transform duration-1000 group-hover:scale-105">
                     </div>
                 </div>
                 <div class="space-y-10">
                     <div>
-                        <span class="text-[#E5C988] text-[9px] tracking-[0.3em] uppercase block mb-4">O Segredo dos Especialistas</span>
-                        <h3 class="font-luxury text-3xl md:text-5xl text-white mb-6 leading-tight">A FONTE DA <br><span class="text-gold italic">TRANSFORMAÇÃO</span></h3>
-                        <p class="text-gray-300 font-light text-sm leading-relaxed text-justify mb-8 max-w-md">
-                            Nossos rituais nascem desta joia tecnológica. Uma fórmula rica em ativos nobres que reestruturam a fibra capilar, garantindo a integridade absoluta que você sente ao toque.
+                        <span class="text-[#E5C988] text-[10px] tracking-[0.3em] uppercase block mb-4">ATO IV: A SUBSTÂNCIA</span>
+                        <h3 class="font-luxury text-3xl md:text-5xl text-white mb-6 leading-tight">PLÁSTICA CAPILAR <br><span class="text-gold italic">HÍBRIDA</span></h3>
+                        <p class="text-gray-300 font-light text-sm md:text-base leading-relaxed text-justify mb-8 max-w-md">
+                            O preço premium se justifica nesta joia tecnológica. A nossa <strong>Plástica Híbrida</strong> é a base de tudo, formulada com ativos que compõem nosso Pilar da Força. Uma formulação restrita que define o novo padrão de elite.
                         </p>
                         
-                        <!-- ATIVOS -->
                         <div class="space-y-4 pt-4">
                             <div class="card-monolith p-4 flex gap-6 items-center group cursor-default observe-me">
                                 <div class="text-[#E5C988] shrink-0"><i data-lucide="shield" class="w-5 h-5"></i></div>
-                                <div><h4 class="text-white font-luxury text-sm mb-1 group-hover:text-[#E5C988] transition">PROTEÍNA DO TRIGO</h4><p class="text-[9px] text-gray-500 uppercase tracking-widest leading-relaxed">Blindagem e Força Estrutural</p></div>
+                                <div><h4 class="text-white font-luxury text-sm mb-1 group-hover:text-[#E5C988] transition">PROTEÍNA DO TRIGO</h4><p class="text-[10px] text-gray-500 uppercase tracking-widest leading-relaxed">Blindagem Nanométrica no Córtex</p></div>
                             </div>
                             <div class="card-monolith p-4 flex gap-6 items-center group cursor-default observe-me">
                                 <div class="text-[#E5C988] shrink-0"><i data-lucide="droplets" class="w-5 h-5"></i></div>
-                                <div><h4 class="text-white font-luxury text-sm mb-1 group-hover:text-[#E5C988] transition">ÁCIDO HIALURÔNICO</h4><p class="text-[9px] text-gray-500 uppercase tracking-widest leading-relaxed">Hidratação e Maleabilidade</p></div>
+                                <div><h4 class="text-white font-luxury text-sm mb-1 group-hover:text-[#E5C988] transition">ÁCIDO HIALURÔNICO</h4><p class="text-[10px] text-gray-500 uppercase tracking-widest leading-relaxed">Retém 1000x o peso em água</p></div>
                             </div>
                             <div class="card-monolith p-4 flex gap-6 items-center group cursor-default observe-me">
                                 <div class="text-[#E5C988] shrink-0"><i data-lucide="sparkles" class="w-5 h-5"></i></div>
-                                <div><h4 class="text-white font-luxury text-sm mb-1 group-hover:text-[#E5C988] transition">ÓLEO DE SEMENTE DE UVA</h4><p class="text-[9px] text-gray-500 uppercase tracking-widest leading-relaxed">Brilho Tridimensional de Joia</p></div>
+                                <div><h4 class="text-white font-luxury text-sm mb-1 group-hover:text-[#E5C988] transition">NANO & ÓLEO DE UVA</h4><p class="text-[10px] text-gray-500 uppercase tracking-widest leading-relaxed">Véu de Ouro que reflete a luz</p></div>
                             </div>
                         </div>
                     </div>
                 </div>
             </section>
-
-            <!-- A ARQUITETURA DO TEMPO -->
+             <section class="mb-40 text-center max-w-4xl mx-auto bg-white/5 p-12 border border-white/10 rounded-sm">
+                <span class="text-[#E5C988] text-[10px] tracking-[0.3em] uppercase block mb-6">ATO V: O MANIFESTO</span>
+                <h3 class="font-luxury text-3xl text-white mb-8">O DESPERTAR DE UM ÍCONE</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div>
+                        <h4 class="text-[#E5C988] font-luxury text-lg mb-2">CONFIANÇA</h4>
+                        <p class="text-[11px] text-gray-400 font-light">A tranquilidade de um reflexo que nunca decepciona.</p>
+                    </div>
+                    <div>
+                        <h4 class="text-[#E5C988] font-luxury text-lg mb-2">PODER</h4>
+                        <p class="text-[11px] text-gray-400 font-light">A aura que você projeta ao entrar em uma sala.</p>
+                    </div>
+                    <div>
+                        <h4 class="text-[#E5C988] font-luxury text-lg mb-2">ATITUDE</h4>
+                        <p class="text-[11px] text-gray-400 font-light">Liberdade sem pausas para o secador.</p>
+                    </div>
+                </div>
+            </section>
             <section class="mb-48">
                 <div class="text-center mb-16">
-                    <span class="text-[#E5C988] text-[9px] tracking-[0.3em] uppercase">O Menu de Serviços</span>
-                    <h3 class="font-luxury text-3xl text-white mt-4">ARQUITETURA DO TEMPO</h3>
+                    <h3 class="font-luxury text-3xl text-white mt-4">PROTOCOLO DE ELITE</h3>
+                    <p class="text-[10px] text-gray-500 tracking-widest uppercase mt-2">O Tempo Define o Resultado</p>
                 </div>
-
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <div class="card-monolith p-12 md:p-16 group cursor-pointer relative hover:border-[#E5C988]/50 transition-colors observe-me" onclick="window.open('https://wa.me/554900000000?text=Agendar%20Flash%20Ritual')">
-                        <span class="text-[#E5C988] text-[9px] tracking-[0.2em] uppercase mb-2 block">Para a Mulher Dinâmica</span>
+                    <div class="card-monolith p-12 md:p-16 group cursor-pointer relative hover:border-[#E5C988]/50 transition-colors observe-me" onclick="window.open('https://wa.me/554900000000?text=Agendar%20Protocolo%20Ritual%20(15min)')">
+                        <span class="text-[#E5C988] text-[10px] tracking-[0.2em] uppercase mb-2 block">Toque de Seda</span>
                         <div class="flex justify-between items-baseline mb-6">
-                            <h4 class="text-3xl text-white font-luxury">FLASH RITUAL</h4>
+                            <h4 class="text-3xl text-white font-luxury">RITUAL</h4>
                             <span class="text-5xl font-luxury text-white/10 group-hover:text-[#E5C988] transition duration-500">15'</span>
                         </div>
                         <p class="text-xs text-gray-400 font-light leading-relaxed max-w-sm mb-10">
-                            Polimento instantâneo. Um serviço expresso que silencia o frizz e devolve o movimento em minutos. Ideal para manutenção de brilho.
+                            Selagem Cuticular Nanofluidificada. Performance espelhada para quem exige excelência imediata.
                         </p>
-                        <div class="flex items-center gap-3 text-[9px] tracking-widest text-[#E5C988] uppercase opacity-70 group-hover:opacity-100 transition">
-                            <span>Reservar Minha Sessão</span>
+                        <div class="flex items-center gap-3 text-[10px] tracking-widest text-[#E5C988] uppercase opacity-100 transition">
+                            <span>Agendar Performance</span>
                             <i data-lucide="arrow-up-right" class="w-3 h-3"></i>
                         </div>
                     </div>
-
-                    <div class="card-monolith p-12 md:p-16 group cursor-pointer relative hover:border-[#E5C988]/50 transition-colors observe-me" onclick="window.open('https://wa.me/554900000000?text=Agendar%20Liso%20Blindado')">
-                        <span class="text-[#E5C988] text-[9px] tracking-[0.2em] uppercase mb-2 block">Para a Mulher que Busca Reinvenção</span>
+                    <div class="card-monolith p-12 md:p-16 group cursor-pointer relative hover:border-[#E5C988]/50 transition-colors observe-me" onclick="window.open('https://wa.me/554900000000?text=Agendar%20Protocolo%20Reestruturação%20(40min)')">
+                        <span class="text-[#E5C988] text-[10px] tracking-[0.2em] uppercase mb-2 block">Reorganização Estrutural</span>
                         <div class="flex justify-between items-baseline mb-6">
-                            <h4 class="text-3xl text-white font-luxury">LISO BLINDADO</h4>
-                            <span class="text-5xl font-luxury text-white/10 group-hover:text-[#E5C988] transition duration-500">40'</span>
+                            <h4 class="text-3xl text-white font-luxury">REESTRUTURAÇÃO</h4>
+                            <span class="text-5xl font-luxury text-white/10 group-hover:text-[#E5C988] transition duration-500">40+'</span>
                         </div>
                         <p class="text-xs text-gray-400 font-light leading-relaxed max-w-sm mb-10">
-                            A transformação absoluta. Plástica capilar que reestrutura o fio desde o córtex, garantindo um liso impecável, duradouro e com movimento natural.
+                            Reposição de Massa Biomolecular. O liso absoluto com integridade total do córtex.
                         </p>
-                        <div class="flex items-center gap-3 text-[9px] tracking-widest text-[#E5C988] uppercase opacity-70 group-hover:opacity-100 transition">
-                            <span>Reservar Minha Sessão</span>
+                        <div class="flex items-center gap-3 text-[10px] tracking-widest text-[#E5C988] uppercase opacity-100 transition">
+                            <span>Agendar Performance</span>
                             <i data-lucide="arrow-up-right" class="w-3 h-3"></i>
                         </div>
                     </div>
                 </div>
             </section>
-
-            <!-- VITRINE HOME CARE (ZIG-ZAG) -->
-            <div class="mb-24 flex justify-center">
-                <span class="text-[9px] text-gray-500 tracking-widest uppercase border-b border-white/10 pb-2">Maintenance Collection</span>
+            <div class="mb-24 flex justify-center text-center flex-col">
+                <span class="text-[#E5C988] text-[10px] tracking-[0.3em] uppercase block mb-4">A Arte de Perpetuar a Perfeição</span>
+                <h3 class="font-luxury text-3xl text-white">RITUAL HOME CARE</h3>
             </div>
-
             <div class="space-y-32 mb-40">
-                <!-- PRODUTO 1 -->
                 <div class="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center group observe-me">
                     <div class="lg:col-span-5 lg:col-start-2 text-right order-2 lg:order-1">
-                        <span class="text-[#E5C988] text-[9px] tracking-[0.3em] uppercase block mb-4">Step 01 • Cleanse</span>
+                        <span class="text-[#E5C988] text-[10px] tracking-[0.3em] uppercase block mb-4">Passo 01 • Purificar</span>
                         <h3 class="font-luxury text-4xl text-white mb-6">BAIN RECONSTRUTOR</h3>
-                        <p class="text-gray-400 font-light text-sm leading-relaxed mb-8 ml-auto max-w-sm">
-                            Limpeza inteligente que preserva a integridade da fibra. Uma infusão de queratina que prepara o fio sem agredir o liso conquistado.
+                        <p class="text-gray-400 font-light text-sm leading-relaxed mb-4 ml-auto max-w-sm">
+                            Edição Repair Master. Limpeza suave que preserva a integridade do fio enquanto repõe massa.
                         </p>
-                        <a href="https://wa.me/554900000000?text=Quero%20o%20Bain%20Reconstrutor" target="_blank" class="btn-outline border-white/20 text-[9px] px-8 py-3 hover:bg-white hover:text-black hover:border-white text-white">Adicionar à Rotina</a>
+                        <div class="flex justify-end gap-2 mb-8">
+                            <span class="border border-white/20 text-[8px] px-2 py-1 text-gray-500">PARABEN FREE</span>
+                            <span class="border border-white/20 text-[8px] px-2 py-1 text-gray-500">CRUELTY FREE</span>
+                        </div>
+                        <a href="https://wa.me/554900000000?text=Quero%20o%20Bain%20Reconstrutor" target="_blank" class="btn-outline border-white/20 text-[10px] px-8 py-3 hover:bg-white hover:text-black hover:border-white text-white">Adquirir Agora</a>
                     </div>
                     <div class="lg:col-span-5 order-1 lg:order-2 flex justify-center">
-                        <div class="relative aspect-[3/4] w-2/3 overflow-hidden bg-[#0f0f0f] border border-white/5 img-luxury-frame">
-                            <img src="https://agatalambeu.com.br/assets/images/image01.jpg?v=c6206b86" class="w-full h-full object-cover opacity-90 group-hover:opacity-100 group-hover:scale-105 transition duration-1000" alt="Bain Reconstrutor">
+                        <div class="relative w-full max-w-sm mx-auto overflow-hidden img-luxury-frame rounded-lg">
+                             <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-50"></div>
+                            <img loading="lazy" width="600" height="800" src="https://agatalambeu.com.br/assets/images/image01.jpg?v=c6206b86" class="w-full h-auto object-cover opacity-90 group-hover:opacity-100 group-hover:scale-105 transition duration-1000" alt="Bain Reconstrutor">
                         </div>
                     </div>
                 </div>
-
-                <!-- PRODUTO 2 -->
                 <div class="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center group observe-me">
                     <div class="lg:col-span-5 lg:col-start-2 flex justify-center">
-                        <div class="relative aspect-[3/4] w-2/3 overflow-hidden bg-[#0f0f0f] border border-white/5 img-luxury-frame">
-                            <img src="https://agatalambeu.com.br/assets/images/image02.jpg?v=624d4663" class="w-full h-full object-cover opacity-90 group-hover:opacity-100 group-hover:scale-105 transition duration-1000" alt="Gold Infusion">
+                         <div class="relative w-full max-w-sm mx-auto overflow-hidden img-luxury-frame rounded-lg">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-50"></div>
+                            <img loading="lazy" width="600" height="800" src="https://agatalambeu.com.br/assets/images/image02.jpg?v=624d4663" class="w-full h-auto object-cover opacity-90 group-hover:opacity-100 group-hover:scale-105 transition duration-1000" alt="Gold Infusion">
                         </div>
                     </div>
                     <div class="lg:col-span-5 text-left">
-                        <span class="text-[#E5C988] text-[9px] tracking-[0.3em] uppercase block mb-4">Step 02 • Treat</span>
+                        <span class="text-[#E5C988] text-[10px] tracking-[0.3em] uppercase block mb-4">Passo 02 • Potência</span>
                         <h3 class="font-luxury text-4xl text-white mb-6">GOLD INFUSION</h3>
                         <p class="text-gray-400 font-light text-sm leading-relaxed mb-8 max-w-sm">
-                            A injeção de vida instantânea. Uma ampola de alta potência que devolve a luminosidade perdida e sela as cutículas em segundos.
+                            Ampola Power Dose. Uma injeção de vida que penetra no córtex para regeneração instantânea nos dias em que seu cabelo exige um milagre.
                         </p>
-                        <a href="https://wa.me/554900000000?text=Quero%20o%20Gold%20Infusion" target="_blank" class="btn-outline border-white/20 text-[9px] px-8 py-3 hover:bg-white hover:text-black hover:border-white text-white">Adicionar à Rotina</a>
+                        <a href="https://wa.me/554900000000?text=Quero%20o%20Gold%20Infusion" target="_blank" class="btn-outline border-white/20 text-[10px] px-8 py-3 hover:bg-white hover:text-black hover:border-white text-white">Adquirir Dose</a>
                     </div>
                 </div>
-
-                <!-- PRODUTO 3 -->
                 <div class="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center group observe-me">
                     <div class="lg:col-span-5 lg:col-start-2 text-right order-2 lg:order-1">
-                        <span class="text-[#E5C988] text-[9px] tracking-[0.3em] uppercase block mb-4">Step 03 • Protect</span>
+                        <span class="text-[#E5C988] text-[10px] tracking-[0.3em] uppercase block mb-4">Passo 03 • Blindagem</span>
                         <h3 class="font-luxury text-4xl text-white mb-6">BLINDAGEM QUEEN</h3>
                         <p class="text-gray-400 font-light text-sm leading-relaxed mb-8 ml-auto max-w-sm">
-                            O escudo final. Proteção térmica avançada que cria um véu invisível contra a umidade e o calor, perpetuando o efeito liso.
+                            BB Finalizador Multifuncional. O escudo da realeza contra proteção térmica e solar. Selagem antifrizz em um único toque.
                         </p>
-                        <a href="https://wa.me/554900000000?text=Quero%20a%20Blindagem%20Queen" target="_blank" class="btn-outline border-white/20 text-[9px] px-8 py-3 hover:bg-white hover:text-black hover:border-white text-white">Adicionar à Rotina</a>
+                        <a href="https://wa.me/554900000000?text=Quero%20a%20Blindagem%20Queen" target="_blank" class="btn-outline border-white/20 text-[10px] px-8 py-3 hover:bg-white hover:text-black hover:border-white text-white">Adquirir Blindagem</a>
                     </div>
                     <div class="lg:col-span-5 order-1 lg:order-2 flex justify-center">
-                        <div class="relative aspect-[3/4] w-2/3 overflow-hidden bg-[#0f0f0f] border border-white/5 img-luxury-frame">
-                            <img src="https://agatalambeu.com.br/assets/images/image03.jpg?v=624d4663" class="w-full h-full object-cover opacity-90 group-hover:opacity-100 group-hover:scale-105 transition duration-1000" alt="Blindagem Queen">
+                         <div class="relative w-full max-w-sm mx-auto overflow-hidden img-luxury-frame rounded-lg">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-50"></div>
+                            <img loading="lazy" width="600" height="800" src="https://agatalambeu.com.br/assets/images/image03.jpg?v=624d4663" class="w-full h-auto object-cover opacity-90 group-hover:opacity-100 group-hover:scale-105 transition duration-1000" alt="Blindagem Queen">
                         </div>
                     </div>
                 </div>
             </div>
-
-            <!-- GALERIA FINAL -->
-            <section>
-                <div class="text-center mb-12">
-                    <span class="text-[#E5C988] font-bold tracking-[0.2em] text-[10px] uppercase mb-3 block">Resultados Reais</span>
-                    <h2 class="font-luxury text-3xl text-white">METAMORFOSE</h2>
-                </div>
-                <div class="grid grid-cols-2 gap-4 max-w-4xl mx-auto">
-                    <div class="relative group cursor-pointer overflow-hidden rounded-sm aspect-square border border-white/5 img-luxury-frame observe-me">
-                        <img src="https://images.unsplash.com/photo-1560869713-7d0a29430803?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Cabelo Liso" class="w-full h-full object-cover transform group-hover:scale-105 transition duration-1000 opacity-80 group-hover:opacity-100">
-                    </div>
-                    <div class="relative group cursor-pointer overflow-hidden rounded-sm aspect-square border border-white/5 img-luxury-frame observe-me">
-                        <img src="https://images.unsplash.com/photo-1580618672591-eb180b1a973f?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Cabelo com Brilho" class="w-full h-full object-cover transform group-hover:scale-105 transition duration-1000 opacity-80 group-hover:opacity-100">
-                    </div>
-                </div>
-            </section>
-
-            <!-- SESSÃO DE AGENDAMENTO -->
             <div class="text-center py-20 border-t border-white/5 mt-20">
-                <h3 class="font-luxury text-3xl mb-6 text-white">PRONTA PARA O SEU MOMENTO?</h3>
-                <p class="text-gray-400 mb-10 max-w-lg mx-auto font-light">Nossos especialistas estão prontos para revelar a melhor versão do seu cabelo.</p>
-                <a href="https://wa.me/554900000000" class="btn-outline observe-me">AGENDAR PROCEDIMENTO</a>
+                <h3 class="font-luxury text-3xl mb-6 text-white">SUA TRANSFORMAÇÃO COMEÇA AGORA</h3>
+                <a href="https://wa.me/554900000000" class="btn-outline observe-me">RESERVAR MINHA TRANSFORMAÇÃO DE ELITE</a>
             </div>
-
-            <!-- Back to Home -->
-            <div class="text-center py-8">
-                <button onclick="switchView('intro')" class="text-[9px] text-gray-500 hover:text-[#E5C988] tracking-widest uppercase transition border-b border-transparent hover:border-[#E5C988] pb-1">Voltar ao Início</button>
+             <div class="text-center py-8">
+                <button onclick="switchView('intro')" class="text-[11px] text-gray-500 hover:text-[#E5C988] tracking-widest uppercase transition border-b border-transparent hover:border-[#E5C988] pb-1">Voltar ao Início</button>
             </div>
-
         </div>
     </main>
 
-    <!-- 4. FOOTER -->
-    <footer class="bg-black/90 py-16 border-t border-white/5 text-center">
-        <div class="max-w-4xl mx-auto px-6">
-            <h4 class="font-luxury text-3xl mb-8 tracking-[0.2em] text-white">A GATA LAMBEU</h4>
-            
-            <div class="flex justify-center gap-12 mb-12 text-[10px] text-gray-500 uppercase tracking-widest">
-                <a href="#" class="hover:text-[#E5C988] transition">Instagram</a>
-                <a href="#" class="hover:text-[#E5C988] transition">Facebook</a>
-                <a href="#" class="hover:text-[#E5C988] transition">Contato</a>
+    <!-- WRAPPER GLOBAL FOOTER (OCULTO NA INTRO) -->
+    <div id="global-footer" class="hidden-on-intro">
+        <!-- ATO FINAL: FAQ -->
+        <section class="bg-[#080808] py-24 px-6 border-t border-white/5">
+            <div class="max-w-3xl mx-auto">
+                <div class="text-center mb-16">
+                    <span class="text-[#E5C988] text-[10px] tracking-[0.3em] uppercase block mb-4">Ato Final</span>
+                    <h2 class="font-luxury text-3xl md:text-4xl text-white">A CLAREZA</h2>
+                    <p class="text-gray-500 text-xs mt-2">O Fim da Dúvida. O Início da Certeza.</p>
+                </div>
+                <div class="space-y-4">
+                    <div class="faq-item" onclick="this.classList.toggle('active')">
+                        <div class="flex justify-between items-center text-white text-xs md:text-sm font-light tracking-wide uppercase">
+                            <span>É compatível com coloração/químicas?</span>
+                            <i data-lucide="plus" class="w-4 h-4 faq-icon"></i>
+                        </div>
+                        <div class="faq-answer text-gray-400 text-xs leading-relaxed mt-4 text-justify">
+                            Absolutamente. Nossa fórmula foi desenvolvida para ser compatível com a maioria das químicas. Ela inclusive ajuda a tratar e a selar fios danificados por coloração. Recomendamos sempre o teste de mecha.
+                        </div>
+                    </div>
+                    <div class="faq-item" onclick="this.classList.toggle('active')">
+                        <div class="flex justify-between items-center text-white text-xs md:text-sm font-light tracking-wide uppercase">
+                            <span>O produto amarela fios loiros?</span>
+                            <i data-lucide="plus" class="w-4 h-4 faq-icon"></i>
+                        </div>
+                        <div class="faq-answer text-gray-400 text-xs leading-relaxed mt-4 text-justify">
+                            Não. Nossa tecnologia foi desenvolvida para ser perfeitamente compatível com cabelos descoloridos sem causar amarelamento. Nossos profissionais certificados utilizam técnicas específicas de aplicação que protegem a integridade da cor, garantindo um liso saudável e um loiro impecável.
+                        </div>
+                    </div>
+                    <div class="faq-item" onclick="this.classList.toggle('active')">
+                        <div class="flex justify-between items-center text-white text-xs md:text-sm font-light tracking-wide uppercase">
+                            <span>Grávidas ou crianças podem usar?</span>
+                            <i data-lucide="plus" class="w-4 h-4 faq-icon"></i>
+                        </div>
+                        <div class="faq-answer text-gray-400 text-xs leading-relaxed mt-4 text-justify">
+                            Nossa fórmula é livre de ativos agressivos. Porém, por máxima segurança, recomendamos autorização médica prévia.
+                        </div>
+                    </div>
+                    <div class="faq-item" onclick="this.classList.toggle('active')">
+                        <div class="flex justify-between items-center text-white text-xs md:text-sm font-light tracking-wide uppercase">
+                            <span>Qual a durabilidade do efeito liso?</span>
+                            <i data-lucide="plus" class="w-4 h-4 faq-icon"></i>
+                        </div>
+                        <div class="faq-answer text-gray-400 text-xs leading-relaxed mt-4 text-justify">
+                            Com o uso do Ritual Home Care, o efeito pode se estender por até 4 meses. O efeito é progressivo, tornando-se mais duradouro a cada aplicação.
+                        </div>
+                    </div>
+                     <div class="faq-item" onclick="this.classList.toggle('active')">
+                        <div class="flex justify-between items-center text-white text-xs md:text-sm font-light tracking-wide uppercase">
+                            <span>Os produtos são testados em animais?</span>
+                            <i data-lucide="plus" class="w-4 h-4 faq-icon"></i>
+                        </div>
+                        <div class="faq-answer text-gray-400 text-xs leading-relaxed mt-4 text-justify">
+                            Não. A Gata Lambeu é uma marca orgulhosamente cruelty-free. Nosso amor pela beleza inclui o respeito incondicional por todas as formas de vida.
+                        </div>
+                    </div>
+                </div>
             </div>
-
-            <div class="text-[8px] text-gray-700 uppercase tracking-[0.2em] space-y-2">
-                <p>16 ANOS DE EXPERIÊNCIA (JÔ MANTO & TIAGO GRABSKI)</p>
-                <p>PRODUTO NOTIFICADO ANVISA</p>
-                <p class="mt-8">© 2025 A Gata Lambeu. Luxury Hair Tech.</p>
+        </section>
+        <!-- FOOTER -->
+        <footer class="bg-black/90 py-16 border-t border-white/5 text-center">
+            <div class="max-w-4xl mx-auto px-6">
+                <h4 class="font-luxury text-3xl mb-8 tracking-[0.2em] text-white">A GATA LAMBEU</h4>
+                <div class="flex justify-center gap-12 mb-12 text-[10px] text-gray-500 uppercase tracking-widest">
+                    <a href="#" class="hover:text-[#E5C988] transition">Instagram</a>
+                    <a href="#" class="hover:text-[#E5C988] transition">Facebook</a>
+                    <a href="mailto:contato@agatalambeu.com" class="hover:text-[#E5C988] transition">Contato</a>
+                </div>
+                <div class="text-[8px] text-gray-600 uppercase tracking-[0.2em] space-y-3 font-medium">
+                    <p>R. Achiles Tomazeli, 296 - Centro, Chapecó - SC</p>
+                    <p>(49) 0000-0000</p>
+                    <div class="w-8 h-px bg-[#E5C988]/30 mx-auto my-4"></div>
+                    <p>Junte-se ao Círculo Íntimo</p>
+                    <p class="mt-8 text-[#E5C988]">© 2024 A Gata Lambeu. Todos os direitos reservados.</p>
+                </div>
             </div>
-        </div>
-    </footer>
+        </footer>
+    </div>
 
     <!-- 5. LÓGICA DE NAVEGAÇÃO -->
     <script>
         lucide.createIcons();
+        let isAuthenticated = false; // Estado de autenticação
+        let targetViewAfterAuth = ''; // Armazena a view desejada após a senha
 
+        // NAVEGAÇÃO
         function switchView(viewName) {
-            // Atualiza Navegação Visual
-            document.querySelectorAll('.nav-link').forEach(link => {
-                link.classList.remove('active');
-            });
+            // REMOVIDO O BLOQUEIO DE NAVEGAÇÃO NA ENTRADA DA ABA
+            // O profissional acessa livremente a área BUSINESS (Showroom)
+
+            document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active'));
             const activeLink = document.getElementById('nav-' + viewName);
             if(activeLink) activeLink.classList.add('active');
 
-            // LOGICA DO LOGO DINÂMICO & VISIBILIDADE
             const logoContainer = document.getElementById('nav-brand-container');
             const logoText = document.getElementById('brand-logo');
             const menuLeft = document.getElementById('menu-left');
             const menuRight = document.getElementById('menu-right');
             const menuMobile = document.getElementById('menu-mobile');
+            const globalFooter = document.getElementById('global-footer'); // CAPTURA O WRAPPER DO FAQ/FOOTER
             
             const elementsToHideInIntro = [logoContainer, menuLeft, menuRight, menuMobile];
 
             if (viewName === 'intro') {
-                elementsToHideInIntro.forEach(el => {
-                    el.classList.remove('opacity-100-forced');
-                    el.classList.add('opacity-0-forced');
-                });
+                elementsToHideInIntro.forEach(el => { el.classList.remove('opacity-100-forced'); el.classList.add('opacity-0-forced'); });
+                document.body.classList.add('is-intro'); // Trava o scroll
+                if(globalFooter) globalFooter.style.display = 'none'; // ESCONDE O FAQ
             } else {
-                elementsToHideInIntro.forEach(el => {
-                    el.classList.remove('opacity-0-forced');
-                    el.classList.add('opacity-100-forced');
-                });
+                elementsToHideInIntro.forEach(el => { el.classList.remove('opacity-0-forced'); el.classList.add('opacity-100-forced'); });
+                document.body.classList.remove('is-intro'); // Libera o scroll
+                if(globalFooter) globalFooter.style.display = 'block'; // MOSTRA O FAQ
                 
-                if (viewName === 'pro') {
-                    logoText.innerHTML = 'A GATA LAMBEU <span class="text-[#E5C988] ml-2 text-sm align-middle tracking-widest">PRO</span>';
-                } else {
-                    logoText.innerHTML = 'A GATA LAMBEU';
-                }
+                logoText.innerHTML = (viewName === 'pro') ? 'A GATA LAMBEU <span class="text-[#E5C988] ml-2 text-sm align-middle tracking-widest">PRO</span>' : 'A GATA LAMBEU';
             }
 
-            // Troca de Telas
             document.querySelectorAll('.view-section').forEach(el => {
                 el.classList.remove('view-active');
-                setTimeout(() => {
-                    if(!el.classList.contains('view-active')) el.style.display = 'none';
-                }, 1000); 
+                setTimeout(() => { if(!el.classList.contains('view-active')) el.style.display = 'none'; }, 1000); 
             });
 
             const target = document.getElementById('view-' + viewName);
             target.style.display = (viewName === 'intro') ? 'flex' : 'block';
-            
-            setTimeout(() => {
-                target.classList.add('view-active');
-            }, 50);
+            setTimeout(() => target.classList.add('view-active'), 50);
 
-            if(viewName !== 'intro') {
-                window.scrollTo({ top: 0, behavior: 'smooth' });
+            if(viewName !== 'intro') window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // SCROLL SUAVE PARA ELEMENTOS INTERNOS
+        function scrollToElement(id) {
+            const el = document.getElementById(id);
+            if(el) el.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // FUNÇÕES DO MODAL DE SENHA
+        const passwordModal = document.getElementById('password-modal');
+        const passwordInput = document.getElementById('business-password');
+
+        function openPasswordModal(target) {
+            targetViewAfterAuth = target; // Define qual seção abrir após a senha (catalog, academy, workshops)
+            
+            // Se já autenticado, vai direto
+            if(isAuthenticated) {
+                switchView(targetViewAfterAuth);
+                return;
+            }
+
+            passwordModal.classList.add('open');
+            passwordInput.focus();
+        }
+
+        function closePasswordModal() {
+            passwordModal.classList.remove('open');
+            targetViewAfterAuth = '';
+        }
+
+        function handlePasswordEnter(e) {
+            if(e.key === 'Enter') verifyPassword();
+        }
+
+        function verifyPassword() {
+            const secretKey = 'GATA2025'; // SENHA MESTRA
+            const userKey = passwordInput.value.toUpperCase();
+
+            if (userKey === secretKey) {
+                // Senha Correta
+                isAuthenticated = true; 
+                passwordModal.classList.remove('open');
+                // Abre a view que foi solicitada (Catalog, Academy ou Workshops)
+                if(targetViewAfterAuth) switchView(targetViewAfterAuth);
+            } else {
+                // Senha Incorreta
+                passwordInput.classList.add('shake');
+                passwordInput.value = '';
+                passwordInput.placeholder = 'SENHA INCORRETA';
+                setTimeout(() => {
+                    passwordInput.classList.remove('shake');
+                    passwordInput.placeholder = 'SENHA DE ACESSO';
+                }, 1000);
             }
         }
 
-        // --- SISTEMA DE ANIMAÇÃO NO SCROLL (MOBILE "HOVER") ---
-        document.addEventListener('DOMContentLoaded', () => {
-            const observerOptions = {
-                root: null,
-                rootMargin: '-20% 0px -20% 0px', // Ativa quando o elemento está no centro vertical
-                threshold: 0.3 // 30% do elemento visível
-            };
+        // CARREGAMENTO PERCEPTIVO E PRELOADER
+        window.addEventListener('load', () => {
+            document.body.classList.add('loaded');
+            
+            const globalFooter = document.getElementById('global-footer');
+            if(globalFooter) globalFooter.style.display = 'none';
 
+            const observerOptions = { root: null, rootMargin: '-20% 0px -20% 0px', threshold: 0.3 };
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('active-state');
-                    } else {
-                        // Opcional: remover a classe quando sai da tela para repetir o efeito
-                        entry.target.classList.remove('active-state');
-                    }
+                    if (entry.isIntersecting) { entry.target.classList.add('active-state'); }
+                    else { entry.target.classList.remove('active-state'); }
                 });
             }, observerOptions);
 
-            // Observar elementos chave
             const elementsToObserve = document.querySelectorAll('.observe-me, .group, .card-monolith, .img-luxury-frame, .btn-griffe, .btn-gold-solid, .btn-outline');
             elementsToObserve.forEach(el => observer.observe(el));
         });
