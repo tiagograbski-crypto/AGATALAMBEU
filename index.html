@@ -934,6 +934,38 @@
             const globalFooter = document.getElementById('global-footer');
             if(globalFooter) globalFooter.style.display = 'none';
 
+            // --- NOVO: LÓGICA DE DEEP LINK (QR CODE) ---
+            // Verifica se tem um #hash na URL ao carregar a página
+            const hash = window.location.hash;
+
+            if (hash) {
+                // Pequeno delay para garantir que o preloader sumiu
+                setTimeout(() => {
+                    if (hash === '#academy') {
+                        // QR Code da Academia: Vai pro Pro e abre a senha da Academy
+                        switchView('pro');
+                        openPasswordModal('academy');
+                    } else if (hash === '#workshops') {
+                        // QR Code dos Workshops
+                        switchView('pro');
+                        openPasswordModal('workshops');
+                    } else if (hash === '#catalog') {
+                        // QR Code do Catálogo/Tabela
+                        switchView('pro');
+                        openPasswordModal('catalog');
+                    } else if (hash === '#store') {
+                        // Link direto para a Loja
+                        switchView('store');
+                    } else if (hash === '#pro') {
+                        // Link direto para área Business
+                        switchView('pro');
+                    } else if (hash === '#client') {
+                        // Link direto para área Cliente
+                        switchView('client');
+                    }
+                }, 500);
+            }
+
             const observerOptions = { root: null, rootMargin: '-20% 0px -20% 0px', threshold: 0.3 };
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
