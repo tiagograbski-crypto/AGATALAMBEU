@@ -6,12 +6,13 @@
     <meta name="description" content="A Gata Lambeu - Alta Tecnologia Capilar. Gloss Premium Híbrido e Home Care de Elite.">
     <title>A GATA LAMBEU | Grife Capilar</title>
 
-    <!-- 1. BIBLIOTECAS VISUAIS -->
+    <!-- 1. BIBLIOTECAS VISUAIS & UTILS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Montserrat:wght@200;300;400;500;600&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script> <!-- Para formatar o texto da IA -->
 
     <style>
         /* 2. DESIGN SYSTEM: CHAMPAGNE GOLD & DEEP BLACK */
@@ -53,13 +54,12 @@
             background-clip: text;
         }
 
-        /* HEADER */
+        /* HEADER & NAV */
         .nav-glass {
             background: linear-gradient(to bottom, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.8) 50%, rgba(0,0,0,0) 100%);
             transition: all 0.8s ease;
         }
 
-        /* MENU LINKS */
         .nav-link {
             position: relative;
             color: rgba(255,255,255,0.6);
@@ -68,97 +68,129 @@
             text-transform: uppercase;
             transition: color 0.4s ease;
         }
-        .nav-link:hover, .nav-link.active {
-            color: var(--gold-primary);
-        }
+        .nav-link:hover, .nav-link.active { color: var(--gold-primary); }
         .nav-link::after {
-            content: '•';
-            position: absolute;
-            bottom: -15px;
-            left: 50%;
-            transform: translateX(-50%) scale(0);
-            color: var(--gold-primary);
-            transition: transform 0.3s ease;
-            font-size: 14px;
+            content: '•'; position: absolute; bottom: -15px; left: 50%;
+            transform: translateX(-50%) scale(0); color: var(--gold-primary);
+            transition: transform 0.3s ease; font-size: 14px;
         }
-        .nav-link:hover::after, .nav-link.active::after {
-            transform: translateX(-50%) scale(1);
-        }
+        .nav-link:hover::after, .nav-link.active::after { transform: translateX(-50%) scale(1); }
 
         /* BOTÕES */
         .btn-griffe {
-            background: transparent;
-            color: #fff;
-            border: 1px solid rgba(255,255,255,0.3);
-            padding: 1.2rem 3rem;
-            font-family: 'Montserrat', sans-serif;
-            font-size: 10px;
-            letter-spacing: 0.3em;
-            text-transform: uppercase;
-            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-            position: relative;
-            overflow: hidden;
+            background: transparent; color: #fff; border: 1px solid rgba(255,255,255,0.3);
+            padding: 1.2rem 3rem; font-family: 'Montserrat', sans-serif; font-size: 10px;
+            letter-spacing: 0.3em; text-transform: uppercase; transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative; overflow: hidden;
         }
         .btn-griffe:hover {
-            border-color: var(--gold-primary);
-            background: rgba(229, 201, 136, 0.05);
-            letter-spacing: 0.4em;
-            color: var(--gold-primary);
+            border-color: var(--gold-primary); background: rgba(229, 201, 136, 0.05);
+            letter-spacing: 0.4em; color: var(--gold-primary);
         }
 
         .btn-gold-solid {
-            background: var(--gold-primary);
-            color: #000;
-            padding: 1rem 2rem;
-            font-size: 10px;
-            letter-spacing: 0.2em;
-            font-weight: 600;
-            text-transform: uppercase;
-            transition: all 0.4s ease;
+            background: var(--gold-primary); color: #000; padding: 1rem 2rem;
+            font-size: 10px; letter-spacing: 0.2em; font-weight: 600;
+            text-transform: uppercase; transition: all 0.4s ease;
         }
-        .btn-gold-solid:hover {
-            background: #fff;
-            transform: translateY(-2px);
-        }
+        .btn-gold-solid:hover { background: #fff; transform: translateY(-2px); }
 
-        /* === A TECNOLOGIA DO MONOLITO FLUTUANTE === */
+        /* MONOLITO FLUTUANTE (GLASSMORPHISM) */
         .card-monolith {
             background: rgba(255, 255, 255, 0.03); 
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.08);
             transition: all 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
-            position: relative;
-            overflow: hidden;
+            position: relative; overflow: hidden;
         }
         .card-monolith:hover {
-            border-color: var(--gold-primary);
-            background: rgba(255, 255, 255, 0.06);
-            transform: translateY(-8px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+            border-color: var(--gold-primary); background: rgba(255, 255, 255, 0.06);
+            transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
         }
 
-        /* Utilitários de Imagem & Layout */
-        .img-luxury-frame {
-            border: 1px solid rgba(255,255,255,0.05);
-            transition: all 0.7s ease;
+        /* CHAT IA & CONCIERGE */
+        .concierge-btn {
+            position: fixed; bottom: 30px; right: 30px; z-index: 100;
+            display: flex; align-items: center; gap: 12px; cursor: pointer;
+            transition: all 0.5s ease;
         }
-        .img-luxury-frame:hover {
-            border-color: rgba(229, 201, 136, 0.4);
+        .concierge-icon {
+            width: 50px; height: 50px; background: var(--gold-gradient); border-radius: 50%;
+            display: flex; align-items: center; justify-content: center; color: #000;
+            box-shadow: 0 4px 20px rgba(229, 201, 136, 0.3); transition: transform 0.5s ease;
         }
+        .concierge-text {
+            background: rgba(0,0,0,0.8); backdrop-filter: blur(5px); padding: 8px 16px;
+            border-radius: 4px; border: 1px solid rgba(255,255,255,0.1);
+            font-size: 10px; text-transform: uppercase; letter-spacing: 0.2em; color: #fff;
+            opacity: 0; transform: translateX(20px); transition: all 0.5s ease; pointer-events: none;
+        }
+        .concierge-btn:hover .concierge-text { opacity: 1; transform: translateX(0); }
+        .concierge-btn:hover .concierge-icon { transform: scale(1.1); }
+
+        .ai-chat-btn {
+            position: fixed; bottom: 95px; right: 37px; z-index: 100; cursor: pointer;
+            width: 36px; height: 36px; background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(5px); border: 1px solid rgba(229, 201, 136, 0.5);
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            color: #E5C988; transition: all 0.3s ease; animation: pulse-gold 3s infinite;
+        }
+        .ai-chat-btn:hover { background: #E5C988; color: #000; transform: scale(1.1); }
+        @keyframes pulse-gold {
+            0% { box-shadow: 0 0 0 0 rgba(229, 201, 136, 0.4); }
+            70% { box-shadow: 0 0 0 10px rgba(229, 201, 136, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(229, 201, 136, 0); }
+        }
+
+        .ai-chat-window {
+            position: fixed; bottom: 100px; right: 30px; width: 350px; height: 500px;
+            background: rgba(10, 10, 10, 0.95); backdrop-filter: blur(20px);
+            border: 1px solid rgba(229, 201, 136, 0.2); border-radius: 2px;
+            z-index: 101; display: flex; flex-direction: column;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.8); transform: translateY(20px); opacity: 0;
+            pointer-events: none; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .ai-chat-window.open { transform: translateY(0); opacity: 1; pointer-events: auto; }
+        
+        .chat-header {
+            padding: 20px; border-bottom: 1px solid rgba(255,255,255,0.05);
+            display: flex; justify-content: space-between; align-items: center;
+            background: linear-gradient(90deg, rgba(229, 201, 136, 0.05) 0%, rgba(0,0,0,0) 100%);
+        }
+        .chat-messages {
+            flex: 1; padding: 20px; overflow-y: auto; font-size: 11px; font-weight: 300;
+            display: flex; flex-direction: column; gap: 15px;
+        }
+        .chat-input-area {
+            padding: 15px; border-top: 1px solid rgba(255,255,255,0.05);
+            display: flex; gap: 10px;
+        }
+        .chat-input {
+            flex: 1; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+            color: white; padding: 10px; border-radius: 2px; font-size: 11px; outline: none;
+        }
+        .msg-ai {
+            align-self: flex-start; background: rgba(255,255,255,0.03); border-left: 2px solid #E5C988;
+            padding: 12px; border-radius: 0 8px 8px 8px; max-width: 90%; line-height: 1.5;
+        }
+        .msg-user {
+            align-self: flex-end; background: #E5C988; color: #000;
+            padding: 12px; border-radius: 8px 0 8px 8px; max-width: 80%; font-weight: 500;
+        }
+
+        /* Utilitários & Animações */
+        .img-luxury-frame { border: 1px solid rgba(255,255,255,0.05); transition: all 0.7s ease; }
+        .img-luxury-frame:hover { border-color: rgba(229, 201, 136, 0.4); }
         
         .view-section { display: none; opacity: 0; transition: opacity 1s ease; }
         .view-active { display: block; opacity: 1; }
-
-        /* Animações */
+        
         .slide-up { animation: slideUp 1s ease-out forwards; opacity: 0; transform: translateY(30px); }
         @keyframes slideUp { to { opacity: 1; transform: translateY(0); } }
 
-        /* Estados de Visibilidade */
         .opacity-0-forced { opacity: 0 !important; pointer-events: none; }
         .opacity-100-forced { opacity: 1 !important; pointer-events: auto; }
         .transition-opacity-slow { transition: opacity 1s ease; }
-
     </style>
 </head>
 <body class="bg-luxury-clean min-h-screen text-gray-200 selection:bg-[#E5C988] selection:text-black">
@@ -186,7 +218,7 @@
                 <button class="text-white/50 hover:text-[#E5C988] transition"><i data-lucide="search" class="w-3 h-3"></i></button>
             </div>
 
-            <!-- Menu Mobile (INICIALMENTE OCULTO NA CAPA) - ADICIONADO BOTÃO INÍCIO -->
+            <!-- Menu Mobile (INICIALMENTE OCULTO NA CAPA) -->
             <div id="menu-mobile" class="flex md:hidden gap-6 order-3 text-[9px] tracking-widest text-gray-400 opacity-0-forced transition-opacity-slow justify-center w-full">
                 <button onclick="switchView('intro')" class="hover:text-[#E5C988]">INÍCIO</button>
                 <button onclick="switchView('client')" class="hover:text-[#E5C988]">RITUAIS</button>
@@ -194,6 +226,41 @@
             </div>
         </div>
     </nav>
+
+    <!-- CHATBOT IA TRIGGER -->
+    <div onclick="toggleChat()" class="ai-chat-btn" title="Concierge IA">
+        <i data-lucide="sparkles" class="w-4 h-4"></i>
+    </div>
+
+    <!-- JANELA DE CHAT IA -->
+    <div id="ai-chat-window" class="ai-chat-window">
+        <div class="chat-header">
+            <div>
+                <h5 class="font-luxury text-[#E5C988] tracking-widest text-sm">CONCIERGE DIGITAL</h5>
+                <p class="text-[8px] text-gray-400 uppercase tracking-wide">Powered by Gemini AI ✨</p>
+            </div>
+            <button onclick="toggleChat()" class="text-gray-400 hover:text-white"><i data-lucide="x" class="w-4 h-4"></i></button>
+        </div>
+        <div id="chat-messages" class="chat-messages">
+            <div class="msg-ai">
+                Olá. Sou a inteligência artificial da Gata Lambeu. <br><br>
+                Posso ajudar você a escolher o <strong>Ritual Ideal</strong> para seu cabelo ou calcular a <strong>Rentabilidade</strong> para seu salão.<br><br>
+                Como posso ser útil hoje?
+            </div>
+        </div>
+        <div class="chat-input-area">
+            <input type="text" id="user-input" class="chat-input" placeholder="Digite sua dúvida..." onkeypress="handleEnter(event)">
+            <button onclick="sendMessage()" class="text-[#E5C988] hover:text-white"><i data-lucide="send" class="w-4 h-4"></i></button>
+        </div>
+    </div>
+
+    <!-- CONCIERGE FLUTUANTE (WhatsApp) -->
+    <a href="https://wa.me/554900000000" target="_blank" class="concierge-btn">
+        <span class="concierge-text">Falar com Humano</span>
+        <div class="concierge-icon">
+            <i data-lucide="message-circle" class="w-5 h-5"></i>
+        </div>
+    </a>
 
     <!-- =========================================================================
          VISÃO 1: CAPA ABERTURA
@@ -243,7 +310,6 @@
 
             <section class="grid grid-cols-1 lg:grid-cols-2 gap-20 mb-32 items-center">
                 <div class="relative group flex justify-center lg:block">
-                    <!-- AJUSTE: Imagem Pro contida e elegante -->
                     <div class="relative bg-[#0a0a0a] aspect-[4/5] w-3/4 mx-auto flex items-center justify-center overflow-hidden border border-white/5 img-luxury-frame">
                         <img src="https://res.cloudinary.com/dh4ekg6f2/image/upload/v1765327213/unnamed_k0lpmx.jpg" alt="Gloss Premium" class="h-[80%] w-auto object-contain drop-shadow-2xl transition-transform duration-1000 group-hover:scale-105">
                     </div>
@@ -298,7 +364,6 @@
                 </div>
             </section>
 
-            <!-- BIO-ARQUITETURA -->
             <div class="mb-12 text-center">
                 <span class="text-[#E5C988] text-[10px] tracking-[0.3em] uppercase">Engenharia Molecular</span>
                 <h3 class="font-luxury text-3xl text-white mt-4">BIO-ARQUITETURA CAPILAR</h3>
@@ -314,7 +379,6 @@
                         Atua como uma armadura biomimética no córtex, preservando a integridade da fibra durante a transformação térmica.
                     </p>
                 </div>
-                
                 <div class="card-monolith p-8 group">
                     <div class="mb-6 text-[#E5C988] opacity-80 group-hover:opacity-100 transition">
                         <i data-lucide="droplets" class="w-8 h-8"></i>
@@ -324,19 +388,17 @@
                         Sistema inteligente de hidro-retenção. Mantém a maleabilidade do fio liso, evitando o aspecto rígido ou artificial.
                     </p>
                 </div>
-                
                 <div class="card-monolith p-8 group">
                     <div class="mb-6 text-[#E5C988] opacity-80 group-hover:opacity-100 transition">
                         <i data-lucide="sparkles" class="w-8 h-8"></i>
                     </div>
-                    <h4 class="font-luxury text-lg mb-3 text-white">NANO OURO & SEMENTE DE UVA</h4>
+                    <h4 class="font-luxury text-lg mb-3 text-white">ÓLEO DE SEMENTE DE UVA</h4>
                     <p class="text-xs text-gray-400 leading-relaxed font-light">
                         O toque final de luxo. Ação antioxidante preciosa que sela a cutícula com um brilho tridimensional incomparável.
                     </p>
                 </div>
             </section>
 
-            <!-- Back to Home -->
             <div class="text-center py-8">
                 <button onclick="switchView('intro')" class="text-[9px] text-gray-500 hover:text-[#E5C988] tracking-widest uppercase transition border-b border-transparent hover:border-[#E5C988] pb-1">Voltar ao Início</button>
             </div>
@@ -356,10 +418,8 @@
                 <p class="text-gray-400 max-w-md mx-auto font-light text-xs tracking-wide leading-relaxed">A tecnologia de salão traduzida para o seu santuário particular.</p>
             </header>
 
-            <!-- O PROTAGONISTA -->
             <section class="grid grid-cols-1 lg:grid-cols-2 gap-16 mb-40 items-center border-b border-white/5 pb-20">
                 <div class="relative group flex justify-center lg:block">
-                     <!-- AJUSTE: Imagem Hero Cliente contida -->
                      <div class="relative bg-[#0a0a0a] aspect-[4/5] w-3/4 mx-auto flex items-center justify-center overflow-hidden border border-white/5 img-luxury-frame">
                         <img src="https://res.cloudinary.com/dh4ekg6f2/image/upload/v1765327213/unnamed_k0lpmx.jpg" alt="Plástica Capilar Híbrida" class="h-[80%] w-auto object-contain drop-shadow-2xl transition-transform duration-1000 group-hover:scale-105">
                     </div>
@@ -372,41 +432,24 @@
                             Nossos rituais nascem desta joia tecnológica. Uma fórmula rica em ativos nobres que reestruturam a fibra capilar, garantindo a integridade absoluta que você sente ao toque.
                         </p>
                         
-                        <!-- ATIVOS -->
                         <div class="space-y-4 pt-4">
                             <div class="card-monolith p-4 flex gap-6 items-center group cursor-default">
-                                <div class="text-[#E5C988] shrink-0">
-                                    <i data-lucide="shield" class="w-5 h-5"></i>
-                                </div>
-                                <div>
-                                    <h4 class="text-white font-luxury text-sm mb-1 group-hover:text-[#E5C988] transition">PROTEÍNA DO TRIGO</h4>
-                                    <p class="text-[9px] text-gray-500 uppercase tracking-widest leading-relaxed">Blindagem e Força Estrutural</p>
-                                </div>
+                                <div class="text-[#E5C988] shrink-0"><i data-lucide="shield" class="w-5 h-5"></i></div>
+                                <div><h4 class="text-white font-luxury text-sm mb-1 group-hover:text-[#E5C988] transition">PROTEÍNA DO TRIGO</h4><p class="text-[9px] text-gray-500 uppercase tracking-widest leading-relaxed">Blindagem e Força Estrutural</p></div>
                             </div>
                             <div class="card-monolith p-4 flex gap-6 items-center group cursor-default">
-                                <div class="text-[#E5C988] shrink-0">
-                                    <i data-lucide="droplets" class="w-5 h-5"></i>
-                                </div>
-                                <div>
-                                    <h4 class="text-white font-luxury text-sm mb-1 group-hover:text-[#E5C988] transition">ÁCIDO HIALURÔNICO</h4>
-                                    <p class="text-[9px] text-gray-500 uppercase tracking-widest leading-relaxed">Hidratação e Maleabilidade</p>
-                                </div>
+                                <div class="text-[#E5C988] shrink-0"><i data-lucide="droplets" class="w-5 h-5"></i></div>
+                                <div><h4 class="text-white font-luxury text-sm mb-1 group-hover:text-[#E5C988] transition">ÁCIDO HIALURÔNICO</h4><p class="text-[9px] text-gray-500 uppercase tracking-widest leading-relaxed">Hidratação e Maleabilidade</p></div>
                             </div>
                             <div class="card-monolith p-4 flex gap-6 items-center group cursor-default">
-                                <div class="text-[#E5C988] shrink-0">
-                                    <i data-lucide="sparkles" class="w-5 h-5"></i>
-                                </div>
-                                <div>
-                                    <h4 class="text-white font-luxury text-sm mb-1 group-hover:text-[#E5C988] transition">NANO OURO & SEMENTE DE UVA</h4>
-                                    <p class="text-[9px] text-gray-500 uppercase tracking-widest leading-relaxed">Brilho Tridimensional de Joia</p>
-                                </div>
+                                <div class="text-[#E5C988] shrink-0"><i data-lucide="sparkles" class="w-5 h-5"></i></div>
+                                <div><h4 class="text-white font-luxury text-sm mb-1 group-hover:text-[#E5C988] transition">ÓLEO DE SEMENTE DE UVA</h4><p class="text-[9px] text-gray-500 uppercase tracking-widest leading-relaxed">Brilho Tridimensional de Joia</p></div>
                             </div>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <!-- A ARQUITETURA DO TEMPO -->
             <section class="mb-48">
                 <div class="text-center mb-16">
                     <span class="text-[#E5C988] text-[9px] tracking-[0.3em] uppercase">O Menu de Serviços</span>
@@ -414,8 +457,7 @@
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <!-- 15 MIN -->
-                    <div class="card-monolith p-12 md:p-16 group cursor-pointer relative" onclick="window.open('https://wa.me/554900000000?text=Agendar%20Flash%20Ritual')">
+                    <div class="card-monolith p-12 md:p-16 group cursor-pointer relative hover:border-[#E5C988]/50 transition-colors" onclick="window.open('https://wa.me/554900000000?text=Agendar%20Flash%20Ritual')">
                         <span class="text-[#E5C988] text-[9px] tracking-[0.2em] uppercase mb-2 block">Para a Mulher Dinâmica</span>
                         <div class="flex justify-between items-baseline mb-6">
                             <h4 class="text-3xl text-white font-luxury">FLASH RITUAL</h4>
@@ -424,14 +466,13 @@
                         <p class="text-xs text-gray-400 font-light leading-relaxed max-w-sm mb-10">
                             Polimento instantâneo. Um serviço expresso que silencia o frizz e devolve o movimento em minutos. Ideal para manutenção de brilho.
                         </p>
-                        <div class="flex items-center gap-3 text-[9px] tracking-widest text-[#E5C988] uppercase opacity-70 group-hover:opacity-100 transition">
-                            <span>Agendar Sessão</span>
+                        <div class="flex items-center gap-3 text-[9px] tracking-widest text-[#E5C988] uppercase opacity-100 transition">
+                            <span>Reservar Minha Sessão</span>
                             <i data-lucide="arrow-up-right" class="w-3 h-3"></i>
                         </div>
                     </div>
 
-                    <!-- 40 MIN -->
-                    <div class="card-monolith p-12 md:p-16 group cursor-pointer relative" onclick="window.open('https://wa.me/554900000000?text=Agendar%20Liso%20Blindado')">
+                    <div class="card-monolith p-12 md:p-16 group cursor-pointer relative hover:border-[#E5C988]/50 transition-colors" onclick="window.open('https://wa.me/554900000000?text=Agendar%20Liso%20Blindado')">
                         <span class="text-[#E5C988] text-[9px] tracking-[0.2em] uppercase mb-2 block">Para a Mulher que Busca Reinvenção</span>
                         <div class="flex justify-between items-baseline mb-6">
                             <h4 class="text-3xl text-white font-luxury">LISO BLINDADO</h4>
@@ -440,15 +481,14 @@
                         <p class="text-xs text-gray-400 font-light leading-relaxed max-w-sm mb-10">
                             A transformação absoluta. Plástica capilar que reestrutura o fio desde o córtex, garantindo um liso impecável, duradouro e com movimento natural.
                         </p>
-                        <div class="flex items-center gap-3 text-[9px] tracking-widest text-[#E5C988] uppercase opacity-70 group-hover:opacity-100 transition">
-                            <span>Agendar Sessão</span>
+                        <div class="flex items-center gap-3 text-[9px] tracking-widest text-[#E5C988] uppercase opacity-100 transition">
+                            <span>Reservar Minha Sessão</span>
                             <i data-lucide="arrow-up-right" class="w-3 h-3"></i>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <!-- VITRINE HOME CARE (ZIG-ZAG) -->
             <div class="mb-24 flex justify-center">
                 <span class="text-[9px] text-gray-500 tracking-widest uppercase border-b border-white/10 pb-2">Maintenance Collection</span>
             </div>
@@ -556,64 +596,100 @@
         </div>
     </footer>
 
-    <!-- 5. LÓGICA DE NAVEGAÇÃO -->
+    <!-- 5. LÓGICA DE NAVEGAÇÃO E IA -->
     <script>
         lucide.createIcons();
 
+        // NAVEGAÇÃO
         function switchView(viewName) {
-            // Atualiza Navegação Visual
-            document.querySelectorAll('.nav-link').forEach(link => {
-                link.classList.remove('active');
-            });
+            document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active'));
             const activeLink = document.getElementById('nav-' + viewName);
             if(activeLink) activeLink.classList.add('active');
 
-            // LOGICA DO LOGO DINÂMICO & VISIBILIDADE
             const logoContainer = document.getElementById('nav-brand-container');
             const logoText = document.getElementById('brand-logo');
             const menuLeft = document.getElementById('menu-left');
             const menuRight = document.getElementById('menu-right');
             const menuMobile = document.getElementById('menu-mobile');
-            
             const elementsToHideInIntro = [logoContainer, menuLeft, menuRight, menuMobile];
 
             if (viewName === 'intro') {
-                elementsToHideInIntro.forEach(el => {
-                    el.classList.remove('opacity-100-forced');
-                    el.classList.add('opacity-0-forced');
-                });
+                elementsToHideInIntro.forEach(el => { el.classList.remove('opacity-100-forced'); el.classList.add('opacity-0-forced'); });
             } else {
-                elementsToHideInIntro.forEach(el => {
-                    el.classList.remove('opacity-0-forced');
-                    el.classList.add('opacity-100-forced');
-                });
-                
-                if (viewName === 'pro') {
-                    logoText.innerHTML = 'A GATA LAMBEU <span class="text-[#E5C988] ml-2 text-sm align-middle tracking-widest">PRO</span>';
-                } else {
-                    logoText.innerHTML = 'A GATA LAMBEU';
-                }
+                elementsToHideInIntro.forEach(el => { el.classList.remove('opacity-0-forced'); el.classList.add('opacity-100-forced'); });
+                logoText.innerHTML = (viewName === 'pro') ? 'A GATA LAMBEU <span class="text-[#E5C988] ml-2 text-sm align-middle tracking-widest">PRO</span>' : 'A GATA LAMBEU';
             }
 
-            // Troca de Telas
             document.querySelectorAll('.view-section').forEach(el => {
                 el.classList.remove('view-active');
-                setTimeout(() => {
-                    if(!el.classList.contains('view-active')) el.style.display = 'none';
-                }, 1000); 
+                setTimeout(() => { if(!el.classList.contains('view-active')) el.style.display = 'none'; }, 1000); 
             });
 
             const target = document.getElementById('view-' + viewName);
             target.style.display = (viewName === 'intro') ? 'flex' : 'block';
-            
-            setTimeout(() => {
-                target.classList.add('view-active');
-            }, 50);
+            setTimeout(() => target.classList.add('view-active'), 50);
 
-            if(viewName !== 'intro') {
-                window.scrollTo({ top: 0, behavior: 'smooth' });
+            if(viewName !== 'intro') window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // CHAT IA
+        const chatWindow = document.getElementById('ai-chat-window');
+        const chatMessages = document.getElementById('chat-messages');
+        const userInput = document.getElementById('user-input');
+        const apiKey = ""; // INSIRA SUA API KEY DO GEMINI AQUI
+
+        function toggleChat() {
+            chatWindow.classList.toggle('open');
+            if(chatWindow.classList.contains('open')) userInput.focus();
+        }
+
+        function handleEnter(e) { if(e.key === 'Enter') sendMessage(); }
+
+        async function sendMessage() {
+            const text = userInput.value.trim();
+            if (!text) return;
+            addMessage(text, 'user');
+            userInput.value = '';
+            const loadingId = addLoading();
+
+            try {
+                if(!apiKey) throw new Error("API Key não configurada");
+                const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        contents: [{ parts: [{ text: text }] }],
+                        systemInstruction: { parts: [{ text: "Você é a Concierge Digital da marca de luxo 'A Gata Lambeu'. Seja sofisticada, técnica e breve. Produtos: Gloss Premium (Híbrido, 15min ou 40min), Home Care (Bain, Gold Infusion, Blindagem). Objetivo: Venda e suporte." }] }
+                    })
+                });
+                const data = await response.json();
+                removeLoading(loadingId);
+                if (data.error) { addMessage("Perdão, tive um lapso. Tente novamente.", 'ai'); } 
+                else { addMessage(data.candidates[0].content.parts[0].text, 'ai'); }
+            } catch (error) {
+                removeLoading(loadingId);
+                addMessage("Sistema em manutenção. Fale no WhatsApp.", 'ai');
             }
         }
+
+        function addMessage(text, sender) {
+            const div = document.createElement('div');
+            div.className = sender === 'user' ? 'msg-user' : 'msg-ai';
+            if(sender === 'ai' && typeof marked !== 'undefined') div.innerHTML = marked.parse(text);
+            else div.innerText = text;
+            chatMessages.appendChild(div);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        function addLoading() {
+            const id = 'loading-' + Date.now();
+            const div = document.createElement('div');
+            div.id = id; div.className = 'msg-ai'; div.innerText = 'Digitando...';
+            chatMessages.appendChild(div);
+            return id;
+        }
+
+        function removeLoading(id) { const el = document.getElementById(id); if(el) el.remove(); }
     </script>
 </body>
 </html>
