@@ -113,7 +113,7 @@
             transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
         }
 
-        /* Regras Active State */
+        /* Regras Active State (Mobile Scroll) */
         .card-monolith.active-state .opacity-80 { opacity: 1; }
         .card-monolith.active-state .text-white\/30 { color: #E5C988; } 
         .group.active-state h4, .group.active-state i, .group.active-state .text-white\/20, .group.active-state .text-5xl { color: #E5C988; }
@@ -160,7 +160,7 @@
         .hidden-on-intro { display: none; }
         p { font-weight: 300; }
 
-        /* Modal Senha */
+        /* --- MODAL DE SENHA DE LUXO --- */
         .password-modal-overlay {
             position: fixed; inset: 0; background: rgba(0,0,0,0.95); backdrop-filter: blur(20px);
             z-index: 9999; display: flex; align-items: center; justify-content: center;
@@ -201,7 +201,7 @@
             
             <div id="menu-left" class="hidden md:flex gap-12 order-2 md:order-1 opacity-0-forced transition-opacity-slow">
                 <button onclick="switchView('intro')" id="nav-intro" class="nav-link cursor-pointer hover:text-[#E5C988] transition-colors">INÍCIO</button>
-                <button onclick="switchView('client')" id="nav-client" class="nav-link cursor-pointer hover:text-[#E5C988] transition-colors">O RITUAL</button>
+                <button onclick="switchView('client')" id="nav-client" class="nav-link cursor-pointer hover:text-[#E5C988] transition-colors">RITUAIS</button>
             </div>
 
             <div onclick="switchView('intro')" id="nav-brand-container" class="cursor-pointer order-1 md:order-2 text-center group opacity-0-forced transition-opacity-slow hover:opacity-80">
@@ -212,35 +212,31 @@
             
             <div id="menu-right" class="hidden md:flex gap-12 order-3 justify-end items-center opacity-0-forced transition-opacity-slow">
                 <button onclick="switchView('pro')" id="nav-pro" class="nav-link cursor-pointer hover:text-[#E5C988] transition-colors">BUSINESS</button>
-                <button class="text-white/50 hover:text-[#E5C988] transition"><i data-lucide="search" class="w-3 h-3"></i></button>
+                <button onclick="switchView('store')" id="nav-store" class="nav-link cursor-pointer hover:text-[#E5C988] transition-colors flex items-center gap-2"><i data-lucide="shopping-bag" class="w-3 h-3"></i> LOJA</button>
             </div>
 
-            <div id="menu-mobile" class="flex md:hidden gap-8 order-3 text-[10px] tracking-widest text-gray-300 opacity-0-forced transition-opacity-slow justify-center w-full uppercase">
-                <button onclick="switchView('intro')" class="hover:text-[#E5C988]">Início</button>
+            <div id="menu-mobile" class="flex md:hidden gap-6 order-3 text-[9px] tracking-widest text-gray-300 opacity-0-forced transition-opacity-slow justify-center w-full uppercase">
                 <button onclick="switchView('client')" class="hover:text-[#E5C988]">Rituais</button>
                 <button onclick="switchView('pro')" class="hover:text-[#E5C988]">Business</button>
+                <button onclick="switchView('store')" class="hover:text-[#E5C988] text-[#E5C988]">Loja</button>
             </div>
         </div>
     </nav>
 
-    <!-- === MODAL DE SENHA DE LUXO === -->
+    <!-- === MODAL DE SENHA === -->
     <div id="password-modal" class="password-modal-overlay">
         <div class="password-box">
             <div class="text-[#E5C988] mb-6"><i data-lucide="lock" class="w-10 h-10 mx-auto"></i></div>
             <h3 class="font-luxury text-2xl text-white mb-2">ACESSO RESTRITO</h3>
             <p class="text-[10px] text-gray-400 uppercase tracking-widest mb-8">Conteúdo Exclusivo para Membros Elite</p>
-            
             <input type="password" id="business-password" class="password-input" placeholder="CHAVE DE ACESSO" onkeypress="handlePasswordEnter(event)">
-            
             <button onclick="verifyPassword()" class="btn-gold-solid w-full mb-6">DESBLOQUEAR ACERVO</button>
-            
             <div class="border-t border-white/10 pt-4">
                 <p class="text-[9px] text-gray-500 mb-2">Ainda não possui credencial?</p>
                 <a href="https://wa.me/554900000000?text=Olá,%20sou%20profissional%20e%20gostaria%20da%20chave%20de%20acesso%20para%20o%20Acervo%20Gata%20Lambeu" target="_blank" class="text-[10px] text-[#E5C988] border-b border-[#E5C988]/50 pb-1 hover:text-white transition uppercase tracking-widest">
                     Solicitar Chave ao Concierge
                 </a>
             </div>
-            
             <button onclick="closePasswordModal()" class="absolute top-4 right-4 text-gray-500 hover:text-white transition"><i data-lucide="x" class="w-5 h-5"></i></button>
         </div>
     </div>
@@ -283,7 +279,7 @@
     </main>
 
     <!-- =========================================================================
-         VISÃO 2: ÁREA PROFISSIONAL (BUSINESS ECOSYSTEM)
+         VISÃO 2: ÁREA PROFISSIONAL (BUSINESS)
          ========================================================================= -->
     <main id="view-pro" class="view-section min-h-screen pt-32 md:pt-40 pb-20">
         <div class="max-w-[1400px] mx-auto px-6 md:px-16">
@@ -294,20 +290,19 @@
                 </div>
             </div>
 
-            <!-- SUB-MENU -->
+            <!-- SUB-MENU (EDUCACIONAL / TÉCNICO) -->
             <div class="flex flex-wrap justify-center md:justify-start gap-8 md:gap-12 mb-20 border-b border-white/10 pb-6 text-[#E5C988]/70 font-light text-[10px] md:text-xs tracking-[0.2em] uppercase slide-up">
                 <button onclick="scrollToElement('tech-section')" class="hover:text-[#E5C988] transition hover:scale-105">Tecnologia</button>
-                <button onclick="scrollToElement('resale-section')" class="hover:text-[#E5C988] transition hover:scale-105">Home Care</button>
                 <button onclick="openPasswordModal('catalog')" class="hover:text-[#E5C988] transition hover:scale-105 flex items-center gap-2"><i data-lucide="lock" class="w-3 h-3"></i> Tabela Blindada</button>
+                <button onclick="openPasswordModal('academy')" class="hover:text-[#E5C988] transition hover:scale-105 flex items-center gap-2"><i data-lucide="lock" class="w-3 h-3"></i> Academy</button>
                 <button onclick="scrollToElement('exclusivity-section')" class="hover:text-[#E5C988] transition hover:scale-105 flex items-center gap-2"><i data-lucide="map-pin" class="w-3 h-3"></i> Exclusividade</button>
             </div>
 
-            <!-- HERO B2B: O PRODUTO -->
             <section class="grid grid-cols-1 lg:grid-cols-2 gap-20 mb-32 items-center">
                 <div class="relative group flex justify-center lg:block">
                     <div class="relative bg-[#0a0a0a] aspect-[4/5] w-3/4 mx-auto flex items-center justify-center overflow-hidden border border-white/5 img-luxury-frame observe-me rounded-lg">
                         <div class="absolute inset-0 bg-gradient-to-b from-[#E5C988]/5 to-transparent opacity-30"></div>
-                        <img loading="lazy" width="800" height="1000" src="https://res.cloudinary.com/dh4ekg6f2/image/upload/v1765334678/Gemini_Generated_Image_qfrznfqfrznfqfrz_uphgnj.png" alt="Plástica Híbrida - Gloss Premium" class="relative z-10 h-auto w-full object-cover drop-shadow-2xl transition-transform duration-1000 group-hover:scale-105">
+                        <img loading="lazy" width="800" height="1000" src="https://res.cloudinary.com/dh4ekg6f2/image/upload/v1765334678/Gemini_Generated_Image_qfrznfqfrznfqfrz_uphgnj.png" alt="Elixir Híbrido de Alta Precisão" class="relative z-10 h-auto w-full object-cover drop-shadow-2xl transition-transform duration-1000 group-hover:scale-105">
                     </div>
                     <div class="absolute -bottom-6 right-10 text-right z-20">
                         <p class="text-[80px] md:text-[100px] font-luxury text-white/5 leading-none select-none">PRO</p>
@@ -321,27 +316,27 @@
                             <span class="border border-white/20 text-gray-400 text-[9px] font-bold px-2 py-1 tracking-wider uppercase">Sem Formol</span>
                         </div>
                         <h3 class="font-luxury text-3xl text-white mb-2">PLÁSTICA HÍBRIDA <span class="text-lg text-gray-500 font-light align-middle ml-2">(Gloss Premium 1L)</span></h3>
-                        <p class="text-[#E5C988] text-[11px] tracking-[0.3em] uppercase mb-6">Biossegurança e Alta Performance</p>
+                        <p class="text-[#E5C988] text-[11px] tracking-[0.3em] uppercase mb-6">Tecnologia de Alta Precisão</p>
                         <div class="w-12 h-px bg-[#E5C988] mb-8"></div>
                         <p class="text-gray-300 font-light text-sm md:text-base leading-relaxed text-justify mb-8">
-                            Redefina o padrão do seu salão com a primeira <strong>Tecnologia Híbrida Orgânica</strong> do mercado. Uma fórmula inteligente que permite executar desde polimentos rápidos até alisamentos definitivos, com total segurança para você e sua cliente.
+                            Não vendemos apenas um produto. Oferecemos uma **Concessão de Tecnologia**. Nossa fórmula híbrida exclusiva adapta-se ao tempo de pausa, permitindo dois níveis de entrega com o mesmo ativo.
                         </p>
                         
                         <div class="card-monolith p-8 rounded-sm mb-8 observe-me border border-[#E5C988]/20">
-                            <h4 class="font-luxury text-lg mb-2 text-white">VERSATILIDADE TÉCNICA</h4>
-                            <p class="text-[9px] text-gray-500 uppercase tracking-widest mb-6 border-b border-white/10 pb-4">Um Ativo. Múltiplos Protocolos.</p>
+                            <h4 class="font-luxury text-lg mb-2 text-white">TECNOLOGIA HÍBRIDA</h4>
+                            <p class="text-[9px] text-gray-500 uppercase tracking-widest mb-6 border-b border-white/10 pb-4">Um Ativo. Múltiplas Possibilidades.</p>
                             
                             <div class="space-y-6">
                                 <div class="flex justify-between items-center group cursor-pointer observe-me">
                                     <div>
                                         <p class="text-[#E5C988] text-[11px] tracking-widest uppercase font-bold mb-1">Flash Ritual (15min de Pausa)</p>
-                                        <p class="text-white text-sm">Polimento & Brilho Espelhado</p>
+                                        <p class="text-white text-sm">Polimento & Brilho</p>
                                     </div>
                                 </div>
                                 <div class="flex justify-between items-center group cursor-pointer observe-me">
                                     <div>
                                         <p class="text-[#E5C988] text-[11px] tracking-widest uppercase font-bold mb-1">Liso Blindado (40+ min de Pausa)</p>
-                                        <p class="text-white text-sm">Transformação Estrutural Definitiva</p>
+                                        <p class="text-white text-sm">Transformação Definitiva</p>
                                     </div>
                                 </div>
                             </div>
@@ -349,7 +344,7 @@
                     </div>
                     <div class="flex flex-col gap-4">
                         <button onclick="scrollToElement('tech-section')" class="btn-gold-solid text-center w-full md:w-auto observe-me flex items-center justify-center gap-2">
-                            EXPLORAR A BIO-ARQUITETURA
+                            EXPLORAR BIO-ARQUITETURA
                         </button>
                     </div>
                 </div>
@@ -361,7 +356,7 @@
                 <h3 class="font-luxury text-3xl text-white mt-4">BIO-ARQUITETURA CAPILAR</h3>
             </div>
             
-            <section class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-32">
+            <section class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-24">
                 <div class="card-monolith p-8 group observe-me">
                     <div class="mb-6 text-[#E5C988] opacity-80 group-hover:opacity-100 transition">
                         <i data-lucide="shield" class="w-8 h-8"></i>
@@ -391,62 +386,7 @@
                 </div>
             </section>
 
-            <!-- HOME CARE B2B (RENDA PASSIVA) -->
-            <div id="resale-section" class="mb-24 text-center slide-up pt-10 border-t border-white/5">
-                <span class="text-[#E5C988] text-[10px] font-bold tracking-[0.3em] uppercase mb-4 block">Lucratividade Recorrente</span>
-                <h2 class="font-luxury text-3xl md:text-5xl text-white mb-6">REVENDA <span class="text-gold italic">HOME CARE</span></h2>
-                <div class="w-16 h-px bg-[#E5C988] mx-auto mb-8 opacity-60"></div>
-                <p class="text-gray-400 max-w-2xl mx-auto font-light text-sm tracking-wide leading-relaxed">
-                    Transforme a manutenção da sua cliente em uma nova fonte de receita. Garanta a durabilidade do liso e a fidelização através da revenda da linha completa no seu salão.
-                </p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
-                <!-- Produtos Home Care (Mantidos) -->
-                <div class="card-monolith p-8 group hover:border-[#E5C988]/40 transition-colors observe-me text-center flex flex-col h-full">
-                    <div class="relative w-full max-w-[200px] mx-auto mb-6 overflow-hidden rounded-lg img-luxury-frame">
-                         <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-50"></div>
-                         <img loading="lazy" src="https://agatalambeu.com.br/assets/images/image01.jpg?v=c6206b86" class="w-full h-auto object-cover opacity-90 group-hover:scale-105 transition duration-700" alt="Bain Reconstrutor">
-                    </div>
-                    <h4 class="font-luxury text-lg text-white mb-2">BAIN RECONSTRUTOR</h4>
-                    <p class="text-[10px] text-[#E5C988] uppercase tracking-widest mb-4">Shampoo Pós-Química</p>
-                    <p class="text-xs text-gray-400 mb-6 font-light flex-grow leading-relaxed">Indispensável para a cliente manter o pH equilibrado e a cutícula selada em casa.</p>
-                    <div class="border-t border-white/10 pt-4 mt-auto">
-                         <span class="text-[9px] text-gray-500 uppercase tracking-widest block mb-1">Potencial de Giro</span>
-                         <span class="text-white font-bold text-xs">ALTO (Uso Diário)</span>
-                    </div>
-                </div>
-
-                <div class="card-monolith p-8 group hover:border-[#E5C988]/40 transition-colors observe-me text-center flex flex-col h-full">
-                     <div class="relative w-full max-w-[200px] mx-auto mb-6 overflow-hidden rounded-lg img-luxury-frame">
-                         <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-50"></div>
-                         <img loading="lazy" src="https://agatalambeu.com.br/assets/images/image02.jpg?v=624d4663" class="w-full h-auto object-cover opacity-90 group-hover:scale-105 transition duration-700" alt="Gold Infusion">
-                    </div>
-                    <h4 class="font-luxury text-lg text-white mb-2">GOLD INFUSION</h4>
-                    <p class="text-[10px] text-[#E5C988] uppercase tracking-widest mb-4">Ampola Power Dose</p>
-                    <p class="text-xs text-gray-400 mb-6 font-light flex-grow leading-relaxed">Tratamento de choque para recuperação instantânea. O "S.O.S" de luxo.</p>
-                    <div class="border-t border-white/10 pt-4 mt-auto">
-                         <span class="text-[9px] text-gray-500 uppercase tracking-widest block mb-1">Valor Agregado</span>
-                         <span class="text-white font-bold text-xs">PREMIUM</span>
-                    </div>
-                </div>
-
-                <div class="card-monolith p-8 group hover:border-[#E5C988]/40 transition-colors observe-me text-center flex flex-col h-full">
-                     <div class="relative w-full max-w-[200px] mx-auto mb-6 overflow-hidden rounded-lg img-luxury-frame">
-                         <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-50"></div>
-                         <img loading="lazy" src="https://agatalambeu.com.br/assets/images/image03.jpg?v=624d4663" class="w-full h-auto object-cover opacity-90 group-hover:scale-105 transition duration-700" alt="Blindagem Queen">
-                    </div>
-                    <h4 class="font-luxury text-lg text-white mb-2">BLINDAGEM QUEEN</h4>
-                    <p class="text-[10px] text-[#E5C988] uppercase tracking-widest mb-4">BB Finalizador</p>
-                    <p class="text-xs text-gray-400 mb-6 font-light flex-grow leading-relaxed">Proteção térmica e solar. A "garantia estendida" do liso perfeito.</p>
-                    <div class="border-t border-white/10 pt-4 mt-auto">
-                         <span class="text-[9px] text-gray-500 uppercase tracking-widest block mb-1">Recorrência</span>
-                         <span class="text-white font-bold text-xs">ALTA (Finalização)</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- EXCLUSIVIDADE TERRITORIAL (FUNDO DE FUNIL) -->
+            <!-- EXCLUSIVIDADE TERRITORIAL -->
             <div id="exclusivity-section" class="max-w-3xl mx-auto mb-32 mt-24">
                 <div class="card-monolith p-10 rounded-sm border border-[#E5C988]/30 bg-[#E5C988]/5 relative overflow-hidden group hover:bg-[#E5C988]/10 transition-colors cursor-default observe-me text-center">
                     
@@ -466,9 +406,6 @@
                             <a href="https://wa.me/554900000000?text=Olá,%20sou%20profissional%20e%20quero%20verificar%20a%20disponibilidade%20na%20minha%20cidade" target="_blank" class="btn-gold-solid w-full flex items-center justify-center gap-3 py-4 text-xs tracking-widest">
                                 <i data-lucide="search" class="w-4 h-4"></i> VERIFICAR DISPONIBILIDADE NA MINHA CIDADE
                             </a>
-                            <a href="#" class="text-[10px] text-gray-500 hover:text-[#E5C988] transition uppercase tracking-widest border-b border-transparent hover:border-[#E5C988] pb-1 w-fit mx-auto" onclick="openPasswordModal('catalog')">
-                                Já é parceiro? Acessar Tabela Blindada
-                            </a>
                         </div>
                     </div>
                 </div>
@@ -478,6 +415,92 @@
                 <button onclick="switchView('intro')" class="text-[11px] text-gray-500 hover:text-[#E5C988] tracking-widest uppercase transition border-b border-transparent hover:border-[#E5C988] pb-1">Voltar ao Início</button>
             </div>
         </div>
+    </main>
+
+    <!-- =========================================================================
+         VISÃO 7: LOJA B2B & HOME CARE (BOUTIQUE)
+         ========================================================================= -->
+    <main id="view-store" class="view-section min-h-screen pt-40 pb-20">
+         <div class="max-w-[1400px] mx-auto px-6 md:px-16">
+            <header class="text-center mb-24 slide-up">
+                <span class="text-[#E5C988] text-[10px] font-bold tracking-[0.4em] mb-6 block uppercase">Boutique Oficial</span>
+                <h2 class="font-luxury text-5xl md:text-7xl text-white mb-8 font-light">COLEÇÃO <span class="italic font-normal">COMPLETA</span></h2>
+                <div class="w-24 h-px bg-[#E5C988] mx-auto mb-8 opacity-50"></div>
+            </header>
+
+            <!-- SEÇÃO PROFISSIONAL (DESTAQUE) -->
+            <div class="mb-16 border-b border-white/10 pb-16">
+                <div class="flex justify-between items-end mb-12">
+                    <h3 class="font-luxury text-2xl text-white">LINHA PROFISSIONAL</h3>
+                    <span class="text-[10px] text-gray-500 tracking-widest uppercase">Uso Exclusivo em Salão</span>
+                </div>
+                
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center bg-[#0f0f0f] p-8 rounded-lg border border-white/5">
+                    <div class="relative w-full max-w-sm mx-auto overflow-hidden img-luxury-frame rounded-lg">
+                        <img loading="lazy" src="https://res.cloudinary.com/dh4ekg6f2/image/upload/v1765334678/Gemini_Generated_Image_qfrznfqfrznfqfrz_uphgnj.png" alt="Gloss Premium" class="w-full h-auto object-cover">
+                    </div>
+                    <div>
+                        <h4 class="font-luxury text-3xl text-white mb-2">PLÁSTICA HÍBRIDA 1L</h4>
+                        <p class="text-[#E5C988] text-[10px] tracking-[0.2em] uppercase mb-6">Gloss Premium Híbrido</p>
+                        <p class="text-gray-400 text-xs mb-8 leading-relaxed">A ferramenta definitiva para o profissional de elite. Realize polimentos e alisamentos com um único ativo.</p>
+                        <div class="flex flex-col gap-3">
+                            <div class="flex justify-between items-center border-b border-white/10 pb-2">
+                                <span class="text-gray-500 text-xs">Amostra (120ml)</span>
+                                <a href="https://wa.me/554900000000?text=Quero%20comprar%20amostra%20Gloss%20Premium" class="text-[#E5C988] text-xs hover:text-white transition">Consultar Preço →</a>
+                            </div>
+                            <div class="flex justify-between items-center border-b border-white/10 pb-2">
+                                <span class="text-gray-500 text-xs">Frasco Profissional (1L)</span>
+                                <a href="https://wa.me/554900000000?text=Quero%20comprar%20Gloss%20Premium%201L" class="text-[#E5C988] text-xs hover:text-white transition">Consultar Preço →</a>
+                            </div>
+                             <div class="flex justify-between items-center border-b border-white/10 pb-2">
+                                <span class="text-gray-500 text-xs">Combo Atacado (5un+)</span>
+                                <a href="https://wa.me/554900000000?text=Quero%20tabela%20atacado%20Gloss" class="text-[#E5C988] text-xs hover:text-white transition font-bold">Solicitar Tabela →</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SEÇÃO HOME CARE (REVENDA & CLIENTE) -->
+            <div>
+                <div class="flex justify-between items-end mb-12">
+                    <h3 class="font-luxury text-2xl text-white">HOME CARE</h3>
+                    <span class="text-[10px] text-gray-500 tracking-widest uppercase">Manutenção & Revenda</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                     <!-- Produto 1 -->
+                    <div class="card-monolith p-6 group hover:border-[#E5C988]/40 transition-colors">
+                        <div class="relative aspect-[3/4] w-full mb-6 overflow-hidden rounded-sm border border-white/5 img-luxury-frame">
+                            <img loading="lazy" src="https://agatalambeu.com.br/assets/images/image01.jpg?v=c6206b86" class="w-full h-full object-cover opacity-90 group-hover:scale-105 transition duration-700">
+                        </div>
+                        <h4 class="font-luxury text-lg text-white mb-1">BAIN RECONSTRUTOR</h4>
+                        <p class="text-[9px] text-[#E5C988] uppercase tracking-widest mb-4">Shampoo Pós-Química</p>
+                        <a href="https://wa.me/554900000000?text=Quero%20comprar%20Bain%20Reconstrutor" class="btn-outline w-full text-center text-[10px] py-3">ADQUIRIR</a>
+                    </div>
+                    
+                    <!-- Produto 2 -->
+                    <div class="card-monolith p-6 group hover:border-[#E5C988]/40 transition-colors">
+                        <div class="relative aspect-[3/4] w-full mb-6 overflow-hidden rounded-sm border border-white/5 img-luxury-frame">
+                            <img loading="lazy" src="https://agatalambeu.com.br/assets/images/image02.jpg?v=624d4663" class="w-full h-full object-cover opacity-90 group-hover:scale-105 transition duration-700">
+                        </div>
+                        <h4 class="font-luxury text-lg text-white mb-1">GOLD INFUSION</h4>
+                        <p class="text-[9px] text-[#E5C988] uppercase tracking-widest mb-4">Ampola Power Dose</p>
+                        <a href="https://wa.me/554900000000?text=Quero%20comprar%20Gold%20Infusion" class="btn-outline w-full text-center text-[10px] py-3">ADQUIRIR</a>
+                    </div>
+
+                    <!-- Produto 3 -->
+                    <div class="card-monolith p-6 group hover:border-[#E5C988]/40 transition-colors">
+                        <div class="relative aspect-[3/4] w-full mb-6 overflow-hidden rounded-sm border border-white/5 img-luxury-frame">
+                            <img loading="lazy" src="https://agatalambeu.com.br/assets/images/image03.jpg?v=624d4663" class="w-full h-full object-cover opacity-90 group-hover:scale-105 transition duration-700">
+                        </div>
+                        <h4 class="font-luxury text-lg text-white mb-1">BLINDAGEM QUEEN</h4>
+                        <p class="text-[9px] text-[#E5C988] uppercase tracking-widest mb-4">BB Finalizador</p>
+                        <a href="https://wa.me/554900000000?text=Quero%20comprar%20Blindagem%20Queen" class="btn-outline w-full text-center text-[10px] py-3">ADQUIRIR</a>
+                    </div>
+                </div>
+            </div>
+         </div>
     </main>
     
     <!-- =========================================================================
@@ -490,12 +513,16 @@
                 <h2 class="font-luxury text-4xl text-white mb-4">ACESSO CONCEDIDO</h2>
                 <p class="text-gray-400 text-sm">Bem-vindo à área exclusiva de parceiros A Gata Lambeu.</p>
             </div>
+            
             <div class="bg-[#0f0f0f] border border-[#E5C988]/30 p-12 rounded-lg shadow-2xl relative overflow-hidden group">
                 <div class="absolute inset-0 bg-gradient-to-b from-[#E5C988]/5 to-transparent"></div>
+                
                 <h3 class="font-luxury text-2xl text-white mb-8 relative z-10">CATÁLOGO OFICIAL 2025</h3>
+                
                 <div class="aspect-[16/9] bg-black mb-8 border border-white/10 flex items-center justify-center relative z-10">
                     <p class="text-gray-500 text-xs tracking-widest uppercase">[ Visualização do Catálogo Aqui ]</p>
                 </div>
+                
                 <div class="flex flex-col md:flex-row justify-center gap-6 relative z-10">
                     <a href="#" class="btn-gold-solid flex items-center gap-2 justify-center">
                         <i data-lucide="download" class="w-4 h-4"></i> BAIXAR PDF COMPLETO
@@ -569,12 +596,6 @@
                 </div>
                 <div class="space-y-10">
                     <div>
-                        <!-- ESTRATÉGIA ORGÂNICA APLICADA AO CLIENTE -->
-                        <div class="flex items-center gap-3 mb-6">
-                            <span class="bg-[#E5C988] text-black text-[9px] font-bold px-2 py-1 tracking-wider uppercase">Orgânico</span>
-                            <span class="border border-white/20 text-gray-400 text-[9px] font-bold px-2 py-1 tracking-wider uppercase">Sem Formol</span>
-                        </div>
-                        
                         <span class="text-[#E5C988] text-[10px] tracking-[0.3em] uppercase block mb-4">ATO IV: A SUBSTÂNCIA</span>
                         <h3 class="font-luxury text-3xl md:text-5xl text-white mb-6 leading-tight">PLÁSTICA CAPILAR <br><span class="text-gold italic">HÍBRIDA</span></h3>
                         <p class="text-gray-300 font-light text-sm md:text-base leading-relaxed text-justify mb-8 max-w-md">
@@ -621,13 +642,10 @@
                     <h3 class="font-luxury text-3xl text-white mt-4">PROTOCOLO DE ELITE</h3>
                     <p class="text-[10px] text-gray-500 tracking-widest uppercase mt-2">O Tempo Define o Resultado</p>
                 </div>
-
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <!-- CARD 15 MIN -->
                     <div class="card-monolith p-12 md:p-16 group cursor-pointer relative hover:border-[#E5C988]/50 transition-colors observe-me" onclick="window.open('https://wa.me/554900000000?text=Agendar%20Protocolo%20Ritual%20(15min)')">
                         <span class="text-[#E5C988] text-[10px] tracking-[0.2em] uppercase mb-2 block">Toque de Seda</span>
                         <div class="flex justify-between items-baseline mb-6">
-                            <!-- CORREÇÃO: TÍTULO RESTAURADO, SEM NÚMERO REDUNDANTE -->
                             <h4 class="text-3xl text-white font-luxury">FLASH RITUAL</h4>
                             <span class="text-5xl font-luxury text-white/10 group-hover:text-[#E5C988] transition duration-500">15'</span>
                         </div>
@@ -635,16 +653,13 @@
                             Selagem Cuticular Nanofluidificada. Performance espelhada para quem exige excelência imediata.
                         </p>
                         <div class="flex items-center gap-3 text-[10px] tracking-widest text-[#E5C988] uppercase opacity-100 transition">
-                            <span>REIVINDICAR MEU HORÁRIO</span>
+                            <span>Agendar Performance</span>
                             <i data-lucide="arrow-up-right" class="w-3 h-3"></i>
                         </div>
                     </div>
-
-                    <!-- CARD 40 MIN -->
                     <div class="card-monolith p-12 md:p-16 group cursor-pointer relative hover:border-[#E5C988]/50 transition-colors observe-me" onclick="window.open('https://wa.me/554900000000?text=Agendar%20Protocolo%20Reestruturação%20(40min)')">
                         <span class="text-[#E5C988] text-[10px] tracking-[0.2em] uppercase mb-2 block">Reorganização Estrutural</span>
                         <div class="flex justify-between items-baseline mb-6">
-                            <!-- CORREÇÃO: TÍTULO RESTAURADO, SEM NÚMERO REDUNDANTE -->
                             <h4 class="text-3xl text-white font-luxury">LISO BLINDADO</h4>
                             <span class="text-5xl font-luxury text-white/10 group-hover:text-[#E5C988] transition duration-500">40+'</span>
                         </div>
@@ -652,13 +667,15 @@
                             Reposição de Massa Biomolecular. O liso absoluto com integridade total do córtex.
                         </p>
                         <div class="flex items-center gap-3 text-[10px] tracking-widest text-[#E5C988] uppercase opacity-100 transition">
-                            <span>REIVINDICAR MEU HORÁRIO</span>
+                            <span>Agendar Performance</span>
                             <i data-lucide="arrow-up-right" class="w-3 h-3"></i>
                         </div>
                     </div>
                 </div>
             </section>
-            <div class="mb-24 flex justify-center text-center flex-col">
+            
+             <!-- VITRINE HOME CARE (ZIG-ZAG) MANTIDA - SEM ALTERAÇÃO -->
+             <div class="mb-24 flex justify-center text-center flex-col">
                 <span class="text-[#E5C988] text-[10px] tracking-[0.3em] uppercase block mb-4">A Arte de Perpetuar a Perfeição</span>
                 <h3 class="font-luxury text-3xl text-white">RITUAL HOME CARE</h3>
             </div>
@@ -716,6 +733,7 @@
                     </div>
                 </div>
             </div>
+
             <div class="text-center py-20 border-t border-white/5 mt-20">
                 <h3 class="font-luxury text-3xl mb-6 text-white">SUA TRANSFORMAÇÃO COMEÇA AGORA</h3>
                 <a href="https://wa.me/554900000000" class="btn-outline observe-me">REIVINDICAR MINHA TRANSFORMAÇÃO DE ELITE</a>
@@ -853,7 +871,12 @@
         // SCROLL SUAVE PARA ELEMENTOS INTERNOS
         function scrollToElement(id) {
             const el = document.getElementById(id);
-            if(el) el.scrollIntoView({ behavior: 'smooth' });
+            if(el) {
+                switchView('pro'); // Garante que está na view correta
+                setTimeout(() => {
+                     el.scrollIntoView({ behavior: 'smooth' });
+                }, 100);
+            }
         }
 
         // FUNÇÕES DO MODAL DE SENHA
