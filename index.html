@@ -79,7 +79,7 @@
         }
         .btn-griffe:hover, .btn-griffe.active-state {
             border-color: var(--gold-primary); background: rgba(229, 201, 136, 0.1);
-            letter-spacing: 0.35em; color: var(--gold-primary);
+            letter-spacing: 0.4em; color: var(--gold-primary);
         }
 
         .btn-gold-solid {
@@ -111,6 +111,30 @@
         .card-monolith:hover, .card-monolith.active-state {
             border-color: var(--gold-primary); background: rgba(255, 255, 255, 0.06);
             transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+        }
+
+        /* NOVO: CARD STORIES (VERTICAL PARA ABERTURA) */
+        .card-story {
+            height: 55vh; /* Altura imponente */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(0, 0, 0, 0.6); /* Mais escuro para contraste */
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+        .card-story:hover {
+            transform: translateY(-10px);
+            border-color: #E5C988;
+            background: rgba(229, 201, 136, 0.05);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+        }
+        .card-story:hover i, .card-story:hover h3 {
+            color: #E5C988;
         }
 
         /* Regras Active State (Mobile Scroll) */
@@ -151,6 +175,13 @@
 
         .text-fluid-title { font-size: clamp(3rem, 12vw, 8rem); }
 
+        /* INTRO TRANSITION */
+        #intro-content { transition: all 1s ease; opacity: 1; transform: scale(1); }
+        #intro-selection { transition: all 1s ease; opacity: 0; pointer-events: none; transform: scale(0.95); }
+        .intro-hidden { opacity: 0 !important; pointer-events: none; transform: scale(1.1) !important; }
+        .selection-visible { opacity: 1 !important; pointer-events: auto; transform: scale(1) !important; }
+
+        /* FAQ */
         .faq-item { border-bottom: 1px solid rgba(255,255,255,0.1); padding: 1.5rem 0; cursor: pointer; }
         .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.5s ease; }
         .faq-item.active .faq-answer { max-height: 300px; }
@@ -160,7 +191,7 @@
         .hidden-on-intro { display: none; }
         p { font-weight: 300; }
 
-        /* --- MODAL DE SENHA DE LUXO --- */
+        /* MODAL SENHA */
         .password-modal-overlay {
             position: fixed; inset: 0; background: rgba(0,0,0,0.95); backdrop-filter: blur(20px);
             z-index: 9999; display: flex; align-items: center; justify-content: center;
@@ -191,7 +222,7 @@
             50% { transform: translateX(5px); } 75% { transform: translateX(-5px); } 100% { transform: translateX(0); }
         }
 
-        /* --- ESTILOS DA LOJA DE LUXO (MINIMALISTA) --- */
+        /* LOJA MINIMALISTA */
         .store-card {
             background: rgba(255,255,255,0.02);
             transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
@@ -206,7 +237,7 @@
             position: relative;
             overflow: hidden;
             width: 100%;
-            padding-top: 120%; /* Aspect Ratio vertical elegante */
+            padding-top: 120%; 
         }
         .store-image {
             position: absolute;
@@ -268,7 +299,7 @@
             letter-spacing: 0.1em; z-index: 20;
         }
 
-        /* --- ESTILOS DO QUIZ (SURVEY DE LUXO) --- */
+        /* QUIZ */
         .quiz-option {
             background: rgba(255,255,255,0.05);
             border: 1px solid rgba(255,255,255,0.1);
@@ -312,13 +343,6 @@
         }
         .form-input-quiz:focus { border-bottom-color: #E5C988; }
         .form-input-quiz::placeholder { color: rgba(255,255,255,0.4); text-transform: uppercase; font-size: 0.7rem; letter-spacing: 0.1em; }
-        
-        /* --- ESTILOS DA TRANSIÇÃO DE INTRO --- */
-        #intro-content { transition: all 1s ease; opacity: 1; transform: scale(1); }
-        #intro-selection { transition: all 1s ease; opacity: 0; pointer-events: none; transform: scale(0.95); }
-        
-        .intro-hidden { opacity: 0 !important; pointer-events: none; transform: scale(1.1) !important; }
-        .selection-visible { opacity: 1 !important; pointer-events: auto; transform: scale(1) !important; }
 
     </style>
 </head>
@@ -509,23 +533,21 @@
                 </div>
             </div>
 
-            <!-- CONTEÚDO DE ESCOLHA (MONOLITOS) - INICIALMENTE OCULTO -->
-            <div id="intro-selection" class="absolute w-full max-w-4xl flex flex-col md:flex-row gap-8 justify-center items-center intro-hidden">
+            <!-- CONTEÚDO DE ESCOLHA (ESTILO STORIES VERTICAL) - INICIALMENTE OCULTO -->
+            <div id="intro-selection" class="absolute w-full max-w-5xl flex flex-col md:flex-row gap-6 justify-center items-center intro-hidden px-6">
                 
-                <!-- CARD RITUAL PESSOAL -->
-                <div class="card-monolith p-10 w-full md:w-1/2 text-center cursor-pointer group hover:bg-white/5 transition-all duration-500" onclick="switchView('client')">
-                    <i data-lucide="sparkles" class="w-10 h-10 text-[#E5C988] mx-auto mb-6 opacity-70 group-hover:opacity-100 transition-opacity"></i>
-                    <h3 class="font-luxury text-2xl text-white mb-2">RITUAL PESSOAL</h3>
-                    <div class="w-12 h-px bg-[#E5C988] mx-auto mb-4"></div>
-                    <p class="text-xs text-gray-400 font-light tracking-wide">Desejo alinhar e tratar meus fios.</p>
+                <!-- CARD RITUAL PESSOAL (CLIENTE) -->
+                <div class="card-story w-full md:w-1/2 cursor-pointer group" onclick="switchView('client')">
+                    <i data-lucide="sparkles" class="w-12 h-12 text-[#E5C988] mb-8 opacity-70 group-hover:opacity-100 transition-opacity"></i>
+                    <h3 class="font-luxury text-3xl text-white mb-3 tracking-widest">RITUAL PESSOAL</h3>
+                    <p class="text-xs text-gray-400 font-light tracking-[0.2em] uppercase">Experiência & Autoestima</p>
                 </div>
 
-                <!-- CARD PARCEIRO ELITE -->
-                <div class="card-monolith p-10 w-full md:w-1/2 text-center cursor-pointer group hover:bg-white/5 transition-all duration-500" onclick="switchView('pro')">
-                    <i data-lucide="crown" class="w-10 h-10 text-[#E5C988] mx-auto mb-6 opacity-70 group-hover:opacity-100 transition-opacity"></i>
-                    <h3 class="font-luxury text-2xl text-white mb-2">PARCEIRO ELITE</h3>
-                    <div class="w-12 h-px bg-[#E5C988] mx-auto mb-4"></div>
-                    <p class="text-xs text-gray-400 font-light tracking-wide">Desejo elevar o nível do meu salão.</p>
+                <!-- CARD PARCEIRO ELITE (PROFISSIONAL) -->
+                <div class="card-story w-full md:w-1/2 cursor-pointer group" onclick="switchView('pro')">
+                    <i data-lucide="crown" class="w-12 h-12 text-[#E5C988] mb-8 opacity-70 group-hover:opacity-100 transition-opacity"></i>
+                    <h3 class="font-luxury text-3xl text-white mb-3 tracking-widest">PARCEIRO ELITE</h3>
+                    <p class="text-xs text-gray-400 font-light tracking-[0.2em] uppercase">Alta Performance & Gestão</p>
                 </div>
 
             </div>
@@ -1185,16 +1207,7 @@
         // SCROLL SUAVE PARA ELEMENTOS INTERNOS
         function scrollToElement(id) {
             const el = document.getElementById(id);
-            if(el) {
-                // Se o target está na área 'pro', garante que o modal não bloqueie
-                if (['tech-section', 'exclusivity-section', 'shop-section', 'resale-section'].includes(id)) {
-                    switchView('pro');
-                }
-                
-                setTimeout(() => {
-                     el.scrollIntoView({ behavior: 'smooth' });
-                }, 100);
-            }
+            if(el) el.scrollIntoView({ behavior: 'smooth' });
         }
 
         // FUNÇÕES DO MODAL DE SENHA
@@ -1310,25 +1323,25 @@
             closeQuizModal();
         }
 
+        // FUNÇÃO REVEAL JOURNEY (CORREÇÃO DE BUG ANTERIOR)
+        window.revealJourney = function() {
+            const content = document.getElementById('intro-content');
+            const selection = document.getElementById('intro-selection');
+            
+            content.classList.add('intro-hidden');
+            
+            setTimeout(() => {
+                selection.classList.remove('intro-hidden');
+                selection.classList.add('selection-visible');
+            }, 300);
+        }
+
         // CARREGAMENTO PERCEPTIVO E ANIMAÇÕES
         window.addEventListener('load', () => {
             document.body.classList.add('loaded');
             
             const globalFooter = document.getElementById('global-footer');
             if(globalFooter) globalFooter.style.display = 'none';
-
-            // FUNÇÃO REVEAL JOURNEY (CORREÇÃO DE BUG ANTERIOR)
-            window.revealJourney = function() {
-                const content = document.getElementById('intro-content');
-                const selection = document.getElementById('intro-selection');
-                
-                content.classList.add('intro-hidden');
-                
-                setTimeout(() => {
-                    selection.classList.remove('intro-hidden');
-                    selection.classList.add('selection-visible');
-                }, 300);
-            }
 
             const observerOptions = { root: null, rootMargin: '-20% 0px -20% 0px', threshold: 0.3 };
             const observer = new IntersectionObserver((entries) => {
@@ -1338,7 +1351,7 @@
                 });
             }, observerOptions);
 
-            const elementsToObserve = document.querySelectorAll('.observe-me, .group, .card-monolith, .img-luxury-frame, .btn-griffe, .btn-gold-solid, .btn-outline');
+            const elementsToObserve = document.querySelectorAll('.observe-me, .group, .card-monolith, .img-luxury-frame, .btn-griffe, .btn-gold-solid, .btn-outline, .card-story');
             elementsToObserve.forEach(el => observer.observe(el));
         });
     </script>
