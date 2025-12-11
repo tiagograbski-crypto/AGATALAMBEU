@@ -79,7 +79,7 @@
         }
         .btn-griffe:hover, .btn-griffe.active-state {
             border-color: var(--gold-primary); background: rgba(229, 201, 136, 0.1);
-            letter-spacing: 0.4em; color: var(--gold-primary);
+            letter-spacing: 0.35em; color: var(--gold-primary);
         }
 
         .btn-gold-solid {
@@ -268,6 +268,58 @@
             letter-spacing: 0.1em; z-index: 20;
         }
 
+        /* --- ESTILOS DO QUIZ (SURVEY DE LUXO) --- */
+        .quiz-option {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: left;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .quiz-option:hover, .quiz-option.selected {
+            background: rgba(229, 201, 136, 0.1);
+            border-color: #E5C988;
+        }
+        .quiz-option.selected i { opacity: 1; }
+        .quiz-progress {
+            height: 2px;
+            background: rgba(255,255,255,0.1);
+            width: 100%;
+            margin-bottom: 2rem;
+        }
+        .quiz-progress-bar {
+            height: 100%;
+            background: #E5C988;
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+        .hidden { display: none; }
+        
+        .form-input-quiz {
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid rgba(255,255,255,0.3);
+            width: 100%;
+            padding: 10px 0;
+            color: white;
+            font-size: 0.9rem;
+            outline: none;
+            margin-bottom: 20px;
+        }
+        .form-input-quiz:focus { border-bottom-color: #E5C988; }
+        .form-input-quiz::placeholder { color: rgba(255,255,255,0.4); text-transform: uppercase; font-size: 0.7rem; letter-spacing: 0.1em; }
+        
+        /* --- ESTILOS DA TRANSIÇÃO DE INTRO --- */
+        #intro-content { transition: all 1s ease; opacity: 1; transform: scale(1); }
+        #intro-selection { transition: all 1s ease; opacity: 0; pointer-events: none; transform: scale(0.95); }
+        
+        .intro-hidden { opacity: 0 !important; pointer-events: none; transform: scale(1.1) !important; }
+        .selection-visible { opacity: 1 !important; pointer-events: auto; transform: scale(1) !important; }
+
     </style>
 </head>
 <body class="bg-luxury-clean min-h-screen text-gray-200 selection:bg-[#E5C988] selection:text-black is-intro">
@@ -322,8 +374,108 @@
         </div>
     </div>
 
+    <!-- === MODAL DE QUIZ COMPLETO (AUDITORIA DE ELITE) === -->
+    <div id="quiz-modal" class="password-modal-overlay">
+        <div class="password-box w-full max-w-2xl bg-[#0a0a0a]">
+            <div class="flex justify-between items-center mb-6">
+                <span class="text-[#E5C988] text-[9px] tracking-[0.3em] uppercase">Auditoria de Credenciamento</span>
+                <button onclick="closeQuizModal()" class="text-gray-500 hover:text-white"><i data-lucide="x" class="w-5 h-5"></i></button>
+            </div>
+            
+            <div class="quiz-progress">
+                <div id="quiz-progress-bar" class="quiz-progress-bar"></div>
+            </div>
+
+            <!-- STEP 1: IDENTIDADE -->
+            <div id="quiz-step-1" class="quiz-step">
+                <h3 class="font-luxury text-xl md:text-2xl text-white mb-6">QUEM É VOCÊ?</h3>
+                <p class="text-gray-400 text-xs mb-8">Precisamos saber com quem estamos negociando a exclusividade.</p>
+                <div class="space-y-4 text-left">
+                     <div>
+                        <label class="text-[9px] text-[#E5C988] uppercase tracking-widest">Seu Nome Completo</label>
+                        <input type="text" id="q_nome" class="form-input-quiz" placeholder="DIGITE AQUI">
+                    </div>
+                    <div>
+                        <label class="text-[9px] text-[#E5C988] uppercase tracking-widest">WhatsApp com DDD</label>
+                        <input type="text" id="q_whats" class="form-input-quiz" placeholder="(00) 00000-0000">
+                    </div>
+                </div>
+                <button onclick="nextStep(1)" class="btn-gold-solid w-full mt-8">AVANÇAR</button>
+            </div>
+
+            <!-- STEP 2: POSICIONAMENTO DIGITAL -->
+            <div id="quiz-step-2" class="quiz-step hidden">
+                <h3 class="font-luxury text-xl md:text-2xl text-white mb-6">POSICIONAMENTO DIGITAL</h3>
+                <div class="space-y-4 text-left">
+                    <div>
+                        <label class="text-[9px] text-[#E5C988] uppercase tracking-widest">Instagram do Salão</label>
+                        <input type="text" id="q_insta" class="form-input-quiz" placeholder="@SEUSALAO">
+                    </div>
+                    <div>
+                        <label class="text-[9px] text-[#E5C988] uppercase tracking-widest">Cidade e Estado</label>
+                        <input type="text" id="q_cidade" class="form-input-quiz" placeholder="EX: CHAPECÓ - SC">
+                    </div>
+                </div>
+                <button onclick="nextStep(2)" class="btn-gold-solid w-full mt-8">AVANÇAR</button>
+            </div>
+
+            <!-- STEP 3: ESTRUTURA E CAPACIDADE -->
+            <div id="quiz-step-3" class="quiz-step hidden">
+                <h3 class="font-luxury text-xl md:text-2xl text-white mb-8">CAPACIDADE OPERACIONAL</h3>
+                <div class="space-y-4">
+                     <p class="text-xs text-gray-400 text-left mb-2">Quantos profissionais atuam no salão?</p>
+                    <div class="quiz-option" onclick="selectOption(3, 'Eu + 1 Auxiliar', this)">
+                        <span class="text-xs uppercase tracking-widest">Apenas Eu + 1 Auxiliar</span>
+                        <i data-lucide="check" class="w-4 h-4 text-[#E5C988] opacity-0 transition"></i>
+                    </div>
+                    <div class="quiz-option" onclick="selectOption(3, 'Equipe Pequena (3-5)', this)">
+                        <span class="text-xs uppercase tracking-widest">Equipe Pequena (3 a 5)</span>
+                        <i data-lucide="check" class="w-4 h-4 text-[#E5C988] opacity-0 transition"></i>
+                    </div>
+                    <div class="quiz-option" onclick="selectOption(3, 'Grande Porte (6+)', this)">
+                        <span class="text-xs uppercase tracking-widest">Grande Porte (6+)</span>
+                        <i data-lucide="check" class="w-4 h-4 text-[#E5C988] opacity-0 transition"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- STEP 4: TICKET MÉDIO (O FILTRO DE OURO) -->
+            <div id="quiz-step-4" class="quiz-step hidden">
+                <h3 class="font-luxury text-xl md:text-2xl text-white mb-8">SEU TICKET MÉDIO HOJE</h3>
+                <p class="text-gray-400 text-xs mb-6 text-left">Para alinhar a estratégia de exclusividade, qual valor médio você cobra em um alisamento?</p>
+                <div class="space-y-4">
+                    <div class="quiz-option" onclick="selectOption(4, 'Até R$ 200', this)">
+                        <span class="text-xs uppercase tracking-widest">Até R$ 200,00</span>
+                        <i data-lucide="check" class="w-4 h-4 text-[#E5C988] opacity-0 transition"></i>
+                    </div>
+                    <div class="quiz-option" onclick="selectOption(4, 'R$ 200 - R$ 400', this)">
+                        <span class="text-xs uppercase tracking-widest">R$ 200,00 a R$ 400,00</span>
+                        <i data-lucide="check" class="w-4 h-4 text-[#E5C988] opacity-0 transition"></i>
+                    </div>
+                    <div class="quiz-option" onclick="selectOption(4, 'Acima de R$ 400', this)">
+                        <span class="text-xs uppercase tracking-widest">Acima de R$ 400,00</span>
+                        <i data-lucide="check" class="w-4 h-4 text-[#E5C988] opacity-0 transition"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- STEP 5: FINALIZAÇÃO -->
+            <div id="quiz-step-5" class="quiz-step hidden">
+                <i data-lucide="check-circle" class="w-16 h-16 text-[#E5C988] mx-auto mb-6"></i>
+                <h3 class="font-luxury text-2xl text-white mb-4">DADOS COLETADOS</h3>
+                <p class="text-gray-400 text-xs mb-8 leading-relaxed">
+                    Sua auditoria foi pré-aprovada pelo sistema. Clique abaixo para enviar o relatório oficial ao nosso Consultor de Expansão e verificar a blindagem da sua região.
+                </p>
+                
+                <button onclick="finishQuiz()" class="btn-gold-solid w-full mt-6">ENVIAR CANDIDATURA OFICIAL</button>
+            </div>
+
+        </div>
+    </div>
+
+
     <!-- =========================================================================
-         VISÃO 1: CAPA ABERTURA
+         VISÃO 1: CAPA ABERTURA (HERO INTRO - PORTAL DE ESCOLHA)
          ========================================================================= -->
     <main id="view-intro" class="view-section view-active h-[100dvh] w-full relative flex flex-col justify-center items-center">
          <div class="absolute inset-0 z-0">
@@ -335,27 +487,49 @@
         </div>
 
         <div class="relative z-20 text-center w-full max-w-5xl px-6 flex flex-col items-center justify-center h-full pb-20">
-            <p class="text-[#E5C988] text-[10px] md:text-sm tracking-[0.25em] font-bold mb-8 uppercase slide-up text-center w-full">
-                O Frizz não é um erro. É o seu sabotador de presença.
-            </p>
-            <h1 class="text-fluid-title text-white font-luxury mb-8 leading-none reveal-text mix-blend-overlay whitespace-nowrap" style="animation-delay: 0.2s; font-weight: 400;">
-                A GATA <span class="text-gold italic">LAMBEU</span>
-            </h1>
-            <div class="flex justify-center items-center gap-6 md:gap-10 text-xs md:text-sm tracking-[0.25em] text-gray-300 mb-10 slide-up uppercase font-medium" style="animation-delay: 0.4s">
-                <span>Confiança</span>
-                <span class="w-1 h-1 bg-[#E5C988] rounded-full"></span>
-                <span>Poder</span>
-                <span class="w-1 h-1 bg-[#E5C988] rounded-full"></span>
-                <span>Atitude</span>
+            
+            <!-- CONTEÚDO INICIAL (DESVENDAR) -->
+            <div id="intro-content">
+                <p class="text-[#E5C988] text-[10px] md:text-sm tracking-[0.25em] font-bold mb-8 uppercase slide-up text-center w-full">
+                    O Frizz não é um erro. É o seu sabotador de presença.
+                </p>
+                <h1 class="text-fluid-title text-white font-luxury mb-8 leading-none reveal-text mix-blend-overlay whitespace-nowrap" style="animation-delay: 0.2s; font-weight: 400;">
+                    A GATA <span class="text-gold italic">LAMBEU</span>
+                </h1>
+                <div class="flex justify-center items-center gap-6 md:gap-10 text-xs md:text-sm tracking-[0.25em] text-gray-300 mb-10 slide-up uppercase font-medium" style="animation-delay: 0.4s">
+                    <span>Confiança</span>
+                    <span class="w-1 h-1 bg-[#E5C988] rounded-full"></span>
+                    <span>Poder</span>
+                    <span class="w-1 h-1 bg-[#E5C988] rounded-full"></span>
+                    <span>Atitude</span>
+                </div>
+                <div class="reveal-text mb-12" style="animation-delay: 0.6s">
+                    <!-- BOTÃO QUE REVELA A ESCOLHA -->
+                    <button onclick="revealJourney()" class="btn-griffe">DESVENDAR A JORNADA</button>
+                </div>
             </div>
-            <div class="reveal-text mb-12" style="animation-delay: 0.6s">
-                <button onclick="switchView('client')" class="btn-griffe">DESVENDAR A JORNADA</button>
+
+            <!-- CONTEÚDO DE ESCOLHA (MONOLITOS) - INICIALMENTE OCULTO -->
+            <div id="intro-selection" class="absolute w-full max-w-4xl flex flex-col md:flex-row gap-8 justify-center items-center intro-hidden">
+                
+                <!-- CARD RITUAL PESSOAL -->
+                <div class="card-monolith p-10 w-full md:w-1/2 text-center cursor-pointer group hover:bg-white/5 transition-all duration-500" onclick="switchView('client')">
+                    <i data-lucide="sparkles" class="w-10 h-10 text-[#E5C988] mx-auto mb-6 opacity-70 group-hover:opacity-100 transition-opacity"></i>
+                    <h3 class="font-luxury text-2xl text-white mb-2">RITUAL PESSOAL</h3>
+                    <div class="w-12 h-px bg-[#E5C988] mx-auto mb-4"></div>
+                    <p class="text-xs text-gray-400 font-light tracking-wide">Desejo alinhar e tratar meus fios.</p>
+                </div>
+
+                <!-- CARD PARCEIRO ELITE -->
+                <div class="card-monolith p-10 w-full md:w-1/2 text-center cursor-pointer group hover:bg-white/5 transition-all duration-500" onclick="switchView('pro')">
+                    <i data-lucide="crown" class="w-10 h-10 text-[#E5C988] mx-auto mb-6 opacity-70 group-hover:opacity-100 transition-opacity"></i>
+                    <h3 class="font-luxury text-2xl text-white mb-2">PARCEIRO ELITE</h3>
+                    <div class="w-12 h-px bg-[#E5C988] mx-auto mb-4"></div>
+                    <p class="text-xs text-gray-400 font-light tracking-wide">Desejo elevar o nível do meu salão.</p>
+                </div>
+
             </div>
-            <div class="flex gap-12 text-[11px] tracking-[0.2em] text-gray-400 uppercase slide-up z-50 cursor-pointer" style="animation-delay: 0.8s">
-                <div onclick="switchView('client')" class="hover:text-[#E5C988] transition transform hover:scale-105 border-b border-transparent hover:border-[#E5C988] pb-1">Sou Cliente</div>
-                <span class="text-[#E5C988] opacity-50">|</span>
-                <div onclick="switchView('pro')" class="hover:text-[#E5C988] transition transform hover:scale-105 border-b border-transparent hover:border-[#E5C988] pb-1">Sou Profissional</div>
-            </div>
+
         </div>
     </main>
 
@@ -373,10 +547,9 @@
 
             <!-- SUB-MENU (SUBTITLES CLEAN) -->
             <div class="flex flex-wrap justify-center md:justify-start gap-8 md:gap-12 mb-20 border-b border-white/10 pb-6 text-[#E5C988]/70 font-light text-[10px] md:text-xs tracking-[0.2em] uppercase slide-up">
-                <button onclick="switchView('store')" class="hover:text-[#E5C988] transition hover:scale-105">Acervo Oficial</button>
+                <button onclick="scrollToElement('shop-section')" class="hover:text-[#E5C988] transition hover:scale-105">Acervo Oficial</button>
                 <button onclick="openPasswordModal('catalog')" class="hover:text-[#E5C988] transition hover:scale-105 flex items-center gap-2"><i data-lucide="lock" class="w-3 h-3"></i> Tabela Blindada</button>
-                <button onclick="openPasswordModal('academy')" class="hover:text-[#E5C988] transition hover:scale-105 flex items-center gap-2"><i data-lucide="lock" class="w-3 h-3"></i> Academy</button>
-                <button onclick="openPasswordModal('workshops')" class="hover:text-[#E5C988] transition hover:scale-105 flex items-center gap-2"><i data-lucide="lock" class="w-3 h-3"></i> Workshops</button>
+                <button onclick="openPasswordModal('academy')" class="hover:text-[#E5C988] transition hover:scale-105 flex items-center gap-2"><i data-lucide="lock" class="w-3 h-3"></i> Academy & Workshops</button>
             </div>
 
             <section class="grid grid-cols-1 lg:grid-cols-2 gap-20 mb-32 items-center">
@@ -425,8 +598,8 @@
                         </div>
                     </div>
                     <div class="flex flex-col gap-4">
-                        <button onclick="scrollToElement('tech-section')" class="btn-gold-solid text-center w-full md:w-auto observe-me flex items-center justify-center gap-2">
-                            EXPLORAR BIO-ARQUITETURA
+                        <button onclick="openQuizModal()" class="btn-gold-solid text-center w-full md:w-auto observe-me flex items-center justify-center gap-2 p-4">
+                            INICIAR AUDITORIA DE PARCEIRO
                         </button>
                     </div>
                 </div>
@@ -485,10 +658,10 @@
                         </p>
                         
                         <div class="flex flex-col gap-4 w-full max-w-md">
-                            <a href="https://wa.me/554900000000?text=Olá,%20sou%20profissional%20e%20quero%20verificar%20a%20disponibilidade%20na%20minha%20cidade" target="_blank" class="btn-gold-solid w-full flex items-center justify-center gap-3 py-4 text-xs tracking-widest">
-                                <i data-lucide="search" class="w-4 h-4"></i> VERIFICAR DISPONIBILIDADE NA MINHA CIDADE
-                            </a>
-                            <a href="#" class="btn-outline w-full text-center text-xs" onclick="openPasswordModal('catalog')">
+                            <button onclick="openQuizModal()" class="btn-gold-solid w-full flex items-center justify-center gap-3 py-4 text-xs tracking-widest p-4">
+                                <i data-lucide="search" class="w-4 h-4"></i> CANDIDATAR MEU SALÃO (QUIZ)
+                            </button>
+                            <a href="#" class="btn-outline w-full text-center text-xs p-4" onclick="openPasswordModal('catalog')">
                                 ACESSAR TABELA BLINDADA (RESTRITO)
                             </a>
                         </div>
@@ -529,7 +702,7 @@
                 </div>
 
                 <!-- CARD HORIZONTAL DE LUXO -->
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center bg-[#0a0a0a] p-8 md:p-12 border border-white/5 observe-me">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center bg-[#0a0a0a] p-8 md:p-12 border border-white/5 observe-me rounded-lg">
                     <!-- Imagem (Limpa, sem bordas pesadas) -->
                     <div class="relative w-2/3 mx-auto md:w-full flex justify-center">
                         <img loading="lazy" src="https://res.cloudinary.com/dh4ekg6f2/image/upload/v1765334678/Gemini_Generated_Image_qfrznfqfrznfqfrz_uphgnj.png" alt="Gloss Premium 1L" class="w-full max-w-[280px] h-auto object-contain drop-shadow-2xl hover:scale-105 transition duration-1000">
@@ -640,7 +813,7 @@
             </div>
             
             <!-- KIT TRINITY (BANNER DESTAQUE) -->
-            <div class="relative bg-white/[0.03] border border-white/5 p-10 md:p-16 flex flex-col md:flex-row items-center justify-between gap-10 group hover:border-[#E5C988]/30 transition-all">
+            <div class="relative bg-white/[0.03] border border-white/5 p-10 md:p-16 flex flex-col md:flex-row items-center justify-between gap-10 group hover:border-[#E5C988]/30 transition-all rounded-lg">
                 <div class="text-center md:text-left">
                     <span class="text-[#E5C988] text-[9px] uppercase tracking-[0.3em] mb-2 block">The Full Experience</span>
                     <h3 class="font-luxury text-3xl text-white mb-4">TRINITY HOME CARE</h3>
@@ -694,15 +867,15 @@
     </main>
     
     <!-- =========================================================================
-         VISÃO 5: ÁREA ACADEMY (EM BREVE - PROTEGIDA)
+         VISÃO 5: ACADEMY (EM BREVE - PROTEGIDA)
          ========================================================================= -->
     <main id="view-academy" class="view-section min-h-screen pt-40 pb-20">
          <div class="max-w-4xl mx-auto px-6 text-center flex flex-col items-center justify-center h-[60vh]">
             <i data-lucide="graduation-cap" class="w-16 h-16 text-[#E5C988] mb-8 opacity-80"></i>
-            <h2 class="font-luxury text-4xl md:text-6xl text-white mb-6">GATA ACADEMY</h2>
+            <h2 class="font-luxury text-4xl md:text-6xl text-white mb-6">GATA ACADEMY & WORKSHOPS</h2>
             <div class="w-24 h-px bg-[#E5C988] mx-auto mb-8 opacity-60"></div>
             <p class="text-gray-400 text-sm md:text-base max-w-xl mx-auto leading-relaxed mb-12">
-                A plataforma educacional definitiva está sendo forjada. Em breve, acesso exclusivo a masterclasses com Jô Manto e Tiago Grabski.
+                A plataforma educacional definitiva está sendo forjada. Em breve, acesso exclusivo a masterclasses e agenda de workshops com Jô Manto e Tiago Grabski.
             </p>
             <div class="flex flex-col gap-4">
                 <span class="text-[#E5C988] text-[10px] tracking-[0.3em] uppercase animate-pulse">Aguarde o Lançamento</span>
@@ -712,27 +885,10 @@
     </main>
 
     <!-- =========================================================================
-         VISÃO 6: ÁREA WORKSHOPS (EM BREVE - PROTEGIDA)
-         ========================================================================= -->
-    <main id="view-workshops" class="view-section min-h-screen pt-40 pb-20">
-         <div class="max-w-4xl mx-auto px-6 text-center flex flex-col items-center justify-center h-[60vh]">
-            <i data-lucide="ticket" class="w-16 h-16 text-[#E5C988] mb-8 opacity-80"></i>
-            <h2 class="font-luxury text-4xl md:text-6xl text-white mb-6">AGENDA ELITE</h2>
-            <div class="w-24 h-px bg-[#E5C988] mx-auto mb-8 opacity-60"></div>
-            <p class="text-gray-400 text-sm md:text-base max-w-xl mx-auto leading-relaxed mb-12">
-                Imersões presenciais e eventos exclusivos. O calendário oficial de workshops será revelado em breve para parceiros credenciados.
-            </p>
-            <div class="flex flex-col gap-4">
-                <span class="text-[#E5C988] text-[10px] tracking-[0.3em] uppercase animate-pulse">Em Breve</span>
-                <button onclick="switchView('pro')" class="btn-outline mt-4">VOLTAR AO HUB</button>
-            </div>
-         </div>
-    </main>
-
-    <!-- =========================================================================
-         VISÃO 3: ÁREA CLIENTE (O RITUAL)
+         VISÃO 3: ÁREA CLIENTE (O RITUAL) - MANTIDA
          ========================================================================= -->
     <main id="view-client" class="view-section min-h-screen pt-40 pb-20">
+         <!-- ... (Conteúdo Cliente Mantido igual ao anterior) ... -->
          <div class="max-w-[1400px] mx-auto px-6 md:px-16">
             <header class="text-center mb-32 slide-up">
                 <span class="text-[#E5C988] text-[10px] font-bold tracking-[0.4em] mb-6 block uppercase">Sua Jornada Pessoal</span>
@@ -744,18 +900,15 @@
             <!-- O PRODUTO HERO CLIENTE -->
             <section class="grid grid-cols-1 lg:grid-cols-2 gap-16 mb-40 items-center border-b border-white/5 pb-20">
                 <div class="relative group flex justify-center lg:block">
+                     <!-- AJUSTE: Imagem Hero Cliente contida e elegante -->
                      <div class="relative bg-[#0a0a0a] aspect-[4/5] w-3/4 mx-auto flex items-center justify-center overflow-hidden border border-white/5 img-luxury-frame observe-me rounded-lg">
                         <div class="absolute inset-0 bg-gradient-to-b from-[#E5C988]/5 to-transparent opacity-30"></div>
+                        <!-- FOTO NOVA (PNG) NA ÁREA CLIENTE TAMBÉM -->
                         <img loading="lazy" width="800" height="1000" src="https://res.cloudinary.com/dh4ekg6f2/image/upload/v1765334678/Gemini_Generated_Image_qfrznfqfrznfqfrz_uphgnj.png" alt="Plástica Capilar Híbrida" class="relative z-10 h-[85%] w-auto object-contain drop-shadow-2xl transition-transform duration-1000 group-hover:scale-105">
                     </div>
                 </div>
                 <div class="space-y-10">
                     <div>
-                        <div class="flex items-center gap-3 mb-6">
-                            <span class="bg-[#E5C988] text-black text-[9px] font-bold px-2 py-1 tracking-wider uppercase">Orgânico</span>
-                            <span class="border border-white/20 text-gray-400 text-[9px] font-bold px-2 py-1 tracking-wider uppercase">Sem Formol</span>
-                        </div>
-                        
                         <span class="text-[#E5C988] text-[10px] tracking-[0.3em] uppercase block mb-4">ATO IV: A SUBSTÂNCIA</span>
                         <h3 class="font-luxury text-3xl md:text-5xl text-white mb-6 leading-tight">PLÁSTICA CAPILAR <br><span class="text-gold italic">HÍBRIDA</span></h3>
                         <p class="text-gray-300 font-light text-sm md:text-base leading-relaxed text-justify mb-8 max-w-md">
@@ -773,7 +926,7 @@
                             </div>
                             <div class="card-monolith p-4 flex gap-6 items-center group cursor-default observe-me">
                                 <div class="text-[#E5C988] shrink-0"><i data-lucide="sparkles" class="w-5 h-5"></i></div>
-                                <div><h4 class="text-white font-luxury text-sm mb-1 group-hover:text-[#E5C988] transition">ÓLEO DA SEMENTE DA UVA</h4><p class="text-[10px] text-gray-500 uppercase tracking-widest leading-relaxed">Véu de Ouro que reflete a luz</p></div>
+                                <div><h4 class="text-white font-luxury text-sm mb-1 group-hover:text-[#E5C988] transition">NANO & ÓLEO DE UVA</h4><p class="text-[10px] text-gray-500 uppercase tracking-widest leading-relaxed">Véu de Ouro que reflete a luz</p></div>
                             </div>
                         </div>
                     </div>
@@ -849,7 +1002,7 @@
                             <span class="border border-white/20 text-[8px] px-2 py-1 text-gray-500">PARABEN FREE</span>
                             <span class="border border-white/20 text-[8px] px-2 py-1 text-gray-500">CRUELTY FREE</span>
                         </div>
-                        <a href="https://wa.me/554900000000?text=Quero%20o%20Bain%20Reconstrutor" target="_blank" class="btn-outline border-white/20 text-[10px] px-8 py-3 hover:bg-white hover:text-black hover:border-white text-white">Adquirir Agora</a>
+                        <button onclick="switchView('store')" class="btn-outline border-white/20 text-[10px] px-8 py-3 hover:bg-white hover:text-black hover:border-white text-white">VER NA BOUTIQUE</button>
                     </div>
                     <div class="lg:col-span-5 order-1 lg:order-2 flex justify-center">
                         <div class="relative w-full max-w-sm mx-auto overflow-hidden img-luxury-frame rounded-lg">
@@ -871,7 +1024,7 @@
                         <p class="text-gray-400 font-light text-sm leading-relaxed mb-8 max-w-sm">
                             Ampola Power Dose. Uma injeção de vida que penetra no córtex para regeneração instantânea nos dias em que seu cabelo exige um milagre.
                         </p>
-                        <a href="https://wa.me/554900000000?text=Quero%20o%20Gold%20Infusion" target="_blank" class="btn-outline border-white/20 text-[10px] px-8 py-3 hover:bg-white hover:text-black hover:border-white text-white">Adquirir Dose</a>
+                        <button onclick="switchView('store')" class="btn-outline border-white/20 text-[10px] px-8 py-3 hover:bg-white hover:text-black hover:border-white text-white">VER NA BOUTIQUE</button>
                     </div>
                 </div>
                 <div class="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center group observe-me">
@@ -881,7 +1034,7 @@
                         <p class="text-gray-400 font-light text-sm leading-relaxed mb-8 ml-auto max-w-sm">
                             BB Finalizador Multifuncional. O escudo da realeza contra proteção térmica e solar. Selagem antifrizz em um único toque.
                         </p>
-                        <a href="https://wa.me/554900000000?text=Quero%20a%20Blindagem%20Queen" target="_blank" class="btn-outline border-white/20 text-[10px] px-8 py-3 hover:bg-white hover:text-black hover:border-white text-white">Adquirir Blindagem</a>
+                        <button onclick="switchView('store')" class="btn-outline border-white/20 text-[10px] px-8 py-3 hover:bg-white hover:text-black hover:border-white text-white">VER NA BOUTIQUE</button>
                     </div>
                     <div class="lg:col-span-5 order-1 lg:order-2 flex justify-center">
                          <div class="relative w-full max-w-sm mx-auto overflow-hidden img-luxury-frame rounded-lg">
@@ -985,9 +1138,13 @@
         lucide.createIcons();
         let isAuthenticated = false; // Estado de autenticação
         let targetViewAfterAuth = ''; // Armazena a view desejada após a senha
+        let quizAnswers = {}; // Armazena respostas do quiz
 
         // NAVEGAÇÃO
         function switchView(viewName) {
+            // REMOVIDO O BLOQUEIO DE NAVEGAÇÃO NA ENTRADA DA ABA
+            // O profissional acessa livremente a área BUSINESS (Showroom)
+
             document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active'));
             const activeLink = document.getElementById('nav-' + viewName);
             if(activeLink) activeLink.classList.add('active');
@@ -1030,7 +1187,7 @@
             const el = document.getElementById(id);
             if(el) {
                 // Se o target está na área 'pro', garante que o modal não bloqueie
-                if (['tech-section', 'exclusivity-section'].includes(id)) {
+                if (['tech-section', 'exclusivity-section', 'shop-section', 'resale-section'].includes(id)) {
                     switchView('pro');
                 }
                 
@@ -1088,12 +1245,90 @@
             }
         }
 
+        // FUNÇÕES DO QUIZ (AUDITORIA)
+        const quizModal = document.getElementById('quiz-modal');
+        const quizProgressBar = document.getElementById('quiz-progress-bar');
+        
+        function openQuizModal() {
+            quizModal.classList.add('open');
+            showQuizStep(1);
+        }
+
+        function closeQuizModal() {
+            quizModal.classList.remove('open');
+        }
+
+        function showQuizStep(step) {
+            document.querySelectorAll('.quiz-step').forEach(el => el.classList.add('hidden'));
+            document.getElementById('quiz-step-' + step).classList.remove('hidden');
+            
+            // Atualiza barra de progresso (25% por passo)
+            quizProgressBar.style.width = (step * 25) + '%';
+        }
+
+        function selectOption(step, value, element) {
+            // Salva a resposta
+            quizAnswers['step' + step] = value;
+
+            // Visual de seleção
+            const parent = element.parentElement;
+            parent.querySelectorAll('.quiz-option').forEach(opt => opt.classList.remove('selected'));
+            element.classList.add('selected');
+
+            // Avança automaticamente após pequeno delay
+            setTimeout(() => {
+                if(step < 4) {
+                    showQuizStep(step + 1);
+                }
+            }, 400);
+        }
+
+        function nextStep(current) {
+            // Validação simples (se não for seleção de opção)
+            if (current === 1) {
+                const nome = document.getElementById('q_nome').value;
+                const whats = document.getElementById('q_whats').value;
+                if (!nome || !whats) { alert("Preencha todos os campos."); return; }
+                quizAnswers.nome = nome;
+                quizAnswers.whats = whats;
+            }
+            if (current === 2) {
+                const insta = document.getElementById('q_insta').value;
+                const cidade = document.getElementById('q_cidade').value;
+                if (!insta || !cidade) { alert("Preencha todos os campos."); return; }
+                quizAnswers.insta = insta;
+                quizAnswers.cidade = cidade;
+            }
+            showQuizStep(current + 1);
+        }
+
+        function finishQuiz() {
+            // Monta a mensagem do WhatsApp (Dados Coletados)
+            const msg = `Olá! Finalizei a Auditoria de Parceiro.%0A%0A*Nome:* ${quizAnswers.nome}%0A*Cidade:* ${quizAnswers.cidade}%0A*Instagram:* ${quizAnswers.insta}%0A%0A*Resultados da Análise:*%0A1. Equipe: ${quizAnswers.step3}%0A2. Ticket Médio: ${quizAnswers.step4}%0A%0AQuero verificar a disponibilidade de território.`;
+            
+            window.open(`https://wa.me/554900000000?text=${msg}`, '_blank');
+            closeQuizModal();
+        }
+
         // CARREGAMENTO PERCEPTIVO E ANIMAÇÕES
         window.addEventListener('load', () => {
             document.body.classList.add('loaded');
             
             const globalFooter = document.getElementById('global-footer');
             if(globalFooter) globalFooter.style.display = 'none';
+
+            // FUNÇÃO REVEAL JOURNEY (CORREÇÃO DE BUG ANTERIOR)
+            window.revealJourney = function() {
+                const content = document.getElementById('intro-content');
+                const selection = document.getElementById('intro-selection');
+                
+                content.classList.add('intro-hidden');
+                
+                setTimeout(() => {
+                    selection.classList.remove('intro-hidden');
+                    selection.classList.add('selection-visible');
+                }, 300);
+            }
 
             const observerOptions = { root: null, rootMargin: '-20% 0px -20% 0px', threshold: 0.3 };
             const observer = new IntersectionObserver((entries) => {
