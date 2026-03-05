@@ -17,17 +17,14 @@
             theme: {
                 extend: {
                     colors: {
-                        // Ouro Joia
-                        gl_gold: '#D4AF37', 
+                        gl_gold: '#C5A059', 
                         gl_gold_light: '#FFF4C2',
                         gl_gold_dark: '#9A7B3E',
-                        // Prata 877 / Platinum (Novo Padrão Industrial B2B)
                         gl_silver: '#D8DADC',
                         gl_silver_dark: '#878C8E',
-                        // Fundos
-                        gl_dark: '#030303', /* Preto OLED Absoluto */
+                        gl_dark: '#030303',
                         gl_dark_fog: '#0A0A0A',
-                        gl_light: '#F8F7F5', /* Off-white editorial para modo claro */
+                        gl_light: '#F8F7F5', 
                         gl_gray: '#121212',
                         gl_platinum: '#E5E4E2'
                     },
@@ -108,11 +105,11 @@
         .card-premium { transition: transform 1.5s cubic-bezier(0.19, 1, 0.22, 1), box-shadow 1.5s ease, border-color 1.5s ease; }
         .card-premium:hover {
             transform: translateY(-12px) scale(1.005);
-            border-color: rgba(212, 175, 55, 0.6);
-            box-shadow: 0 35px 70px -15px rgba(212, 175, 55, 0.2);
+            border-color: rgba(197, 160, 89, 0.6);
+            box-shadow: 0 35px 70px -15px rgba(197, 160, 89, 0.15);
         }
 
-        /* 3. GRADIENTS & TYPOGRAPHY (O EFEITO JOIA E PRATA 877) */
+        /* 3. GRADIENTS & TYPOGRAPHY */
         .gl-gold-gradient {
             background: linear-gradient(135deg, #D4AF37 0%, #FFF4C2 40%, #9A7B3E 100%);
             -webkit-background-clip: text;
@@ -145,7 +142,6 @@
             100% { opacity: 1; transform: translateY(0); filter: blur(0); }
         }
 
-        /* Scroll Reveal Utility */
         .reveal { opacity: 0; transform: translateY(50px); transition: all 1.8s cubic-bezier(0.19, 1, 0.22, 1); }
         .reveal.active { opacity: 1; transform: translateY(0); }
 
@@ -200,7 +196,7 @@
         .dark #cart-overlay { background: rgba(0,0,0,0.7); backdrop-filter: blur(6px); }
         #cart-overlay.open { opacity: 1; pointer-events: auto; }
 
-        /* 7. BUTTONS & INTERACTIONS (EFEITO JOIA E PRATA) */
+        /* 7. BUTTONS & INTERACTIONS */
         .btn-luxury {
             border: 1px solid rgba(212, 175, 55, 0.5);
             background: transparent;
@@ -285,7 +281,7 @@
         .actif-desc { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-style: italic; color: #444; font-weight: 500; line-height: 1.5; max-width: 95%; }
         .dark .actif-desc { color: #A0A0A0; font-weight: 400; }
 
-        /* 9. ANTES & DEPOIS SLIDER (CLINICAL PROOF CORRIGIDO) */
+        /* 9. ANTES & DEPOIS SLIDER (CLINICAL PROOF) */
         .ba-slider-container { position: relative; width: 100%; overflow: hidden; border-radius: 3rem; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5); }
         .ba-img { display: block; width: 100%; height: 100%; object-fit: cover; }
         .ba-after { position: absolute; inset: 0; clip-path: inset(0 50% 0 0); }
@@ -309,11 +305,15 @@
 
         .gl-table th, .gl-table td { padding: 1.5rem 1rem; text-align: center; }
         
-        /* Hero Carousel specific styles */
         .hero-slide { transition: opacity 1.5s cubic-bezier(0.19, 1, 0.22, 1), transform 5s ease-out; }
-        
         .slider-dot { transition: all 0.5s ease; cursor: pointer; }
         .slider-dot.active { width: 30px; background: #D4AF37; }
+
+        /* B2B Sidebar Nav Styles */
+        .b2b-sidebar-btn { width: 100%; text-align: left; padding: 1.25rem 2rem; border-radius: 1.5rem; transition: all 0.5s ease; font-family: 'Montserrat', sans-serif; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.2em; font-weight: 800; color: #666; border: 1px solid transparent; }
+        .dark .b2b-sidebar-btn { color: #A0A0A0; }
+        .b2b-sidebar-btn:hover { color: #C5A059; background: rgba(212, 175, 55, 0.05); }
+        .b2b-sidebar-btn.active { color: #D4AF37; background: rgba(212, 175, 55, 0.1); border-color: rgba(212, 175, 55, 0.3); }
 
     </style>
 </head>
@@ -324,7 +324,30 @@
         <img src="https://testeessencia.carrd.co/assets/images/image52.jpg?v=f5d26855" alt="Luxo Textura" class="w-full h-full object-cover">
     </div>
 
-    <!-- MODAL DE SENHA MESTRA (CADEADO VIP B2B - UPSELL INTEGRADO) -->
+    <!-- MODAL 01: HOMOLOGAÇÃO E EXCLUSIVIDADE REGIONAL (ALGORITMO) -->
+    <div id="homologation-modal" class="fixed inset-0 z-[3000] hidden bg-white/95 dark:bg-black/95 backdrop-blur-2xl items-center justify-center opacity-0 transition-opacity duration-1000">
+        <div class="p-12 md:p-16 rounded-[4rem] w-full max-w-2xl text-center transform scale-95 transition-transform duration-1000 glass-panel border border-gl_gold/30 shadow-[0_30px_100px_rgba(0,0,0,0.1)] dark:shadow-[0_30px_100px_rgba(0,0,0,0.5)] relative overflow-hidden" id="homo-content-box">
+            <button onclick="appState.closeHomologationModal()" class="absolute top-8 right-8 text-gray-500 hover:text-gl_gold text-2xl transition-colors"><i class="fa-solid fa-xmark"></i></button>
+            <div class="w-20 h-20 mx-auto border border-gl_gold/30 rounded-full flex items-center justify-center mb-8 shadow-[0_0_40px_rgba(212,175,55,0.2)] bg-gl_gold/10">
+                <i class="fa-solid fa-map-location-dot text-3xl text-gl_gold"></i>
+            </div>
+            <h3 class="font-serif text-5xl font-light text-gl_dark dark:text-white mb-4 italic">Auditoria Regional</h3>
+            <p class="font-sans text-[0.65rem] text-gray-500 uppercase tracking-mega-wide mb-10 font-bold">Verifique a disponibilidade da Licença GL PRO na sua cidade.</p>
+            
+            <div id="homo-form-area" class="space-y-6">
+                <input type="text" id="homo-cep" placeholder="SEU CEP" maxlength="9" class="w-full p-5 bg-transparent border-b-2 border-gray-300 dark:border-gray-800 text-center tracking-[0.5em] outline-none focus:border-gl_gold transition-all text-gl_dark dark:text-white font-light text-xl">
+                <input type="text" id="homo-city" placeholder="SUA CIDADE" class="w-full p-5 bg-transparent border-b-2 border-gray-300 dark:border-gray-800 text-center tracking-[0.5em] outline-none focus:border-gl_gold transition-all text-gl_dark dark:text-white font-light text-xl uppercase mb-10">
+                <button onclick="appState.verifyHomologation()" class="w-full btn-luxury-solid !py-5">Verificar Disponibilidade de Praça</button>
+            </div>
+
+            <!-- Area de Resultado da Homologação -->
+            <div id="homo-result-area" class="hidden flex flex-col items-center justify-center pt-8">
+                <!-- Preenchido via JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL 02: SENHA MESTRA (CADEADO VIP B2B - UPSELL INTEGRADO) -->
     <div id="password-modal" class="fixed inset-0 z-[2000] hidden bg-white/90 dark:bg-black/95 backdrop-blur-2xl items-center justify-center opacity-0 transition-opacity duration-1000">
         <div class="p-12 md:p-16 rounded-[4rem] w-full max-w-xl text-center transform scale-95 transition-transform duration-1000 glass-panel border border-gl_silver_dark/30 shadow-[0_30px_100px_rgba(0,0,0,0.1)] dark:shadow-[0_30px_100px_rgba(0,0,0,0.5)]" id="modal-content-box">
             <div class="w-20 h-20 mx-auto border border-gl_silver_dark/30 rounded-full flex items-center justify-center mb-8 shadow-[0_0_40px_rgba(135,140,142,0.2)] bg-gl_silver/10">
@@ -343,7 +366,7 @@
             
             <!-- Gatilho de Upsell Automático (Conforme Briefing) -->
             <div class="border-t border-gray-300 dark:border-gray-800 pt-8 mt-4">
-                <button onclick="alert('Redirecionando para página de vendas da Imersão...')" class="text-[0.55rem] font-black text-gl_gold uppercase tracking-giga-wide hover:text-gl_gold_light transition-colors">Não possui a chave? Aplique para a imersão</button>
+                <button onclick="appState.closeModal(); appState.openHomologationModal();" class="text-[0.55rem] font-black text-gl_gold uppercase tracking-giga-wide hover:text-gl_gold_light transition-colors block w-full">[ NÃO POSSUI A CHAVE? APLIQUE PARA A IMERSÃO ]</button>
             </div>
         </div>
     </div>
@@ -355,8 +378,8 @@
     <header id="main-header" class="w-full fixed top-0 z-[500] py-6 px-8 md:px-16 flex justify-between items-center transition-all duration-1000 border-b border-transparent backdrop-blur-md bg-white/30 dark:bg-gl_dark/40">
         <!-- Logo em Imagem Oficial -->
         <div class="cursor-pointer group flex flex-col items-start" onclick="appState.navigate('home')">
-            <img src="https://testeessencia.carrd.co/assets/images/image72.png?v=7b294510" alt="GL PRO Logo" class="h-8 md:h-10 w-auto object-contain transition-transform duration-700 group-hover:scale-105">
-            <span class="font-sans text-[0.45rem] tracking-[0.6em] text-gray-500 uppercase mt-2 font-bold">Engineering Hierarchy</span>
+            <img src="https://testeessencia.carrd.co/assets/images/image72.png?v=7b294510" alt="GL PRO Logo" class="h-8 md:h-10 w-auto object-contain transition-transform duration-700 group-hover:scale-105 filter dark:invert-0 invert">
+            <span class="font-sans text-[0.45rem] tracking-[0.6em] text-gray-600 dark:text-gray-500 uppercase mt-2 font-black">Engineering Hierarchy</span>
         </div>
 
         <div class="flex items-center gap-6 md:gap-10">
@@ -440,6 +463,7 @@
             
             <!-- SLIDE 1: SÉRUM INTELIGENTE & CÓRTEX -->
             <div class="hero-slide absolute inset-0 z-20 opacity-100" id="slide-1">
+                <!-- Imagem com resolução nativa absoluta -->
                 <img src="https://testeessencia.carrd.co/assets/images/image70.jpg?v=2861d9df" alt="Sérum Capilar Inteligente e Córtex" class="w-full h-full object-cover opacity-90 scale-105" id="img-slide-1">
                 <div class="absolute inset-0 bg-gradient-to-r from-gl_dark via-gl_dark/80 to-transparent w-full md:w-3/4"></div>
                 <div class="absolute inset-0 bg-gradient-to-t from-gl_dark via-transparent to-transparent opacity-80"></div>
@@ -497,7 +521,7 @@
                         </p>
                         
                         <div class="flex flex-col md:flex-row items-start md:items-center gap-12">
-                            <button onclick="appState.navigate('dashboard-b2b')" class="btn-luxury-solid !bg-purple-800 hover:!bg-white !text-white hover:!text-black !border-transparent !py-5 !px-14 text-[0.75rem] shadow-[0_20px_50px_rgba(168,85,247,0.3)]">Verificar Credencial</button>
+                            <button onclick="appState.openHomologationModal()" class="btn-luxury-solid !bg-purple-800 hover:!bg-white !text-white hover:!text-black !border-transparent !py-5 !px-14 text-[0.75rem] shadow-[0_20px_50px_rgba(168,85,247,0.3)]">Verificar Credencial</button>
                         </div>
                     </div>
                 </div>
@@ -549,22 +573,18 @@
                     <h4 class="font-serif text-3xl md:text-4xl text-gl_dark dark:text-white mb-10 italic">Liso Soberano <span class="font-sans font-thin not-italic text-2xl text-gl_gold">8K</span></h4>
                     
                     <div class="ba-slider-container aspect-[4/5] bg-gray-200 dark:bg-gl_gray shadow-2xl w-full">
-                        <!-- Imagem Antes (Por baixo) -->
+                        <!-- Imagem Antes -->
                         <img src="https://testeessencia.carrd.co/assets/images/image48.jpg?v=7b294510" alt="Estrutura Original" class="ba-img absolute inset-0 w-full h-full object-cover">
                         
-                        <!-- Imagem Depois (Por cima, com clip-path) -->
+                        <!-- Imagem Depois -->
                         <img src="https://testeessencia.carrd.co/assets/images/image49.jpg?v=7b294510" alt="Supremacia 8K" class="ba-img ba-after absolute inset-0 w-full h-full object-cover">
                         
-                        <!-- Linha Divisória e Botão -->
                         <div class="ba-handle-line"></div>
                         <div class="ba-handle-btn">
                             <i class="fa-solid fa-arrows-left-right text-sm"></i>
                         </div>
-                        
-                        <!-- Range Input Invisível para Controle -->
                         <input type="range" min="0" max="100" value="50" class="ba-range">
                         
-                        <!-- Labels -->
                         <div class="ba-label-after shadow-lg">Supremacia 8K</div>
                         <div class="ba-label-before shadow-lg">Estrutura Original</div>
                     </div>
@@ -578,22 +598,18 @@
                     <h4 class="font-serif text-3xl md:text-4xl text-gl_dark dark:text-white mb-10 italic">Molecular Platinum <span class="font-sans font-thin not-italic text-2xl text-purple-600 dark:text-purple-400">Infusion</span></h4>
                     
                     <div class="ba-slider-container aspect-[4/5] bg-gray-200 dark:bg-gl_gray shadow-2xl w-full">
-                        <!-- Imagem Antes (Por baixo) -->
+                        <!-- Imagem Antes -->
                         <img src="https://testeessencia.carrd.co/assets/images/image45.jpg?v=7b294510" alt="Oxidação Severa" class="ba-img absolute inset-0 w-full h-full object-cover">
                         
-                        <!-- Imagem Depois (Por cima, com clip-path) -->
+                        <!-- Imagem Depois -->
                         <img src="https://testeessencia.carrd.co/assets/images/image47.jpg?v=7b294510" alt="Efeito Platinum" class="ba-img ba-after absolute inset-0 w-full h-full object-cover">
                         
-                        <!-- Linha Divisória e Botão -->
                         <div class="ba-handle-line !bg-purple-500"></div>
                         <div class="ba-handle-btn !border-purple-500 !text-purple-500 !shadow-[0_0_20px_rgba(168,85,247,0.4)]">
                             <i class="fa-solid fa-arrows-left-right text-sm"></i>
                         </div>
-                        
-                        <!-- Range Input Invisível para Controle -->
                         <input type="range" min="0" max="100" value="50" class="ba-range">
                         
-                        <!-- Labels -->
                         <div class="ba-label-after shadow-lg !bg-purple-900/30 !text-purple-300 !border-purple-500/40">Efeito Platinum</div>
                         <div class="ba-label-before shadow-lg">Oxidação Severa</div>
                     </div>
@@ -660,17 +676,17 @@
         <section class="manifesto-bg rounded-[4rem] p-12 md:p-24 mb-40 relative overflow-hidden shadow-2xl reveal">
             <div class="max-w-4xl relative z-20">
                 <span class="font-sans text-[0.6rem] font-black text-gl_gold uppercase tracking-mega-wide mb-8 block">A Fundação da Supremacia</span>
-                <h3 class="font-serif text-6xl md:text-[7rem] font-light text-white leading-none mb-10">Sistema <br><span class="italic gl-gold-gradient font-semibold">Trindade</span></h3>
+                <h3 class="font-serif text-6xl md:text-[7rem] font-light text-white leading-none mb-10">Chase Nature <br><span class="italic gl-gold-gradient font-semibold">System</span></h3>
                 <p class="font-sans text-sm text-gray-300 leading-loose mb-16 max-w-xl uppercase tracking-widest font-bold">
-                    O domínio da estrutura capilar exige previsibilidade. O Sistema Trindade não é manutenção comum; é uma unidade de Engenharia Molecular completa desenvolvida para sustentar a longevidade do protocolo Liso Soberano 8K no seu ambiente privado.
+                    O domínio da estrutura capilar exige previsibilidade. O CHASE NATURE SYSTEM | KIT TRINDADE 8K não é manutenção comum; é a Sinergia Molecular completa desenvolvida para sustentar a longevidade do protocolo Liso Soberano 8K no seu ambiente privado.
                 </p>
                 
                 <div class="glass-panel p-10 md:p-14 rounded-[3.5rem] inline-block w-full max-w-lg shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
-                    <span class="text-[0.6rem] font-black text-gl_gold uppercase tracking-widest block mb-4 italic">Oferta Bundle: Estágios 01 + 02 + 03</span>
+                    <span class="text-[0.6rem] font-black text-gl_gold uppercase tracking-widest block mb-4 italic">01 Purificação Quelante + 02 Regeneração + 03 Blindagem</span>
                     <div class="flex items-end justify-between mb-10">
                         <p class="font-serif text-6xl md:text-7xl text-white price-tag">R$ 597<span class="text-2xl text-gray-400">,00</span></p>
                     </div>
-                    <button onclick="cartSystem.addToCart('trindade', 'Sistema Trindade Completo', 597.00, 'Kit Ultra Bundle')" class="w-full btn-luxury-solid flex justify-center items-center gap-4 !py-6 text-[0.7rem]">
+                    <button onclick="cartSystem.addToCart('trindade', 'Kit Trindade 8K', 597.00, 'Kit Ultra Bundle')" class="w-full btn-luxury-solid flex justify-center items-center gap-4 !py-6 text-[0.7rem]">
                         Adicionar à Sacola <i class="fa-solid fa-plus text-[0.6rem]"></i>
                     </button>
                 </div>
@@ -688,23 +704,24 @@
             <!-- 01. SHAMPOO RECONSTRUTOR -->
             <article class="flex flex-col md:flex-row gap-12 md:gap-24 items-center group reveal">
                 <div class="md:w-5/12 aspect-[3/4] overflow-hidden rounded-[4rem] shadow-2xl border border-gray-300 dark:border-white/5 relative w-full bg-gray-200 dark:bg-gl_gray">
-                    <img src="https://testeessencia.carrd.co/assets/images/image53.jpg?v=f5d26855" alt="Shampoo Reconstrutor" class="w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform duration-[3000ms]">
+                    <img src="https://testeessencia.carrd.co/assets/images/image53.jpg?v=f5d26855" alt="Bain Repar Master" class="w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform duration-[3000ms]">
                     <div class="absolute inset-0 bg-gradient-to-b from-white/60 dark:from-gl_dark/60 via-transparent to-white/80 dark:to-gl_dark/80"></div>
-                    <span class="absolute top-10 left-10 font-sans text-[0.6rem] font-black text-gl_gold tracking-[0.4em] uppercase border border-gl_gold/40 px-5 py-2 rounded-full backdrop-blur-xl bg-white/50 dark:bg-black/50 shadow-lg">01 / Prep</span>
+                    <span class="absolute top-10 left-10 font-sans text-[0.6rem] font-black text-gl_gold tracking-[0.4em] uppercase border border-gl_gold/40 px-5 py-2 rounded-full backdrop-blur-xl bg-white/50 dark:bg-black/50 shadow-lg">Step 01 / Purification</span>
                 </div>
                 <div class="md:w-7/12 flex flex-col justify-center">
-                    <h4 class="font-serif text-5xl md:text-6xl text-gl_dark dark:text-white mb-6 italic">Shampoo Reconstrutor</h4>
-                    <p class="font-sans text-[0.65rem] font-black text-gray-500 uppercase tracking-[0.3em] mb-12">300ml — Arquitetura de Preparação Lipídica</p>
+                    <h4 class="font-serif text-5xl md:text-6xl text-gl_dark dark:text-white mb-6 italic">Bain Repar Master</h4>
+                    <p class="font-sans text-[0.65rem] font-black text-gray-500 uppercase tracking-[0.3em] mb-12">Limpeza Inteligente e Preparação Estrutural</p>
                     
                     <div class="actif-container mb-16 max-w-xl">
-                        <div class="actif-item"><span class="actif-title text-gl_dark dark:text-white">Queratina Hidrolisada</span><p class="actif-desc">Engenharia que atua na reposição imediata da matriz proteica intracelular e ancoragem de massa.</p></div>
-                        <div class="actif-item"><span class="actif-title text-gl_dark dark:text-white">Ceramidas Essenciais</span><p class="actif-desc">Estabiliza a barreira lipídica contra o estresse oxidativo severo do ambiente urbano.</p></div>
-                        <div class="actif-item"><span class="actif-title text-gl_dark dark:text-white">D-Pantenol</span><p class="actif-desc">Rede de retenção hídrica profunda preparando a estrutura biológica do córtex.</p></div>
+                        <div class="actif-item"><span class="actif-title text-gl_dark dark:text-white">01. Biomimetic Keratin</span><p class="actif-desc">Reconstrução estrutural inteligente que atua nas microfissuras da fibra durante a lavagem.</p></div>
+                        <div class="actif-item"><span class="actif-title text-gl_dark dark:text-white">02. Bio-Ceramide Complex</span><p class="actif-desc">Restauração do cimento intercelular para máxima selagem e preparação térmica.</p></div>
+                        <div class="actif-item"><span class="actif-title text-gl_dark dark:text-white">03. Pro-Vitamin B5</span><p class="actif-desc">Umectação profunda que previne o ressecamento do fio exposto à água quente.</p></div>
+                        <div class="actif-item"><span class="actif-title text-gl_gold">International Fragrance Experience</span><p class="actif-desc">Perfumaria fina inspirada no frescor do Mediterrâneo, com notas vibrantes de Limão Siciliano, Bambu e um fundo sofisticado de Cedro e Âmbar.</p></div>
                     </div>
 
                     <div class="flex items-center gap-12 pt-10 border-t border-gray-300 dark:border-white/5">
                         <p class="font-serif text-5xl text-gl_dark dark:text-white price-tag">R$ 147<span class="text-xl text-gray-500">,00</span></p>
-                        <button onclick="cartSystem.addToCart('shampoo_b2c', 'Shampoo Reconstrutor 300ml', 147.00, 'Fase 01')" class="btn-luxury">Adicionar à Sacola</button>
+                        <button onclick="cartSystem.addToCart('shampoo_b2c', 'Bain Repar Master 300ml', 147.00, 'Step 01')" class="btn-luxury">Comprar</button>
                     </div>
                 </div>
             </article>
@@ -712,46 +729,50 @@
             <!-- 02. REPAREM GLOSS & FUSION (INVERTIDO) -->
             <article class="flex flex-col md:flex-row-reverse gap-12 md:gap-24 items-center group reveal">
                 <div class="md:w-5/12 aspect-[3/4] overflow-hidden rounded-[4rem] shadow-2xl border border-gray-300 dark:border-white/5 relative w-full bg-gray-200 dark:bg-gl_gray">
-                    <img src="https://testeessencia.carrd.co/assets/images/image56.jpg?v=f5d26855" alt="Reparem Gloss" class="w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform duration-[3000ms] mix-blend-multiply dark:mix-blend-screen">
+                    <img src="https://testeessencia.carrd.co/assets/images/image56.jpg?v=f5d26855" alt="Repair Gloss Restauração" class="w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform duration-[3000ms] mix-blend-multiply dark:mix-blend-screen">
                     <div class="absolute inset-0 bg-gradient-to-b from-white/60 dark:from-gl_dark/60 via-transparent to-white/80 dark:to-gl_dark/80"></div>
-                    <span class="absolute top-10 right-10 md:left-auto md:right-10 font-sans text-[0.6rem] font-black text-gl_gold tracking-[0.4em] uppercase border border-gl_gold/40 px-5 py-2 rounded-full backdrop-blur-xl bg-white/50 dark:bg-black/50 shadow-lg">02 / Infuse</span>
+                    <span class="absolute top-10 right-10 md:left-auto md:right-10 font-sans text-[0.6rem] font-black text-gl_gold tracking-[0.4em] uppercase border border-gl_gold/40 px-5 py-2 rounded-full backdrop-blur-xl bg-white/50 dark:bg-black/50 shadow-lg">Step 02 / Deep Recon</span>
                 </div>
                 <div class="md:w-7/12 flex flex-col justify-center items-start md:items-end md:text-right">
-                    <h4 class="font-serif text-5xl md:text-6xl text-gl_dark dark:text-white mb-6 italic">Reparem Gloss <span class="font-sans font-thin text-4xl not-italic text-gl_gold">&</span> Fusion</h4>
-                    <p class="font-sans text-[0.65rem] font-black text-gray-500 uppercase tracking-[0.3em] mb-12">20ml — Arquitetura de Infusão Molecular</p>
+                    <h4 class="font-serif text-5xl md:text-6xl text-gl_dark dark:text-white mb-6 italic">Repair Gloss Restauração</h4>
+                    <p class="font-sans text-[0.65rem] font-black text-gray-500 uppercase tracking-[0.3em] mb-12">Máscara de Infusão Proteica Avançada</p>
                     
                     <div class="actif-container mb-16 max-w-xl md:items-end">
-                        <div class="actif-item !border-l-0 md:!border-r-2 md:!pl-0 md:!pr-5 border-gl_gold/40 text-left md:text-right"><span class="actif-title text-gl_dark dark:text-white">Nutriamido Cap</span><p class="actif-desc md:ml-auto">Preenchimento de porosidade severa e reconstrução de fissuras estruturais ao nível molecular.</p></div>
-                        <div class="actif-item !border-l-0 md:!border-r-2 md:!pl-0 md:!pr-5 border-gl_gold/40 text-left md:text-right"><span class="actif-title text-gl_dark dark:text-white">Óleo de Abacate</span><p class="actif-desc md:ml-auto">Ácidos graxos de alta densidade que devolvem a maleabilidade natural à fibra capilar rígida.</p></div>
-                        <div class="actif-item !border-l-0 md:!border-r-2 md:!pl-0 md:!pr-5 border-gl_gold/40 text-left md:text-right"><span class="actif-title text-gl_dark dark:text-white">Proteína da Seda</span><p class="actif-desc md:ml-auto">Cria um escudo de brilho refratário e eleva o índice de refração da luz ambiente no fio.</p></div>
+                        <div class="actif-item !border-l-0 md:!border-r-2 md:!pl-0 md:!pr-5 border-gl_gold/40 text-left md:text-right"><span class="actif-title text-gl_dark dark:text-white">01. Nutriamido Cap</span><p class="actif-desc md:ml-auto">Matriz de preenchimento inteligente: Estabiliza o pH e encorpa a estrutura do fio danificado com precisão molecular.</p></div>
+                        <div class="actif-item !border-l-0 md:!border-r-2 md:!pl-0 md:!pr-5 border-gl_gold/40 text-left md:text-right"><span class="actif-title text-gl_dark dark:text-white">02. Nóble Avocado Oil</span><p class="actif-desc md:ml-auto">Carga lipídica intensa com alta afinidade capilar que combate a porosidade severa e a aspereza.</p></div>
+                        <div class="actif-item !border-l-0 md:!border-r-2 md:!pl-0 md:!pr-5 border-gl_gold/40 text-left md:text-right"><span class="actif-title text-gl_dark dark:text-white">03. Proteína da Seda</span><p class="actif-desc md:ml-auto">Envelopamento da fibra: Efeito de selagem orgânica que gera brilho fotográfico extremo e proteção contra quebra.</p></div>
+                        <div class="actif-item !border-l-0 md:!border-r-2 md:!pl-0 md:!pr-5 border-gl_gold/40 text-left md:text-right"><span class="actif-title text-gl_gold">04. Sensorial Experience</span><p class="actif-desc md:ml-auto">Perfumaria Fina: Notas vibrantes de Limão Siciliano e Bambu, inspiradas no frescor sofisticado do Mediterrâneo.</p></div>
                     </div>
 
                     <div class="flex items-center flex-row-reverse gap-12 pt-10 border-t border-gray-300 dark:border-white/5 w-full justify-end md:justify-start">
-                        <p class="font-serif text-5xl text-gl_dark dark:text-white price-tag">R$ 297<span class="text-xl text-gray-500">,00</span></p>
-                        <button onclick="cartSystem.addToCart('reparem_b2c', 'Reparem Gloss & Fusion 20ml', 297.00, 'Fase 02')" class="btn-luxury">Adicionar à Sacola</button>
+                        <!-- PREÇO ATUALIZADO CONFORME NOVA SOLICITAÇÃO B2C (289) -->
+                        <p class="font-serif text-5xl text-gl_dark dark:text-white price-tag">R$ 289<span class="text-xl text-gray-500">,00</span></p>
+                        <button onclick="cartSystem.addToCart('reparem_b2c', 'Repair Gloss Restauração', 289.00, 'Step 02')" class="btn-luxury">Comprar</button>
                     </div>
                 </div>
             </article>
 
-            <!-- 03. BABY QUEEN 10 EM 1 -->
+            <!-- 03. BABY QUEEN -->
             <article class="flex flex-col md:flex-row gap-12 md:gap-24 items-center group reveal">
                 <div class="md:w-5/12 aspect-[3/4] overflow-hidden rounded-[4rem] shadow-2xl border border-gray-300 dark:border-white/5 relative w-full bg-gray-200 dark:bg-gl_gray">
                     <img src="https://testeessencia.carrd.co/assets/images/image63.jpg?v=f5d26855" alt="Baby Queen" class="w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform duration-[3000ms] grayscale">
                     <div class="absolute inset-0 bg-gradient-to-b from-white/60 dark:from-gl_dark/60 via-transparent to-white/80 dark:to-gl_dark/80"></div>
-                    <span class="absolute top-10 left-10 font-sans text-[0.6rem] font-black text-gl_gold tracking-[0.4em] uppercase border border-gl_gold/40 px-5 py-2 rounded-full backdrop-blur-xl bg-white/50 dark:bg-black/50 shadow-lg">03 / Seal</span>
+                    <span class="absolute top-10 left-10 font-sans text-[0.6rem] font-black text-gl_gold tracking-[0.4em] uppercase border border-gl_gold/40 px-5 py-2 rounded-full backdrop-blur-xl bg-white/50 dark:bg-black/50 shadow-lg">Step 03 / The Shield</span>
                 </div>
                 <div class="md:w-7/12 flex flex-col justify-center">
-                    <h4 class="font-serif text-5xl md:text-6xl text-gl_dark dark:text-white mb-6 italic">Baby Queen 10em1</h4>
-                    <p class="font-sans text-[0.65rem] font-black text-gray-500 uppercase tracking-[0.3em] mb-12">Leave-in — Arquitetura de Selagem Nano</p>
+                    <h4 class="font-serif text-5xl md:text-6xl text-gl_dark dark:text-white mb-6 italic">Baby Queen <span class="font-sans font-thin text-3xl not-italic text-gl_gold">(Blindagem 10 em 1)</span></h4>
+                    <p class="font-sans text-[0.65rem] font-black text-gray-500 uppercase tracking-[0.3em] mb-12">Tecnologia Smart Post-Chemical</p>
                     
                     <div class="actif-container mb-16 max-w-xl">
-                        <div class="actif-item"><span class="actif-title text-gl_dark dark:text-white">Tecnologia Nano Link</span><p class="actif-desc">Executa a ancoragem microscópica dos ativos na matriz, impedindo evasão de nutrientes.</p></div>
-                        <div class="actif-item"><span class="actif-title text-gl_dark dark:text-white">Colágeno de Alta Pureza</span><p class="actif-desc">Reestabelece resistência à tração e elasticidade biológica para selagem térmica de longa duração.</p></div>
+                        <div class="actif-item"><span class="actif-title text-gl_dark dark:text-white">01. Nano Link Complex</span><p class="actif-desc">Sistema de nano-aminoácidos para reposição de massa e reparação intensa pós-química.</p></div>
+                        <div class="actif-item"><span class="actif-title text-gl_dark dark:text-white">02. Bio-Collagen System</span><p class="actif-desc">Colágeno hidrolisado que devolve a elasticidade natural e prepara a cutícula para o selamento.</p></div>
+                        <div class="actif-item"><span class="actif-title text-gl_dark dark:text-white">03. Deca-Shield Matrix</span><p class="actif-desc">Tecnologia de blindagem inteligente que sela a fibra e protege contra agressões térmicas e externas.</p></div>
+                        <div class="actif-item"><span class="actif-title text-gl_gold">04. Sensorial Experience</span><p class="actif-desc">Perfumaria fina referência mediterrânea (Ref. Light Blue) para um frescor sofisticado de elite.</p></div>
                     </div>
 
                     <div class="flex items-center gap-12 pt-10 border-t border-gray-300 dark:border-white/5">
-                        <p class="font-serif text-5xl text-gl_dark dark:text-white price-tag">R$ 257<span class="text-xl text-gray-500">,00</span></p>
-                        <button onclick="cartSystem.addToCart('baby_b2c', 'Baby Queen 10em1 Leave-in', 257.00, 'Fase 03')" class="btn-luxury">Adicionar à Sacola</button>
+                        <p class="font-serif text-5xl text-gl_dark dark:text-white price-tag">R$ 247<span class="text-xl text-gray-500">,00</span></p>
+                        <button onclick="cartSystem.addToCart('baby_b2c', 'Baby Queen Blindagem 10em1', 247.00, 'Step 03')" class="btn-luxury">Comprar</button>
                     </div>
                 </div>
             </article>
@@ -770,15 +791,17 @@
             <p class="font-sans text-gray-500 uppercase tracking-mega-wide text-[0.65rem] font-black mt-6">Ecossistema Exclusivo de Negócios & Engenharia Química</p>
         </div>
 
-        <!-- NAVEGAÇÃO B2B FLUTUANTE (AS 6 CÂMARAS) -->
+        <!-- NAVEGAÇÃO B2B FLUTUANTE (AS 6 CÂMARAS - RECONSTRUÇÃO PHASE 02) -->
         <div class="sticky top-[85px] md:top-[95px] z-[400] w-full flex justify-center mb-24 px-2 md:px-4 reveal transition-all duration-500 pointer-events-none">
-            <nav class="flex flex-nowrap md:flex-wrap justify-start md:justify-center gap-6 border border-gray-300/50 dark:border-white/10 py-5 px-8 md:px-10 bg-white/85 dark:bg-gl_dark/85 backdrop-blur-2xl shadow-[0_20px_50px_rgba(0,0,0,0.15)] dark:shadow-[0_20px_50px_rgba(0,0,0,0.5)] rounded-full pointer-events-auto overflow-x-auto max-w-full custom-scroll">
-                <button onclick="appState.switchB2BTab('dashboard')" id="tab-btn-dashboard" class="b2b-tab-btn font-sans text-[0.65rem] font-black tracking-[0.2em] uppercase transition-all duration-500 text-gl_silver border-b-2 border-gl_silver pb-1 whitespace-nowrap">01. Dashboard</button>
-                <button onclick="appState.switchB2BTab('academy')" id="tab-btn-academy" class="b2b-tab-btn font-sans text-[0.65rem] font-black tracking-[0.2em] uppercase transition-all duration-500 text-gray-500 hover:text-gl_dark dark:hover:text-white border-b-2 border-transparent pb-1 whitespace-nowrap">02. Academy</button>
-                <button onclick="appState.switchB2BTab('arsenal')" id="tab-btn-arsenal" class="b2b-tab-btn font-sans text-[0.65rem] font-black tracking-[0.2em] uppercase transition-all duration-500 text-gray-500 hover:text-gl_dark dark:hover:text-white border-b-2 border-transparent pb-1 whitespace-nowrap">03. Arsenal</button>
-                <button onclick="appState.switchB2BTab('lab')" id="tab-btn-lab" class="b2b-tab-btn font-sans text-[0.6rem] font-black tracking-[0.2em] uppercase transition-all duration-500 text-gray-500 hover:text-gl_dark dark:hover:text-white border-b-2 border-transparent pb-1 whitespace-nowrap">04. Lab Digital</button>
-                <button onclick="appState.switchB2BTab('store')" id="tab-btn-store" class="b2b-tab-btn font-sans text-[0.65rem] font-black tracking-[0.2em] uppercase transition-all duration-500 text-gray-500 hover:text-gl_dark dark:hover:text-white border-b-2 border-transparent pb-1 whitespace-nowrap">05. Store B2B</button>
-                <button onclick="appState.switchB2BTab('sos')" id="tab-btn-sos" class="b2b-tab-btn font-sans text-[0.65rem] font-black tracking-[0.2em] uppercase transition-all duration-500 text-gray-500 hover:text-red-500 border-b-2 border-transparent pb-1 whitespace-nowrap">06. SOS</button>
+            <nav class="flex flex-nowrap justify-start lg:justify-center gap-4 md:gap-6 border border-gray-300/50 dark:border-white/10 py-5 px-6 md:px-10 bg-white/85 dark:bg-gl_dark/85 backdrop-blur-2xl shadow-[0_20px_50px_rgba(0,0,0,0.15)] dark:shadow-[0_20px_50px_rgba(0,0,0,0.5)] rounded-full pointer-events-auto overflow-x-auto max-w-full custom-scroll">
+                <button onclick="appState.switchB2BTab('dashboard')" id="tab-btn-dashboard" class="b2b-tab-btn font-sans text-[0.6rem] font-black tracking-[0.2em] uppercase transition-all duration-500 text-gl_silver border-b-2 border-gl_silver pb-1 whitespace-nowrap">01. Dashboard</button>
+                <button onclick="appState.switchB2BTab('dna')" id="tab-btn-dna" class="b2b-tab-btn font-sans text-[0.6rem] font-black tracking-[0.2em] uppercase transition-all duration-500 text-gray-500 hover:text-gl_dark dark:hover:text-white border-b-2 border-transparent pb-1 whitespace-nowrap">02. DNA da Marca</button>
+                <button onclick="appState.switchB2BTab('academy')" id="tab-btn-academy" class="b2b-tab-btn font-sans text-[0.6rem] font-black tracking-[0.2em] uppercase transition-all duration-500 text-gray-500 hover:text-gl_dark dark:hover:text-white border-b-2 border-transparent pb-1 whitespace-nowrap flex items-center gap-2">03. Academia Técnica <i class="fa-solid fa-lock text-[0.5rem] opacity-50 lock-icon"></i></button>
+                <button onclick="appState.switchB2BTab('business')" id="tab-btn-business" class="b2b-tab-btn font-sans text-[0.6rem] font-black tracking-[0.2em] uppercase transition-all duration-500 text-gray-500 hover:text-gl_dark dark:hover:text-white border-b-2 border-transparent pb-1 whitespace-nowrap flex items-center gap-2">04. Business B2B <i class="fa-solid fa-lock text-[0.5rem] opacity-50 lock-icon"></i></button>
+                <button onclick="appState.switchB2BTab('arsenal')" id="tab-btn-arsenal" class="b2b-tab-btn font-sans text-[0.6rem] font-black tracking-[0.2em] uppercase transition-all duration-500 text-gray-500 hover:text-gl_dark dark:hover:text-white border-b-2 border-transparent pb-1 whitespace-nowrap">05. Arsenal GL PRO</button>
+                <button onclick="appState.switchB2BTab('lab')" id="tab-btn-lab" class="b2b-tab-btn font-sans text-[0.6rem] font-black tracking-[0.2em] uppercase transition-all duration-500 text-gray-500 hover:text-gl_dark dark:hover:text-white border-b-2 border-transparent pb-1 whitespace-nowrap">06. Lab Digital</button>
+                <button onclick="appState.switchB2BTab('store')" id="tab-btn-store" class="b2b-tab-btn font-sans text-[0.6rem] font-black tracking-[0.2em] uppercase transition-all duration-500 text-gray-500 hover:text-gl_dark dark:hover:text-white border-b-2 border-transparent pb-1 whitespace-nowrap flex items-center gap-2">07. Store Oculta <i class="fa-solid fa-lock text-[0.5rem] opacity-50 lock-icon"></i></button>
+                <button onclick="appState.switchB2BTab('sos')" id="tab-btn-sos" class="b2b-tab-btn font-sans text-[0.6rem] font-black tracking-[0.2em] uppercase transition-all duration-500 text-gray-500 hover:text-red-500 border-b-2 border-transparent pb-1 whitespace-nowrap">08. SOS Lavatório</button>
             </nav>
         </div>
 
@@ -793,179 +816,187 @@
                 </div>
                 <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-10 relative z-10">
                     <div>
-                        <span class="font-sans text-[0.6rem] font-black text-gl_silver tracking-mega-wide uppercase mb-4 block">Bem-vindo, Titular</span>
-                        <h2 class="font-serif text-5xl text-gl_dark dark:text-white mb-2 leading-none italic">Embaixador SOBERANO</h2>
-                        <p class="font-sans text-[0.7rem] text-gray-500 uppercase tracking-widest mt-4 font-bold"><i class="fa-solid fa-shield-check text-gl_silver mr-2"></i> IP Monitorado: Proteção Anti-Pirataria Ativa</p>
+                        <span class="font-sans text-[0.6rem] font-black text-gl_silver tracking-mega-wide uppercase mb-4 block">Painel de Titularidade</span>
+                        <h2 class="font-serif text-5xl md:text-6xl text-gl_dark dark:text-white mb-2 leading-none italic">Embaixador SOBERANO</h2>
+                        <p class="font-sans text-[0.65rem] text-gray-500 uppercase tracking-widest mt-4 font-bold"><i class="fa-solid fa-shield-check text-gl_silver mr-2"></i> IP Monitorado: Sistema Anti-Pirataria Ativo</p>
                     </div>
                     <div class="bg-black/5 dark:bg-black/40 p-8 rounded-[2.5rem] border border-gray-300 dark:border-white/10 w-full md:w-auto min-w-[300px]">
                         <div class="flex justify-between items-center mb-4">
-                            <span class="font-sans text-[0.6rem] font-black text-gray-500 uppercase tracking-widest">Trilha Academy</span>
-                            <span class="font-serif text-2xl text-gl_silver font-bold">35%</span>
+                            <span class="font-sans text-[0.6rem] font-black text-gray-500 uppercase tracking-widest">Progresso do Treinamento</span>
+                            <span class="font-serif text-3xl text-gl_silver font-bold">12%</span>
                         </div>
-                        <div class="w-full bg-gray-300 dark:bg-white/10 rounded-full h-1.5">
-                            <div class="bg-gl_silver h-1.5 rounded-full shadow-[0_0_10px_#D8DADC]" style="width: 35%"></div>
+                        <div class="w-full bg-gray-300 dark:bg-white/10 rounded-full h-1.5 mb-4">
+                            <div class="bg-gl_silver h-1.5 rounded-full shadow-[0_0_10px_#D8DADC]" style="width: 12%"></div>
                         </div>
-                        <p class="font-sans text-[0.55rem] text-gray-400 uppercase tracking-widest mt-4 text-center">Conclua para liberar seu Certificado</p>
+                        <p class="font-sans text-[0.55rem] text-gray-400 uppercase tracking-widest text-center">Conclua para liberar a Certificação Master</p>
                     </div>
                 </div>
             </div>
 
-            <!-- Grid: Avisos e Contrato -->
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-16 mb-16">
-                <!-- Avisos -->
-                <div class="lg:col-span-2 glass-panel p-12 rounded-[4rem] border border-gray-300 dark:border-white/5 shadow-2xl relative overflow-hidden">
-                    <div class="absolute top-0 right-0 bg-gl_gold text-black font-sans text-[0.55rem] font-black uppercase tracking-widest px-6 py-2 rounded-bl-[2rem]">Update 2026</div>
-                    <h3 class="font-serif text-4xl text-gl_dark dark:text-white mb-8 italic">Radar GL PRO</h3>
+                <!-- Avisos da Diretoria -->
+                <div class="lg:col-span-2 glass-panel p-12 md:p-16 rounded-[4rem] border border-gray-300 dark:border-white/5 shadow-2xl relative overflow-hidden">
+                    <div class="absolute top-0 right-0 bg-gl_gold text-black font-sans text-[0.55rem] font-black uppercase tracking-widest px-6 py-2 rounded-bl-[2rem]">Update da Matriz</div>
+                    <h3 class="font-serif text-4xl text-gl_dark dark:text-white mb-10 italic">Avisos da Diretoria</h3>
                     <div class="space-y-6">
-                        <div class="bg-white/50 dark:bg-black/30 p-8 rounded-[2rem] border-l-4 border-l-gl_gold">
-                            <span class="font-sans text-[0.55rem] text-gl_gold font-black uppercase tracking-widest mb-2 block">Julho 2026</span>
-                            <p class="font-sans text-sm text-gl_dark dark:text-white font-bold tracking-wide">Lançamento Oficial: Inteligente Cortex 55ml</p>
-                            <p class="font-serif text-base text-gray-600 dark:text-gray-400 italic mt-2">A selagem de alta densidade estará disponível na Store B2B em breve.</p>
+                        <div class="bg-white/50 dark:bg-black/30 p-8 rounded-[2.5rem] border-l-4 border-l-gl_gold">
+                            <span class="font-sans text-[0.55rem] text-gl_gold font-black uppercase tracking-widest mb-2 block">Lançamento Julho/2026</span>
+                            <p class="font-sans text-sm text-gl_dark dark:text-white font-bold tracking-wide uppercase">Inteligente Cortex 55ml</p>
+                            <p class="font-serif text-lg text-gray-600 dark:text-gray-400 italic mt-2">A selagem de ultra densidade estará disponível na Store B2B com tabela de preço dinâmica para Embaixadores.</p>
                         </div>
-                        <div class="bg-white/50 dark:bg-black/30 p-8 rounded-[2rem] border-l-4 border-l-gl_silver">
-                            <span class="font-sans text-[0.55rem] text-gl_silver font-black uppercase tracking-widest mb-2 block">Comunidade</span>
-                            <p class="font-sans text-sm text-gl_dark dark:text-white font-bold tracking-wide">Mentoria Black Room - Turma 04</p>
-                            <p class="font-serif text-base text-gray-600 dark:text-gray-400 italic mt-2">Inscrições abrem na próxima segunda-feira para Embaixadores Nível 2.</p>
+                        <div class="bg-white/50 dark:bg-black/30 p-8 rounded-[2.5rem] border-l-4 border-l-gl_silver">
+                            <span class="font-sans text-[0.55rem] text-gl_silver font-black uppercase tracking-widest mb-2 block">Comunidade GL PRO</span>
+                            <p class="font-sans text-sm text-gl_dark dark:text-white font-bold tracking-wide uppercase">Mentoria Black Room - Turma 04</p>
+                            <p class="font-serif text-lg text-gray-600 dark:text-gray-400 italic mt-2">As vagas para o próximo ciclo de imersão financeira abrem na próxima semana. Fique atento.</p>
                         </div>
                     </div>
                 </div>
 
-                <!-- Onboarding Legal / Hall da Fama -->
+                <!-- Onboarding Legal / Mapa -->
                 <div class="flex flex-col gap-12">
                     <div class="glass-panel p-10 rounded-[3rem] border border-gray-300 dark:border-white/5 shadow-2xl text-center">
-                        <i class="fa-solid fa-file-signature text-3xl text-gl_silver mb-6"></i>
-                        <h4 class="font-serif text-2xl text-gl_dark dark:text-white italic mb-2">Onboarding Legal</h4>
-                        <p class="font-sans text-[0.6rem] text-gray-500 uppercase tracking-widest mb-6 font-bold">Termos de Uso & Padrão SOBERANO</p>
-                        <div class="inline-flex items-center gap-2 bg-green-500/10 border border-green-500/30 text-green-600 dark:text-green-400 px-4 py-2 rounded-full font-sans text-[0.6rem] uppercase tracking-widest font-black">
+                        <i class="fa-solid fa-file-signature text-4xl text-gl_silver mb-6"></i>
+                        <h4 class="font-serif text-3xl text-gl_dark dark:text-white italic mb-2">Onboarding Legal</h4>
+                        <p class="font-sans text-[0.6rem] text-gray-500 uppercase tracking-widest mb-6 font-bold leading-relaxed">Termos de Uso <br>& Padrão SOBERANO 8K</p>
+                        <div class="inline-flex items-center gap-3 bg-green-500/10 border border-green-500/30 text-green-600 dark:text-green-400 px-5 py-2.5 rounded-full font-sans text-[0.6rem] uppercase tracking-widest font-black">
                             <i class="fa-solid fa-check"></i> Contrato Assinado
                         </div>
                     </div>
 
                     <div class="glass-panel p-10 rounded-[3rem] border border-gray-300 dark:border-white/5 shadow-2xl text-center flex-grow flex flex-col justify-center">
-                        <i class="fa-solid fa-map-location-dot text-3xl text-gl_silver mb-6"></i>
-                        <h4 class="font-serif text-2xl text-gl_dark dark:text-white italic mb-4">Mapa de Salões</h4>
-                        <p class="font-sans text-[0.65rem] text-gray-500 leading-relaxed font-bold mb-6">Seu salão consta no mapa oficial para redirecionamento de clientes finais.</p>
-                        <button onclick="appState.checkAccess(event, 'Visualizar Status no Mapa')" class="text-[0.6rem] text-gl_dark dark:text-white uppercase tracking-widest font-black border-b border-gl_dark dark:border-white pb-1 hover:text-gl_silver hover:border-gl_silver transition-all">Ver Status</button>
+                        <i class="fa-solid fa-map-location-dot text-4xl text-gl_silver mb-6"></i>
+                        <h4 class="font-serif text-3xl text-gl_dark dark:text-white italic mb-4">Mapa de Salões</h4>
+                        <p class="font-sans text-[0.65rem] text-gray-500 leading-relaxed font-bold mb-8">Status: Pendente.<br>Conclua a Academia para integração no mapa oficial de leads B2C.</p>
+                        <button onclick="appState.switchB2BTab('academy')" class="btn-silver-solid !py-4 text-[0.65rem]">Acessar Academia</button>
                     </div>
                 </div>
-            </div>
-        </div>
-
-        <!-- =========================================================
-             ABA 02: ACADEMY (O CORAÇÃO DO E-LEARNING)
-             ========================================================= -->
-        <div id="b2b-tab-academy" class="b2b-tab-content hidden reveal">
-            <div class="text-center mb-24">
-                <span class="font-sans text-[0.65rem] text-gl_silver tracking-mega-wide uppercase font-black">O Manual do Proprietário</span>
-                <h3 class="font-serif text-6xl text-gl_dark dark:text-white mt-6 mb-6 italic">Academia <span class="font-sans font-thin not-italic text-5xl text-gl_silver">8K</span></h3>
-                <p class="font-sans text-[0.7rem] font-black text-gray-500 uppercase tracking-widest">A esteira High-Ticket de formação oficial.</p>
             </div>
             
-            <!-- Grade Curricular de 3 Módulos Principais + Certificação -->
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+            <!-- Aplicação de Licenciamento (Fase 01 - Exclusividade Regional) -->
+            <div class="glass-panel rounded-[4rem] p-16 md:p-24 text-center border border-gray-300 dark:border-white/5 max-w-5xl mx-auto shadow-2xl">
+                <div class="w-24 h-24 mx-auto bg-gl_gold/10 border border-gl_gold/30 rounded-full flex items-center justify-center mb-10 text-gl_gold text-4xl shadow-[0_0_30px_rgba(212,175,55,0.2)]">
+                    <i class="fa-solid fa-gem"></i>
+                </div>
+                <h3 class="font-serif text-4xl md:text-5xl text-gl_dark dark:text-white mb-6">Aplicação para Licenciamento</h3>
+                <p class="font-sans text-[0.7rem] font-bold text-gray-600 dark:text-gray-400 uppercase tracking-widest mb-16 max-w-2xl mx-auto leading-loose">
+                    O licenciamento garante titularidade única por cidade. Verifique se a sua região (CEP/Cidade) está disponível para a implantação do Ecossistema SOBERANO.
+                </p>
+                <button onclick="appState.openHomologationModal()" class="btn-luxury-solid !py-6 !px-12 !rounded-[2.5rem]">Realizar Teste de Homologação</button>
+            </div>
+        </div>
+
+        <!-- =========================================================
+             ABA 02: O DNA DA MARCA
+             ========================================================= -->
+        <div id="b2b-tab-dna" class="b2b-tab-content hidden reveal">
+            <!-- Esqueleto da Tela de Edição (Fase 03) Mapeado na UI -->
+            <div class="flex flex-col md:flex-row gap-12 items-start">
                 
-                <!-- MÓDULO 01 -->
-                <div class="glass-panel p-10 rounded-[3rem] border border-gray-300 dark:border-white/5 relative group cursor-pointer hover:border-gl_silver transition-colors">
-                    <div class="absolute top-8 right-8 text-gl_silver opacity-20 group-hover:opacity-100 transition-opacity"><i class="fa-solid fa-dna text-3xl"></i></div>
-                    <span class="font-sans text-[0.55rem] font-black text-gl_silver uppercase tracking-widest block mb-4">Módulo 01</span>
-                    <h4 class="font-serif text-3xl text-gl_dark dark:text-white mb-6 italic">Ecologia da Haste</h4>
-                    <div class="space-y-3 font-sans text-[0.65rem] text-gray-600 dark:text-gray-400 leading-relaxed font-medium">
-                        <p>• Tricologia, arquitetura do fio, pH e diagnóstico avançado.</p>
-                        <p>• Padrão de luxo industrial e Synchronized Matrix.</p>
-                        <p class="text-gl_silver font-bold dark:text-gray-300">• Pirâmide Sensorial: Venda o cheiro da perfumaria internacional.</p>
+                <!-- Menu Lateral das Aulas desta Sub-aba -->
+                <div class="w-full md:w-1/4 glass-panel p-8 rounded-[3rem] sticky top-[200px]">
+                    <h3 class="font-serif text-3xl text-gl_dark dark:text-white italic mb-8">DNA GL PRO</h3>
+                    <div class="space-y-4">
+                        <button onclick="appState.renderLesson('dna-1')" class="b2b-sidebar-btn active">2.1 A Transição (Gata Lambeu -> GL PRO)</button>
+                        <button onclick="appState.renderLesson('dna-2')" class="b2b-sidebar-btn">2.2 Filosofia Soberano & Córtex Inteligente</button>
                     </div>
-                    <button onclick="appState.checkAccess(event, 'Iniciar Módulo 01')" class="mt-8 text-[0.55rem] text-gl_dark dark:text-white font-black tracking-[0.2em] uppercase border-b border-gl_dark dark:border-white pb-1 group-hover:text-gl_silver group-hover:border-gl_silver transition-all flex items-center gap-2"><i class="fa-solid fa-play"></i> Iniciar</button>
                 </div>
 
-                <!-- MÓDULO 02 -->
-                <div class="glass-panel p-10 rounded-[3rem] border border-gray-300 dark:border-white/5 relative group cursor-pointer hover:border-gl_gold transition-colors">
-                    <div class="absolute top-8 right-8 text-gl_gold opacity-20 group-hover:opacity-100 transition-opacity"><i class="fa-solid fa-flask text-3xl"></i></div>
-                    <span class="font-sans text-[0.55rem] font-black text-gl_gold uppercase tracking-widest block mb-4">Módulo 02</span>
-                    <h4 class="font-serif text-3xl text-gl_dark dark:text-white mb-6 italic">Protocolos 8K</h4>
-                    <div class="space-y-3 font-sans text-[0.65rem] text-gray-600 dark:text-gray-400 leading-relaxed font-medium">
-                        <p>• Ritual Trindade (Chase Nature System completo).</p>
-                        <p>• Ritual de Restauração Imediata e Gloss Premium.</p>
-                        <p class="text-gl_gold font-bold">• Finalização: American Glow vs. Inteligente Cortex.</p>
+                <!-- Container do Esqueleto (Onde o Thiago vai colar conteúdo) -->
+                <div class="w-full md:w-3/4" id="lesson-container-dna">
+                    <!-- Conteúdo dinâmico injetado aqui -->
+                </div>
+            </div>
+        </div>
+
+        <!-- =========================================================
+             ABA 03: ACADEMIA TÉCNICA (PROTEGIDA POR SENHA)
+             ========================================================= -->
+        <div id="b2b-tab-academy" class="b2b-tab-content hidden reveal relative">
+            <div class="flex flex-col md:flex-row gap-12 items-start">
+                
+                <!-- Menu Lateral das Aulas -->
+                <div class="w-full md:w-1/4 glass-panel p-8 rounded-[3rem] sticky top-[200px] z-10">
+                    <h3 class="font-serif text-3xl text-gl_dark dark:text-white italic mb-8">Academia 8K</h3>
+                    <div class="space-y-4">
+                        <button onclick="appState.checkAccess(event, 'academy-1')" class="b2b-sidebar-btn flex justify-between items-center">3.1 Ecologia da Haste <i class="fa-solid fa-lock text-[0.5rem] lock-icon"></i></button>
+                        <button onclick="appState.checkAccess(event, 'academy-2')" class="b2b-sidebar-btn flex justify-between items-center">3.2 Protocolos SOBERANO <i class="fa-solid fa-lock text-[0.5rem] lock-icon"></i></button>
+                        <button onclick="appState.checkAccess(event, 'academy-3')" class="b2b-sidebar-btn flex justify-between items-center">3.3 Gloss Premium <i class="fa-solid fa-lock text-[0.5rem] lock-icon"></i></button>
+                        <button onclick="appState.checkAccess(event, 'academy-4')" class="b2b-sidebar-btn flex justify-between items-center">3.4 Molecular Platinum <i class="fa-solid fa-lock text-[0.5rem] lock-icon"></i></button>
                     </div>
-                    <button onclick="appState.checkAccess(event, 'Iniciar Módulo 02')" class="mt-8 text-[0.55rem] text-gl_dark dark:text-white font-black tracking-[0.2em] uppercase border-b border-gl_dark dark:border-white pb-1 group-hover:text-gl_gold group-hover:border-gl_gold transition-all flex items-center gap-2"><i class="fa-solid fa-play"></i> Iniciar</button>
                 </div>
 
-                <!-- MÓDULO 03 -->
-                <div class="glass-panel p-10 rounded-[3rem] border border-gray-300 dark:border-white/5 relative group cursor-pointer hover:border-gl_silver transition-colors">
-                    <div class="absolute top-8 right-8 text-gl_silver opacity-20 group-hover:opacity-100 transition-opacity"><i class="fa-solid fa-chart-line text-3xl"></i></div>
-                    <span class="font-sans text-[0.55rem] font-black text-gl_silver uppercase tracking-widest block mb-4">Módulo 03</span>
-                    <h4 class="font-serif text-3xl text-gl_dark dark:text-white mb-6 italic">Business & High-Ticket</h4>
-                    <div class="space-y-3 font-sans text-[0.65rem] text-gray-600 dark:text-gray-400 leading-relaxed font-medium">
-                        <p>• Precificação: Como justificar tratamentos de R$ 797,00.</p>
-                        <p>• Treinamento de retenção e ecossistema de marca.</p>
-                        <p class="text-gl_silver font-bold dark:text-gray-300">• CPA (Custo por Aplicação): Rentabilidade matemática.</p>
+                <div class="w-full md:w-3/4 relative">
+                    <!-- Revealer Lock sobre a área de conteúdo da aula -->
+                    <div id="lock-overlay-academy" class="price-revealer rounded-[4rem] z-20 flex-col text-center">
+                        <div class="bg-white/90 dark:bg-black/80 backdrop-blur-2xl p-16 rounded-[3rem] border border-gl_silver_dark/30 shadow-2xl max-w-md mx-auto">
+                            <i class="fa-solid fa-lock text-5xl text-gl_silver mb-8"></i>
+                            <h4 class="font-serif text-3xl text-gl_dark dark:text-white italic mb-4">Câmara Técnica Protegida</h4>
+                            <p class="font-sans text-[0.6rem] font-black text-gray-500 dark:text-gray-400 uppercase tracking-widest mb-10 leading-loose">Acesso restrito. Insira a credencial SOBERANO para iniciar as aulas.</p>
+                            <button onclick="appState.openModal()" class="btn-silver-solid w-full !py-5">Destravar Módulos</button>
+                        </div>
                     </div>
-                    <button onclick="appState.checkAccess(event, 'Iniciar Módulo 03')" class="mt-8 text-[0.55rem] text-gl_dark dark:text-white font-black tracking-[0.2em] uppercase border-b border-gl_dark dark:border-white pb-1 group-hover:text-gl_silver group-hover:border-gl_silver transition-all flex items-center gap-2"><i class="fa-solid fa-play"></i> Iniciar</button>
-                </div>
-
-                <!-- HALL DA FAMA / CERTIFICAÇÃO (SPAN 3 COLUMNS) -->
-                <div class="glass-panel p-12 md:p-16 rounded-[4rem] border-t-[10px] border-t-gl_silver relative overflow-hidden group lg:col-span-3 bg-white/50 dark:bg-gl_dark flex flex-col md:flex-row items-center gap-12">
-                    <div class="md:w-1/3 text-center">
-                        <i class="fa-solid fa-award text-7xl text-gl_silver mb-6 drop-shadow-2xl"></i>
-                        <h4 class="font-serif text-4xl text-gl_dark dark:text-white italic">Hall da Fama</h4>
-                    </div>
-                    <div class="md:w-2/3 border-l-0 md:border-l border-gray-300 dark:border-white/10 md:pl-12">
-                        <span class="font-sans text-[0.6rem] font-black text-gray-500 uppercase tracking-widest mb-4 block">Certificação Master GL PRO</span>
-                        <p class="font-sans text-sm text-gray-600 dark:text-gray-400 leading-relaxed font-medium mb-8">
-                            Após a conclusão de 100% das aulas e aprovação nos quizzes técnicos, seu Certificado Digital "GL PRO Authorized Salon" será liberado aqui. Profissionais Tier 2 recebem a placa física "Black Room Mentorship".
-                        </p>
-                        <button onclick="appState.checkAccess(event, 'Acessar Avaliação Teórica')" class="btn-silver-solid">Realizar Teste de Homologação</button>
+                    
+                    <div id="lesson-container-academy" class="blur-lock">
+                        <!-- Conteúdo dinâmico -->
                     </div>
                 </div>
             </div>
         </div>
 
         <!-- =========================================================
-             ABA 03: ARSENAL GL PRO (DOWNLOADS & MIDIA)
+             ABA 04: BUSINESS & HIGH-TICKET (PROTEGIDA POR SENHA)
+             ========================================================= -->
+        <div id="b2b-tab-business" class="b2b-tab-content hidden reveal relative">
+            <div class="flex flex-col md:flex-row gap-12 items-start">
+                <div class="w-full md:w-1/4 glass-panel p-8 rounded-[3rem] sticky top-[200px] z-10">
+                    <h3 class="font-serif text-3xl text-gl_dark dark:text-white italic mb-8">Business B2B</h3>
+                    <div class="space-y-4">
+                        <button onclick="appState.checkAccess(event, 'business-1')" class="b2b-sidebar-btn flex justify-between items-center">4.1 Precificação de Luxo <i class="fa-solid fa-lock text-[0.5rem] lock-icon"></i></button>
+                        <button onclick="appState.checkAccess(event, 'business-2')" class="b2b-sidebar-btn flex justify-between items-center">4.2 Vendas no Salão <i class="fa-solid fa-lock text-[0.5rem] lock-icon"></i></button>
+                        <!-- Inserido o Módulo de Tráfego do Briefing aqui -->
+                        <button onclick="appState.checkAccess(event, 'business-3')" class="b2b-sidebar-btn flex justify-between items-center">4.3 Posicionamento & Tráfego <i class="fa-solid fa-lock text-[0.5rem] lock-icon"></i></button>
+                    </div>
+                </div>
+
+                <div class="w-full md:w-3/4 relative">
+                    <div id="lock-overlay-business" class="price-revealer rounded-[4rem] z-20 flex-col text-center">
+                        <div class="bg-white/90 dark:bg-black/80 backdrop-blur-2xl p-16 rounded-[3rem] border border-gl_silver_dark/30 shadow-2xl max-w-md mx-auto">
+                            <i class="fa-solid fa-lock text-5xl text-gl_silver mb-8"></i>
+                            <h4 class="font-serif text-3xl text-gl_dark dark:text-white italic mb-4">Câmara de Negócios Protegida</h4>
+                            <p class="font-sans text-[0.6rem] font-black text-gray-500 dark:text-gray-400 uppercase tracking-widest mb-10 leading-loose">Acesso restrito. Insira a credencial SOBERANO para iniciar.</p>
+                            <button onclick="appState.openModal()" class="btn-silver-solid w-full !py-5">Destravar Módulos</button>
+                        </div>
+                    </div>
+                    
+                    <div id="lesson-container-business" class="blur-lock">
+                        <!-- Conteúdo dinâmico -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- =========================================================
+             ABA 05: ARSENAL GL PRO (DOWNLOADS)
              ========================================================= -->
         <div id="b2b-tab-arsenal" class="b2b-tab-content hidden reveal">
-            <div class="text-center mb-24">
-                <h3 class="font-serif text-6xl text-gl_dark dark:text-white mb-6 italic">Arsenal <span class="font-sans font-thin not-italic text-5xl text-gl_gold">GL PRO</span></h3>
-                <p class="font-sans text-[0.7rem] font-black text-gray-500 uppercase tracking-widest">Documentação Técnica, Tech Packs & Mídia Kit.</p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                <!-- Fichas -->
-                <div class="glass-panel p-8 rounded-[2.5rem] text-center hover:-translate-y-2 transition-transform">
-                    <i class="fa-solid fa-clipboard-list text-4xl text-gray-400 dark:text-gray-500 mb-6"></i>
-                    <h4 class="font-serif text-2xl text-gl_dark dark:text-white italic mb-4">Anamnese Capilar</h4>
-                    <p class="font-sans text-[0.6rem] text-gray-500 mb-8 uppercase tracking-widest">Fichas em PDF para impressão e diagnóstico de lavatório.</p>
-                    <button onclick="appState.checkAccess(event, 'Baixar Fichas PDF')" class="text-[0.6rem] font-black text-gl_dark dark:text-white uppercase tracking-widest border-b border-gray-400 pb-1 hover:text-gl_silver transition-colors"><i class="fa-solid fa-download mr-2"></i> Download</button>
-                </div>
-                
-                <!-- Tech Packs -->
-                <div class="glass-panel p-8 rounded-[2.5rem] text-center hover:-translate-y-2 transition-transform">
-                    <i class="fa-solid fa-book-journal-whills text-4xl text-gray-400 dark:text-gray-500 mb-6"></i>
-                    <h4 class="font-serif text-2xl text-gl_dark dark:text-white italic mb-4">Tech Packs</h4>
-                    <p class="font-sans text-[0.6rem] text-gray-500 mb-8 uppercase tracking-widest">Dossiês científicos dos ativos e Manuais de Protocolo de Bancada.</p>
-                    <button onclick="appState.checkAccess(event, 'Baixar Tech Packs')" class="text-[0.6rem] font-black text-gl_dark dark:text-white uppercase tracking-widest border-b border-gray-400 pb-1 hover:text-gl_silver transition-colors"><i class="fa-solid fa-download mr-2"></i> Download</button>
+            <div class="flex flex-col md:flex-row gap-12 items-start">
+                <div class="w-full md:w-1/4 glass-panel p-8 rounded-[3rem] sticky top-[200px]">
+                    <h3 class="font-serif text-3xl text-gl_dark dark:text-white italic mb-8">Arsenal Downloads</h3>
+                    <div class="space-y-4">
+                        <button onclick="appState.renderLesson('arsenal-1')" class="b2b-sidebar-btn active">5.1 Biblioteca Técnica (PDFs)</button>
+                        <button onclick="appState.renderLesson('arsenal-2')" class="b2b-sidebar-btn">5.2 Kit Embaixador (Mídia)</button>
+                        <button onclick="appState.renderLesson('arsenal-3')" class="b2b-sidebar-btn">5.3 Scripts de Venda (WhatsApp)</button>
+                    </div>
                 </div>
 
-                <!-- Mídia Kit -->
-                <div class="glass-panel p-8 rounded-[2.5rem] text-center hover:-translate-y-2 transition-transform">
-                    <i class="fa-solid fa-camera-retro text-4xl text-gray-400 dark:text-gray-500 mb-6"></i>
-                    <h4 class="font-serif text-2xl text-gl_dark dark:text-white italic mb-4">Banco de Criativos</h4>
-                    <p class="font-sans text-[0.6rem] text-gray-500 mb-8 uppercase tracking-widest">Fotos High-Res dos frascos e vídeos de Making Of (Instagram/TikTok).</p>
-                    <button onclick="appState.checkAccess(event, 'Acessar Banco de Imagens HD')" class="text-[0.6rem] font-black text-gl_dark dark:text-white uppercase tracking-widest border-b border-gray-400 pb-1 hover:text-gl_silver transition-colors"><i class="fa-solid fa-cloud-arrow-down mr-2"></i> Acessar Drive</button>
-                </div>
-
-                <!-- Scripts -->
-                <div class="glass-panel p-8 rounded-[2.5rem] text-center hover:-translate-y-2 transition-transform border-t-4 border-t-gl_gold">
-                    <i class="fa-brands fa-whatsapp text-4xl text-gl_gold mb-6"></i>
-                    <h4 class="font-serif text-2xl text-gl_dark dark:text-white italic mb-4">Scripts de Venda</h4>
-                    <p class="font-sans text-[0.6rem] text-gray-500 mb-8 uppercase tracking-widest">Textos de alta conversão para abordar clientes no WhatsApp.</p>
-                    <button onclick="appState.checkAccess(event, 'Visualizar Scripts VIP')" class="text-[0.6rem] font-black text-gl_gold uppercase tracking-widest border-b border-gl_gold pb-1 hover:text-gl_dark dark:hover:text-white transition-colors"><i class="fa-solid fa-eye mr-2"></i> Visualizar</button>
+                <div class="w-full md:w-3/4" id="lesson-container-arsenal">
+                    <!-- Conteúdo dinâmico injetado aqui -->
                 </div>
             </div>
         </div>
 
         <!-- =========================================================
-             ABA 04: LABORATÓRIO DIGITAL (FERRAMENTAS)
+             ABA 06: LABORATÓRIO DIGITAL (FERRAMENTAS)
              ========================================================= -->
         <div id="b2b-tab-lab" class="b2b-tab-content hidden reveal">
             <div class="text-center mb-24">
@@ -975,14 +1006,14 @@
 
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
                 <!-- Calc Protocolos -->
-                <div class="glass-panel p-12 md:p-16 rounded-[4rem] border border-gray-300 dark:border-white/5 relative overflow-hidden">
+                <div class="glass-panel p-12 md:p-16 rounded-[4rem] border border-gray-300 dark:border-white/5 relative overflow-hidden shadow-xl">
                     <h4 class="font-serif text-4xl text-gl_dark dark:text-white italic mb-4">Calculadora de Protocolos</h4>
                     <p class="font-sans text-[0.65rem] text-gray-500 uppercase tracking-widest font-bold mb-10">Diagnóstico guiado por Inteligência de Algoritmo.</p>
                     
                     <div class="space-y-6 mb-10">
                         <div>
                             <label class="font-sans text-[0.55rem] text-gray-400 uppercase tracking-widest font-black block mb-2">Estado Atual da Fibra</label>
-                            <select class="w-full p-5 bg-white/50 dark:bg-black/40 border border-gray-300 dark:border-white/10 rounded-[2rem] text-[0.7rem] font-black uppercase tracking-widest text-gl_dark dark:text-white outline-none focus:border-gl_silver appearance-none">
+                            <select class="w-full p-5 bg-white/50 dark:bg-black/40 border border-gray-300 dark:border-white/10 rounded-[2rem] text-[0.7rem] font-black uppercase tracking-widest text-gl_dark dark:text-white outline-none focus:border-gl_silver appearance-none shadow-inner">
                                 <option value="elástico">Corte Químico / Elástico</option>
                                 <option value="poroso">Porosidade Severa (Descoloração)</option>
                                 <option value="oxidado">Oxidação Loira (Amarelamento)</option>
@@ -994,155 +1025,98 @@
                 </div>
 
                 <!-- Calc Cashback -->
-                <div class="glass-panel p-12 md:p-16 rounded-[4rem] border border-gray-300 dark:border-white/5 relative overflow-hidden">
+                <div class="glass-panel p-12 md:p-16 rounded-[4rem] border border-gray-300 dark:border-white/5 relative overflow-hidden shadow-xl">
                     <h4 class="font-serif text-4xl text-gl_dark dark:text-white italic mb-4">Sistema de Cashback</h4>
                     <p class="font-sans text-[0.65rem] text-gray-500 uppercase tracking-widest font-bold mb-10">Calculadora para gerar créditos e fidelizar a cliente final.</p>
                     
                     <div class="space-y-6 mb-10">
                         <div>
-                            <label class="font-sans text-[0.55rem] text-gray-400 uppercase tracking-widest font-black block mb-2">Valor do Serviço SOBERANO Realizado (R$)</label>
-                            <input type="number" placeholder="Ex: 850" class="w-full p-5 bg-white/50 dark:bg-black/40 border border-gray-300 dark:border-white/10 rounded-[2rem] text-base font-serif italic text-gl_dark dark:text-white outline-none focus:border-gl_silver">
+                            <label class="font-sans text-[0.55rem] text-gray-400 uppercase tracking-widest font-black block mb-2">Valor do Serviço SOBERANO (R$)</label>
+                            <input type="number" placeholder="Ex: 850" class="w-full p-5 bg-white/50 dark:bg-black/40 border border-gray-300 dark:border-white/10 rounded-[2rem] text-xl font-serif italic text-gl_dark dark:text-white outline-none focus:border-gl_silver shadow-inner">
                         </div>
                     </div>
-                    <button onclick="appState.checkAccess(event, 'Calcular Retenção de Cashback')" class="btn-luxury w-full !py-6 border-gray-400 text-gray-600 dark:text-gray-300 hover:text-gl_dark dark:hover:text-white hover:border-gl_silver">Calcular Retenção</button>
+                    <button onclick="appState.checkAccess(event, 'Calcular Retenção de Cashback')" class="btn-luxury w-full !py-6 !border-gray-400 !text-gray-600 dark:!text-gray-300 hover:!text-gl_dark dark:hover:!text-white hover:!border-gl_silver">Calcular Retenção</button>
                 </div>
             </div>
         </div>
 
         <!-- =========================================================
-             ABA 05: STORE B2B (A LOJA OCULTA)
+             ABA 07: STORE B2B (A LOJA OCULTA)
              ========================================================= -->
-        <div id="b2b-tab-store" class="b2b-tab-content hidden reveal">
-            <!-- Tabela Âncora & Calc ROI (Livre Visibilidade) -->
-            <div class="glass-panel rounded-[4rem] p-12 md:p-24 border border-gray-300 dark:border-white/5 mb-32 shadow-2xl">
-                <div class="text-center mb-20">
-                    <h2 class="font-serif text-4xl md:text-5xl text-gl_dark dark:text-white italic mb-4">Tabela Âncora Oficial</h2>
-                    <p class="font-sans text-[0.6rem] font-black text-gl_gold uppercase tracking-mega-wide">Valores praticados no site (B2C) para justificar seu ticket</p>
-                </div>
-                
-                <div class="flex justify-center mb-16 gap-6 md:gap-16">
-                    <button onclick="appState.toggleTable('gloss')" id="toggle-gloss" class="text-[0.65rem] font-black text-gl_gold tracking-[0.2em] uppercase border-b-2 border-gl_gold pb-2 transition-all">Gloss Premium</button>
-                    <button onclick="appState.toggleTable('platinum')" id="toggle-platinum" class="text-[0.65rem] font-black text-gray-500 hover:text-gl_dark dark:hover:text-white tracking-[0.2em] uppercase border-b-2 border-transparent pb-2 transition-all">Platinum Infusion</button>
-                </div>
-                
-                <div class="overflow-x-auto">
-                    <table class="w-full text-sm font-sans text-center">
-                        <thead>
-                            <tr class="text-gray-500 text-[0.6rem] font-black tracking-[0.3em] uppercase border-b border-gray-300 dark:border-white/10">
-                                <th class="text-left pb-8 text-gl_dark dark:text-white">Perfil / Tamanho</th>
-                                <th class="pb-8 text-gl_dark dark:text-white">Fibra Fina <span class="block text-[0.45rem] text-gray-500 mt-1">Baixa Densidade</span></th>
-                                <th class="pb-8 text-gl_dark dark:text-white">Fibra Média <span class="block text-[0.45rem] text-gray-500 mt-1">Densidade Média</span></th>
-                                <th class="pb-8 text-gl_dark dark:text-white">Fibra Grossa <span class="block text-[0.45rem] text-gray-500 mt-1">Alta Densidade</span></th>
-                            </tr>
-                        </thead>
-                        <tbody id="ancoragem-tbody">
-                            <!-- Preenchido via JS -->
-                        </tbody>
-                    </table>
-                </div>
-
-                <!-- ROI Calc Massivo (Auditoria: Adição de CPA - Módulo 03) -->
-                <div class="mt-24 pt-20 border-t border-gray-300 dark:border-white/10 grid grid-cols-1 md:grid-cols-4 gap-8">
-                    <div class="bg-white/50 dark:bg-black/30 p-8 rounded-[3rem] text-center border border-gray-200 dark:border-white/5 shadow-inner">
-                        <p class="font-sans text-[0.5rem] font-black text-gray-500 uppercase tracking-widest mb-4">Rendimento</p>
-                        <p class="font-serif text-4xl text-gl_dark dark:text-white">30 <span class="text-lg text-gl_gold italic">Aplicações</span></p>
-                    </div>
-                    <div class="bg-white/50 dark:bg-black/30 p-8 rounded-[3rem] text-center border border-gray-200 dark:border-white/5 shadow-inner">
-                        <p class="font-sans text-[0.5rem] font-black text-gray-500 uppercase tracking-widest mb-4">Ticket Sugerido</p>
-                        <p class="font-serif text-4xl text-gl_dark dark:text-white price-tag">R$ 580</p>
-                    </div>
-                    <div class="bg-white/50 dark:bg-black/30 p-8 rounded-[3rem] text-center border border-gray-200 dark:border-white/5 shadow-inner">
-                        <p class="font-sans text-[0.5rem] font-black text-gl_gold uppercase tracking-widest mb-4">CPA B2B (Custo/Aplicação)</p>
-                        <p class="font-serif text-4xl text-gl_gold price-tag">R$ 43<span class="text-lg">,23</span></p>
-                    </div>
-                    <div class="bg-gl_gold/10 p-8 rounded-[3rem] text-center border border-gl_gold/30 shadow-[0_0_40px_rgba(212,175,55,0.1)]">
-                        <p class="font-sans text-[0.5rem] font-black text-gl_gold uppercase tracking-widest mb-4">Faturamento Bruto (1L)</p>
-                        <p class="font-serif text-4xl text-gl_gold font-bold price-tag">R$ 17.400</p>
-                    </div>
+        <div id="b2b-tab-store" class="b2b-tab-content hidden reveal relative">
+            
+            <div id="lock-overlay-store" class="price-revealer flex-col rounded-[5rem] z-20">
+                <div class="text-center bg-white/90 dark:bg-black/80 backdrop-blur-2xl p-20 rounded-[4rem] border border-gl_gold/30 shadow-[0_30px_100px_rgba(0,0,0,0.1)] dark:shadow-[0_30px_100px_rgba(0,0,0,0.8)] max-w-xl mx-auto transform scale-100 hover:scale-105 transition-transform duration-1000">
+                    <i class="fa-solid fa-lock text-5xl text-gl_gold mb-8 opacity-90"></i>
+                    <h4 class="font-serif text-4xl text-gl_dark dark:text-white italic mb-6">A Loja Oculta (Store B2B)</h4>
+                    <p class="font-sans text-[0.65rem] font-black text-gray-500 dark:text-gray-400 uppercase tracking-mega-wide mb-12 leading-loose">E-commerce restrito para reposição rápida de estoque.<br>Lógica de preço dinâmico ativada.</p>
+                    <button onclick="appState.openModal()" class="btn-luxury-solid w-full !py-6 !text-[0.75rem]">Inserir Chave SOBERANO</button>
                 </div>
             </div>
 
-            <!-- A LOJA OCULTA (STORE B2B) - PROTEGIDO -->
-            <div class="relative mt-32 mb-16">
-                <!-- Revealer Overlay de Cadeado -->
-                <div id="lock-overlay-store" class="price-revealer flex-col rounded-[5rem]">
-                    <div class="text-center bg-white/90 dark:bg-black/80 backdrop-blur-2xl p-20 rounded-[4rem] border border-gl_gold/30 shadow-[0_30px_100px_rgba(0,0,0,0.1)] dark:shadow-[0_30px_100px_rgba(0,0,0,0.8)] max-w-xl mx-auto transform scale-100 hover:scale-105 transition-transform duration-1000">
-                        <i class="fa-solid fa-lock text-5xl text-gl_gold mb-8 opacity-90"></i>
-                        <h4 class="font-serif text-4xl text-gl_dark dark:text-white italic mb-6">A Loja Oculta (Store B2B)</h4>
-                        <p class="font-sans text-[0.65rem] font-black text-gray-500 dark:text-gray-400 uppercase tracking-mega-wide mb-12 leading-loose">E-commerce restrito para reposição rápida de estoque. Tiers altos possuem lógica de preço dinâmico.</p>
-                        <button onclick="appState.openModal()" class="btn-luxury-solid w-full !py-6 !text-[0.75rem]">Inserir Chave SOBERANO</button>
+            <div id="content-store" class="blur-lock">
+                <div class="text-center mb-16">
+                    <h3 class="font-serif text-5xl text-gl_dark dark:text-white mb-4 italic">A Loja Oculta</h3>
+                    <p class="font-sans text-[0.6rem] font-black text-gray-500 uppercase tracking-widest">Reposição Rápida B2B</p>
+                </div>
+
+                <!-- CAPA FULL-WIDTH: PLATINUM INFUSION (Lançamento) -->
+                <div class="glass-panel w-full rounded-[4rem] border-t-[12px] border-t-purple-800 relative overflow-hidden shadow-2xl flex flex-col lg:flex-row group mb-16 bg-gray-200 dark:bg-gl_dark">
+                    <div class="lg:w-1/2 aspect-square lg:aspect-auto relative overflow-hidden bg-white dark:bg-black">
+                        <img src="https://testeessencia.carrd.co/assets/images/image52.jpg?v=f5d26855" alt="Platinum Infusion 1L" class="w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform duration-[4000ms]">
+                        <div class="absolute inset-0 bg-gradient-to-t lg:bg-gradient-to-r from-white dark:from-gl_dark via-white/20 dark:via-transparent to-transparent opacity-90"></div>
+                        <span class="absolute top-10 left-10 bg-purple-900/40 border border-purple-500/50 text-purple-800 dark:text-purple-300 text-[0.65rem] font-black tracking-[0.3em] uppercase px-6 py-2 rounded-full backdrop-blur-md shadow-2xl">Lançamento B2B</span>
+                    </div>
+                    
+                    <div class="p-12 md:p-20 lg:w-1/2 flex flex-col justify-center z-10">
+                        <h4 class="font-serif text-5xl md:text-6xl text-gl_dark dark:text-white italic mb-4 leading-none">Molecular Platinum <br><span class="font-sans font-thin text-3xl not-italic text-purple-600 dark:text-purple-400">Infusion 1L</span></h4>
+                        <p class="font-sans text-[0.65rem] font-black text-gray-500 dark:text-gray-400 uppercase tracking-widest mb-12">Tecnologia Pigmento 43</p>
                         
-                        <!-- Upsell Automático (Conforme Briefing) -->
-                        <div class="border-t border-gray-300 dark:border-gray-800 pt-8 mt-10">
-                            <button onclick="alert('Redirecionando para página de vendas da Imersão...')" class="text-[0.55rem] font-black text-gl_gold uppercase tracking-widest hover:text-gl_gold_light transition-colors block w-full">[ NÃO POSSUI A CHAVE? APLIQUE PARA A IMERSÃO ]</button>
+                        <div class="actif-container mb-16">
+                            <div class="actif-item !border-purple-800/50"><span class="actif-title !text-purple-600 dark:!text-purple-400">Extrato de Caviar</span><p class="actif-desc !text-gray-600 dark:!text-gray-400">Nutrição lipídica intensiva e rejuvenescimento celular focado em fios descoloridos.</p></div>
+                            <div class="actif-item !border-purple-800/50"><span class="actif-title !text-purple-600 dark:!text-purple-400">Pigmento 43</span><p class="actif-desc !text-gray-600 dark:!text-gray-400">Neutralização instantânea de oxidação, garantindo um reflexo platinado de altíssimo padrão.</p></div>
+                        </div>
+
+                        <div class="flex items-center justify-between border-t border-gray-300 dark:border-white/10 pt-12 mt-auto">
+                            <div>
+                                <span class="font-sans text-[0.55rem] text-purple-600 dark:text-purple-400 uppercase tracking-widest font-black block mb-3">Custo Titular B2B</span>
+                                <p class="font-serif text-6xl text-gl_dark dark:text-white price-tag">R$ 1.597</p>
+                            </div>
+                            <button onclick="cartSystem.addToCart('platinum_1l_b2b', 'Molecular Platinum Infusion 1L (B2B)', 1597.00, 'Lançamento VIP')" class="btn-luxury-solid !bg-purple-800 hover:!bg-gl_dark dark:hover:!bg-white text-white dark:hover:!text-black !px-12 !py-6 text-[0.7rem] !border-transparent">Faturar Lote</button>
                         </div>
                     </div>
                 </div>
 
-                <div id="content-store" class="blur-lock">
-                    <div class="text-center mb-16">
-                        <h3 class="font-serif text-5xl text-gl_dark dark:text-white mb-4 italic">A Loja Oculta</h3>
-                        <p class="font-sans text-[0.6rem] font-black text-gray-500 uppercase tracking-widest">Reposição Rápida B2B</p>
+                <!-- GLOSS PREMIUM 1L B2B -->
+                <div class="glass-panel p-12 md:p-16 rounded-[4rem] border-t-[10px] border-t-gl_gold relative overflow-hidden shadow-2xl flex flex-col lg:flex-row group gap-12 bg-gray-200 dark:bg-gl_dark">
+                    <div class="lg:w-1/3 aspect-square relative overflow-hidden rounded-[3rem] border border-gray-300 dark:border-white/5 shadow-inner">
+                        <img src="https://testeessencia.carrd.co/assets/images/image50.jpg?v=f5d26855" alt="Gloss Premium 1L" class="w-full h-full object-cover mix-blend-multiply dark:mix-blend-screen opacity-90 group-hover:scale-105 transition-transform duration-[3000ms]">
                     </div>
-
-                    <!-- CAPA FULL-WIDTH: PLATINUM INFUSION (Lançamento) -->
-                    <div class="glass-panel w-full rounded-[4rem] border-t-[12px] border-t-purple-800 relative overflow-hidden shadow-2xl flex flex-col lg:flex-row group mb-16 bg-gray-200 dark:bg-gl_dark">
-                        <div class="lg:w-1/2 aspect-square lg:aspect-auto relative overflow-hidden bg-white dark:bg-black">
-                            <img src="https://testeessencia.carrd.co/assets/images/image52.jpg?v=f5d26855" alt="Platinum Infusion 1L" class="w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform duration-[4000ms]">
-                            <div class="absolute inset-0 bg-gradient-to-t lg:bg-gradient-to-r from-white dark:from-gl_dark via-white/20 dark:via-transparent to-transparent opacity-90"></div>
-                            <span class="absolute top-10 left-10 bg-purple-900/40 border border-purple-500/50 text-purple-800 dark:text-purple-300 text-[0.65rem] font-black tracking-[0.3em] uppercase px-6 py-2 rounded-full backdrop-blur-md shadow-2xl">Lançamento B2B</span>
-                        </div>
+                    
+                    <div class="lg:w-2/3 flex flex-col justify-center">
+                        <h4 class="font-serif text-4xl md:text-5xl text-gl_dark dark:text-white italic mb-4">Gloss Premium <span class="font-sans font-thin text-2xl not-italic text-gl_gold">1L</span></h4>
+                        <p class="font-sans text-[0.6rem] font-black text-gray-500 dark:text-gray-400 uppercase tracking-widest mb-10">Plástica Híbrida Soberana</p>
                         
-                        <div class="p-12 md:p-20 lg:w-1/2 flex flex-col justify-center z-10">
-                            <h4 class="font-serif text-5xl md:text-6xl text-gl_dark dark:text-white italic mb-4 leading-none">Molecular Platinum <br><span class="font-sans font-thin text-3xl not-italic text-purple-600 dark:text-purple-400">Infusion 1L</span></h4>
-                            <p class="font-sans text-[0.65rem] font-black text-gray-500 dark:text-gray-400 uppercase tracking-widest mb-12">Tecnologia Pigmento 43</p>
-                            
-                            <div class="actif-container mb-16">
-                                <div class="actif-item !border-purple-800/50"><span class="actif-title !text-purple-600 dark:!text-purple-400">Extrato de Caviar</span><p class="actif-desc !text-gray-600 dark:!text-gray-400">Nutrição lipídica intensiva e rejuvenescimento celular focado em fios descoloridos.</p></div>
-                                <div class="actif-item !border-purple-800/50"><span class="actif-title !text-purple-600 dark:!text-purple-400">Pigmento 43</span><p class="actif-desc !text-gray-600 dark:!text-gray-400">Neutralização instantânea de oxidação, garantindo um reflexo platinado de altíssimo padrão.</p></div>
-                            </div>
+                        <div class="actif-container mb-12">
+                            <div class="actif-item"><span class="actif-title text-gl_dark dark:text-white">Hialurônico Reticulado</span><p class="actif-desc !text-gray-600 dark:!text-gray-400">Ancoragem interna de massa e hidratação molecular profunda.</p></div>
+                            <div class="actif-item"><span class="actif-title text-gl_dark dark:text-white">Proteína do Trigo</span><p class="actif-desc !text-gray-600 dark:!text-gray-400">Reconstrução e blindagem térmica do fio pós-química.</p></div>
+                        </div>
 
-                            <div class="flex items-center justify-between border-t border-gray-300 dark:border-white/10 pt-12 mt-auto">
-                                <div>
-                                    <span class="font-sans text-[0.55rem] text-purple-600 dark:text-purple-400 uppercase tracking-widest font-black block mb-3">Custo Titular B2B</span>
-                                    <p class="font-serif text-6xl text-gl_dark dark:text-white price-tag">R$ 1.597</p>
-                                </div>
-                                <button onclick="cartSystem.addToCart('platinum_1l_b2b', 'Molecular Platinum Infusion 1L (B2B)', 1597.00, 'Lançamento VIP')" class="btn-luxury-solid !bg-purple-800 hover:!bg-gl_dark dark:hover:!bg-white text-white dark:hover:!text-black !px-12 !py-6 text-[0.7rem] !border-transparent">Faturar Lote</button>
+                        <div class="flex items-center justify-between border-t border-gray-300 dark:border-white/10 pt-10 mt-auto">
+                            <div>
+                                <span class="font-sans text-[0.5rem] text-gl_gold uppercase tracking-widest font-black block mb-2">Custo Titular B2B</span>
+                                <p class="font-serif text-5xl text-gl_dark dark:text-white price-tag">R$ 1.297</p>
                             </div>
+                            <button onclick="cartSystem.addToCart('gloss_1l_b2b', 'Gloss Premium 1L (B2B)', 1297.00, 'Litrão VIP')" class="btn-luxury-solid !px-10 !py-5 text-[0.7rem]">Faturar Lote</button>
                         </div>
                     </div>
-
-                    <!-- GLOSS PREMIUM 1L B2B -->
-                    <div class="glass-panel p-12 md:p-16 rounded-[4rem] border-t-[10px] border-t-gl_gold relative overflow-hidden shadow-2xl flex flex-col lg:flex-row group gap-12 bg-gray-200 dark:bg-gl_dark">
-                        <div class="lg:w-1/3 aspect-square relative overflow-hidden rounded-[3rem] border border-gray-300 dark:border-white/5 shadow-inner">
-                            <img src="https://testeessencia.carrd.co/assets/images/image50.jpg?v=f5d26855" alt="Gloss Premium 1L" class="w-full h-full object-cover mix-blend-multiply dark:mix-blend-screen opacity-90 group-hover:scale-105 transition-transform duration-[3000ms]">
-                        </div>
-                        
-                        <div class="lg:w-2/3 flex flex-col justify-center">
-                            <h4 class="font-serif text-4xl md:text-5xl text-gl_dark dark:text-white italic mb-4">Gloss Premium <span class="font-sans font-thin text-2xl not-italic text-gl_gold">1L</span></h4>
-                            <p class="font-sans text-[0.6rem] font-black text-gray-500 dark:text-gray-400 uppercase tracking-widest mb-10">Plástica Híbrida Soberana</p>
-                            
-                            <div class="actif-container mb-12">
-                                <div class="actif-item"><span class="actif-title text-gl_dark dark:text-white">Hialurônico Reticulado</span><p class="actif-desc !text-gray-600 dark:!text-gray-400">Ancoragem interna de massa e hidratação molecular profunda.</p></div>
-                                <div class="actif-item"><span class="actif-title text-gl_dark dark:text-white">Proteína do Trigo</span><p class="actif-desc !text-gray-600 dark:!text-gray-400">Reconstrução e blindagem térmica do fio pós-química.</p></div>
-                            </div>
-
-                            <div class="flex items-center justify-between border-t border-gray-300 dark:border-white/10 pt-10 mt-auto">
-                                <div>
-                                    <span class="font-sans text-[0.5rem] text-gl_gold uppercase tracking-widest font-black block mb-2">Custo Titular B2B</span>
-                                    <p class="font-serif text-5xl text-gl_dark dark:text-white price-tag">R$ 1.297</p>
-                                </div>
-                                <button onclick="cartSystem.addToCart('gloss_1l_b2b', 'Gloss Premium 1L (B2B)', 1297.00, 'Litrão VIP')" class="btn-luxury-solid !px-10 !py-5 text-[0.7rem]">Faturar Lote</button>
-                            </div>
-                        </div>
-                    </div>
-
                 </div>
+
             </div>
         </div>
 
         <!-- =========================================================
-             ABA 06: SOS LAVATÓRIO
+             ABA 08: SOS LAVATÓRIO
              ========================================================= -->
         <div id="b2b-tab-sos" class="b2b-tab-content hidden reveal text-center">
             <div class="p-24 md:p-40 glass-panel rounded-[5rem] border border-red-500/20 shadow-[0_0_50px_rgba(239,68,68,0.1)] relative overflow-hidden bg-gradient-to-b from-transparent to-red-900/10">
@@ -1157,7 +1131,7 @@
                     Botão de emergência (Hotline). Conecte-se imediatamente ao suporte técnico da matriz SOBERANO 8K em caso de dúvidas críticas durante procedimentos.
                 </p>
                 
-                <button onclick="appState.checkAccess(event, 'Conectar ao Suporte de Emergência')" class="btn-luxury-solid !bg-red-600 hover:!bg-red-500 !text-white !border-transparent !shadow-[0_20px_40px_rgba(239,68,68,0.3)] !px-16 !py-6 text-[0.8rem]"><i class="fa-brands fa-whatsapp mr-2 text-lg"></i> Acionar Suporte VIP</button>
+                <a href="https://wa.me/5549999999999" target="_blank" class="btn-luxury-solid !bg-red-600 hover:!bg-red-500 !text-white !border-transparent !shadow-[0_20px_40px_rgba(239,68,68,0.3)] !px-16 !py-6 text-[0.8rem] inline-block"><i class="fa-brands fa-whatsapp mr-2 text-lg"></i> Acionar Suporte VIP</a>
             </div>
         </div>
 
@@ -1197,6 +1171,22 @@
                     { p: "04. PERFIL GG<br><span class='text-[0.45rem] tracking-widest opacity-60 normal-case'>Cintura em diante</span>", f: "R$ 937,00", m: "R$ 1.037,00", g: "<span class='text-[0.55rem] text-purple-400 uppercase tracking-widest block mb-1'>Max</span>R$ 1.337,00" }
                 ]
             }
+        };
+
+        // --- SISTEMA DE SKELETONS PARA AULAS (FASE 03) ---
+        const lessonTemplates = {
+            "dna-1": { title: "De A Gata Lambeu a GL PRO", sub: "A Transição Tecnológica", desc: "Histórico da marca e o upgrade para laboratório de engenharia molecular." },
+            "dna-2": { title: "Filosofia Soberano 8K", sub: "O Córtex Inteligente", desc: "Compreensão da matriz sincronizada e o treinamento da Pirâmide Sensorial." },
+            "academy-1": { title: "Ecologia da Haste", sub: "Tricologia e Diagnóstico", desc: "Análise profunda da arquitetura do fio, níveis de pH e testes de elasticidade." },
+            "academy-2": { title: "Protocolos Soberano 8K", sub: "Passo a passo Trindade", desc: "A execução cirúrgica do Chase Nature System. Ordem: Prep > Infuse > Seal." },
+            "academy-3": { title: "Gloss Premium", sub: "Espelhamento e Aplicação", desc: "A técnica perfeita para utilizar o Ácido Hialurônico Reticulado sem sobrecarregar a fibra." },
+            "academy-4": { title: "Molecular Platinum Infusion", sub: "Protocolo a Frio", desc: "Regras de neutralização de oxidação e uso da tecnologia Pigmento 43." },
+            "business-1": { title: "Precificação", sub: "Cobrando Tratamentos de Luxo", desc: "A psicologia e os cálculos por trás da ancoragem do ticket de R$ 797,00." },
+            "business-2": { title: "Vendas no Salão", sub: "Scripts e Objeções", desc: "Como o profissional aborda a cliente, quebra a objeção de preço e finaliza a venda do kit Home Care." },
+            "business-3": { title: "Posicionamento e Tráfego", sub: "Marketing de Autoridade", desc: "Como se posicionar nas redes sociais para atrair o público de alto ticket e dominar a captação." },
+            "arsenal-1": { title: "Biblioteca Técnica", sub: "Fichas e SOPs", desc: "Acesse e faça download das fichas de anamnese capilar e Manuais Standard Operating Procedure." },
+            "arsenal-2": { title: "Kit Embaixador", sub: "Redes Sociais", desc: "Banco de imagens em alta resolução e vídeos de making of para o seu Instagram." },
+            "arsenal-3": { title: "Scripts de Venda", sub: "WhatsApp Conversão VIP", desc: "Acesse e copie os textos de alta conversão para disparar para a base de clientes do salão." }
         };
 
         // --- HERO CAROUSEL ENGINE ---
@@ -1255,7 +1245,7 @@
             }
         };
 
-        // --- SISTEMA DE CARRINHO (SIDE DRAWER & FRETE) ---
+        // --- SISTEMA DE CARRINHO (SIDE DRAWER) ---
         const cartSystem = {
             items: [],
             
@@ -1378,6 +1368,7 @@
             theme: 'dark',
             isUnlocked: false,
             currentTable: 'gloss',
+            currentActionTarget: null,
 
             toggleTheme() {
                 const html = document.documentElement;
@@ -1424,18 +1415,91 @@
                 }
 
                 if (viewId === 'dashboard-b2b') {
-                    // Inicializa na aba Dashboard B2B
                     this.switchB2BTab('dashboard');
                     if(this.isUnlocked) this.applyUnlockUI();
                 }
             },
 
-            // Função de Auditoria: Verifica se tem chave antes da ação
-            checkAccess(event, actionName) {
-                event.preventDefault();
-                if(this.isUnlocked) {
-                    alert(`Iniciando: ${actionName} (Acesso Autorizado)`);
+            // Fase 01: Algoritmo de Homologação Regional
+            openHomologationModal() {
+                const modal = document.getElementById('homologation-modal');
+                modal.style.display = 'flex';
+                setTimeout(() => {
+                    modal.style.opacity = '1';
+                    document.getElementById('homo-content-box').classList.remove('scale-95');
+                    document.getElementById('homo-content-box').classList.add('scale-100');
+                }, 10);
+            },
+
+            closeHomologationModal() {
+                const modal = document.getElementById('homologation-modal');
+                modal.style.opacity = '0';
+                document.getElementById('homo-content-box').classList.remove('scale-100');
+                document.getElementById('homo-content-box').classList.add('scale-95');
+                setTimeout(() => {
+                    modal.style.display = 'none';
+                    document.getElementById('homo-form-area').classList.remove('hidden');
+                    document.getElementById('homo-result-area').classList.add('hidden');
+                    document.getElementById('homo-city').value = '';
+                    document.getElementById('homo-cep').value = '';
+                }, 1000); 
+            },
+
+            verifyHomologation() {
+                const cityInput = document.getElementById('homo-city').value.trim();
+                const cepInput = document.getElementById('homo-cep').value.trim();
+                
+                if(!cityInput) {
+                    alert("Por favor, insira a sua cidade."); return;
+                }
+
+                const normalizedCity = cityInput.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+                const formArea = document.getElementById('homo-form-area');
+                const resultArea = document.getElementById('homo-result-area');
+                
+                formArea.classList.add('hidden');
+                resultArea.classList.remove('hidden');
+
+                if(normalizedCity === 'chapeco' || normalizedCity === 'seara') {
+                    // Cidades Bloqueadas
+                    resultArea.innerHTML = `
+                        <div class="w-20 h-20 mx-auto rounded-full bg-red-600 flex items-center justify-center mb-6 shadow-[0_0_30px_rgba(239,68,68,0.4)]">
+                            <i class="fa-solid fa-lock text-3xl text-white"></i>
+                        </div>
+                        <h4 class="font-serif text-3xl text-gl_dark dark:text-white italic mb-4">Exclusividade Regional Ativa</h4>
+                        <p class="font-sans text-[0.65rem] text-gray-500 uppercase tracking-widest mb-10 font-bold leading-loose">
+                            Já existe um salão credenciado GL PRO em sua cidade.<br>Clique abaixo para falar com a nossa central e verificar a fila de espera.
+                        </p>
+                        <a href="https://wa.me/5549999999999" target="_blank" class="btn-luxury-solid !bg-red-600 hover:!bg-red-500 !text-white !border-transparent w-full block"><i class="fa-brands fa-whatsapp mr-2"></i> Falar com a Central</a>
+                        <button onclick="appState.closeHomologationModal()" class="mt-8 text-[0.6rem] text-gray-500 uppercase tracking-widest hover:text-gl_dark dark:hover:text-white transition-colors">Voltar</button>
+                    `;
                 } else {
+                    // Cidades Livres
+                    resultArea.innerHTML = `
+                        <div class="w-20 h-20 mx-auto rounded-full bg-green-600 flex items-center justify-center mb-6 shadow-[0_0_30px_rgba(34,197,94,0.4)]">
+                            <i class="fa-solid fa-unlock text-3xl text-white"></i>
+                        </div>
+                        <h4 class="font-serif text-3xl text-gl_dark dark:text-white italic mb-4">Área Disponível!</h4>
+                        <p class="font-sans text-[0.65rem] text-gray-500 uppercase tracking-widest mb-10 font-bold leading-loose">
+                            Sua região está limpa. Você está a um passo de se tornar o Embaixador GL PRO na sua cidade.
+                        </p>
+                        <button onclick="alert('Redirecionando para Check-out de Licenciamento...'); appState.closeHomologationModal();" class="btn-luxury-solid w-full block">Prosseguir para Imersão</button>
+                    `;
+                }
+            },
+
+            // Fase 03: Função de Checagem de Senha B2B antes da ação
+            checkAccess(event, targetAction) {
+                if(event) event.preventDefault();
+                
+                if(this.isUnlocked) {
+                    if(targetAction.includes('-')) {
+                        this.renderLesson(targetAction);
+                    } else {
+                        alert(`Executando: ${targetAction}`);
+                    }
+                } else {
+                    this.currentActionTarget = targetAction;
                     this.openModal();
                 }
             },
@@ -1471,6 +1535,11 @@
                     this.closeModal();
                     this.applyUnlockUI();
                     document.getElementById('unlock-badge').classList.replace('hidden', 'flex');
+                    
+                    if(this.currentActionTarget && this.currentActionTarget.includes('-')) {
+                        this.renderLesson(this.currentActionTarget);
+                    }
+                    this.currentActionTarget = null;
                 } else {
                     document.getElementById('modal-error').classList.remove('hidden');
                     document.getElementById('modal-pass-input').value = '';
@@ -1483,6 +1552,13 @@
                     el.style.opacity = '0';
                     el.style.visibility = 'hidden';
                 });
+                
+                document.querySelectorAll('.lock-icon').forEach(icon => icon.style.display = 'none');
+
+                if(document.getElementById('b2b-tab-academy').classList.contains('block')) this.renderLesson('academy-1');
+                if(document.getElementById('b2b-tab-business').classList.contains('block')) this.renderLesson('business-1');
+                if(document.getElementById('b2b-tab-arsenal').classList.contains('block')) this.renderLesson('arsenal-1');
+                if(document.getElementById('b2b-tab-dna').classList.contains('block')) this.renderLesson('dna-1');
             },
 
             switchB2BTab(tabId) {
@@ -1499,7 +1575,6 @@
                 target.style.animation = 'viewFadeIn 1.5s cubic-bezier(0.19, 1, 0.22, 1) forwards';
 
                 const btn = document.getElementById('tab-btn-' + tabId);
-                // Cor do Tab depende da aba (Dashboard é prata, Resto é dourado ou prata tbm)
                 if(tabId === 'dashboard') {
                     btn.classList.add('text-gl_silver', 'border-gl_silver');
                 } else {
@@ -1507,15 +1582,77 @@
                 }
                 btn.classList.remove('text-gray-500', 'dark:text-gray-600', 'border-transparent');
                 
-                if(tabId === 'loja' || tabId === 'store') this.renderTable();
+                if(tabId === 'store') this.renderTable();
+                
+                if(tabId === 'dna') this.renderLesson('dna-1');
+                if(tabId === 'arsenal') this.renderLesson('arsenal-1');
+                if(tabId === 'academy' && this.isUnlocked) this.renderLesson('academy-1');
+                if(tabId === 'business' && this.isUnlocked) this.renderLesson('business-1');
 
-                // Scroll suave para a seção do dashboard B2B ajustado pelo nav flutuante
                 const b2bSection = document.getElementById('view-dashboard-b2b');
                 if (b2bSection && window.scrollY > b2bSection.offsetTop) {
                     const yOffset = -120; 
                     const y = b2bSection.getBoundingClientRect().top + window.scrollY + yOffset;
                     window.scrollTo({top: y, behavior: 'smooth'});
                 }
+            },
+
+            // Fase 03: Injeção Dinâmica do Esqueleto de Edição
+            renderLesson(lessonId) {
+                document.querySelectorAll('.b2b-sidebar-btn').forEach(btn => btn.classList.remove('active'));
+                const activeBtn = document.querySelector(`button[onclick="appState.renderLesson('${lessonId}')"]`) || document.querySelector(`button[onclick="appState.checkAccess(event, '${lessonId}')"]`);
+                if(activeBtn) activeBtn.classList.add('active');
+
+                let containerPrefix = lessonId.split('-')[0];
+                const container = document.getElementById(`lesson-container-${containerPrefix}`);
+                if(!container) return;
+
+                const data = lessonTemplates[lessonId];
+
+                container.innerHTML = `
+                    <div class="glass-panel p-10 md:p-16 rounded-[4rem] border border-gray-300 dark:border-white/5 shadow-2xl animate-[viewFadeIn_1s_cubic-bezier(0.19,1,0.22,1)_forwards]">
+                        
+                        <!-- 🎬 CAIXA DE VÍDEO / PLAYER -->
+                        <div class="aspect-video w-full bg-black rounded-[3rem] border border-white/10 flex items-center justify-center mb-12 relative group shadow-inner">
+                            <i class="fa-solid fa-play text-5xl text-white/20 group-hover:text-gl_gold transition-colors cursor-pointer" onclick="appState.checkAccess(event, 'Play Vídeo: ${data.title}')"></i>
+                            <span class="absolute bottom-6 left-6 text-[0.55rem] font-sans font-black text-gray-600 uppercase tracking-widest">[ 🎬 CAIXA DE VÍDEO / PLAYER VIMEO ]</span>
+                        </div>
+                        
+                        <!-- 📝 TÍTULO E SUBTÍTULO -->
+                        <h1 class="font-serif text-5xl text-gl_dark dark:text-white mb-4 italic">[ 📝 ${data.title} ]</h1>
+                        <h2 class="font-sans text-[0.65rem] font-black text-gl_gold uppercase tracking-[0.3em] mb-12">[ 📝 OBJETIVO: ${data.sub} ]</h2>
+                        
+                        <!-- ✍️ ÁREA DE TEXTO LIVRE -->
+                        <div class="bg-white/50 dark:bg-black/30 p-10 rounded-[3rem] mb-12 text-gray-600 dark:text-gray-400 font-sans text-sm leading-loose border border-gray-300 dark:border-white/5 shadow-inner">
+                            <p class="text-[0.55rem] font-black uppercase text-gray-500 dark:text-gray-400 mb-6 tracking-widest border-b border-gray-300 dark:border-gray-800 pb-2">[ ✍️ ÁREA DE TEXTO LIVRE HTML - DESCRIÇÃO / APLICAÇÃO / AVISOS ]</p>
+                            <p class="font-serif text-xl italic mb-4">"A edição do protocolo exato ocorre neste container."</p>
+                            <p>${data.desc}</p>
+                            <ul class="list-disc pl-6 mt-4 space-y-2 font-medium">
+                                <li>Tempo de pausa: <strong>[ Inserir ]</strong></li>
+                                <li>Gramatura exata: <strong>[ Inserir ]</strong></li>
+                                <li>Restrições: <i>[ Não misturar com... ]</i></li>
+                            </ul>
+                        </div>
+
+                        <!-- 📥 ÁREA DE DOWNLOADS -->
+                        <div class="mb-12">
+                            <p class="font-sans text-[0.55rem] font-black uppercase text-gray-500 mb-6 tracking-widest">[ 📥 MATERIAIS DE APOIO ]</p>
+                            <div class="flex flex-col md:flex-row gap-6">
+                                <button onclick="appState.checkAccess(event, 'Download PDF')" class="btn-luxury flex-1 !text-[0.6rem] !py-5"><i class="fa-solid fa-file-pdf mr-3"></i> [ ADICIONAR ARQUIVO PDF ]</button>
+                                <button onclick="appState.checkAccess(event, 'Download ZIP')" class="btn-luxury flex-1 !text-[0.6rem] !py-5"><i class="fa-solid fa-file-zipper mr-3"></i> [ ADICIONAR IMAGEM / ZIP ]</button>
+                            </div>
+                        </div>
+
+                        <!-- 📱 ÁREA DE SUPORTE DIRETO -->
+                        <div class="border-t border-gray-300 dark:border-white/10 pt-12">
+                            <p class="font-sans text-[0.55rem] font-black uppercase text-gray-500 mb-6 tracking-widest text-center">[ 📱 SUPORTE DIRETO ]</p>
+                            <div class="flex flex-col md:flex-row gap-6">
+                                <a href="https://wa.me/5549999999999" target="_blank" class="btn-silver-solid !bg-red-600 hover:!bg-red-500 !text-white !border-transparent !shadow-[0_10px_30px_rgba(239,68,68,0.2)] !py-5 text-[0.6rem] flex-1 text-center"><i class="fa-brands fa-whatsapp mr-3 text-lg"></i> [ SOS LAVATÓRIO TÉCNICO ]</a>
+                                <a href="https://wa.me/5549999999999" target="_blank" class="btn-silver-solid !py-5 text-[0.6rem] flex-1 text-center"><i class="fa-brands fa-whatsapp mr-3 text-lg"></i> [ DÚVIDAS B2B COMERCIAL ]</a>
+                            </div>
+                        </div>
+                    </div>
+                `;
             },
 
             toggleTable(type) {
@@ -1558,13 +1695,13 @@
                 textArea.select();
                 try {
                     document.execCommand('copy');
-                    alert("Script Neural copiado para a área de transferência.");
+                    alert("Script VIP copiado para a área de transferência.");
                 } catch (err) { console.error('Copy Error', err); }
                 document.body.removeChild(textArea);
             }
         };
 
-        // --- SISTEMA DE SLIDERS ANTES/DEPOIS (CLINICAL PROOF) ---
+        // --- SISTEMA DE SLIDERS ANTES/DEPOIS ---
         function initSliders() {
             document.querySelectorAll('.ba-slider-container').forEach(container => {
                 const range = container.querySelector('.ba-range');
