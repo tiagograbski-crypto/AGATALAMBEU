@@ -17,9 +17,10 @@
             theme: {
                 extend: {
                     colors: {
-                        gl_gold: '#C5A059', 
-                        gl_gold_light: '#E5D5B7',
-                        gl_gold_dark: '#8C6D31',
+                        // Ouro Joia: Mais denso, reflexivo e luxuoso
+                        gl_gold: '#D4AF37', 
+                        gl_gold_light: '#FFF4C2',
+                        gl_gold_dark: '#9A7B3E',
                         gl_dark: '#030303', /* Preto OLED Absoluto */
                         gl_dark_fog: '#0A0A0A',
                         gl_light: '#F8F7F5', /* Off-white editorial para modo claro */
@@ -70,7 +71,7 @@
         ::-webkit-scrollbar { width: 3px; }
         ::-webkit-scrollbar-track { background: transparent; }
         .dark ::-webkit-scrollbar-track { background: #030303; }
-        ::-webkit-scrollbar-thumb { background: #C5A059; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb { background: #D4AF37; border-radius: 10px; }
 
         /* 2. FROSTED GLASS & TEXTURES (Ultra Realism) */
         .glass-panel {
@@ -81,7 +82,7 @@
             overflow: hidden;
             /* Day Mode Default (Platinum Fog / Jateado Cinza) */
             background: rgba(230, 230, 230, 0.55); 
-            border: 1px solid rgba(197, 160, 89, 0.25);
+            border: 1px solid rgba(212, 175, 55, 0.25);
             box-shadow: 0 15px 50px 0 rgba(0, 0, 0, 0.05);
         }
         
@@ -104,15 +105,23 @@
         .card-premium { transition: transform 1.5s cubic-bezier(0.19, 1, 0.22, 1), box-shadow 1.5s ease, border-color 1.5s ease; }
         .card-premium:hover {
             transform: translateY(-12px) scale(1.005);
-            border-color: rgba(197, 160, 89, 0.6);
-            box-shadow: 0 35px 70px -15px rgba(197, 160, 89, 0.15);
+            border-color: rgba(212, 175, 55, 0.6);
+            box-shadow: 0 35px 70px -15px rgba(212, 175, 55, 0.2);
         }
 
-        /* 3. GRADIENTS & TYPOGRAPHY */
+        /* 3. GRADIENTS & TYPOGRAPHY (O EFEITO JOIA) */
         .gl-gold-gradient {
-            background: linear-gradient(135deg, #C5A059 0%, #F8E2A7 50%, #8C6D31 100%);
+            background: linear-gradient(135deg, #D4AF37 0%, #FFF4C2 40%, #9A7B3E 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            text-shadow: 0px 4px 25px rgba(212, 175, 55, 0.3); /* Brilho de joia polida */
+        }
+
+        .gl-platinum-gradient {
+            background: linear-gradient(135deg, #C084FC 0%, #E9D5FF 40%, #7E22CE 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0px 4px 25px rgba(168, 85, 247, 0.3);
         }
         
         .price-tag { font-family: 'Montserrat', sans-serif; font-weight: 200; letter-spacing: -0.05em; }
@@ -167,7 +176,7 @@
             backdrop-filter: blur(50px);
             z-index: 1000;
             transition: right 1s cubic-bezier(0.19, 1, 0.22, 1);
-            border-left: 1px solid rgba(197, 160, 89, 0.2);
+            border-left: 1px solid rgba(212, 175, 55, 0.3);
             display: flex; flex-direction: column;
         }
         .dark #cart-drawer { background: rgba(8,8,8,0.9); }
@@ -181,11 +190,11 @@
         .dark #cart-overlay { background: rgba(0,0,0,0.7); backdrop-filter: blur(6px); }
         #cart-overlay.open { opacity: 1; pointer-events: auto; }
 
-        /* 7. BUTTONS & INTERACTIONS */
+        /* 7. BUTTONS & INTERACTIONS (EFEITO JOIA) */
         .btn-luxury {
-            border: 1px solid rgba(197, 160, 89, 0.4);
+            border: 1px solid rgba(212, 175, 55, 0.5);
             background: transparent;
-            color: #C5A059;
+            color: #D4AF37;
             text-transform: uppercase;
             letter-spacing: 0.25em;
             font-size: 0.65rem;
@@ -204,22 +213,22 @@
         
         .btn-luxury::before {
             content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(197, 160, 89, 0.15), transparent);
+            background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.2), transparent);
             transition: left 1s ease;
         }
         .btn-luxury:hover::before { left: 100%; }
         .btn-luxury:hover {
-            background: rgba(197, 160, 89, 0.1);
-            border-color: #C5A059;
+            background: rgba(212, 175, 55, 0.15);
+            border-color: #D4AF37;
             transform: translateY(-2px);
-            box-shadow: 0 15px 30px -10px rgba(197, 160, 89, 0.3);
+            box-shadow: 0 15px 30px -10px rgba(212, 175, 55, 0.4);
             color: #0A0A0A;
         }
-        .dark .btn-luxury:hover { color: #030303; background: #C5A059; }
+        .dark .btn-luxury:hover { color: #030303; background: #D4AF37; }
 
         .btn-luxury-solid {
-            background: linear-gradient(135deg, #C5A059, #8C6D31);
-            color: #F8F7F5;
+            background: linear-gradient(135deg, #D4AF37 0%, #FFF4C2 45%, #9A7B3E 100%);
+            color: #030303;
             text-transform: uppercase;
             letter-spacing: 0.25em;
             font-size: 0.65rem;
@@ -227,28 +236,40 @@
             border-radius: 100px;
             transition: all 0.8s cubic-bezier(0.19, 1, 0.22, 1);
             font-weight: 800;
-            border: 1px solid transparent;
+            border: 1px solid rgba(255,255,255,0.2);
             cursor: pointer;
+            box-shadow: inset 0 1px 2px rgba(255,255,255,0.8), 0 15px 30px -10px rgba(212, 175, 55, 0.5); /* Efeito 3D Polido */
         }
         .dark .btn-luxury-solid { color: #030303; }
         .btn-luxury-solid:hover {
             transform: translateY(-4px);
-            box-shadow: 0 25px 50px -10px rgba(197, 160, 89, 0.5);
-            border-color: #F8E2A7;
+            box-shadow: inset 0 1px 2px rgba(255,255,255,0.9), 0 25px 50px -10px rgba(212, 175, 55, 0.7);
+            border-color: #FFF4C2;
         }
 
         /* 8. ATIVOS AUDIT (Bula Estética) */
         .actif-container { display: flex; flex-direction: column; gap: 20px; margin-top: 2rem; position: relative; z-index: 10; }
-        .actif-item { border-left: 2px solid rgba(197, 160, 89, 0.3); padding-left: 20px; transition: border-color 0.8s; }
-        .actif-item:hover { border-color: #C5A059; }
-        .actif-title { font-family: 'Montserrat', sans-serif; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.25em; font-weight: 800; color: #C5A059; display: block; margin-bottom: 6px; }
+        .actif-item { border-left: 2px solid rgba(212, 175, 55, 0.4); padding-left: 20px; transition: border-color 0.8s; }
+        .actif-item:hover { border-color: #D4AF37; }
+        .actif-title { font-family: 'Montserrat', sans-serif; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.25em; font-weight: 800; color: #D4AF37; display: block; margin-bottom: 6px; }
         .actif-desc { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-style: italic; color: #444; font-weight: 500; line-height: 1.5; max-width: 95%; }
         .dark .actif-desc { color: #A0A0A0; font-weight: 400; }
 
+        /* 9. ANTES & DEPOIS SLIDER (CLINICAL PROOF) */
+        .ba-slider-container { position: relative; width: 100%; overflow: hidden; border-radius: 3rem; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5); }
+        .ba-img { display: block; width: 100%; height: 100%; object-fit: cover; }
+        .ba-after { position: absolute; inset: 0; clip-path: inset(0 50% 0 0); }
+        .ba-handle-line { position: absolute; top: 0; bottom: 0; left: 50%; width: 2px; background: rgba(212,175,55,0.8); transform: translateX(-50%); pointer-events: none; z-index: 5; }
+        .ba-handle-btn { position: absolute; top: 50%; left: 50%; width: 46px; height: 46px; background: #030303; border: 2px solid #D4AF37; border-radius: 50%; transform: translate(-50%, -50%); display: flex; justify-content: center; align-items: center; color: #D4AF37; pointer-events: none; box-shadow: 0 0 20px rgba(212,175,55,0.4); z-index: 6; }
+        .ba-range { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; cursor: ew-resize; z-index: 10; margin: 0; }
+        
+        .ba-label-before { position: absolute; bottom: 25px; right: 25px; background: rgba(0,0,0,0.6); backdrop-filter: blur(8px); padding: 8px 20px; border-radius: 30px; font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.25em; color: white; border: 1px solid rgba(255,255,255,0.1); font-weight: 800; z-index: 4; font-family: 'Montserrat', sans-serif;}
+        .ba-label-after { position: absolute; bottom: 25px; left: 25px; background: rgba(212,175,55,0.2); backdrop-filter: blur(8px); padding: 8px 20px; border-radius: 30px; font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.25em; color: #D4AF37; border: 1px solid rgba(212,175,55,0.4); font-weight: 800; z-index: 5; font-family: 'Montserrat', sans-serif;}
+
         /* Componentes Especiais */
         .cep-loader {
-            border: 2px solid rgba(197,160,89,0.2);
-            border-top: 2px solid #C5A059;
+            border: 2px solid rgba(212,175,55,0.2);
+            border-top: 2px solid #D4AF37;
             border-radius: 50%;
             width: 18px; height: 18px;
             animation: spin 1s linear infinite;
@@ -257,6 +278,13 @@
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
         .gl-table th, .gl-table td { padding: 1.5rem 1rem; text-align: center; }
+        
+        /* Hero Carousel specific styles */
+        .hero-slide { transition: opacity 1.5s cubic-bezier(0.19, 1, 0.22, 1), transform 5s ease-out; }
+        
+        /* Efeito de destaque dinâmico para os "dots" do slider */
+        .slider-dot { transition: all 0.5s ease; cursor: pointer; }
+        .slider-dot.active { width: 30px; background: #D4AF37; }
 
     </style>
 </head>
@@ -270,7 +298,7 @@
     <!-- MODAL DE SENHA MESTRA (CADEADO VIP) -->
     <div id="password-modal" class="fixed inset-0 z-[2000] hidden bg-white/90 dark:bg-black/95 backdrop-blur-2xl items-center justify-center opacity-0 transition-opacity duration-1000">
         <div class="p-16 rounded-[4rem] w-full max-w-xl text-center transform scale-95 transition-transform duration-1000 glass-panel border border-gl_gold/20 shadow-[0_30px_100px_rgba(0,0,0,0.1)] dark:shadow-[0_30px_100px_rgba(0,0,0,0.5)]" id="modal-content-box">
-            <div class="w-24 h-24 mx-auto border border-gl_gold/30 rounded-full flex items-center justify-center mb-10 shadow-[0_0_40px_rgba(197,160,89,0.15)] bg-gl_gold/5">
+            <div class="w-24 h-24 mx-auto border border-gl_gold/30 rounded-full flex items-center justify-center mb-10 shadow-[0_0_40px_rgba(212,175,55,0.2)] bg-gl_gold/10">
                 <i class="fa-solid fa-gem text-4xl text-gl_gold"></i>
             </div>
             <h3 class="font-serif text-5xl font-light text-gl_dark dark:text-white mb-4 italic">Private Access</h3>
@@ -303,15 +331,15 @@
             </div>
 
             <!-- Bagde VIP (Revelado Pós-Senha) -->
-            <div id="unlock-badge" class="hidden items-center gap-3 px-5 py-2 rounded-full border border-gl_gold/30 bg-gl_gold/10 text-gl_gold text-[0.55rem] tracking-[0.2em] uppercase font-black shadow-[0_0_15px_rgba(197,160,89,0.2)]">
-                <span class="w-1.5 h-1.5 bg-gl_gold rounded-full animate-pulse shadow-[0_0_10px_#C5A059]"></span> Titular VIP
+            <div id="unlock-badge" class="hidden items-center gap-3 px-5 py-2 rounded-full border border-gl_gold/30 bg-gl_gold/10 text-gl_gold text-[0.55rem] tracking-[0.2em] uppercase font-black shadow-[0_0_15px_rgba(212,175,55,0.2)]">
+                <span class="w-1.5 h-1.5 bg-gl_gold rounded-full animate-pulse shadow-[0_0_10px_#D4AF37]"></span> Titular VIP
             </div>
 
             <!-- Cart Toggle -->
             <button onclick="cartSystem.openCart()" class="relative text-gray-600 dark:text-gray-400 hover:text-gl_gold dark:hover:text-gl_gold transition-colors duration-700 group flex items-center gap-3" aria-label="Abrir Sacola">
                 <span class="text-[0.6rem] uppercase tracking-widest font-bold hidden md:block">Bag</span>
                 <i class="fa-solid fa-bag-shopping text-xl"></i>
-                <span id="cart-count" class="absolute -top-2 -right-2 bg-gl_gold text-black text-[0.55rem] font-black w-4 h-4 rounded-full flex items-center justify-center opacity-0 transition-opacity duration-500">0</span>
+                <span id="cart-count" class="absolute -top-2 -right-2 bg-gl_gold text-black text-[0.55rem] font-black w-4 h-4 rounded-full flex items-center justify-center opacity-0 transition-opacity duration-500 shadow-[0_0_10px_rgba(212,175,55,0.5)]">0</span>
             </button>
 
             <!-- Theme Toggle -->
@@ -371,54 +399,94 @@
          ========================================================================== -->
     <main id="view-home" class="view-section active flex-grow">
         
-        <!-- MEGA DESTAQUE: PRE-SALE SÉRUM INTELIGENTE CÓRTEX -->
-        <!-- O fundo é cinemático (escuro) independente do modo, garantindo o visual da campanha -->
-        <section class="w-full relative overflow-hidden mb-16 shadow-2xl bg-gl_dark" style="min-height: 92vh;">
-            <div class="absolute inset-0">
-                <!-- Imagem com resolução nativa -->
-                <img src="https://testeessencia.carrd.co/assets/images/image70.jpg?v=2861d9df" alt="Sérum Capilar Inteligente e Córtex" class="w-full h-full object-cover opacity-90 transform scale-105 hover:scale-100 transition-transform duration-[8000ms]">
-                <!-- Gradientes para proteção de leitura -->
-                <div class="absolute inset-0 bg-gradient-to-r from-gl_dark via-gl_dark/70 to-transparent w-full md:w-2/3"></div>
-                <div class="absolute inset-0 bg-gradient-to-t from-gl_dark via-transparent to-transparent opacity-80"></div>
-            </div>
+        <!-- MEGA DESTAQUE: HERO CAROUSEL (Sérum e Platinum) -->
+        <section class="w-full relative overflow-hidden mb-16 shadow-2xl bg-gl_dark" style="min-height: 92vh;" id="hero-slider">
             
-            <div class="relative z-10 container mx-auto px-8 md:px-16 h-full flex flex-col justify-center min-h-[92vh]">
-                <div class="max-w-5xl reveal">
-                    <div class="inline-flex items-center gap-3 px-6 py-2.5 rounded-full border border-gl_gold/40 bg-gl_dark/40 backdrop-blur-xl mb-10 shadow-[0_0_30px_rgba(197,160,89,0.3)]">
-                        <span class="w-2 h-2 bg-gl_gold rounded-full animate-pulse"></span>
-                        <span class="font-sans text-[0.65rem] font-black text-gl_gold tracking-[0.4em] uppercase drop-shadow-md">Global Pre-Sale Authorized</span>
-                    </div>
-                    
-                    <h2 class="font-serif text-5xl md:text-[8rem] font-light text-white leading-none mb-8 tracking-tighter uppercase drop-shadow-2xl">
-                        Sérum Inteligente <br><span class="italic gl-gold-gradient font-bold pr-4">& Córtex</span>
-                    </h2>
-                    
-                    <p class="font-sans text-gray-300 tracking-[0.3em] uppercase text-[0.65rem] font-bold mb-16 leading-loose max-w-2xl drop-shadow-lg">
-                        A Intervenção Estrutural Definitiva. <br>
-                        Ativos de pureza farmacêutica para o brilho espelhado supremo. <br>
-                        <span class="text-gl_gold">Lote Limitado de Lançamento. Garanta o seu.</span>
-                    </p>
-                    
-                    <div class="flex flex-col md:flex-row items-start md:items-center gap-12">
-                        <button onclick="cartSystem.addToCart('cortex_presale', 'Sérum Inteligente & Córtex 55ml (Pre-Sale)', 797.00, 'Supreme Ticket')" class="btn-luxury-solid !py-5 !px-14 text-[0.75rem] shadow-[0_20px_50px_rgba(197,160,89,0.5)]">Reservar Imediatamente</button>
-                        <div>
-                            <span class="font-sans text-[0.55rem] text-white uppercase tracking-widest block mb-2 font-bold drop-shadow-md">Investimento Pre-Sale</span>
-                            <p class="font-serif text-6xl text-white price-tag drop-shadow-2xl font-bold">R$ 797<span class="text-2xl text-gray-300">,00</span></p>
+            <!-- SLIDE 1: SÉRUM INTELIGENTE & CÓRTEX -->
+            <div class="hero-slide absolute inset-0 z-20 opacity-100" id="slide-1">
+                <!-- Imagem com resolução nativa -->
+                <img src="https://testeessencia.carrd.co/assets/images/image70.jpg?v=2861d9df" alt="Sérum Capilar Inteligente e Córtex" class="w-full h-full object-cover opacity-90 scale-105" id="img-slide-1">
+                <!-- Gradientes para proteção de leitura do lado esquerdo e rodapé -->
+                <div class="absolute inset-0 bg-gradient-to-r from-gl_dark via-gl_dark/80 to-transparent w-full md:w-3/4"></div>
+                <div class="absolute inset-0 bg-gradient-to-t from-gl_dark via-transparent to-transparent opacity-80"></div>
+                
+                <div class="absolute inset-0 z-10 container mx-auto px-8 md:px-16 flex flex-col justify-center">
+                    <div class="max-w-5xl">
+                        <div class="inline-flex items-center gap-3 px-6 py-2.5 rounded-full border border-gl_gold/40 bg-gl_dark/60 backdrop-blur-xl mb-10 shadow-[0_0_30px_rgba(212,175,55,0.3)]">
+                            <span class="w-2 h-2 bg-gl_gold rounded-full animate-pulse shadow-[0_0_10px_#D4AF37]"></span>
+                            <span class="font-sans text-[0.65rem] font-black text-gl_gold tracking-[0.4em] uppercase drop-shadow-md">Global Pre-Sale Authorized</span>
+                        </div>
+                        
+                        <h2 class="font-serif text-5xl md:text-[8rem] font-light text-white leading-none mb-8 tracking-tighter uppercase drop-shadow-2xl">
+                            Sérum Inteligente <br><span class="italic gl-gold-gradient font-bold pr-4">& Córtex</span>
+                        </h2>
+                        
+                        <p class="font-sans text-gray-300 tracking-[0.3em] uppercase text-[0.65rem] font-bold mb-16 leading-loose max-w-2xl drop-shadow-lg">
+                            A Intervenção Estrutural Absoluta. <br>
+                            Ativos de pureza farmacêutica para o brilho espelhado supremo. <br>
+                            <span class="text-gl_gold">Lote Limitado de Lançamento. Garanta o seu.</span>
+                        </p>
+                        
+                        <div class="flex flex-col md:flex-row items-start md:items-center gap-12">
+                            <button onclick="cartSystem.addToCart('cortex_presale', 'Sérum Inteligente & Córtex 55ml (Pre-Sale)', 797.00, 'Supreme Ticket')" class="btn-luxury-solid !py-5 !px-14 text-[0.75rem] shadow-[0_20px_50px_rgba(212,175,55,0.5)]">Reservar Imediatamente</button>
+                            <div>
+                                <span class="font-sans text-[0.55rem] text-white uppercase tracking-widest block mb-2 font-bold drop-shadow-md">Investimento Pre-Sale</span>
+                                <p class="font-serif text-6xl text-white price-tag drop-shadow-2xl font-bold">R$ 797<span class="text-2xl text-gray-300">,00</span></p>
+                            </div>
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <div class="absolute bottom-10 left-8 md:left-16 flex flex-col items-start gap-4 opacity-90 reveal" style="transition-delay: 800ms;">
-                    <div class="w-[1px] h-20 bg-gradient-to-b from-gl_gold to-transparent"></div>
-                    <span class="font-sans text-[0.5rem] uppercase tracking-widest text-gl_gold font-black drop-shadow-lg">Scroll to Discover</span>
+            <!-- SLIDE 2: MOLECULAR PLATINUM INFUSION -->
+            <div class="hero-slide absolute inset-0 z-10 opacity-0" id="slide-2">
+                <img src="https://testeessencia.carrd.co/assets/images/image52.jpg?v=f5d26855" alt="Molecular Platinum Infusion" class="w-full h-full object-cover opacity-80 grayscale scale-100" id="img-slide-2">
+                <div class="absolute inset-0 bg-gradient-to-r from-gl_dark via-gl_dark/80 to-transparent w-full md:w-3/4"></div>
+                <div class="absolute inset-0 bg-gradient-to-t from-gl_dark via-transparent to-transparent opacity-80"></div>
+                
+                <div class="absolute inset-0 z-10 container mx-auto px-8 md:px-16 flex flex-col justify-center">
+                    <div class="max-w-5xl">
+                        <!-- Badge adaptada para Platinum -->
+                        <div class="inline-flex items-center gap-3 px-6 py-2.5 rounded-full border border-purple-500/40 bg-gl_dark/60 backdrop-blur-xl mb-10 shadow-[0_0_30px_rgba(168,85,247,0.3)]">
+                            <span class="w-2 h-2 bg-purple-500 rounded-full animate-pulse shadow-[0_0_10px_#A855F7]"></span>
+                            <span class="font-sans text-[0.65rem] font-black text-purple-400 tracking-[0.4em] uppercase drop-shadow-md">Parceria B2B Exclusiva</span>
+                        </div>
+                        
+                        <!-- Palavra chave alterada para o Efeito Platinum -->
+                        <h2 class="font-serif text-5xl md:text-[8rem] font-light text-white leading-none mb-8 tracking-tighter uppercase drop-shadow-2xl">
+                            Molecular <br><span class="italic gl-platinum-gradient font-bold pr-4">Platinum Infusion</span>
+                        </h2>
+                        
+                        <p class="font-sans text-gray-300 tracking-[0.3em] uppercase text-[0.65rem] font-bold mb-16 leading-loose max-w-2xl drop-shadow-lg">
+                            O Lançamento B2B que redefine o mercado. <br>
+                            Neutralização e Rejuvenescimento em nível molecular. <br>
+                            <span class="text-purple-400">Exclusividade de Titularidade Geográfica.</span>
+                        </p>
+                        
+                        <div class="flex flex-col md:flex-row items-start md:items-center gap-12">
+                            <button onclick="appState.navigate('dashboard-b2b')" class="btn-luxury-solid !bg-purple-800 hover:!bg-white !text-white hover:!text-black !border-transparent !py-5 !px-14 text-[0.75rem] shadow-[0_20px_50px_rgba(168,85,247,0.3)]">Verificar Credencial</button>
+                        </div>
+                    </div>
                 </div>
+            </div>
+
+            <!-- Carousel Controls -->
+            <div class="absolute bottom-10 right-8 md:right-16 z-30 flex gap-4">
+                <div class="slider-dot w-6 h-1.5 bg-white/30 rounded-full active" onclick="heroSlider.goToSlide(1)" id="dot-1"></div>
+                <div class="slider-dot w-6 h-1.5 bg-white/30 rounded-full" onclick="heroSlider.goToSlide(2)" id="dot-2"></div>
+            </div>
+
+            <!-- Scroll Down Hint -->
+            <div class="absolute bottom-10 left-8 md:left-16 flex flex-col items-start gap-4 opacity-90 z-30 reveal" style="transition-delay: 800ms;">
+                <div class="w-[1px] h-20 bg-gradient-to-b from-gl_gold to-transparent"></div>
+                <span class="font-sans text-[0.5rem] uppercase tracking-widest text-gl_gold font-black drop-shadow-lg">Scroll to Discover</span>
             </div>
         </section>
 
         <!-- SECTION 2: A GÊNESE (O DOSSIÊ DA MARCA) -->
         <section class="py-32 md:py-48 px-8 relative bg-gray-200 dark:bg-gl_gray border-y border-gray-300 dark:border-white/5">
             <div class="container mx-auto max-w-5xl text-center reveal">
-                <i class="fa-solid fa-dna text-5xl text-gl_gold mb-12 opacity-60"></i>
+                <i class="fa-solid fa-dna text-5xl text-gl_gold mb-12 opacity-60 drop-shadow-[0_0_20px_rgba(212,175,55,0.4)]"></i>
                 <span class="font-sans text-[0.6rem] text-gray-500 uppercase tracking-mega-wide block mb-6 font-bold">The Heritage</span>
                 <h3 class="font-serif text-5xl md:text-7xl text-gl_dark dark:text-white mb-16 italic">A Gênese da Transformação</h3>
                 
@@ -433,7 +501,78 @@
             </div>
         </section>
 
-        <!-- SECTION 3: NAVEGAÇÃO DE PORTAIS (SPLIT) -->
+        <!-- SECTION 3: PROVAS CLÍNICAS (ANTES E DEPOIS - RESTAURAÇÃO EXATA COM CORREÇÃO DE BUG) -->
+        <section class="py-32 md:py-48 px-8 relative bg-white dark:bg-gl_dark border-b border-gray-300 dark:border-white/5">
+            <div class="text-center mb-32 reveal">
+                <span class="font-sans text-[0.6rem] text-gl_gold tracking-mega-wide uppercase font-black">Clinical Results</span>
+                <h3 class="font-serif text-5xl md:text-6xl text-gl_dark dark:text-white mt-6 mb-6 italic">A Engenharia na Prática</h3>
+                <p class="font-sans text-[0.7rem] text-gray-500 uppercase tracking-widest font-bold">Liso Soberano 8K & Matização Platinum</p>
+            </div>
+
+            <div class="container mx-auto max-w-[85rem] grid grid-cols-1 lg:grid-cols-2 gap-20 reveal">
+                
+                <!-- Slider Liso Soberano -->
+                <div class="flex flex-col items-center w-full">
+                    <h4 class="font-serif text-3xl md:text-4xl text-gl_dark dark:text-white mb-10 italic">Liso Soberano <span class="font-sans font-thin not-italic text-2xl text-gl_gold">8K</span></h4>
+                    
+                    <div class="ba-slider-container aspect-[4/5] bg-gray-200 dark:bg-gl_gray shadow-2xl w-full">
+                        <!-- Imagem Antes (Por baixo) - BUG CORRIGIDO AQUI -->
+                        <img src="https://testeessencia.carrd.co/assets/images/image48.jpg?v=7b294510" alt="Estrutura Original" class="ba-img absolute inset-0 w-full h-full object-cover">
+                        
+                        <!-- Imagem Depois (Por cima, com clip-path) -->
+                        <img src="https://testeessencia.carrd.co/assets/images/image49.jpg?v=7b294510" alt="Supremacia 8K" class="ba-img ba-after absolute inset-0 w-full h-full object-cover">
+                        
+                        <!-- Linha Divisória e Botão -->
+                        <div class="ba-handle-line"></div>
+                        <div class="ba-handle-btn">
+                            <i class="fa-solid fa-arrows-left-right text-sm"></i>
+                        </div>
+                        
+                        <!-- Range Input Invisível para Controle -->
+                        <input type="range" min="0" max="100" value="50" class="ba-range">
+                        
+                        <!-- Labels -->
+                        <div class="ba-label-after shadow-lg">Supremacia 8K</div>
+                        <div class="ba-label-before shadow-lg">Estrutura Original</div>
+                    </div>
+                    <p class="font-sans text-[0.6rem] text-gray-500 uppercase tracking-widest mt-8 font-bold text-center leading-loose">
+                        Recuperação da arquitetura lipídica.<br>Ancoragem de Massa e Brilho Espelhado.
+                    </p>
+                </div>
+
+                <!-- Slider Platinum Infusion -->
+                <div class="flex flex-col items-center w-full">
+                    <h4 class="font-serif text-3xl md:text-4xl text-gl_dark dark:text-white mb-10 italic">Molecular Platinum <span class="font-sans font-thin not-italic text-2xl text-purple-600 dark:text-purple-400">Infusion</span></h4>
+                    
+                    <div class="ba-slider-container aspect-[4/5] bg-gray-200 dark:bg-gl_gray shadow-2xl w-full">
+                        <!-- Imagem Antes (Por baixo) - BUG CORRIGIDO AQUI -->
+                        <img src="https://testeessencia.carrd.co/assets/images/image45.jpg?v=7b294510" alt="Oxidação Severa" class="ba-img absolute inset-0 w-full h-full object-cover">
+                        
+                        <!-- Imagem Depois (Por cima, com clip-path) -->
+                        <img src="https://testeessencia.carrd.co/assets/images/image47.jpg?v=7b294510" alt="Efeito Platinum" class="ba-img ba-after absolute inset-0 w-full h-full object-cover">
+                        
+                        <!-- Linha Divisória e Botão -->
+                        <div class="ba-handle-line !bg-purple-500"></div>
+                        <div class="ba-handle-btn !border-purple-500 !text-purple-500 !shadow-[0_0_20px_rgba(168,85,247,0.4)]">
+                            <i class="fa-solid fa-arrows-left-right text-sm"></i>
+                        </div>
+                        
+                        <!-- Range Input Invisível para Controle -->
+                        <input type="range" min="0" max="100" value="50" class="ba-range">
+                        
+                        <!-- Labels -->
+                        <div class="ba-label-after shadow-lg !bg-purple-900/30 !text-purple-300 !border-purple-500/40">Efeito Platinum</div>
+                        <div class="ba-label-before shadow-lg">Oxidação Severa</div>
+                    </div>
+                    <p class="font-sans text-[0.6rem] text-gray-500 uppercase tracking-widest mt-8 font-bold text-center leading-loose">
+                        Neutralização instantânea via Pigmento 43.<br>Rejuvenescimento Celular com Caviar.
+                    </p>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- SECTION 4: NAVEGAÇÃO DE PORTAIS (SPLIT) -->
         <section class="py-32 md:py-48 px-8 container mx-auto flex flex-col items-center justify-center">
             <div class="text-center mb-24 reveal">
                 <span class="font-sans text-[0.6rem] text-gl_gold tracking-mega-wide uppercase font-black">Selecione seu ambiente de navegação</span>
@@ -485,7 +624,6 @@
         </div>
 
         <!-- MANIFESTO TRINDADE (HERO OFFER) -->
-        <!-- Usamos a classe manifesto-bg que tem gradiente escuro garantido -->
         <section class="manifesto-bg rounded-[4rem] p-12 md:p-24 mb-40 relative overflow-hidden shadow-2xl reveal">
             <div class="max-w-4xl relative z-20">
                 <span class="font-sans text-[0.6rem] font-black text-gl_gold uppercase tracking-mega-wide mb-8 block">A Fundação da Supremacia</span>
@@ -497,7 +635,7 @@
                 <div class="glass-panel p-10 md:p-14 rounded-[3.5rem] inline-block w-full max-w-lg shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
                     <span class="text-[0.6rem] font-black text-gl_gold uppercase tracking-widest block mb-4 italic">Oferta Bundle: Estágios 01 + 02 + 03</span>
                     <div class="flex items-end justify-between mb-10">
-                        <p class="font-serif text-6xl md:text-7xl text-gl_dark dark:text-white price-tag">R$ 597<span class="text-2xl text-gray-500">,00</span></p>
+                        <p class="font-serif text-6xl md:text-7xl text-white price-tag">R$ 597<span class="text-2xl text-gray-400">,00</span></p>
                     </div>
                     <button onclick="cartSystem.addToCart('trindade', 'Sistema Trindade Completo', 597.00, 'Kit Ultra Bundle')" class="w-full btn-luxury-solid flex justify-center items-center gap-4 !py-6 text-[0.7rem]">
                         Adicionar à Sacola <i class="fa-solid fa-plus text-[0.6rem]"></i>
@@ -505,7 +643,6 @@
                 </div>
             </div>
             
-            <!-- Imagem lateral no Desktop -->
             <div class="hidden lg:block absolute right-0 top-0 w-1/2 h-full overflow-hidden z-10 pointer-events-none opacity-90">
                 <div class="absolute inset-0 bg-gradient-to-l from-transparent via-transparent to-black/80 z-20"></div>
                 <img src="https://testeessencia.carrd.co/assets/images/image58.jpg?v=f5d26855" alt="Kit Trindade" class="w-full h-full object-cover transform translate-x-10">
@@ -576,7 +713,7 @@
                     
                     <div class="actif-container mb-16 max-w-xl">
                         <div class="actif-item"><span class="actif-title text-gl_dark dark:text-white">Tecnologia Nano Link</span><p class="actif-desc">Executa a ancoragem microscópica dos ativos na matriz, impedindo evasão de nutrientes.</p></div>
-                        <div class="actif-item"><span class="actif-title text-gl_dark dark:text-white">Colágeno de Alta Pureza</span><p class="actif-desc">Reestabelece resistência à tração e elasticidade biológica para selagem térmica diária definitiva.</p></div>
+                        <div class="actif-item"><span class="actif-title text-gl_dark dark:text-white">Colágeno de Alta Pureza</span><p class="actif-desc">Reestabelece resistência à tração e elasticidade biológica para selagem térmica de longa duração.</p></div>
                     </div>
 
                     <div class="flex items-center gap-12 pt-10 border-t border-gray-300 dark:border-white/5">
@@ -662,7 +799,7 @@
             
             <!-- Dossiê Exclusividade -->
             <div class="glass-panel rounded-[4rem] p-16 md:p-24 text-center border border-gray-300 dark:border-white/5 max-w-5xl mx-auto shadow-2xl">
-                <div class="w-24 h-24 mx-auto bg-gl_gold/10 border border-gl_gold/30 rounded-full flex items-center justify-center mb-10 text-gl_gold text-4xl">
+                <div class="w-24 h-24 mx-auto bg-gl_gold/10 border border-gl_gold/30 rounded-full flex items-center justify-center mb-10 text-gl_gold text-4xl shadow-[0_0_30px_rgba(212,175,55,0.2)]">
                     <i class="fa-solid fa-map-location-dot"></i>
                 </div>
                 <h3 class="font-serif text-4xl md:text-5xl text-gl_dark dark:text-white mb-6">Exclusividade Geográfica</h3>
@@ -718,14 +855,14 @@
                         <p class="font-sans text-[0.55rem] font-black text-gray-500 uppercase tracking-widest mb-4">Ticket Médio Sugerido</p>
                         <p class="font-serif text-5xl text-gl_dark dark:text-white price-tag">R$ 580</p>
                     </div>
-                    <div class="bg-gl_gold/10 p-10 rounded-[3rem] text-center border border-gl_gold/30 shadow-[0_0_40px_rgba(197,160,89,0.1)]">
+                    <div class="bg-gl_gold/10 p-10 rounded-[3rem] text-center border border-gl_gold/30 shadow-[0_0_40px_rgba(212,175,55,0.1)]">
                         <p class="font-sans text-[0.55rem] font-black text-gl_gold uppercase tracking-widest mb-4">Faturamento Bruto (1L)</p>
                         <p class="font-serif text-5xl text-gl_gold font-bold price-tag">R$ 17.400</p>
                     </div>
                 </div>
             </div>
 
-            <!-- MEGA LANÇAMENTO B2B (PLATINUM INFUSION COVER) -->
+            <!-- ARSENAL B2B (PROTEGIDO) -->
             <div class="relative mt-32 mb-16">
                 <!-- Revealer Overlay de Cadeado -->
                 <div id="lock-overlay-arsenal" class="price-revealer flex-col rounded-[5rem]">
@@ -740,7 +877,6 @@
                 <div id="content-arsenal" class="blur-lock">
                     
                     <!-- CAPA FULL-WIDTH: PLATINUM INFUSION (Lançamento) -->
-                    <!-- Mantemos o fundo cinemático escuro porque é o lançamento Hero -->
                     <div class="glass-panel w-full rounded-[4rem] border-t-[12px] border-t-purple-800 relative overflow-hidden shadow-2xl flex flex-col lg:flex-row group mb-16 bg-gl_dark">
                         <div class="lg:w-1/2 aspect-square lg:aspect-auto relative overflow-hidden bg-black">
                             <img src="https://testeessencia.carrd.co/assets/images/image52.jpg?v=f5d26855" alt="Platinum Infusion 1L" class="w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform duration-[4000ms]">
@@ -749,43 +885,43 @@
                         </div>
                         
                         <div class="p-12 md:p-20 lg:w-1/2 flex flex-col justify-center z-10">
-                            <h4 class="font-serif text-5xl md:text-6xl text-gl_dark dark:text-white italic mb-4 leading-none">Molecular Platinum <br><span class="font-sans font-thin text-3xl not-italic text-purple-600 dark:text-purple-400">Infusion 1L</span></h4>
-                            <p class="font-sans text-[0.65rem] font-black text-gray-500 dark:text-gray-400 uppercase tracking-widest mb-12">Tecnologia Pigmento 43</p>
+                            <h4 class="font-serif text-5xl md:text-6xl text-white italic mb-4 leading-none">Molecular Platinum <br><span class="font-sans font-thin text-3xl not-italic text-purple-400">Infusion 1L</span></h4>
+                            <p class="font-sans text-[0.65rem] font-black text-gray-400 uppercase tracking-widest mb-12">Tecnologia Pigmento 43</p>
                             
                             <div class="actif-container mb-16">
-                                <div class="actif-item !border-purple-800/50"><span class="actif-title !text-purple-600 dark:!text-purple-400">Extrato de Caviar</span><p class="actif-desc !text-gray-600 dark:!text-gray-400">Nutrição lipídica intensiva e rejuvenescimento celular focado em fios descoloridos.</p></div>
-                                <div class="actif-item !border-purple-800/50"><span class="actif-title !text-purple-600 dark:!text-purple-400">Pigmento 43</span><p class="actif-desc !text-gray-600 dark:!text-gray-400">Neutralização instantânea de oxidação, garantindo um reflexo platinado de altíssimo padrão.</p></div>
+                                <div class="actif-item !border-purple-800/50"><span class="actif-title !text-purple-400">Extrato de Caviar</span><p class="actif-desc !text-gray-400">Nutrição lipídica intensiva e rejuvenescimento celular focado em fios descoloridos.</p></div>
+                                <div class="actif-item !border-purple-800/50"><span class="actif-title !text-purple-400">Pigmento 43</span><p class="actif-desc !text-gray-400">Neutralização instantânea de oxidação, garantindo um reflexo platinado de altíssimo padrão.</p></div>
                             </div>
 
-                            <div class="flex items-center justify-between border-t border-gray-300 dark:border-white/10 pt-12 mt-auto">
+                            <div class="flex items-center justify-between border-t border-white/10 pt-12 mt-auto">
                                 <div>
-                                    <span class="font-sans text-[0.55rem] text-purple-600 dark:text-purple-400 uppercase tracking-widest font-black block mb-3">Custo Titular B2B</span>
-                                    <p class="font-serif text-6xl text-gl_dark dark:text-white price-tag">R$ 1.597</p>
+                                    <span class="font-sans text-[0.55rem] text-purple-400 uppercase tracking-widest font-black block mb-3">Custo Titular B2B</span>
+                                    <p class="font-serif text-6xl text-white price-tag">R$ 1.597</p>
                                 </div>
-                                <button onclick="cartSystem.addToCart('platinum_1l_b2b', 'Molecular Platinum Infusion 1L (B2B)', 1597.00, 'Lançamento VIP')" class="btn-luxury-solid !bg-purple-800 hover:!bg-gl_dark dark:hover:!bg-white text-white dark:hover:!text-black !px-12 !py-6 text-[0.7rem] !border-transparent">Faturar Lote</button>
+                                <button onclick="cartSystem.addToCart('platinum_1l_b2b', 'Molecular Platinum Infusion 1L (B2B)', 1597.00, 'Lançamento VIP')" class="btn-luxury-solid !bg-purple-800 hover:!bg-white !text-white hover:!text-black !px-12 !py-6 text-[0.7rem] !border-transparent">Faturar Lote</button>
                             </div>
                         </div>
                     </div>
 
                     <!-- GLOSS PREMIUM 1L B2B -->
-                    <div class="glass-panel p-12 md:p-16 rounded-[4rem] border-t-[10px] border-t-gl_gold relative overflow-hidden shadow-2xl flex flex-col lg:flex-row group gap-12">
-                        <div class="lg:w-1/3 aspect-square relative overflow-hidden rounded-[3rem] border border-gray-300 dark:border-white/5 shadow-inner">
+                    <div class="glass-panel p-12 md:p-16 rounded-[4rem] border-t-[10px] border-t-gl_gold relative overflow-hidden shadow-2xl flex flex-col lg:flex-row group gap-12 bg-gl_dark">
+                        <div class="lg:w-1/3 aspect-square relative overflow-hidden rounded-[3rem] border border-white/5 shadow-inner">
                             <img src="https://testeessencia.carrd.co/assets/images/image50.jpg?v=f5d26855" alt="Gloss Premium 1L" class="w-full h-full object-cover mix-blend-multiply dark:mix-blend-screen opacity-90 group-hover:scale-105 transition-transform duration-[3000ms]">
                         </div>
                         
                         <div class="lg:w-2/3 flex flex-col justify-center">
-                            <h4 class="font-serif text-4xl md:text-5xl text-gl_dark dark:text-white italic mb-4">Gloss Premium <span class="font-sans font-thin text-2xl not-italic text-gl_gold">1L</span></h4>
-                            <p class="font-sans text-[0.6rem] font-black text-gray-500 dark:text-gray-400 uppercase tracking-widest mb-10">Plástica Híbrida Soberana</p>
+                            <h4 class="font-serif text-4xl md:text-5xl text-white italic mb-4">Gloss Premium <span class="font-sans font-thin text-2xl not-italic text-gl_gold">1L</span></h4>
+                            <p class="font-sans text-[0.6rem] font-black text-gray-400 uppercase tracking-widest mb-10">Plástica Híbrida Soberana</p>
                             
                             <div class="actif-container mb-12">
-                                <div class="actif-item"><span class="actif-title text-gl_dark dark:text-white">Hialurônico Reticulado</span><p class="actif-desc">Ancoragem interna de massa e hidratação molecular profunda.</p></div>
-                                <div class="actif-item"><span class="actif-title text-gl_dark dark:text-white">Proteína do Trigo</span><p class="actif-desc">Reconstrução e blindagem térmica do fio pós-química.</p></div>
+                                <div class="actif-item"><span class="actif-title text-white">Hialurônico Reticulado</span><p class="actif-desc !text-gray-400">Ancoragem interna de massa e hidratação molecular profunda.</p></div>
+                                <div class="actif-item"><span class="actif-title text-white">Proteína do Trigo</span><p class="actif-desc !text-gray-400">Reconstrução e blindagem térmica do fio pós-química.</p></div>
                             </div>
 
-                            <div class="flex items-center justify-between border-t border-gray-300 dark:border-white/10 pt-10 mt-auto">
+                            <div class="flex items-center justify-between border-t border-white/10 pt-10 mt-auto">
                                 <div>
                                     <span class="font-sans text-[0.5rem] text-gl_gold uppercase tracking-widest font-black block mb-2">Custo Titular B2B</span>
-                                    <p class="font-serif text-5xl text-gl_dark dark:text-white price-tag">R$ 1.297</p>
+                                    <p class="font-serif text-5xl text-white price-tag">R$ 1.297</p>
                                 </div>
                                 <button onclick="cartSystem.addToCart('gloss_1l_b2b', 'Gloss Premium 1L (B2B)', 1297.00, 'Litrão VIP')" class="btn-luxury-solid !px-10 !py-5 text-[0.7rem]">Faturar Lote</button>
                             </div>
@@ -878,8 +1014,8 @@
     <footer class="py-32 mt-auto relative overflow-hidden text-center bg-gray-200 dark:bg-gl_dark border-t border-gray-300 dark:border-white/5">
         <div class="container mx-auto px-8 relative z-10">
             <i class="fa-solid fa-gem text-3xl text-gl_gold mb-12 opacity-40"></i>
-            <h2 class="font-serif text-4xl md:text-5xl text-gl_dark/40 dark:text-white/40 italic mb-20">The Ultimate Hair Engineering</h2>
-            <div class="flex justify-center gap-16 mb-20 text-gray-500 dark:text-white/30">
+            <h2 class="font-serif text-4xl md:text-5xl text-gray-500 dark:text-white/40 italic mb-20">The Ultimate Hair Engineering</h2>
+            <div class="flex justify-center gap-16 mb-20 text-gray-400 dark:text-white/30">
                 <i class="fa-brands fa-meta text-3xl hover:text-gl_gold transition-colors duration-700 cursor-pointer"></i>
                 <i class="fa-brands fa-tiktok text-3xl hover:text-gl_gold transition-colors duration-700 cursor-pointer"></i>
                 <i class="fa-brands fa-instagram text-3xl hover:text-gl_gold transition-colors duration-700 cursor-pointer"></i>
@@ -889,7 +1025,7 @@
     </footer>
 
     <!-- ==========================================================================
-         ENGINE JS: SPA, CART, REVEAL, & ANIMATIONS
+         ENGINE JS: SPA, CART, REVEAL, SLIDERS & ANIMATIONS
          ========================================================================== -->
     <script>
         // --- DATABASE ---
@@ -907,6 +1043,67 @@
                     { p: "Perfil G (Costas)", f: "R$ 790", m: "R$ 890", g: "R$ 1.020" },
                     { p: "Perfil GG (Cintura)", f: "R$ 920", m: "R$ 1.020", g: "R$ 1.290" }
                 ]
+            }
+        };
+
+        // --- HERO CAROUSEL ENGINE ---
+        const heroSlider = {
+            currentSlide: 1,
+            totalSlides: 2,
+            interval: null,
+            
+            init() {
+                // Inicia o loop apenas se o slider existir na view
+                if(document.getElementById('hero-slider')) {
+                    this.start();
+                }
+            },
+            
+            start() {
+                if(this.interval) clearInterval(this.interval);
+                this.interval = setInterval(() => {
+                    let next = this.currentSlide + 1;
+                    if(next > this.totalSlides) next = 1;
+                    this.goToSlide(next);
+                }, 6000);
+            },
+            
+            goToSlide(num) {
+                // Esconder atual
+                const currentEl = document.getElementById(`slide-${this.currentSlide}`);
+                const currentDot = document.getElementById(`dot-${this.currentSlide}`);
+                if(currentEl) {
+                    currentEl.classList.replace('opacity-100', 'opacity-0');
+                    currentEl.classList.replace('z-20', 'z-10');
+                }
+                if(currentDot) {
+                    currentDot.classList.remove('active');
+                }
+                
+                this.currentSlide = num;
+                
+                // Mostrar novo
+                const newEl = document.getElementById(`slide-${this.currentSlide}`);
+                const newDot = document.getElementById(`dot-${this.currentSlide}`);
+                if(newEl) {
+                    newEl.classList.replace('opacity-0', 'opacity-100');
+                    newEl.classList.replace('z-10', 'z-20');
+                    
+                    // Reset do efeito zoom da imagem para recomeçar
+                    const img = document.getElementById(`img-slide-${this.currentSlide}`);
+                    if(img) {
+                        img.classList.remove('scale-100');
+                        void img.offsetWidth; // trigger reflow
+                        img.classList.add('scale-105');
+                        setTimeout(() => img.classList.replace('scale-105', 'scale-100'), 50);
+                    }
+                }
+                if(newDot) {
+                    newDot.classList.add('active');
+                }
+                
+                // Reiniciar timer
+                this.start();
             }
         };
 
@@ -1057,10 +1254,13 @@
                 if (viewId === 'home') {
                     switcher.classList.add('hidden');
                     header.classList.remove('bg-white/90', 'dark:bg-gl_dark/90', 'shadow-sm');
+                    // Retoma o slider se voltar pra home
+                    heroSlider.init();
                 } else {
                     switcher.classList.remove('hidden');
                     switcher.classList.add('md:flex');
                     header.classList.add('bg-white/90', 'dark:bg-gl_dark/90', 'shadow-sm');
+                    if(heroSlider.interval) clearInterval(heroSlider.interval);
                 }
 
                 if(btnB2C && btnB2B) {
@@ -1194,6 +1394,25 @@
             }
         };
 
+        // --- SISTEMA DE SLIDERS ANTES/DEPOIS (CLINICAL PROOF) ---
+        function initSliders() {
+            document.querySelectorAll('.ba-slider-container').forEach(container => {
+                const range = container.querySelector('.ba-range');
+                const afterImg = container.querySelector('.ba-after');
+                const line = container.querySelector('.ba-handle-line');
+                const btn = container.querySelector('.ba-handle-btn');
+
+                if(!range || !afterImg || !line || !btn) return;
+
+                range.addEventListener('input', (e) => {
+                    const val = e.target.value;
+                    afterImg.style.clipPath = `inset(0 ${100 - val}% 0 0)`;
+                    line.style.left = `${val}%`;
+                    btn.style.left = `${val}%`;
+                });
+            });
+        }
+
         // --- SCROLL REVEAL ENGINE ---
         function triggerReveals() {
             const reveals = document.querySelectorAll('.reveal');
@@ -1214,6 +1433,8 @@
         // --- INIT ---
         document.addEventListener('DOMContentLoaded', () => {
             console.log("Portal GL Pro v2026 | Ultra Luxury Council Engine Ready.");
+            heroSlider.init();
+            initSliders();
             setTimeout(triggerReveals, 300); 
         });
     </script>
