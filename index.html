@@ -45,7 +45,7 @@
             flex-direction: column;
         }
         
-        /* 1. Cinematic Ambient Background for Glassmorphism */
+        /* Cinematic Ambient Background for Glassmorphism */
         .ambient-bg {
             position: fixed; inset: 0; z-index: -2;
             background: #030303;
@@ -67,7 +67,7 @@
             100% { transform: translate(10%, 10%); }
         }
 
-        /* 2. Efeito Vidro Translúcido (Glassmorphism) */
+        /* Efeito Vidro Translúcido (Glassmorphism) */
         .glass-panel {
             background: linear-gradient(135deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.01) 100%);
             backdrop-filter: blur(24px);
@@ -89,7 +89,7 @@
             box-shadow: 0 10px 40px 0 rgba(0, 0, 0, 0.6), inset 0 0 20px rgba(255,255,255,0.05);
         }
 
-        /* 3. Animações UI Fullscreen */
+        /* Animações UI Fullscreen */
         .fade-up-enter { animation: fadeUpEnter 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
         .fade-up-exit { animation: fadeUpExit 0.5s ease-out forwards; }
         
@@ -162,145 +162,198 @@
                     <span class="font-mono text-[9px] uppercase tracking-widest text-luxury-platinum">Concierge IA Online</span>
                 </div>
                 <h1 class="font-editorial text-5xl md:text-7xl mb-6 text-white leading-tight tracking-tight">
-                    Mapeamento<br><span class="italic font-light text-luxury-gray">Biológico</span>
+                    Diagnóstico<br><span class="italic font-light text-luxury-gray">Digital</span>
                 </h1>
                 <p class="font-tech text-luxury-gray text-base md:text-lg mb-14 opacity-80 font-light leading-relaxed max-w-lg mx-auto">
-                    A nossa Inteligência Artificial irá cruzar os seus dados estruturais para decodificar o protocolo exato da sua fibra capilar.
+                    Responda de forma simples. A nossa Inteligência Artificial vai ler os seus dados e traduzir qual o protocolo clínico exato que o seu cabelo precisa.
                 </p>
             </div>
             
             <button onclick="nextView(1)" class="btn-press w-full max-w-md mx-auto glass-panel text-white font-cta py-5 px-8 rounded-full uppercase tracking-[0.2em] text-[10px] font-bold hover:bg-white hover:text-black transition-all duration-300 block">
-                Iniciar Triagem IA
+                Iniciar Triagem
             </button>
         </section>
 
-        <!-- View 1: Question 1 -->
+        <!-- View 1: Curvatura -->
         <section id="view-1" class="hidden flex-col justify-center py-20 max-w-2xl mx-auto w-full">
             <div class="mb-12 text-center">
-                <span class="font-mono text-luxury-gray text-[10px] tracking-[0.3em] uppercase block mb-4 border-b border-white/10 pb-4 inline-block">01 — Morfologia</span>
-                <h2 class="font-editorial italic text-4xl md:text-5xl text-white">Qual a espessura da sua fibra?</h2>
+                <span class="font-mono text-luxury-gray text-[10px] tracking-[0.3em] uppercase block mb-4 border-b border-white/10 pb-4 inline-block">01 — Curvatura</span>
+                <h2 class="font-editorial italic text-4xl md:text-5xl text-white">Como é a forma natural do seu cabelo?</h2>
             </div>
             
-            <div class="space-y-5">
-                <button onclick="saveSingleAnswer('estrutura', 'Fino', 2)" class="btn-press glass-panel w-full text-left p-6 md:p-8 transition-all flex items-center justify-between group rounded-3xl">
+            <div class="space-y-4">
+                <button onclick="saveSingleAnswer('curvatura', 'Liso', 2)" class="btn-press glass-panel w-full text-left p-6 md:p-8 transition-all flex items-center justify-between group rounded-3xl">
                     <div>
-                        <span class="font-tech font-light text-xl text-white block mb-2">Fibra Delicada / Fina</span>
-                        <span class="font-tech text-xs subtitle-text text-luxury-gray">Baixa capacidade de retenção lipídica.</span>
+                        <span class="font-tech font-light text-xl text-white block mb-2">Liso e Reto</span>
+                        <span class="font-tech text-xs subtitle-text text-luxury-gray">Sem ondas naturais, tende a ser mais oleoso na raiz.</span>
                     </div>
                     <i class="arrow-icon ph ph-arrow-right opacity-0 transition-all text-white transform -translate-x-4 text-2xl"></i>
                 </button>
-                <button onclick="saveSingleAnswer('estrutura', 'Médio', 2)" class="btn-press glass-panel w-full text-left p-6 md:p-8 transition-all flex items-center justify-between group rounded-3xl">
+                <button onclick="saveSingleAnswer('curvatura', 'Ondulado', 2)" class="btn-press glass-panel w-full text-left p-6 md:p-8 transition-all flex items-center justify-between group rounded-3xl">
                     <div>
-                        <span class="font-tech font-light text-xl text-white block mb-2">Fibra Equilibrada / Média</span>
-                        <span class="font-tech text-xs subtitle-text text-luxury-gray">Diâmetro estável, absorção regular.</span>
+                        <span class="font-tech font-light text-xl text-white block mb-2">Ondulado</span>
+                        <span class="font-tech text-xs subtitle-text text-luxury-gray">Forma leves ondas em "S", especialmente nas pontas.</span>
                     </div>
                     <i class="arrow-icon ph ph-arrow-right opacity-0 transition-all text-white transform -translate-x-4 text-2xl"></i>
                 </button>
-                <button onclick="saveSingleAnswer('estrutura', 'Grosso', 2)" class="btn-press glass-panel w-full text-left p-6 md:p-8 transition-all flex items-center justify-between group rounded-3xl">
+                <button onclick="saveSingleAnswer('curvatura', 'Cacheado', 2)" class="btn-press glass-panel w-full text-left p-6 md:p-8 transition-all flex items-center justify-between group rounded-3xl">
                     <div>
-                        <span class="font-tech font-light text-xl text-white block mb-2">Fibra Resistente / Grossa</span>
-                        <span class="font-tech text-xs subtitle-text text-luxury-gray">Córtex espesso, requer alta carga de tratamento.</span>
+                        <span class="font-tech font-light text-xl text-white block mb-2">Cacheado</span>
+                        <span class="font-tech text-xs subtitle-text text-luxury-gray">Cachos definidos, formato de mola, tende a ser mais seco.</span>
+                    </div>
+                    <i class="arrow-icon ph ph-arrow-right opacity-0 transition-all text-white transform -translate-x-4 text-2xl"></i>
+                </button>
+                <button onclick="saveSingleAnswer('curvatura', 'Crespo', 2)" class="btn-press glass-panel w-full text-left p-6 md:p-8 transition-all flex items-center justify-between group rounded-3xl">
+                    <div>
+                        <span class="font-tech font-light text-xl text-white block mb-2">Crespo / Volumoso</span>
+                        <span class="font-tech text-xs subtitle-text text-luxury-gray">Cachos bem fechados desde a raiz, volume natural alto.</span>
                     </div>
                     <i class="arrow-icon ph ph-arrow-right opacity-0 transition-all text-white transform -translate-x-4 text-2xl"></i>
                 </button>
             </div>
         </section>
 
-        <!-- View 2: Question 2 -->
+        <!-- View 2: Espessura -->
         <section id="view-2" class="hidden flex-col justify-center py-20 max-w-2xl mx-auto w-full">
+            <div class="mb-12 text-center">
+                <span class="font-mono text-luxury-gray text-[10px] tracking-[0.3em] uppercase block mb-4 border-b border-white/10 pb-4 inline-block">02 — Espessura</span>
+                <h2 class="font-editorial italic text-4xl md:text-5xl text-white">Ao pegar no fio, como o sente?</h2>
+            </div>
+            
+            <div class="space-y-4">
+                <button onclick="saveSingleAnswer('espessura', 'Fino', 3)" class="btn-press glass-panel w-full text-left p-6 md:p-8 transition-all flex items-center justify-between group rounded-3xl">
+                    <div>
+                        <span class="font-tech font-light text-xl text-white block mb-2">Fino e Delicado</span>
+                        <span class="font-tech text-xs subtitle-text text-luxury-gray">Parece cabelo de bebé. Míngua rápido e embaraça muito fácil.</span>
+                    </div>
+                    <i class="arrow-icon ph ph-arrow-right opacity-0 transition-all text-white transform -translate-x-4 text-2xl"></i>
+                </button>
+                <button onclick="saveSingleAnswer('espessura', 'Médio', 3)" class="btn-press glass-panel w-full text-left p-6 md:p-8 transition-all flex items-center justify-between group rounded-3xl">
+                    <div>
+                        <span class="font-tech font-light text-xl text-white block mb-2">Médio / Normal</span>
+                        <span class="font-tech text-xs subtitle-text text-luxury-gray">Nem muito fino, nem muito pesado. Volume equilibrado.</span>
+                    </div>
+                    <i class="arrow-icon ph ph-arrow-right opacity-0 transition-all text-white transform -translate-x-4 text-2xl"></i>
+                </button>
+                <button onclick="saveSingleAnswer('espessura', 'Grosso', 3)" class="btn-press glass-panel w-full text-left p-6 md:p-8 transition-all flex items-center justify-between group rounded-3xl">
+                    <div>
+                        <span class="font-tech font-light text-xl text-white block mb-2">Grosso e Pesado</span>
+                        <span class="font-tech text-xs subtitle-text text-luxury-gray">Fio rígido, espesso, difícil de modelar e pesa bastante.</span>
+                    </div>
+                    <i class="arrow-icon ph ph-arrow-right opacity-0 transition-all text-white transform -translate-x-4 text-2xl"></i>
+                </button>
+            </div>
+        </section>
+
+        <!-- View 3: Histórico Químico -->
+        <section id="view-3" class="hidden flex-col justify-center py-20 max-w-2xl mx-auto w-full">
             <div class="mb-10 text-center">
-                <span class="font-mono text-luxury-gray text-[10px] tracking-[0.3em] uppercase block mb-4 border-b border-white/10 pb-4 inline-block">02 — Histórico Químico</span>
-                <h2 class="font-editorial italic text-4xl md:text-5xl text-white">Sobreposição química?</h2>
-                <p class="font-tech text-luxury-gray text-xs mt-6 opacity-70">A Concierge IA permite seleção múltipla.</p>
+                <span class="font-mono text-luxury-gray text-[10px] tracking-[0.3em] uppercase block mb-4 border-b border-white/10 pb-4 inline-block">03 — Sobreposição Química</span>
+                <h2 class="font-editorial italic text-4xl md:text-5xl text-white">O que já fez no cabelo?</h2>
+                <p class="font-tech text-luxury-gray text-xs mt-6 opacity-70">Pode selecionar mais de uma opção (mesmo que só nas pontas).</p>
             </div>
             
             <div class="space-y-4" id="options-quimica">
                 <button onclick="toggleOption('quimica', 'Descoloração', this)" class="option-btn glass-panel btn-press w-full text-left p-6 transition-all flex items-center gap-6 rounded-3xl">
                     <i class="check-icon ph ph-circle text-3xl text-luxury-gray/50 transition-colors"></i>
                     <div>
-                        <span class="font-tech font-light text-lg text-white block mb-1">Descoloração Oxidativa</span>
-                        <span class="font-tech text-xs subtitle-text text-luxury-gray leading-relaxed">Mechas, luzes ou extração de pigmento.</span>
+                        <span class="font-tech font-light text-lg text-white block mb-1">Luzes, Mechas ou Descoloração</span>
+                        <span class="font-tech text-xs subtitle-text text-luxury-gray leading-relaxed">Qualquer técnica que usou pó descolorante.</span>
                     </div>
                 </button>
                 <button onclick="toggleOption('quimica', 'Acida', this)" class="option-btn glass-panel btn-press w-full text-left p-6 transition-all flex items-center gap-6 rounded-3xl">
                     <i class="check-icon ph ph-circle text-3xl text-luxury-gray/50 transition-colors"></i>
                     <div>
-                        <span class="font-tech font-light text-lg text-white block mb-1">Alinhamento Ácido</span>
-                        <span class="font-tech text-xs subtitle-text text-luxury-gray leading-relaxed">Progressiva orgânica, botox ou selagem.</span>
+                        <span class="font-tech font-light text-lg text-white block mb-1">Progressiva Sem Formol / Selagem</span>
+                        <span class="font-tech text-xs subtitle-text text-luxury-gray leading-relaxed">Ácidos, progressiva orgânica, botox ou alinhamento.</span>
                     </div>
                 </button>
                 <button onclick="toggleOption('quimica', 'Formol', this)" class="option-btn glass-panel btn-press w-full text-left p-6 transition-all flex items-center gap-6 rounded-3xl">
                     <i class="check-icon ph ph-circle text-3xl text-luxury-gray/50 transition-colors"></i>
                     <div>
-                        <span class="font-tech font-light text-lg text-white block mb-1">Polímeros Fixadores</span>
-                        <span class="font-tech text-xs subtitle-text text-luxury-gray leading-relaxed">Progressiva tradicional com formol.</span>
+                        <span class="font-tech font-light text-lg text-white block mb-1">Progressiva Com Formol</span>
+                        <span class="font-tech text-xs subtitle-text text-luxury-gray leading-relaxed">Escova inteligente tradicional, marroquina, etc.</span>
+                    </div>
+                </button>
+                <button onclick="toggleOption('quimica', 'Coloração', this)" class="option-btn glass-panel btn-press w-full text-left p-6 transition-all flex items-center gap-6 rounded-3xl">
+                    <i class="check-icon ph ph-circle text-3xl text-luxury-gray/50 transition-colors"></i>
+                    <div>
+                        <span class="font-tech font-light text-lg text-white block mb-1">Tinta ou Tonalizante</span>
+                        <span class="font-tech text-xs subtitle-text text-luxury-gray leading-relaxed">Coloração permanente, retoque de raiz ou cobrir brancos.</span>
                     </div>
                 </button>
                 <button onclick="toggleOption('quimica', 'Virgem', this)" class="option-btn glass-panel btn-press w-full text-left p-6 transition-all flex items-center gap-6 rounded-3xl" id="btn-virgem">
                     <i class="check-icon ph ph-circle text-3xl text-luxury-gray/50 transition-colors"></i>
                     <div>
-                        <span class="font-tech font-light text-lg text-white block mb-1">Matriz Biológica Intacta</span>
-                        <span class="font-tech text-xs subtitle-text text-luxury-gray leading-relaxed">Nenhuma intervenção química registada.</span>
+                        <span class="font-tech font-light text-lg text-white block mb-1">Cabelo Natural (Virgem)</span>
+                        <span class="font-tech text-xs subtitle-text text-luxury-gray leading-relaxed">Nunca passei nenhum produto químico nos fios.</span>
                     </div>
                 </button>
             </div>
 
-            <button id="btnAdvance2" onclick="nextView(3)" class="btn-press w-full bg-white text-black font-cta py-5 px-8 rounded-full uppercase tracking-[0.2em] text-[10px] font-bold transition-all mt-10 opacity-0 pointer-events-none transform translate-y-4">
-                Confirmar Histórico à IA
+            <button id="btnAdvance3" onclick="nextView(4)" class="btn-press w-full bg-white text-black font-cta py-5 px-8 rounded-full uppercase tracking-[0.2em] text-[10px] font-bold transition-all mt-10 opacity-0 pointer-events-none transform translate-y-4">
+                Confirmar Histórico
             </button>
         </section>
 
-        <!-- View 3: Question 3 -->
-        <section id="view-3" class="hidden flex-col justify-center py-20 max-w-2xl mx-auto w-full">
+        <!-- View 4: Sintomas -->
+        <section id="view-4" class="hidden flex-col justify-center py-20 max-w-2xl mx-auto w-full">
             <div class="mb-10 text-center">
-                <span class="font-mono text-luxury-gray text-[10px] tracking-[0.3em] uppercase block mb-4 border-b border-white/10 pb-4 inline-block">03 — Sintomatologia</span>
-                <h2 class="font-editorial italic text-4xl md:text-5xl text-white">Qual a queixa principal?</h2>
-                <p class="font-tech text-luxury-gray text-xs mt-6 opacity-70">A Concierge IA permite seleção múltipla.</p>
+                <span class="font-mono text-luxury-gray text-[10px] tracking-[0.3em] uppercase block mb-4 border-b border-white/10 pb-4 inline-block">04 — O que mais incomoda</span>
+                <h2 class="font-editorial italic text-4xl md:text-5xl text-white">Qual a situação das pontas e do fio hoje?</h2>
+                <p class="font-tech text-luxury-gray text-xs mt-6 opacity-70">Pode selecionar todas as dores que sentir.</p>
             </div>
             
             <div class="space-y-4" id="options-dor">
                 <button onclick="toggleOption('dor', 'Vermelho_Ruptura', this)" class="option-btn glass-panel btn-press w-full text-left p-6 transition-all flex items-center gap-6 rounded-3xl">
                     <i class="check-icon ph ph-circle text-3xl text-luxury-gray/50 transition-colors"></i>
                     <div>
-                        <span class="font-tech font-light text-lg text-white block mb-1">Colapso Estrutural (Quebra)</span>
-                        <span class="font-tech text-xs subtitle-text text-luxury-gray leading-relaxed">Ruptura severa e fratura do fio seco.</span>
+                        <span class="font-tech font-light text-lg text-white block mb-1">Quebra (O cabelo parte e cai pedaços)</span>
+                        <span class="font-tech text-xs subtitle-text text-luxury-gray leading-relaxed">Ao passar a escova no cabelo seco, ele quebra no meio.</span>
                     </div>
                 </button>
                 <button onclick="toggleOption('dor', 'Vermelho_Elastico', this)" class="option-btn glass-panel btn-press w-full text-left p-6 transition-all flex items-center gap-6 rounded-3xl">
                     <i class="check-icon ph ph-circle text-3xl text-luxury-gray/50 transition-colors"></i>
                     <div>
-                        <span class="font-tech font-light text-lg text-white block mb-1">Fadiga Elástica</span>
-                        <span class="font-tech text-xs subtitle-text text-luxury-gray leading-relaxed">Emborrachado: estica úmido e não volta.</span>
+                        <span class="font-tech font-light text-lg text-white block mb-1">Emborrachado (Estica como chiclete)</span>
+                        <span class="font-tech text-xs subtitle-text text-luxury-gray leading-relaxed">Quando molhado, ele estica e perde totalmente a forma.</span>
                     </div>
                 </button>
                 <button onclick="toggleOption('dor', 'Amarelo_Porosidade', this)" class="option-btn glass-panel btn-press w-full text-left p-6 transition-all flex items-center gap-6 rounded-3xl">
                     <i class="check-icon ph ph-circle text-3xl text-luxury-gray/50 transition-colors"></i>
                     <div>
-                        <span class="font-tech font-light text-lg text-white block mb-1">Desgaste (Frizz/Aspereza)</span>
-                        <span class="font-tech text-xs subtitle-text text-luxury-gray leading-relaxed">Superfície porosa, embaraça sem brilho.</span>
+                        <span class="font-tech font-light text-lg text-white block mb-1">Poroso, Áspero e com Muito Frizz</span>
+                        <span class="font-tech text-xs subtitle-text text-luxury-gray leading-relaxed">Sem brilho, incha com facilidade e dá nós o tempo todo.</span>
+                    </div>
+                </button>
+                <button onclick="toggleOption('dor', 'Amarelo_Afinamento', this)" class="option-btn glass-panel btn-press w-full text-left p-6 transition-all flex items-center gap-6 rounded-3xl">
+                    <i class="check-icon ph ph-circle text-3xl text-luxury-gray/50 transition-colors"></i>
+                    <div>
+                        <span class="font-tech font-light text-lg text-white block mb-1">Pontas Ralas (Afinamento)</span>
+                        <span class="font-tech text-xs subtitle-text text-luxury-gray leading-relaxed">O cabelo perdeu a massa e o volume, ficando com as pontas transparentes.</span>
                     </div>
                 </button>
                 <button onclick="toggleOption('dor', 'Verde_Saudavel', this)" class="option-btn glass-panel btn-press w-full text-left p-6 transition-all flex items-center gap-6 rounded-3xl" id="btn-saudavel">
                     <i class="check-icon ph ph-circle text-3xl text-luxury-gray/50 transition-colors"></i>
                     <div>
-                        <span class="font-tech font-light text-lg text-white block mb-1">Fibra Saudável</span>
-                        <span class="font-tech text-xs subtitle-text text-luxury-gray leading-relaxed">Foco exclusivo em proteção e prevenção.</span>
+                        <span class="font-tech font-light text-lg text-white block mb-1">Está Saudável</span>
+                        <span class="font-tech text-xs subtitle-text text-luxury-gray leading-relaxed">Busco apenas mantê-lo bonito, com brilho e evitar danos futuros.</span>
                     </div>
                 </button>
             </div>
 
-            <button id="btnAdvance3" onclick="nextView(4)" class="btn-press w-full bg-white text-black font-cta py-5 px-8 rounded-full uppercase tracking-[0.2em] text-[10px] font-bold transition-all mt-10 opacity-0 pointer-events-none transform translate-y-4">
-                Enviar Sintomas à IA
+            <button id="btnAdvance4" onclick="nextView(5)" class="btn-press w-full bg-white text-black font-cta py-5 px-8 rounded-full uppercase tracking-[0.2em] text-[10px] font-bold transition-all mt-10 opacity-0 pointer-events-none transform translate-y-4">
+                Enviar para a Inteligência Artificial
             </button>
         </section>
 
-        <!-- View 4: Lead -->
-        <section id="view-4" class="hidden flex-col justify-center py-20 max-w-xl mx-auto w-full">
+        <!-- View 5: Lead -->
+        <section id="view-5" class="hidden flex-col justify-center py-20 max-w-xl mx-auto w-full">
             <div class="mb-12 text-center">
                 <i class="ph ph-sparkle text-4xl text-white/50 mb-6"></i>
-                <h2 class="font-editorial italic text-5xl mb-6 text-white">A sua Assinatura</h2>
+                <h2 class="font-editorial italic text-5xl mb-6 text-white">Para onde enviamos a prescrição?</h2>
                 <p class="font-tech text-luxury-gray text-base leading-relaxed font-light">
-                    A nossa Concierge IA irá processar as suas seleções para decodificar o diagnóstico exato da sua fibra capilar.
+                    A nossa Concierge IA já cruzou as suas respostas. Deixe o seu nome para desbloquearmos o nível de alerta e o protocolo gerado.
                 </p>
             </div>
             
@@ -314,13 +367,13 @@
                 </div>
 
                 <button type="submit" id="submitBtn" disabled class="btn-press w-full glass-panel text-luxury-gray font-cta py-6 px-8 rounded-full uppercase tracking-[0.2em] text-[10px] font-bold transition-all mt-8 opacity-50 cursor-not-allowed">
-                    Sintetizar Diagnóstico
+                    Revelar o meu Diagnóstico
                 </button>
             </form>
         </section>
 
-        <!-- View 5: Loader -->
-        <section id="view-5" class="hidden flex-col items-center justify-center text-center py-32 max-w-lg mx-auto w-full">
+        <!-- View 6: Loader (IA Thinking) -->
+        <section id="view-6" class="hidden flex-col items-center justify-center text-center py-32 max-w-lg mx-auto w-full">
             <div class="relative mb-12">
                 <!-- Loader Glass/Orbital -->
                 <div class="w-24 h-24 rounded-full border border-white/10 border-t-white/80 animate-spin absolute inset-0"></div>
@@ -328,55 +381,57 @@
                 <i class="ph ph-brain font-light text-4xl text-white/80 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"></i>
             </div>
             <h3 class="font-editorial italic text-4xl mb-4 text-white">Concierge IA em Análise</h3>
-            <p id="loadingText" class="font-mono text-luxury-gray text-[10px] tracking-widest uppercase">A cruzar histórico e sintomas...</p>
+            <p id="loadingText" class="font-mono text-luxury-gray text-[10px] tracking-widest uppercase">Mapeando curvatura e espessura...</p>
         </section>
 
-        <!-- View 6: Result -->
-        <section id="view-6" class="hidden flex-col justify-center py-20 max-w-2xl mx-auto w-full text-center">
+        <!-- View 7: Result -->
+        <section id="view-7" class="hidden flex-col justify-center py-20 max-w-2xl mx-auto w-full text-center">
             
             <div class="mb-10">
                 <div class="inline-flex items-center gap-2 glass-panel px-4 py-2 rounded-full mb-6">
                     <i class="ph ph-check-circle text-white"></i>
-                    <span class="font-mono text-[9px] uppercase tracking-widest text-luxury-platinum">Triagem Digital Concluída</span>
+                    <span class="font-mono text-[9px] uppercase tracking-widest text-luxury-platinum">Processamento Clínico Concluído</span>
                 </div>
                 
+                <!-- Aqui entra o Choque de Autoridade (O sistema devolve um nome técnico) -->
                 <h2 id="result-title" class="font-editorial italic text-5xl md:text-6xl text-white mb-6 leading-tight"></h2>
                 
                 <p class="font-tech text-luxury-gray text-base leading-relaxed font-light mb-10 max-w-lg mx-auto">
-                    Baseado no seu histórico e nos sintomas selecionados, a nossa Inteligência Artificial mapeou as suas necessidades.
+                    A Inteligência Artificial cruzou o histórico do seu cabelo e montou a arquitetura de recuperação necessária.
                 </p>
             </div>
 
-            <!-- Glass Receipt Box -->
+            <!-- Glass Receipt Box (A Receita Oculta) -->
             <div class="glass-panel p-8 md:p-12 rounded-[2.5rem] mb-12 relative overflow-hidden text-left">
-                <h4 class="font-mono text-[10px] uppercase tracking-[0.2em] text-white/50 border-b border-white/10 pb-4 mb-6">Prescrição Criptografada</h4>
+                <h4 class="font-mono text-[10px] uppercase tracking-[0.2em] text-white/50 border-b border-white/10 pb-4 mb-6">Arquitetura Protocolar Exigida</h4>
                 
                 <div class="space-y-4 blur-md opacity-30 select-none pointer-events-none">
-                    <div class="flex items-center gap-4"><div class="w-2 h-2 bg-white rounded-full"></div><span class="font-tech text-lg text-white">Complexo Aminoácidos Puros</span></div>
-                    <div class="flex items-center gap-4"><div class="w-2 h-2 bg-white rounded-full"></div><span class="font-tech text-lg text-white">Blindagem Cuticular Hidrofóbica</span></div>
-                    <div class="flex items-center gap-4"><div class="w-2 h-2 bg-white rounded-full"></div><span class="font-tech text-lg text-white">Reconstrução Molecular Profunda</span></div>
+                    <div class="flex items-center gap-4"><div class="w-2 h-2 bg-white rounded-full"></div><span class="font-tech text-lg text-white">Infusão de Lipídios Hidrofóbicos</span></div>
+                    <div class="flex items-center gap-4"><div class="w-2 h-2 bg-white rounded-full"></div><span class="font-tech text-lg text-white">Reposição de Matriz de Córtex</span></div>
+                    <div class="flex items-center gap-4"><div class="w-2 h-2 bg-white rounded-full"></div><span class="font-tech text-lg text-white">Blindagem Térmica Polimérica</span></div>
                 </div>
                 
                 <div class="absolute inset-0 flex flex-col items-center justify-center text-center p-6 bg-black/20">
                     <i class="ph ph-lock-key text-3xl text-white mb-3"></i>
                     <span class="text-white text-sm font-tech font-light max-w-sm">
-                        Para a sua biossegurança, a dosagem protocolar exata foi retida. A especialista humana necessita validar a estrutura tátil.
+                        Para a sua segurança, a química exata da receita foi retida. A Bio-Arquiteta necessita validar o seu cabelo pessoalmente para libertar a dosagem milimétrica.
                     </span>
                 </div>
             </div>
 
             <button onclick="schedulePhysical()" class="btn-press w-full max-w-md mx-auto bg-white text-black font-cta py-5 px-8 rounded-full uppercase tracking-[0.2em] text-[10px] font-bold hover:shadow-[0_0_30px_rgba(255,255,255,0.3)] transition-all block">
-                Agendar Validação na Matriz
+                Agendar Teste de Tração Físico
             </button>
-            <p class="font-mono text-[9px] text-luxury-gray mt-6 uppercase tracking-widest">Atendimento Presencial Exclusivo</p>
+            <p class="font-mono text-[9px] text-luxury-gray mt-6 uppercase tracking-widest">Avaliação na Matriz Chapecó</p>
         </section>
 
     </main>
 
     <script>
-        // --- 1. STATE MANAGEMENT ---
+        // --- 1. STATE MANAGEMENT (Adicionado "curvatura") ---
         let patientData = {
-            estrutura: '',
+            curvatura: '',
+            espessura: '',
             quimica: [],
             dor: [],
             nome: '',
@@ -384,6 +439,7 @@
         };
 
         let currentStep = 0;
+        const totalSteps = 6; // Agora temos do view-0 ao view-6 (antes de carregar)
 
         // --- 2. INPUT LOGIC & GLASS TOGGLE ---
         function saveSingleAnswer(key, value, nextStepIndex) {
@@ -394,7 +450,8 @@
         function toggleOption(category, value, element) {
             const arr = patientData[category];
             const index = arr.indexOf(value);
-            const btnAdvance = document.getElementById(category === 'quimica' ? 'btnAdvance2' : 'btnAdvance3');
+            // btnAdvance3 para Química, btnAdvance4 para Dor
+            const btnAdvance = document.getElementById(category === 'quimica' ? 'btnAdvance3' : 'btnAdvance4');
 
             if(value === 'Virgem' || value === 'Verde_Saudavel') {
                 clearCategory(category);
@@ -445,7 +502,8 @@
             const nextSection = document.getElementById(`view-${stepIndex}`);
             const backBtn = document.getElementById('backBtn');
 
-            if(stepIndex > 0 && stepIndex < 5) backBtn.classList.remove('hidden');
+            // Header/Back button display logic
+            if(stepIndex > 0 && stepIndex < totalSteps) backBtn.classList.remove('hidden');
             else backBtn.classList.add('hidden');
 
             window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -464,7 +522,6 @@
 
         function goBack() {
             if(currentStep === 0) return;
-            // Simplified linear back logic
             let prevStep = currentStep - 1;
             nextView(prevStep);
         }
@@ -498,16 +555,16 @@
             e.preventDefault();
             patientData.nome = document.getElementById('nome').value;
             patientData.whatsapp = document.getElementById('whatsapp').value;
-            nextView(5); 
+            nextView(6); // Go to Loader
             simulateLoading();
         }
 
         // --- 5. AI CONCIERGE LOADER & RESULT REVEAL ---
         const loadingTexts = [
-            "A cruzar dados de espessura...",
-            "A analisar sobreposição química...",
-            "A calcular risco de elasticidade...",
-            "A estruturar receita biológica..."
+            "A ler morfologia da base...",
+            "A processar conflitos químicos...",
+            "A decodificar quadro sintomático...",
+            "A estruturar fórmula protetiva..."
         ];
 
         function simulateLoading() {
@@ -528,7 +585,7 @@
             setTimeout(() => {
                 clearInterval(interval);
                 generateResult();
-                nextView(6);
+                nextView(7); // Show result
             }, 5500);
         }
 
@@ -538,18 +595,19 @@
             
             let statusText = '';
 
-            if(hasRed) { statusText = "Alerta de<br>Colapso Cortical"; }
-            else if(hasYellow) { statusText = "Quadro de<br>Fadiga Cuticular"; }
-            else { statusText = "Estabilidade<br>Estrutural"; }
+            // O sistema transforma as escolhas fáceis da cliente num laudo médico assustador/de autoridade
+            if(hasRed) { statusText = "Alerta Clínico:<br>Colapso Cortical"; }
+            else if(hasYellow) { statusText = "Atenção:<br>Fadiga Cuticular"; }
+            else { statusText = "Estabilidade<br>Homeostática"; }
 
             document.getElementById('result-title').innerHTML = statusText;
         }
 
         // --- 6. GITHUB HOOK ---
         function schedulePhysical() {
-            console.log("=== PAYLOAD V.10.0 [AI CONCIERGE & GLASSMORPHISM FULLSCREEN] ===");
+            console.log("=== PAYLOAD V.11.0 [UX CLIENT-FRIENDLY & AI LUXURY] ===");
             console.log(JSON.stringify(patientData, null, 2));
-            alert(`Aviso do Sistema (Glitch OS):\n\nA paciente ${patientData.nome} será redirecionada para a marcação. Dados capturados com sucesso.`);
+            alert(`Aviso do Sistema (Glitch OS):\n\nA paciente ${patientData.nome} será redirecionada para o WhatsApp da Jô ou para a agenda. Payload gerado com Curvatura, Espessura, Química e Dor.`);
         }
     </script>
 </body>
