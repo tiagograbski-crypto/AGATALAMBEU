@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>GL PRO | Arquitetura Capilar - Concierge IA</title>
+    <!-- Tailwind CSS with Dark Mode Class Strategy -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class', // Ativa o modo escuro via classe CSS
+            theme: {
+                extend: {
+                    fontFamily: {
+                        editorial: ['"Playfair Display"', 'serif'],
+                        tech: ['Inter', 'sans-serif'],
+                        cta: ['Montserrat', 'sans-serif'],
+                        mono: ['"JetBrains Mono"', 'monospace'],
+                    },
+                    colors: {
+                        clinical: {
+                            bg: '#F8FAFC',
+                            card: 'rgba(255, 255, 255, 0.7)',
+                            text: '#0F172A',
+                            subtext: '#64748B',
+                            border: 'rgba(15, 23, 42, 0.1)',
+                            accent: '#0F172A', // Preto profundo para contraste no claro
+                        },
+                        luxury: {
+                            bg: '#050505',
+                            card: 'rgba(20, 20, 20, 0.6)',
+                            text: '#FFFFFF',
+                            subtext: '#A1A1AA',
+                            border: 'rgba(255, 255, 255, 0.1)',
+                            accent: '#FFFFFF', // Branco puro para contraste no escuro
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    
+    <style>
+        body { 
+            min-height: 100vh;
+            overflow-x: hidden;
+            -webkit-tap-highlight-color: transparent;
+            display: flex;
+            flex-direction: column;
+            transition: background-color 0.5s ease, color 0.5s ease;
+        }
+        
+        /* Backgrounds Animados (Claro e Escuro) */
+        .ambient-bg-light {
+            position: fixed; inset: 0; z-index: -2;
+            background: #F8FAFC;
+            background-image: radial-gradient(#E2E8F0 1px, transparent 1px);
+            background-size: 30px 30px;
+        }
+        .ambient-bg-dark {
+            position: fixed; inset: 0; z-index: -2;
+            background: #030303;
+            opacity: 0; transition: opacity 0.5s ease; pointer-events: none;
+        }
+        .dark .ambient-bg-dark { opacity: 1; }
+        .dark .ambient-bg-light { opacity: 0; }
+
+        /* Orbs de Luz */
+        .ambient-orb-1 {
+            position: absolute; top: -10%; left: -10%; width: 50vw; height: 50vw;
+            background: radial-gradient(circle, rgba(148,163,184,0.2) 0%, transparent 60%);
+            filter: blur(60px); animation: floatOrb 20s ease-in-out infinite alternate;
+        }
+        .dark .ambient-orb-1 { background: radial-gradient(circle, rgba(255,255,255,0.04) 0%, transparent 60%); }
+
+        @keyframes floatOrb {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(10%, 10%); }
+        }
+
+        /* Efeito Vidro Translúcido (Glassmorphism Adaptativo) */
+        .glass-panel {
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .glass-panel:hover {
+            transform: translateY(-2px);
+        }
+        
+        /* Estado Selecionado */
+        .glass-selected {
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            transform: translateY(-2px);
+        }
+
+        /* Animações UI Fullscreen */
+        .fade-up-enter { animation: fadeUpEnter 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        .fade-up-exit { animation: fadeUpExit 0.4s ease-out forwards; }
+        
+        @keyframes fadeUpEnter {
+            from { opacity: 0; transform: translateY(20px); filter: blur(4px); }
+            to { opacity: 1; transform: translateY(0); filter: blur(0); }
+        }
+        @keyframes fadeUpExit {
+            from { opacity: 1; transform: translateY(0); }
+            to { opacity: 0; transform: translateY(-15px); filter: blur(2px); }
+        }
+
+        .btn-press { transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1); }
+        .btn-press:active { transform: scale(0.97); }
+
+        /* Inputs de Texto */
+        .input-glass {
+            backdrop-filter: blur(10px);
+            border-radius: 9999px;
+            transition: all 0.3s ease;
+        }
+        .input-glass:focus {
+            outline: none;
+        }
+
+        ::-webkit-scrollbar { width: 0px; background: transparent; }
+
+        /* Toggle Switch CSS */
+        .toggle-checkbox:checked {
+            right: 0;
+            border-color: #0F172A;
+        }
+        .toggle-checkbox:checked + .toggle-label {
+            background-color: #0F172A;
+        }
+    </style>
+</head>
+<body class="font-tech text-clinical-text dark:text-luxury-text transition-colors duration-500">
+
+    <!-- Fundo Clinical Light Default -->
+    <div class="ambient-bg-light">
+        <div class="ambient-orb-1"></div>
+    </div>
+    <!-- Fundo Dark (Oculto por default) -->
+    <div class="ambient-bg-dark">
+        <div class="ambient-orb-1"></div>
+    </div>
+
+    <!-- Header Progress & Theme Toggle -->
+    <header class="w-full px-6 md:px-8 pt-6 pb-4 flex items-center justify-between z-50 fixed top-0" id="mainHeader">
+        <button onclick="goBack()" id="backBtn" class="text-clinical-subtext hover:text-clinical-text dark:text-luxury-subtext dark:hover:text-luxury-text transition-colors hidden focus:outline-none glass-panel bg-clinical-card dark:bg-luxury-card border border-clinical-border dark:border-luxury-border w-10 h-10 rounded-full flex items-center justify-center">
+            <i class="ph ph-arrow-left text-xl"></i>
+        </button>
+        <div class="flex-1 text-center">
+            <h1 class="font-cta text-[10px] tracking-[0.5em] uppercase font-bold">[GL.] PRO</h1>
+        </div>
+        
+        <!-- Theme Toggle Switch -->
+        <div class="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in">
+            <input type="checkbox" name="toggle" id="themeToggle" onclick="toggleTheme()" class="toggle-checkbox absolute block w-5 h-5 rounded-full bg-white border-4 border-slate-200 appearance-none cursor-pointer z-10 top-0 left-0 transition-transform duration-300 ease-in-out" />
+            <label for="themeToggle" class="toggle-label block overflow-hidden h-5 rounded-full bg-slate-200 cursor-pointer"></label>
+        </div>
+        
+        <div class="absolute bottom-0 left-0 h-[2px] bg-black/5 dark:bg-white/10 w-full">
+            <div id="progressBar" class="h-full bg-clinical-accent dark:bg-luxury-accent transition-all duration-500 ease-out" style="width: 0%;"></div>
+        </div>
+    </header>
+
+    <!-- FULLSCREEN MAIN AREA -->
+    <main class="w-full max-w-4xl mx-auto px-6 flex-1 flex flex-col justify-center relative z-10" id="appContainer">
+        
+        <!-- View 0: Landing -->
+        <section id="view-0" class="fade-up-enter text-center py-20 mt-10">
+            <div class="mb-12">
+                <div class="inline-flex items-center gap-2 glass-panel bg-clinical-card dark:bg-luxury-card border border-clinical-border dark:border-luxury-border px-4 py-2 rounded-full mb-8 shadow-sm">
+                    <span class="relative flex h-2 w-2">
+                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                    </span>
+                    <span class="font-mono text-[9px] uppercase tracking-widest text-clinical-subtext dark:text-luxury-subtext font-medium">Concierge IA Online</span>
+                </div>
+                <h1 class="font-editorial text-5xl md:text-7xl mb-6 leading-tight tracking-tight">
+                    Arquitetura<br><span class="italic font-light text-clinical-subtext dark:text-luxury-subtext">Capilar</span>
+                </h1>
+                <p class="font-tech text-clinical-subtext dark:text-luxury-subtext text-base md:text-lg mb-14 font-light leading-relaxed max-w-lg mx-auto">
+                    Vamos descobrir o que o seu fio realmente precisa. A nossa IA fará uma triagem clínica rápida e precisa para prescrever a sua receita.
+                </p>
+            </div>
+            
+            <button onclick="nextView(1)" class="btn-press w-full max-w-md mx-auto bg-clinical-accent text-white dark:bg-luxury-accent dark:text-black font-cta py-5 px-8 rounded-full uppercase tracking-[0.2em] text-[10px] font-bold shadow-lg hover:shadow-xl transition-all duration-300 block">
+                Iniciar Diagnóstico
+            </button>
+        </section>
+
+        <!-- View 1: Curvatura -->
+        <section id="view-1" class="hidden flex-col justify-center py-20 mt-10 max-w-2xl mx-auto w-full">
+            <div class="mb-12 text-center">
+                <span class="font-mono text-clinical-subtext dark:text-luxury-subtext text-[10px] tracking-[0.3em] uppercase block mb-4 border-b border-clinical-border dark:border-luxury-border pb-4 inline-block font-semibold">Passo 1 de 5</span>
+                <h2 class="font-editorial italic text-4xl md:text-5xl">Como é a forma natural do seu cabelo?</h2>
+            </div>
+            
+            <div class="space-y-4">
+                <button onclick="saveSingleAnswer('curvatura', 'Liso', 2)" class="option-btn btn-press glass-panel bg-clinical-card dark:bg-luxury-card border border-clinical-border dark:border-luxury-border w-full text-left p-6 md:p-8 flex items-center justify-between group rounded-[2rem] hover:border-clinical-text dark:hover:border-white shadow-sm">
+                    <div>
+                        <span class="font-tech font-medium text-xl block mb-2">Liso e Reto</span>
+                        <span class="font-tech text-xs subtitle-text text-clinical-subtext dark:text-luxury-subtext">Sem ondas naturais, tende a ser mais oleoso na raiz.</span>
+                    </div>
+                    <i class="arrow-icon ph ph-arrow-right opacity-0 transition-all transform -translate-x-4 text-2xl"></i>
+                </button>
+                <button onclick="saveSingleAnswer('curvatura', 'Ondulado', 2)" class="option-btn btn-press glass-panel bg-clinical-card dark:bg-luxury-card border border-clinical-border dark:border-luxury-border w-full text-left p-6 md:p-8 flex items-center justify-between group rounded-[2rem] hover:border-clinical-text dark:hover:border-white shadow-sm">
+                    <div>
+                        <span class="font-tech font-medium text-xl block mb-2">Ondulado</span>
+                        <span class="font-tech text-xs subtitle-text text-clinical-subtext dark:text-luxury-subtext">Forma leves ondas em "S", especialmente nas pontas.</span>
+                    </div>
+                    <i class="arrow-icon ph ph-arrow-right opacity-0 transition-all transform -translate-x-4 text-2xl"></i>
+                </button>
+                <button onclick="saveSingleAnswer('curvatura', 'Cacheado', 2)" class="option-btn btn-press glass-panel bg-clinical-card dark:bg-luxury-card border border-clinical-border dark:border-luxury-border w-full text-left p-6 md:p-8 flex items-center justify-between group rounded-[2rem] hover:border-clinical-text dark:hover:border-white shadow-sm">
+                    <div>
+                        <span class="font-tech font-medium text-xl block mb-2">Cacheado</span>
+                        <span class="font-tech text-xs subtitle-text text-clinical-subtext dark:text-luxury-subtext">Cachos definidos, formato de mola, tende a ser mais seco.</span>
+                    </div>
+                    <i class="arrow-icon ph ph-arrow-right opacity-0 transition-all transform -translate-x-4 text-2xl"></i>
+                </button>
+                <button onclick="saveSingleAnswer('curvatura', 'Crespo', 2)" class="option-btn btn-press glass-panel bg-clinical-card dark:bg-luxury-card border border-clinical-border dark:border-luxury-border w-full text-left p-6 md:p-8 flex items-center justify-between group rounded-[2rem] hover:border-clinical-text dark:hover:border-white shadow-sm">
+                    <div>
+                        <span class="font-tech font-medium text-xl block mb-2">Crespo / Volumoso</span>
+                        <span class="font-tech text-xs subtitle-text text-clinical-subtext dark:text-luxury-subtext">Cachos bem fechados desde a raiz, volume natural alto.</span>
+                    </div>
+                    <i class="arrow-icon ph ph-arrow-right opacity-0 transition-all transform -translate-x-4 text-2xl"></i>
+                </button>
+            </div>
+        </section>
+
+        <!-- View 2: Espessura -->
+        <section id="view-2" class="hidden flex-col justify-center py-20 mt-10 max-w-2xl mx-auto w-full">
+            <div class="mb-12 text-center">
+                <span class="font-mono text-clinical-subtext dark:text-luxury-subtext text-[10px] tracking-[0.3em] uppercase block mb-4 border-b border-clinical-border dark:border-luxury-border pb-4 inline-block font-semibold">Passo 2 de 5</span>
+                <h2 class="font-editorial italic text-4xl md:text-5xl">Ao tocar nos fios, o que você sente?</h2>
+            </div>
+            
+            <div class="space-y-4">
+                <button onclick="saveSingleAnswer('espessura', 'Fino', 3)" class="option-btn btn-press glass-panel bg-clinical-card dark:bg-luxury-card border border-clinical-border dark:border-luxury-border w-full text-left p-6 md:p-8 flex items-center justify-between group rounded-[2rem] hover:border-clinical-text dark:hover:border-white shadow-sm">
+                    <div>
+                        <span class="font-tech font-medium text-xl block mb-2">Fino e Delicado</span>
+                        <span class="font-tech text-xs subtitle-text text-clinical-subtext dark:text-luxury-subtext">Parece cabelo de bebé. Míngua rápido e embaraça muito fácil.</span>
+                    </div>
+                    <i class="arrow-icon ph ph-arrow-right opacity-0 transition-all transform -translate-x-4 text-2xl"></i>
+                </button>
+                <button onclick="saveSingleAnswer('espessura', 'Médio', 3)" class="option-btn btn-press glass-panel bg-clinical-card dark:bg-luxury-card border border-clinical-border dark:border-luxury-border w-full text-left p-6 md:p-8 flex items-center justify-between group rounded-[2rem] hover:border-clinical-text dark:hover:border-white shadow-sm">
+                    <div>
+                        <span class="font-tech font-medium text-xl block mb-2">Médio / Normal</span>
+                        <span class="font-tech text-xs subtitle-text text-clinical-subtext dark:text-luxury-subtext">Nem muito fino, nem muito pesado. Volume equilibrado.</span>
+                    </div>
+                    <i class="arrow-icon ph ph-arrow-right opacity-0 transition-all transform -translate-x-4 text-2xl"></i>
+                </button>
+                <button onclick="saveSingleAnswer('espessura', 'Grosso', 3)" class="option-btn btn-press glass-panel bg-clinical-card dark:bg-luxury-card border border-clinical-border dark:border-luxury-border w-full text-left p-6 md:p-8 flex items-center justify-between group rounded-[2rem] hover:border-clinical-text dark:hover:border-white shadow-sm">
+                    <div>
+                        <span class="font-tech font-medium text-xl block mb-2">Grosso e Pesado</span>
+                        <span class="font-tech text-xs subtitle-text text-clinical-subtext dark:text-luxury-subtext">Fio rígido, espesso, difícil de modelar e pesa bastante.</span>
+                    </div>
+                    <i class="arrow-icon ph ph-arrow-right opacity-0 transition-all transform -translate-x-4 text-2xl"></i>
+                </button>
+            </div>
+        </section>
+
+        <!-- View 3: Histórico Químico (Múltipla) -->
+        <section id="view-3" class="hidden flex-col justify-center py-20 mt-10 max-w-2xl mx-auto w-full">
+            <div class="mb-10 text-center">
+                <span class="font-mono text-clinical-subtext dark:text-luxury-subtext text-[10px] tracking-[0.3em] uppercase block mb-4 border-b border-clinical-border dark:border-luxury-border pb-4 inline-block font-semibold">Passo 3 de 5</span>
+                <h2 class="font-editorial italic text-4xl md:text-5xl">O que já aplicou no seu cabelo?</h2>
+                <div class="inline-block mt-6 bg-clinical-text text-white dark:bg-white dark:text-black px-3 py-1 rounded font-mono text-[9px] uppercase tracking-widest">
+                    Pode selecionar mais de uma opção
+                </div>
+            </div>
+            
+            <div class="space-y-4" id="options-quimica">
+                <button onclick="toggleOption('quimica', 'Descoloração', this)" class="option-btn glass-panel bg-clinical-card dark:bg-luxury-card border border-clinical-border dark:border-luxury-border btn-press w-full text-left p-6 flex items-center gap-6 rounded-[2rem] shadow-sm">
+                    <i class="check-icon ph ph-square text-3xl text-clinical-subtext/50 dark:text-luxury-subtext/50 transition-colors"></i>
+                    <div>
+                        <span class="font-tech font-medium text-lg block mb-1">Luzes, Mechas ou Descoloração</span>
+                        <span class="font-tech text-xs subtitle-text text-clinical-subtext dark:text-luxury-subtext leading-relaxed">Qualquer técnica que exigiu pó descolorante.</span>
+                    </div>
+                </button>
+                <button onclick="toggleOption('quimica', 'Acida', this)" class="option-btn glass-panel bg-clinical-card dark:bg-luxury-card border border-clinical-border dark:border-luxury-border btn-press w-full text-left p-6 flex items-center gap-6 rounded-[2rem] shadow-sm">
+                    <i class="check-icon ph ph-square text-3xl text-clinical-subtext/50 dark:text-luxury-subtext/50 transition-colors"></i>
+                    <div>
+                        <span class="font-tech font-medium text-lg block mb-1">Progressiva Sem Formol / Selagem</span>
+                        <span class="font-tech text-xs subtitle-text text-clinical-subtext dark:text-luxury-subtext leading-relaxed">Ácidos, progressiva orgânica, botox ou alinhamento.</span>
+                    </div>
+                </button>
+                <button onclick="toggleOption('quimica', 'Formol', this)" class="option-btn glass-panel bg-clinical-card dark:bg-luxury-card border border-clinical-border dark:border-luxury-border btn-press w-full text-left p-6 flex items-center gap-6 rounded-[2rem] shadow-sm">
+                    <i class="check-icon ph ph-square text-3xl text-clinical-subtext/50 dark:text-luxury-subtext/50 transition-colors"></i>
+                    <div>
+                        <span class="font-tech font-medium text-lg block mb-1">Progressiva Com Formol</span>
+                        <span class="font-tech text-xs subtitle-text text-clinical-subtext dark:text-luxury-subtext leading-relaxed">Escova inteligente tradicional, marroquina, etc.</span>
+                    </div>
+                </button>
+                <button onclick="toggleOption('quimica', 'Coloração', this)" class="option-btn glass-panel bg-clinical-card dark:bg-luxury-card border border-clinical-border dark:border-luxury-border btn-press w-full text-left p-6 flex items-center gap-6 rounded-[2rem] shadow-sm">
+                    <i class="check-icon ph ph-square text-3xl text-clinical-subtext/50 dark:text-luxury-subtext/50 transition-colors"></i>
+                    <div>
+                        <span class="font-tech font-medium text-lg block mb-1">Tinta ou Tonalizante</span>
+                        <span class="font-tech text-xs subtitle-text text-clinical-subtext dark:text-luxury-subtext leading-relaxed">Coloração permanente, retoque de raiz ou cobrir brancos.</span>
+                    </div>
+                </button>
+                <button onclick="toggleOption('quimica', 'Virgem', this)" class="option-btn glass-panel bg-clinical-card dark:bg-luxury-card border border-clinical-border dark:border-luxury-border btn-press w-full text-left p-6 flex items-center gap-6 rounded-[2rem] shadow-sm" id="btn-virgem">
+                    <i class="check-icon ph ph-square text-3xl text-clinical-subtext/50 dark:text-luxury-subtext/50 transition-colors"></i>
+                    <div>
+                        <span class="font-tech font-medium text-lg block mb-1">Cabelo Natural (Virgem)</span>
+                        <span class="font-tech text-xs subtitle-text text-clinical-subtext dark:text-luxury-subtext leading-relaxed">Nenhuma intervenção química registada nos fios.</span>
+                    </div>
+                </button>
+            </div>
+
+            <button id="btnAdvance3" onclick="nextView(4)" class="btn-press w-full bg-clinical-accent text-white dark:bg-luxury-accent dark:text-black font-cta py-5 px-8 rounded-full uppercase tracking-[0.2em] text-[10px] font-bold transition-all mt-10 opacity-0 pointer-events-none transform translate-y-4 shadow-lg">
+                Confirmar Histórico Químico
+            </button>
+        </section>
+
+        <!-- View 4: Sintomas (Múltipla) -->
+        <section id="view-4" class="hidden flex-col justify-center py-20 mt-10 max-w-2xl mx-auto w-full">
+            <div class="mb-10 text-center">
+                <span class="font-mono text-clinical-subtext dark:text-luxury-subtext text-[10px] tracking-[0.3em] uppercase block mb-4 border-b border-clinical-border dark:border-luxury-border pb-4 inline-block font-semibold">Passo 4 de 5</span>
+                <h2 class="font-editorial italic text-4xl md:text-5xl">O que mais a incomoda hoje?</h2>
+                <div class="inline-block mt-6 bg-clinical-text text-white dark:bg-white dark:text-black px-3 py-1 rounded font-mono text-[9px] uppercase tracking-widest">
+                    Pode selecionar mais de uma opção
+                </div>
+            </div>
+            
+            <div class="space-y-4" id="options-dor">
+                <button onclick="toggleOption('dor', 'Amarelo_Pontas', this)" class="option-btn glass-panel bg-clinical-card dark:bg-luxury-card border border-clinical-border dark:border-luxury-border btn-press w-full text-left p-6 flex items-center gap-6 rounded-[2rem] shadow-sm">
+                    <i class="check-icon ph ph-square text-3xl text-clinical-subtext/50 dark:text-luxury-subtext/50 transition-colors"></i>
+                    <div>
+                        <span class="font-tech font-medium text-lg block mb-1">Pontas Duplas e Espigadas</span>
+                        <span class="font-tech text-xs subtitle-text text-clinical-subtext dark:text-luxury-subtext leading-relaxed">As extremidades dividem-se, o pente enrosca com frequência.</span>
+                    </div>
+                </button>
+                <button onclick="toggleOption('dor', 'Vermelho_Ruptura', this)" class="option-btn glass-panel bg-clinical-card dark:bg-luxury-card border border-clinical-border dark:border-luxury-border btn-press w-full text-left p-6 flex items-center gap-6 rounded-[2rem] shadow-sm">
+                    <i class="check-icon ph ph-square text-3xl text-clinical-subtext/50 dark:text-luxury-subtext/50 transition-colors"></i>
+                    <div>
+                        <span class="font-tech font-medium text-lg block mb-1">Quebra (O cabelo parte facilmente)</span>
+                        <span class="font-tech text-xs subtitle-text text-clinical-subtext dark:text-luxury-subtext leading-relaxed">Ao passar a escova no fio seco, ele rompe e caem pedaços.</span>
+                    </div>
+                </button>
+                <button onclick="toggleOption('dor', 'Vermelho_Elastico', this)" class="option-btn glass-panel bg-clinical-card dark:bg-luxury-card border border-clinical-border dark:border-luxury-border btn-press w-full text-left p-6 flex items-center gap-6 rounded-[2rem] shadow-sm">
+                    <i class="check-icon ph ph-square text-3xl text-clinical-subtext/50 dark:text-luxury-subtext/50 transition-colors"></i>
+                    <div>
+                        <span class="font-tech font-medium text-lg block mb-1">Emborrachado (Perda Elástica)</span>
+                        <span class="font-tech text-xs subtitle-text text-clinical-subtext dark:text-luxury-subtext leading-relaxed">Quando molhado, ele estica como elástico e não regressa à forma.</span>
+                    </div>
+                </button>
+                <button onclick="toggleOption('dor', 'Amarelo_Porosidade', this)" class="option-btn glass-panel bg-clinical-card dark:bg-luxury-card border border-clinical-border dark:border-luxury-border btn-press w-full text-left p-6 flex items-center gap-6 rounded-[2rem] shadow-sm">
+                    <i class="check-icon ph ph-square text-3xl text-clinical-subtext/50 dark:text-luxury-subtext/50 transition-colors"></i>
+                    <div>
+                        <span class="font-tech font-medium text-lg block mb-1">Poroso, Áspero e com Frizz</span>
+                        <span class="font-tech text-xs subtitle-text text-clinical-subtext dark:text-luxury-subtext leading-relaxed">Superfície sem brilho, incha facilmente com a humidade.</span>
+                    </div>
+                </button>
+                <button onclick="toggleOption('dor', 'Amarelo_Afinamento', this)" class="option-btn glass-panel bg-clinical-card dark:bg-luxury-card border border-clinical-border dark:border-luxury-border btn-press w-full text-left p-6 flex items-center gap-6 rounded-[2rem] shadow-sm">
+                    <i class="check-icon ph ph-square text-3xl text-clinical-subtext/50 dark:text-luxury-subtext/50 transition-colors"></i>
+                    <div>
+                        <span class="font-tech font-medium text-lg block mb-1">Pontas Ralas (Afinamento)</span>
+                        <span class="font-tech text-xs subtitle-text text-clinical-subtext dark:text-luxury-subtext leading-relaxed">Perda de densidade global. O cabelo perdeu o corpo e o volume.</span>
+                    </div>
+                </button>
+                <button onclick="toggleOption('dor', 'Verde_Saudavel', this)" class="option-btn glass-panel bg-clinical-card dark:bg-luxury-card border border-clinical-border dark:border-luxury-border btn-press w-full text-left p-6 flex items-center gap-6 rounded-[2rem] shadow-sm" id="btn-saudavel">
+                    <i class="check-icon ph ph-square text-3xl text-clinical-subtext/50 dark:text-luxury-subtext/50 transition-colors"></i>
+                    <div>
+                        <span class="font-tech font-medium text-lg block mb-1">Íntegro e Saudável</span>
+                        <span class="font-tech text-xs subtitle-text text-clinical-subtext dark:text-luxury-subtext leading-relaxed">Busco apenas blindagem, brilho radiante e manutenção preventiva.</span>
+                    </div>
+                </button>
+            </div>
+
+            <button id="btnAdvance4" onclick="nextView(5)" class="btn-press w-full bg-clinical-accent text-white dark:bg-luxury-accent dark:text-black font-cta py-5 px-8 rounded-full uppercase tracking-[0.2em] text-[10px] font-bold transition-all mt-10 opacity-0 pointer-events-none transform translate-y-4 shadow-lg">
+                Confirmar Sintomas
+            </button>
+        </section>
+
+        <!-- View 5: Procedimento Pretendido -->
+        <section id="view-5" class="hidden flex-col justify-center py-20 mt-10 max-w-2xl mx-auto w-full">
+            <div class="mb-12 text-center">
+                <span class="font-mono text-clinical-subtext dark:text-luxury-subtext text-[10px] tracking-[0.3em] uppercase block mb-4 border-b border-clinical-border dark:border-luxury-border pb-4 inline-block font-semibold">Último Passo — 5 de 5</span>
+                <h2 class="font-editorial italic text-4xl md:text-5xl">Qual é a sua meta principal com a GL PRO?</h2>
+            </div>
+            
+            <div class="space-y-4">
+                <button onclick="saveSingleAnswer('objetivo', 'Tratamento', 6)" class="option-btn glass-panel bg-clinical-card dark:bg-luxury-card border border-clinical-border dark:border-luxury-border btn-press w-full text-left p-6 md:p-8 flex items-center justify-between group rounded-[2rem] hover:border-clinical-text dark:hover:border-white shadow-sm">
+                    <div>
+                        <span class="font-tech font-medium text-xl block mb-2">Recuperação Estrutural</span>
+                        <span class="font-tech text-xs subtitle-text text-clinical-subtext dark:text-luxury-subtext">Desejo um protocolo profundo para devolver massa e saúde ao fio.</span>
+                    </div>
+                    <i class="arrow-icon ph ph-arrow-right opacity-0 transition-all transform -translate-x-4 text-2xl"></i>
+                </button>
+                <button onclick="saveSingleAnswer('objetivo', 'Quimica', 6)" class="option-btn glass-panel bg-clinical-card dark:bg-luxury-card border border-clinical-border dark:border-luxury-border btn-press w-full text-left p-6 md:p-8 flex items-center justify-between group rounded-[2rem] hover:border-clinical-text dark:hover:border-white shadow-sm">
+                    <div>
+                        <span class="font-tech font-medium text-xl block mb-2">Transformação (Cor ou Forma)</span>
+                        <span class="font-tech text-xs subtitle-text text-clinical-subtext dark:text-luxury-subtext">Quero agendar luzes, coloração, selagem ou alteração química.</span>
+                    </div>
+                    <i class="arrow-icon ph ph-arrow-right opacity-0 transition-all transform -translate-x-4 text-2xl"></i>
+                </button>
+                <button onclick="saveSingleAnswer('objetivo', 'Corte', 6)" class="option-btn glass-panel bg-clinical-card dark:bg-luxury-card border border-clinical-border dark:border-luxury-border btn-press w-full text-left p-6 md:p-8 flex items-center justify-between group rounded-[2rem] hover:border-clinical-text dark:hover:border-white shadow-sm">
+                    <div>
+                        <span class="font-tech font-medium text-xl block mb-2">Design de Corte</span>
+                        <span class="font-tech text-xs subtitle-text text-clinical-subtext dark:text-luxury-subtext">Preciso renovar o visual estrutural ou eliminar pontas duplas.</span>
+                    </div>
+                    <i class="arrow-icon ph ph-arrow-right opacity-0 transition-all transform -translate-x-4 text-2xl"></i>
+                </button>
+                <button onclick="saveSingleAnswer('objetivo', 'Mapeamento', 6)" class="option-btn glass-panel bg-clinical-card dark:bg-luxury-card border border-clinical-border dark:border-luxury-border btn-press w-full text-left p-6 md:p-8 flex items-center justify-between group rounded-[2rem] hover:border-clinical-text dark:hover:border-white shadow-sm">
+                    <div>
+                        <span class="font-tech font-medium text-xl block mb-2">Apenas Mapeamento Capilar</span>
+                        <span class="font-tech text-xs subtitle-text text-clinical-subtext dark:text-luxury-subtext">Sem compromisso. Quero apenas descobrir como cuidar corretamente do fio.</span>
+                    </div>
+                    <i class="arrow-icon ph ph-arrow-right opacity-0 transition-all transform -translate-x-4 text-2xl"></i>
+                </button>
+            </div>
+        </section>
+
+        <!-- View 6: Lead (A Conversão Suave) -->
+        <section id="view-6" class="hidden flex-col justify-center py-20 mt-10 max-w-xl mx-auto w-full">
+            <div class="mb-12 text-center">
+                <i class="ph ph-envelope-open text-4xl text-clinical-subtext dark:text-luxury-subtext mb-6"></i>
+                <h2 class="font-editorial italic text-5xl mb-6">Para onde enviamos a sua receita clínica?</h2>
+                <p class="font-tech text-clinical-subtext dark:text-luxury-subtext text-base leading-relaxed font-light">
+                    A Inteligência Artificial vai gerar o seu dossiê clínico neste exato momento. Identifique-se para associarmos o laudo ao seu nome.
+                </p>
+            </div>
+            
+            <form id="leadForm" onsubmit="handleLeadSubmit(event)" class="space-y-6">
+                <div>
+                    <input type="text" id="nome" required oninput="validateForm()" class="input-glass w-full p-6 text-sm font-tech text-center border border-clinical-border dark:border-luxury-border bg-white/50 dark:bg-white/5 placeholder-clinical-subtext dark:placeholder-luxury-subtext shadow-sm" placeholder="O seu Nome Completo">
+                </div>
+                
+                <div>
+                    <input type="tel" id="whatsapp" oninput="formatPhone(this); validateForm()" required class="input-glass w-full p-6 text-sm font-tech text-center border border-clinical-border dark:border-luxury-border bg-white/50 dark:bg-white/5 placeholder-clinical-subtext dark:placeholder-luxury-subtext shadow-sm" placeholder="O seu melhor WhatsApp">
+                </div>
+
+                <button type="submit" id="submitBtn" disabled class="btn-press w-full glass-panel bg-clinical-card text-clinical-subtext dark:bg-luxury-card dark:text-luxury-subtext border border-clinical-border dark:border-luxury-border font-cta py-6 px-8 rounded-full uppercase tracking-[0.2em] text-[10px] font-bold transition-all mt-8 opacity-50 cursor-not-allowed shadow-sm">
+                    Gerar e Desbloquear Dossiê
+                </button>
+            </form>
+        </section>
+
+        <!-- View 7: Loader (IA Thinking) -->
+        <section id="view-7" class="hidden flex-col items-center justify-center text-center py-32 mt-10 max-w-lg mx-auto w-full">
+            <div class="relative mb-12">
+                <div class="w-24 h-24 rounded-full border border-clinical-border dark:border-luxury-border border-t-clinical-accent dark:border-t-white animate-spin absolute inset-0"></div>
+                <div class="w-24 h-24 rounded-full border border-clinical-border/50 dark:border-luxury-border/50 border-b-clinical-accent/50 dark:border-b-white/50 animate-spin absolute inset-0" style="animation-direction: reverse; animation-duration: 1.5s;"></div>
+                <i class="ph ph-microscope font-light text-4xl text-clinical-accent dark:text-white absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"></i>
+            </div>
+            <h3 class="font-editorial italic text-4xl mb-4">A compilar matriz de dados</h3>
+            <p id="loadingText" class="font-mono text-clinical-subtext dark:text-luxury-subtext text-[10px] tracking-widest uppercase font-semibold">A ler biometria estrutural...</p>
+        </section>
+
+        <!-- View 8: Result -->
+        <section id="view-8" class="hidden flex-col justify-center py-20 mt-10 max-w-2xl mx-auto w-full text-center">
+            
+            <div class="mb-10">
+                <div class="inline-flex items-center gap-2 glass-panel bg-clinical-card dark:bg-luxury-card border border-clinical-border dark:border-luxury-border px-4 py-2 rounded-full mb-6 shadow-sm">
+                    <i class="ph ph-shield-check text-emerald-600 dark:text-emerald-400"></i>
+                    <span class="font-mono text-[9px] uppercase tracking-widest text-clinical-text dark:text-luxury-text font-semibold">Dossiê Clínico Processado</span>
+                </div>
+                
+                <!-- Status gerado via JavaScript com Graus de Severidade -->
+                <h2 id="result-title" class="font-editorial italic text-4xl md:text-5xl mb-6 leading-tight"></h2>
+                
+                <p class="font-tech text-clinical-subtext dark:text-luxury-subtext text-sm md:text-base leading-relaxed font-light mb-10 max-w-lg mx-auto">
+                    A Inteligência Artificial calculou as variáveis estruturais do seu fio e determinou a arquitetura protocolar primária.
+                </p>
+            </div>
+
+            <!-- Div para Alerta Químico de Bloqueio -->
+            <div id="alert-container"></div>
+
+            <!-- Glass Receipt Box (A Receita Criptografada) -->
+            <div class="glass-panel p-8 md:p-12 rounded-[2.5rem] mb-10 relative overflow-hidden text-left bg-clinical-card dark:bg-luxury-card border border-clinical-border dark:border-luxury-border shadow-md">
+                <h4 class="font-mono text-[10px] uppercase tracking-[0.2em] text-clinical-subtext dark:text-luxury-subtext border-b border-clinical-border dark:border-luxury-border pb-4 mb-6 font-semibold">Arquitetura Protocolar Criptografada</h4>
+                
+                <!-- Receita gerada dinamicamente via JS -->
+                <div id="dynamic-recipe" class="space-y-4 blur-md opacity-40 select-none pointer-events-none">
+                </div>
+                
+                <div class="absolute inset-0 flex flex-col items-center justify-center text-center p-6 bg-white/60 dark:bg-black/40 backdrop-blur-sm">
+                    <i class="ph ph-lock-key text-4xl text-clinical-text dark:text-white mb-4"></i>
+                    <span class="text-clinical-text dark:text-white text-sm font-tech font-medium max-w-sm leading-relaxed">
+                        Por diretrizes rigorosas de biossegurança, a dosagem milimétrica dos ativos foi criptografada. Apenas a Bio-Arquiteta pode avaliar a resistência tátil do seu fio presencialmente.
+                    </span>
+                </div>
+            </div>
+
+            <button id="finalCtaBtn" onclick="schedulePhysical()" class="btn-press w-full max-w-md mx-auto bg-clinical-accent text-white dark:bg-luxury-accent dark:text-black font-cta py-5 px-8 rounded-full uppercase tracking-[0.2em] text-[10px] font-bold shadow-lg hover:shadow-xl transition-all block">
+                Desbloquear Protocolo na Matriz
+            </button>
+            <p class="font-mono text-[9px] text-clinical-subtext dark:text-luxury-subtext mt-6 uppercase tracking-widest font-semibold">Atendimento sujeito à disponibilidade da agenda.</p>
+        </section>
+
+    </main>
+
+    <script>
+        // --- 0. THEME TOGGLE LOGIC ---
+        function toggleTheme() {
+            const htmlClasses = document.documentElement.classList;
+            if (htmlClasses.contains('dark')) {
+                htmlClasses.remove('dark');
+                // localStorage.theme = 'light';
+            } else {
+                htmlClasses.add('dark');
+                // localStorage.theme = 'dark';
+            }
+        }
+
+        // Default to Light (Clinical) mode on load as requested. No JS needed to force it since tailwind 'dark' class is absent by default.
+
+        // --- 1. STATE MANAGEMENT ---
+        let patientData = {
+            curvatura: '',
+            espessura: '',
+            quimica: [],
+            dor: [],
+            objetivo: '',
+            nome: '',
+            whatsapp: ''
+        };
+
+        let currentStep = 0;
+        const totalSteps = 7; 
+
+        // --- 2. INPUT LOGIC & GLASS TOGGLE ---
+        function saveSingleAnswer(key, value, nextStepIndex) {
+            patientData[key] = value;
+            nextView(nextStepIndex);
+        }
+
+        function toggleOption(category, value, element) {
+            const arr = patientData[category];
+            const index = arr.indexOf(value);
+            const btnAdvance = document.getElementById(category === 'quimica' ? 'btnAdvance3' : 'btnAdvance4');
+
+            if(value === 'Virgem' || value === 'Verde_Saudavel') {
+                clearCategory(category);
+                if (index === -1) { arr.push(value); setVisualState(element, true); }
+            } else {
+                const exclusiveIndex = arr.indexOf(category === 'quimica' ? 'Virgem' : 'Verde_Saudavel');
+                if (exclusiveIndex > -1) {
+                    arr.splice(exclusiveIndex, 1);
+                    setVisualState(document.getElementById(category === 'quimica' ? 'btn-virgem' : 'btn-saudavel'), false);
+                }
+                
+                if (index > -1) { arr.splice(index, 1); setVisualState(element, false); } 
+                else { arr.push(value); setVisualState(element, true); }
+            }
+
+            if (patientData[category].length > 0) {
+                btnAdvance.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-4');
+                btnAdvance.classList.add('opacity-100', 'translate-y-0');
+            } else {
+                btnAdvance.classList.add('opacity-0', 'pointer-events-none', 'translate-y-4');
+                btnAdvance.classList.remove('opacity-100', 'translate-y-0');
+            }
+        }
+
+        function setVisualState(element, isSelected) {
+            const icon = element.querySelector('.check-icon');
+            if(isSelected) {
+                element.classList.add('glass-selected');
+                // Adiciona bg contrastante escuro no modo claro, e branco no modo escuro
+                element.classList.add('bg-clinical-text', 'text-white', 'dark:bg-white', 'dark:text-black');
+                element.classList.remove('bg-clinical-card', 'dark:bg-luxury-card', 'text-clinical-text', 'dark:text-luxury-text');
+                icon.classList.replace('ph-square', 'ph-check-square');
+                
+                // Fix subtitles and icons for selected state
+                element.querySelectorAll('.subtitle-text').forEach(el => el.classList.replace('text-clinical-subtext', 'text-gray-300'));
+                element.querySelectorAll('.subtitle-text').forEach(el => el.classList.replace('dark:text-luxury-subtext', 'dark:text-gray-600'));
+            } else {
+                element.classList.remove('glass-selected');
+                element.classList.remove('bg-clinical-text', 'text-white', 'dark:bg-white', 'dark:text-black');
+                element.classList.add('bg-clinical-card', 'dark:bg-luxury-card', 'text-clinical-text', 'dark:text-luxury-text');
+                icon.classList.replace('ph-check-square', 'ph-square');
+
+                // Restore subtitles
+                element.querySelectorAll('.subtitle-text').forEach(el => el.classList.replace('text-gray-300', 'text-clinical-subtext'));
+                element.querySelectorAll('.subtitle-text').forEach(el => el.classList.replace('dark:text-gray-600', 'dark:text-luxury-subtext'));
+            }
+        }
+
+        function clearCategory(category) {
+            patientData[category] = [];
+            const container = document.getElementById(`options-${category}`);
+            const buttons = container.querySelectorAll('.option-btn');
+            buttons.forEach(btn => setVisualState(btn, false));
+        }
+
+        // --- 3. NAVIGATION ---
+        function nextView(stepIndex) {
+            const currentSection = document.getElementById(`view-${currentStep}`);
+            const nextSection = document.getElementById(`view-${stepIndex}`);
+            const backBtn = document.getElementById('backBtn');
+            const progress = document.getElementById('progressBar');
+
+            if(stepIndex > 0 && stepIndex < totalSteps) {
+                backBtn.classList.remove('hidden');
+                progress.style.width = `${(stepIndex / 6) * 100}%`; 
+            } else {
+                backBtn.classList.add('hidden');
+                if(stepIndex === 0) progress.style.width = `0%`;
+            }
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            currentSection.classList.remove('fade-up-enter');
+            currentSection.classList.add('fade-up-exit');
+            
+            setTimeout(() => {
+                currentSection.classList.add('hidden');
+                currentSection.classList.remove('fade-up-exit');
+                nextSection.classList.remove('hidden');
+                nextSection.classList.add('fade-up-enter');
+                currentStep = stepIndex;
+            }, 400); 
+        }
+
+        function goBack() {
+            if(currentStep === 0) return;
+            let prevStep = currentStep - 1;
+            nextView(prevStep);
+        }
+
+        // --- 4. FORM VALIDATION ---
+        function formatPhone(input) {
+            let value = input.value.replace(/\D/g, ''); 
+            if (value.length > 11) value = value.slice(0, 11);
+            if (value.length > 2) value = `(${value.slice(0,2)}) ${value.slice(2)}`;
+            if (value.length > 10) value = `${value.slice(0,10)}-${value.slice(10)}`;
+            input.value = value;
+        }
+
+        function validateForm() {
+            const nome = document.getElementById('nome').value.trim();
+            const whats = document.getElementById('whatsapp').value.trim();
+            const btn = document.getElementById('submitBtn');
+
+            if(nome.length > 2 && whats.length >= 14) {
+                btn.disabled = false;
+                btn.classList.remove('bg-clinical-card', 'dark:bg-luxury-card', 'text-clinical-subtext', 'dark:text-luxury-subtext', 'opacity-50', 'cursor-not-allowed');
+                btn.classList.add('bg-clinical-accent', 'text-white', 'dark:bg-luxury-accent', 'dark:text-black', 'opacity-100', 'shadow-md');
+            } else {
+                btn.disabled = true;
+                btn.classList.add('bg-clinical-card', 'dark:bg-luxury-card', 'text-clinical-subtext', 'dark:text-luxury-subtext', 'opacity-50', 'cursor-not-allowed');
+                btn.classList.remove('bg-clinical-accent', 'text-white', 'dark:bg-luxury-accent', 'dark:text-black', 'opacity-100', 'shadow-md');
+            }
+        }
+
+        function handleLeadSubmit(e) {
+            e.preventDefault();
+            patientData.nome = document.getElementById('nome').value;
+            patientData.whatsapp = document.getElementById('whatsapp').value;
+            nextView(7); 
+            simulateLoading();
+        }
+
+        // --- 5. AI CONCIERGE LOADER & RESULT REVEAL ---
+        const loadingTexts = [
+            "A ler biometria estrutural...",
+            "A analisar histórico de saturação química...",
+            "A calcular nível de elasticidade e tração...",
+            "A mapear necessidades intracelulares...",
+            "A criptografar protocolo de bio-arquitetura..."
+        ];
+
+        function simulateLoading() {
+            const textElement = document.getElementById('loadingText');
+            let i = 0;
+            
+            const interval = setInterval(() => {
+                i++;
+                if(i < loadingTexts.length) {
+                    textElement.style.opacity = 0;
+                    setTimeout(() => {
+                        textElement.innerText = loadingTexts[i];
+                        textElement.style.opacity = 1;
+                    }, 300);
+                }
+            }, 1400); 
+
+            setTimeout(() => {
+                clearInterval(interval);
+                generateResult();
+                nextView(8);
+            }, 7500);
+        }
+
+        function generateResult() {
+            const hasRed = patientData.dor.some(d => d.includes('Vermelho'));
+            const hasYellow = patientData.dor.some(d => d.includes('Amarelo'));
+            const hasPontas = patientData.dor.includes('Amarelo_Pontas');
+            
+            let statusText = '';
+            let recipeItems = [];
+
+            // A Lógica do Diagnóstico
+            if(hasRed) { 
+                statusText = "Alerta Nível 3:<br><span class='text-rose-600 dark:text-rose-500'>Risco de Colapso Cortical</span>"; 
+                recipeItems.push("Infusão de Aminoácidos Catiônicos");
+                recipeItems.push("Reconstrução de Matriz Proteica");
+            }
+            else if(hasYellow) { 
+                statusText = "Alerta Nível 2:<br><span class='text-amber-600 dark:text-amber-500'>Degradação Cuticular</span>"; 
+                recipeItems.push("Carga Lipídica Celular Hidrofóbica");
+                recipeItems.push("Selamento Cuticular Termo-Ativado");
+            }
+            else { 
+                statusText = "Nível de Integridade:<br><span class='text-emerald-600 dark:text-emerald-500'>Estável e Preservado</span>"; 
+                recipeItems.push("Blindagem Antioxidante Botânica");
+                recipeItems.push("Manutenção de Polímeros Hídricos");
+            }
+
+            if(hasPontas || patientData.objetivo === 'Corte') {
+                recipeItems.push("Design Terapêutico (Polimento de Tricoptilose)");
+            }
+
+            // GATILHO DE AUTORIDADE: Bloqueio Químico
+            let alertMessage = "";
+            if (patientData.objetivo === 'Quimica' && hasRed) {
+                alertMessage = `
+                <div class="bg-rose-50 dark:bg-rose-950/40 border border-rose-200 dark:border-rose-500/40 p-6 rounded-3xl mb-8 backdrop-blur-md relative overflow-hidden shadow-sm">
+                    <div class="absolute left-0 top-0 w-1 h-full bg-rose-500"></div>
+                    <span class="text-rose-600 dark:text-rose-400 font-bold text-[10px] uppercase tracking-[0.2em] block mb-3"><i class="ph ph-warning-octagon text-base align-middle mr-1"></i> Intervenção Química Bloqueada</span>
+                    <span class="text-clinical-text dark:text-white/90 text-sm font-tech font-medium dark:font-light leading-relaxed block">
+                        O sistema detetou incompatibilidade estrutural severa. Qualquer procedimento químico atual (descoloração ou ácidos) poderá resultar em <strong>corte químico irreversível</strong>. O seu protocolo principal foi alterado automaticamente para Reconstrução de Córtex.
+                    </span>
+                </div>`;
+            }
+
+            document.getElementById('result-title').innerHTML = statusText;
+            
+            // Injeta a Receita Gerada
+            let recipeHTML = recipeItems.map((item, idx) => `
+                <div class="flex items-center gap-4">
+                    <div class="font-mono text-[9px] text-clinical-subtext/60 dark:text-white/40 tracking-widest w-16 font-bold">[ FASE 0${idx+1} ]</div>
+                    <span class="font-tech text-base text-clinical-text dark:text-white/90 tracking-wide font-medium">${item}</span>
+                </div>
+            `).join('<div class="h-[1px] w-full bg-clinical-border dark:bg-white/5 my-3"></div>');
+            
+            document.getElementById('dynamic-recipe').innerHTML = recipeHTML;
+            document.getElementById('alert-container').innerHTML = alertMessage;
+
+            // Adapta o CTA para preparar a chamada no WhatsApp
+            const ctaBtn = document.getElementById('finalCtaBtn');
+            if (patientData.objetivo === 'Mapeamento') {
+                ctaBtn.innerHTML = "Solicitar Validação Presencial <i class='ph ph-whatsapp-logo text-lg inline-block ml-2 align-middle'></i>";
+            } else if (patientData.objetivo === 'Corte') {
+                ctaBtn.innerHTML = "Agendar Design Terapêutico <i class='ph ph-whatsapp-logo text-lg inline-block ml-2 align-middle'></i>";
+            } else if (patientData.objetivo === 'Quimica' && hasRed) {
+                ctaBtn.innerHTML = "Solicitar SOS Reconstrução <i class='ph ph-whatsapp-logo text-lg inline-block ml-2 align-middle'></i>";
+            } else {
+                ctaBtn.innerHTML = "Desbloquear Protocolo na Matriz <i class='ph ph-whatsapp-logo text-lg inline-block ml-2 align-middle'></i>";
+            }
+        }
+
+        // --- 6. GITHUB HOOK ---
+        function schedulePhysical() {
+            console.log("=== PAYLOAD V.14.0 [DUAL MODE & UX REFINED] ===");
+            console.log(JSON.stringify(patientData, null, 2));
+            alert(`Aviso do Sistema (GitHub / Glitch OS):\n\nLead gerada e pronta para o WhatsApp.\nModo de interface escolhido: ${document.documentElement.classList.contains('dark') ? 'Dark' : 'Clinical Light'}`);
+        }
+    </script>
+</body>
+</html>d
