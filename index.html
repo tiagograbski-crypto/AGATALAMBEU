@@ -3,13 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>GL PRO | Arquitetura Capilar - Concierge IA</title>
+    <title>GL PRO | Concierge IA</title>
     <!-- Tailwind CSS with Dark Mode Class Strategy -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
-        /* * ÁREA PARA O DESIGNER / OUTRA IA:
-         * Todas as cores e tokens de design estão mapeados aqui. 
-         * Podem alterar os HEX codes abaixo para combinar exatamente com o vosso site atual.
+        /* * ÁREA DE TOKENS (DESIGN SYSTEM)
+         * Preparado para receber a paleta exata do site principal da GL PRO.
          */
         tailwind.config = {
             darkMode: 'class',
@@ -18,25 +17,27 @@
                     fontFamily: {
                         editorial: ['"Playfair Display"', 'serif'],
                         tech: ['Inter', 'sans-serif'],
-                        cta: ['Montserrat', 'sans-serif'],
                         mono: ['"JetBrains Mono"', 'monospace'],
                     },
                     colors: {
-                        clinical: {
-                            bg: '#F8FAFC',
-                            card: 'rgba(255, 255, 255, 0.7)',
-                            text: '#0F172A',
-                            subtext: '#64748B',
-                            border: 'rgba(15, 23, 42, 0.1)',
-                            accent: '#0F172A', 
-                        },
-                        luxury: {
-                            bg: '#050505',
-                            card: 'rgba(20, 20, 20, 0.6)',
-                            text: '#FFFFFF',
-                            subtext: '#A1A1AA',
-                            border: 'rgba(255, 255, 255, 0.1)',
-                            accent: '#FFFFFF', 
+                        brand: {
+                            // Light Mode Colors
+                            surfaceDay: '#FAFAFA',
+                            cardDay: '#FFFFFF',
+                            textDay: '#0A0A0A',
+                            subtextDay: '#71717A',
+                            borderDay: '#E4E4E7',
+                            
+                            // Dark Mode Colors
+                            surfaceNight: '#050505',
+                            cardNight: 'rgba(20,20,20,0.6)',
+                            textNight: '#FFFFFF',
+                            subtextNight: '#A1A1AA',
+                            borderNight: 'rgba(255,255,255,0.1)',
+                            
+                            // Accents
+                            accentLight: '#000000',
+                            accentDark: '#FFFFFF',
                         }
                     }
                 }
@@ -46,7 +47,7 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <!-- Phosphor Icons -->
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
     
@@ -57,46 +58,51 @@
             -webkit-tap-highlight-color: transparent;
             display: flex;
             flex-direction: column;
-            transition: background-color 0.5s ease, color 0.5s ease;
+        }
+
+        /* Transições globais de tema (Smooth Mode Switch) */
+        * {
+            transition: background-color 0.5s cubic-bezier(0.4, 0, 0.2, 1), 
+                        border-color 0.5s cubic-bezier(0.4, 0, 0.2, 1);
         }
         
         /* Backgrounds Animados */
         .ambient-bg-light {
-            position: fixed; inset: 0; z-index: -2; background: #F8FAFC;
-            background-image: radial-gradient(#E2E8F0 1px, transparent 1px); background-size: 30px 30px;
+            position: fixed; inset: 0; z-index: -2; background: #FAFAFA;
+            opacity: 1; transition: opacity 0.5s ease;
         }
         .ambient-bg-dark {
-            position: fixed; inset: 0; z-index: -2; background: #030303;
+            position: fixed; inset: 0; z-index: -2; background: #050505;
             opacity: 0; transition: opacity 0.5s ease; pointer-events: none;
         }
         .dark .ambient-bg-dark { opacity: 1; }
         .dark .ambient-bg-light { opacity: 0; }
 
-        .ambient-orb-1 {
+        .ambient-orb {
             position: absolute; top: -10%; left: -10%; width: 50vw; height: 50vw;
-            background: radial-gradient(circle, rgba(148,163,184,0.2) 0%, transparent 60%);
+            background: radial-gradient(circle, rgba(0,0,0,0.03) 0%, transparent 60%);
             filter: blur(60px); animation: floatOrb 20s ease-in-out infinite alternate;
         }
-        .dark .ambient-orb-1 { background: radial-gradient(circle, rgba(255,255,255,0.04) 0%, transparent 60%); }
+        .dark .ambient-orb { background: radial-gradient(circle, rgba(255,255,255,0.03) 0%, transparent 60%); }
 
         @keyframes floatOrb {
             0% { transform: translate(0, 0); }
             100% { transform: translate(10%, 10%); }
         }
 
-        /* Efeito Vidro Translúcido */
-        .glass-panel {
-            backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        /* Painéis (Glassmorphism no Dark, Solid no Light) */
+        .panel-ui {
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
-        .glass-panel:hover { transform: translateY(-2px); }
-        .glass-selected {
+        .dark .panel-ui {
+            background: linear-gradient(135deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.01) 100%);
             backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
-            transform: translateY(-2px);
         }
+        
+        .panel-ui:hover { transform: translateY(-2px); }
 
         /* Animações UI Fullscreen */
-        .fade-up-enter { animation: fadeUpEnter 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        .fade-up-enter { animation: fadeUpEnter 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
         .fade-up-exit { animation: fadeUpExit 0.4s ease-out forwards; }
         
         @keyframes fadeUpEnter {
@@ -111,39 +117,47 @@
         .btn-press { transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1); }
         .btn-press:active { transform: scale(0.97); }
 
-        .input-glass {
-            backdrop-filter: blur(10px);
+        .input-ui {
             border-radius: 9999px;
             transition: all 0.3s ease;
         }
-        .input-glass:focus { outline: none; }
+        .input-ui:focus { outline: none; }
+        .dark .input-ui { backdrop-filter: blur(10px); }
+
         ::-webkit-scrollbar { width: 0px; background: transparent; }
 
-        .toggle-checkbox:checked { right: 0; border-color: #0F172A; }
-        .toggle-checkbox:checked + .toggle-label { background-color: #0F172A; }
+        /* Theme Toggle Icon Animations */
+        .icon-sun { opacity: 0; transform: rotate(-90deg); transition: all 0.5s ease; position: absolute; }
+        .icon-moon { opacity: 1; transform: rotate(0); transition: all 0.5s ease; position: absolute; }
+        
+        .dark .icon-sun { opacity: 1; transform: rotate(0); }
+        .dark .icon-moon { opacity: 0; transform: rotate(90deg); }
     </style>
 </head>
-<body class="font-tech text-clinical-text dark:text-luxury-text transition-colors duration-500">
+<body class="font-tech text-brand-textDay dark:text-brand-textNight bg-brand-surfaceDay dark:bg-brand-surfaceNight">
 
-    <div class="ambient-bg-light"><div class="ambient-orb-1"></div></div>
-    <div class="ambient-bg-dark"><div class="ambient-orb-1"></div></div>
+    <!-- Fundos -->
+    <div class="ambient-bg-light"><div class="ambient-orb"></div></div>
+    <div class="ambient-bg-dark"><div class="ambient-orb"></div></div>
 
-    <!-- Header Progress & Theme Toggle -->
-    <header class="w-full px-6 md:px-8 pt-6 pb-4 flex items-center justify-between z-50 fixed top-0" id="mainHeader">
-        <button onclick="goBack()" id="backBtn" class="text-clinical-subtext hover:text-clinical-text dark:text-luxury-subtext dark:hover:text-luxury-text transition-colors hidden focus:outline-none glass-panel bg-clinical-card dark:bg-luxury-card border border-clinical-border dark:border-luxury-border w-10 h-10 rounded-full flex items-center justify-center">
+    <!-- Header & Theme Toggle -->
+    <header class="w-full px-6 md:px-10 pt-8 pb-4 flex items-center justify-between z-50 fixed top-0" id="mainHeader">
+        <button onclick="goBack()" id="backBtn" class="text-brand-subtextDay hover:text-brand-textDay dark:text-brand-subtextNight dark:hover:text-brand-textNight transition-colors hidden focus:outline-none w-12 h-12 rounded-full flex items-center justify-center border border-brand-borderDay dark:border-brand-borderNight bg-brand-cardDay dark:bg-brand-cardNight shadow-sm panel-ui">
             <i class="ph ph-arrow-left text-xl"></i>
         </button>
+        
         <div class="flex-1 text-center">
-            <h1 class="font-cta text-[10px] tracking-[0.5em] uppercase font-bold">[GL.] PRO</h1>
+            <h1 class="font-tech text-[10px] tracking-[0.4em] font-semibold uppercase opacity-80">[GL.] PRO</h1>
         </div>
         
-        <div class="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in">
-            <input type="checkbox" name="toggle" id="themeToggle" onclick="toggleTheme()" class="toggle-checkbox absolute block w-5 h-5 rounded-full bg-white border-4 border-slate-200 appearance-none cursor-pointer z-10 top-0 left-0 transition-transform duration-300 ease-in-out" />
-            <label for="themeToggle" class="toggle-label block overflow-hidden h-5 rounded-full bg-slate-200 cursor-pointer"></label>
-        </div>
+        <!-- Premium Theme Toggle -->
+        <button onclick="toggleTheme()" class="w-12 h-12 rounded-full border border-brand-borderDay dark:border-brand-borderNight bg-brand-cardDay dark:bg-brand-cardNight flex items-center justify-center shadow-sm panel-ui text-brand-textDay dark:text-brand-textNight focus:outline-none relative overflow-hidden">
+            <i class="ph ph-moon text-xl icon-moon"></i>
+            <i class="ph ph-sun text-xl icon-sun"></i>
+        </button>
         
-        <div class="absolute bottom-0 left-0 h-[2px] bg-black/5 dark:bg-white/10 w-full">
-            <div id="progressBar" class="h-full bg-clinical-accent dark:bg-luxury-accent transition-all duration-500 ease-out" style="width: 0%;"></div>
+        <div class="absolute bottom-0 left-0 h-[1px] bg-black/5 dark:bg-white/10 w-full">
+            <div id="progressBar" class="h-full bg-brand-accentLight dark:bg-brand-accentDark transition-all duration-700 ease-out" style="width: 0%;"></div>
         </div>
     </header>
 
@@ -153,342 +167,337 @@
         <!-- View 0: Landing -->
         <section id="view-0" class="fade-up-enter text-center py-20 mt-10">
             <div class="mb-12">
-                <div class="inline-flex items-center gap-2 glass-panel bg-clinical-card dark:bg-luxury-card border border-clinical-border dark:border-luxury-border px-4 py-2 rounded-full mb-8 shadow-sm">
+                <div class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full mb-10 border border-brand-borderDay dark:border-brand-borderNight bg-brand-cardDay dark:bg-brand-cardNight shadow-sm">
                     <span class="relative flex h-2 w-2">
                         <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-75"></span>
                         <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
                     </span>
-                    <span class="font-mono text-[9px] uppercase tracking-widest text-clinical-subtext dark:text-luxury-subtext font-medium">Concierge IA Online</span>
+                    <span class="font-mono text-[9px] uppercase tracking-widest text-brand-subtextDay dark:text-brand-subtextNight font-medium">Concierge IA Online</span>
                 </div>
                 <h1 class="font-editorial text-5xl md:text-7xl mb-6 leading-tight tracking-tight">
-                    Arquitetura<br><span class="italic font-light text-clinical-subtext dark:text-luxury-subtext">Capilar</span>
+                    Arquitetura<br><span class="italic font-light text-brand-subtextDay dark:text-brand-subtextNight">Capilar</span>
                 </h1>
-                <p class="font-tech text-clinical-subtext dark:text-luxury-subtext text-base md:text-lg mb-14 font-light leading-relaxed max-w-lg mx-auto">
-                    Vamos descobrir a real necessidade do seu fio. A nossa IA fará uma triagem clínica para processar a sua receita de intervenção.
+                <p class="font-tech text-brand-subtextDay dark:text-brand-subtextNight text-base md:text-lg mb-14 font-light leading-relaxed max-w-lg mx-auto">
+                    Vamos decodificar a real necessidade do seu fio. A nossa IA fará uma triagem clínica para processar a sua receita de intervenção.
                 </p>
             </div>
             
-            <button onclick="nextView(1)" class="btn-press w-full max-w-md mx-auto bg-clinical-accent text-white dark:bg-luxury-accent dark:text-black font-cta py-5 px-8 rounded-full uppercase tracking-[0.2em] text-[10px] font-bold shadow-lg hover:shadow-xl transition-all duration-300 block">
+            <button onclick="nextView(1)" class="btn-press w-full max-w-md mx-auto bg-brand-accentLight text-white dark:bg-brand-accentDark dark:text-black font-tech py-5 px-8 rounded-full uppercase tracking-[0.2em] text-[10px] font-bold shadow-xl hover:shadow-2xl transition-all duration-300 block">
                 Iniciar Anamnese Digital
             </button>
         </section>
 
-        <!-- View 1: Curvatura (Neuro-copy: Geometria) -->
+        <!-- View 1: Curvatura -->
         <section id="view-1" class="hidden flex-col justify-center py-20 mt-10 max-w-2xl mx-auto w-full">
             <div class="mb-12 text-center">
-                <span class="font-mono text-clinical-subtext dark:text-luxury-subtext text-[10px] tracking-[0.3em] uppercase block mb-4 border-b border-clinical-border dark:border-luxury-border pb-4 inline-block font-semibold">Passo 1 de 5</span>
+                <span class="font-mono text-brand-subtextDay dark:text-brand-subtextNight text-[10px] tracking-[0.3em] uppercase block mb-4 border-b border-brand-borderDay dark:border-brand-borderNight pb-4 inline-block font-semibold">Passo 1 de 5</span>
                 <h2 class="font-editorial italic text-4xl md:text-5xl">Qual a geometria natural da sua fibra?</h2>
             </div>
             
             <div class="space-y-4">
-                <button onclick="saveSingleAnswer('curvatura', 'Liso', 2)" class="option-btn btn-press glass-panel bg-clinical-card dark:bg-luxury-card border border-clinical-border dark:border-luxury-border w-full text-left p-6 md:p-8 flex items-center justify-between group rounded-[2rem] hover:border-clinical-text dark:hover:border-white shadow-sm">
+                <button onclick="saveSingleAnswer('curvatura', 'Liso', 2)" class="option-btn btn-press panel-ui bg-brand-cardDay dark:bg-brand-cardNight border border-brand-borderDay dark:border-brand-borderNight w-full text-left p-6 md:p-8 flex items-center justify-between group rounded-[2rem] hover:border-brand-textDay dark:hover:border-white shadow-sm">
                     <div>
                         <span class="font-tech font-medium text-xl block mb-2">Liso e Retilíneo</span>
-                        <span class="font-tech text-xs subtitle-text text-clinical-subtext dark:text-luxury-subtext">Sem ondas naturais, tende a ser mais oleoso na raiz.</span>
+                        <span class="font-tech text-xs subtitle-text text-brand-subtextDay dark:text-brand-subtextNight">Sem ondas naturais, tende a ser mais oleoso na raiz.</span>
                     </div>
                     <i class="arrow-icon ph ph-arrow-right opacity-0 transition-all transform -translate-x-4 text-2xl"></i>
                 </button>
-                <button onclick="saveSingleAnswer('curvatura', 'Ondulado', 2)" class="option-btn btn-press glass-panel bg-clinical-card dark:bg-luxury-card border border-clinical-border dark:border-luxury-border w-full text-left p-6 md:p-8 flex items-center justify-between group rounded-[2rem] hover:border-clinical-text dark:hover:border-white shadow-sm">
+                <button onclick="saveSingleAnswer('curvatura', 'Ondulado', 2)" class="option-btn btn-press panel-ui bg-brand-cardDay dark:bg-brand-cardNight border border-brand-borderDay dark:border-brand-borderNight w-full text-left p-6 md:p-8 flex items-center justify-between group rounded-[2rem] hover:border-brand-textDay dark:hover:border-white shadow-sm">
                     <div>
                         <span class="font-tech font-medium text-xl block mb-2">Ondulado (Sinuoso)</span>
-                        <span class="font-tech text-xs subtitle-text text-clinical-subtext dark:text-luxury-subtext">Forma leves ondas em "S", especialmente nas pontas.</span>
+                        <span class="font-tech text-xs subtitle-text text-brand-subtextDay dark:text-brand-subtextNight">Forma leves ondas em "S", especialmente nas pontas.</span>
                     </div>
                     <i class="arrow-icon ph ph-arrow-right opacity-0 transition-all transform -translate-x-4 text-2xl"></i>
                 </button>
-                <button onclick="saveSingleAnswer('curvatura', 'Cacheado', 2)" class="option-btn btn-press glass-panel bg-clinical-card dark:bg-luxury-card border border-clinical-border dark:border-luxury-border w-full text-left p-6 md:p-8 flex items-center justify-between group rounded-[2rem] hover:border-clinical-text dark:hover:border-white shadow-sm">
+                <button onclick="saveSingleAnswer('curvatura', 'Cacheado', 2)" class="option-btn btn-press panel-ui bg-brand-cardDay dark:bg-brand-cardNight border border-brand-borderDay dark:border-brand-borderNight w-full text-left p-6 md:p-8 flex items-center justify-between group rounded-[2rem] hover:border-brand-textDay dark:hover:border-white shadow-sm">
                     <div>
                         <span class="font-tech font-medium text-xl block mb-2">Cacheado (Espiral)</span>
-                        <span class="font-tech text-xs subtitle-text text-clinical-subtext dark:text-luxury-subtext">Cachos definidos, formato de mola, tende à porosidade.</span>
+                        <span class="font-tech text-xs subtitle-text text-brand-subtextDay dark:text-brand-subtextNight">Cachos definidos, formato de mola, tende à porosidade.</span>
                     </div>
                     <i class="arrow-icon ph ph-arrow-right opacity-0 transition-all transform -translate-x-4 text-2xl"></i>
                 </button>
-                <button onclick="saveSingleAnswer('curvatura', 'Crespo', 2)" class="option-btn btn-press glass-panel bg-clinical-card dark:bg-luxury-card border border-clinical-border dark:border-luxury-border w-full text-left p-6 md:p-8 flex items-center justify-between group rounded-[2rem] hover:border-clinical-text dark:hover:border-white shadow-sm">
+                <button onclick="saveSingleAnswer('curvatura', 'Crespo', 2)" class="option-btn btn-press panel-ui bg-brand-cardDay dark:bg-brand-cardNight border border-brand-borderDay dark:border-brand-borderNight w-full text-left p-6 md:p-8 flex items-center justify-between group rounded-[2rem] hover:border-brand-textDay dark:hover:border-white shadow-sm">
                     <div>
                         <span class="font-tech font-medium text-xl block mb-2">Crespo / Volumoso</span>
-                        <span class="font-tech text-xs subtitle-text text-clinical-subtext dark:text-luxury-subtext">Cachos bem fechados desde a matriz, volume estrutural alto.</span>
+                        <span class="font-tech text-xs subtitle-text text-brand-subtextDay dark:text-brand-subtextNight">Cachos bem fechados desde a matriz, volume estrutural alto.</span>
                     </div>
                     <i class="arrow-icon ph ph-arrow-right opacity-0 transition-all transform -translate-x-4 text-2xl"></i>
                 </button>
             </div>
         </section>
 
-        <!-- View 2: Espessura (Neuro-copy: Calibre e Densidade) -->
+        <!-- View 2: Espessura -->
         <section id="view-2" class="hidden flex-col justify-center py-20 mt-10 max-w-2xl mx-auto w-full">
             <div class="mb-12 text-center">
-                <span class="font-mono text-clinical-subtext dark:text-luxury-subtext text-[10px] tracking-[0.3em] uppercase block mb-4 border-b border-clinical-border dark:border-luxury-border pb-4 inline-block font-semibold">Passo 2 de 5</span>
+                <span class="font-mono text-brand-subtextDay dark:text-brand-subtextNight text-[10px] tracking-[0.3em] uppercase block mb-4 border-b border-brand-borderDay dark:border-brand-borderNight pb-4 inline-block font-semibold">Passo 2 de 5</span>
                 <h2 class="font-editorial italic text-4xl md:text-5xl">Qual o calibre e a densidade ao toque?</h2>
             </div>
             
             <div class="space-y-4">
-                <button onclick="saveSingleAnswer('espessura', 'Fino', 3)" class="option-btn btn-press glass-panel bg-clinical-card dark:bg-luxury-card border border-clinical-border dark:border-luxury-border w-full text-left p-6 md:p-8 flex items-center justify-between group rounded-[2rem] hover:border-clinical-text dark:hover:border-white shadow-sm">
+                <button onclick="saveSingleAnswer('espessura', 'Fino', 3)" class="option-btn btn-press panel-ui bg-brand-cardDay dark:bg-brand-cardNight border border-brand-borderDay dark:border-brand-borderNight w-full text-left p-6 md:p-8 flex items-center justify-between group rounded-[2rem] hover:border-brand-textDay dark:hover:border-white shadow-sm">
                     <div>
                         <span class="font-tech font-medium text-xl block mb-2">Fio Fino e Delicado</span>
-                        <span class="font-tech text-xs subtitle-text text-clinical-subtext dark:text-luxury-subtext">Abaixa o volume rápido e embaraça com extrema facilidade.</span>
+                        <span class="font-tech text-xs subtitle-text text-brand-subtextDay dark:text-brand-subtextNight">Abaixa o volume rápido e embaraça com extrema facilidade.</span>
                     </div>
                     <i class="arrow-icon ph ph-arrow-right opacity-0 transition-all transform -translate-x-4 text-2xl"></i>
                 </button>
-                <button onclick="saveSingleAnswer('espessura', 'Médio', 3)" class="option-btn btn-press glass-panel bg-clinical-card dark:bg-luxury-card border border-clinical-border dark:border-luxury-border w-full text-left p-6 md:p-8 flex items-center justify-between group rounded-[2rem] hover:border-clinical-text dark:hover:border-white shadow-sm">
+                <button onclick="saveSingleAnswer('espessura', 'Médio', 3)" class="option-btn btn-press panel-ui bg-brand-cardDay dark:bg-brand-cardNight border border-brand-borderDay dark:border-brand-borderNight w-full text-left p-6 md:p-8 flex items-center justify-between group rounded-[2rem] hover:border-brand-textDay dark:hover:border-white shadow-sm">
                     <div>
                         <span class="font-tech font-medium text-xl block mb-2">Calibre Médio / Normal</span>
-                        <span class="font-tech text-xs subtitle-text text-clinical-subtext dark:text-luxury-subtext">Nem muito fino, nem muito pesado. Densidade equilibrada.</span>
+                        <span class="font-tech text-xs subtitle-text text-brand-subtextDay dark:text-brand-subtextNight">Nem muito fino, nem muito pesado. Densidade equilibrada.</span>
                     </div>
                     <i class="arrow-icon ph ph-arrow-right opacity-0 transition-all transform -translate-x-4 text-2xl"></i>
                 </button>
-                <button onclick="saveSingleAnswer('espessura', 'Grosso', 3)" class="option-btn btn-press glass-panel bg-clinical-card dark:bg-luxury-card border border-clinical-border dark:border-luxury-border w-full text-left p-6 md:p-8 flex items-center justify-between group rounded-[2rem] hover:border-clinical-text dark:hover:border-white shadow-sm">
+                <button onclick="saveSingleAnswer('espessura', 'Grosso', 3)" class="option-btn btn-press panel-ui bg-brand-cardDay dark:bg-brand-cardNight border border-brand-borderDay dark:border-brand-borderNight w-full text-left p-6 md:p-8 flex items-center justify-between group rounded-[2rem] hover:border-brand-textDay dark:hover:border-white shadow-sm">
                     <div>
                         <span class="font-tech font-medium text-xl block mb-2">Fio Grosso e Resistente</span>
-                        <span class="font-tech text-xs subtitle-text text-clinical-subtext dark:text-luxury-subtext">Estrutura rígida, difícil de modelar e pesa bastante na base.</span>
+                        <span class="font-tech text-xs subtitle-text text-brand-subtextDay dark:text-brand-subtextNight">Estrutura rígida, difícil de modelar e pesa bastante na base.</span>
                     </div>
                     <i class="arrow-icon ph ph-arrow-right opacity-0 transition-all transform -translate-x-4 text-2xl"></i>
                 </button>
             </div>
         </section>
 
-        <!-- View 3: Histórico Químico (Neuro-copy: Histórico de Saturação) -->
+        <!-- View 3: Histórico Químico (Múltipla) -->
         <section id="view-3" class="hidden flex-col justify-center py-20 mt-10 max-w-2xl mx-auto w-full">
             <div class="mb-10 text-center">
-                <span class="font-mono text-clinical-subtext dark:text-luxury-subtext text-[10px] tracking-[0.3em] uppercase block mb-4 border-b border-clinical-border dark:border-luxury-border pb-4 inline-block font-semibold">Passo 3 de 5</span>
+                <span class="font-mono text-brand-subtextDay dark:text-brand-subtextNight text-[10px] tracking-[0.3em] uppercase block mb-4 border-b border-brand-borderDay dark:border-brand-borderNight pb-4 inline-block font-semibold">Passo 3 de 5</span>
                 <h2 class="font-editorial italic text-4xl md:text-5xl">O seu histórico de Saturação Química?</h2>
-                <div class="inline-block mt-6 bg-clinical-text text-white dark:bg-white dark:text-black px-3 py-1 rounded font-mono text-[9px] uppercase tracking-widest">
+                <div class="inline-block mt-6 bg-brand-textDay text-white dark:bg-white dark:text-black px-3 py-1 rounded font-mono text-[9px] uppercase tracking-widest">
                     Pode selecionar mais de uma opção
                 </div>
             </div>
             
             <div class="space-y-4" id="options-quimica">
-                <button onclick="toggleOption('quimica', 'Descoloração', this)" class="option-btn glass-panel bg-clinical-card dark:bg-luxury-card border border-clinical-border dark:border-luxury-border btn-press w-full text-left p-6 flex items-center gap-6 rounded-[2rem] shadow-sm">
-                    <i class="check-icon ph ph-square text-3xl text-clinical-subtext/50 dark:text-luxury-subtext/50 transition-colors"></i>
+                <button onclick="toggleOption('quimica', 'Descoloração', this)" class="option-btn panel-ui bg-brand-cardDay dark:bg-brand-cardNight border border-brand-borderDay dark:border-brand-borderNight btn-press w-full text-left p-6 flex items-center gap-6 rounded-[2rem] shadow-sm">
+                    <i class="check-icon ph ph-square text-3xl text-brand-subtextDay/50 dark:text-brand-subtextNight/50 transition-colors"></i>
                     <div>
                         <span class="font-tech font-medium text-lg block mb-1">Luzes, Mechas ou Descoloração</span>
-                        <span class="font-tech text-xs subtitle-text text-clinical-subtext dark:text-luxury-subtext leading-relaxed">Qualquer técnica que exigiu pó descolorante.</span>
+                        <span class="font-tech text-xs subtitle-text text-brand-subtextDay dark:text-brand-subtextNight leading-relaxed">Qualquer técnica que exigiu pó descolorante.</span>
                     </div>
                 </button>
-                <button onclick="toggleOption('quimica', 'Acida', this)" class="option-btn glass-panel bg-clinical-card dark:bg-luxury-card border border-clinical-border dark:border-luxury-border btn-press w-full text-left p-6 flex items-center gap-6 rounded-[2rem] shadow-sm">
-                    <i class="check-icon ph ph-square text-3xl text-clinical-subtext/50 dark:text-luxury-subtext/50 transition-colors"></i>
+                <button onclick="toggleOption('quimica', 'Acida', this)" class="option-btn panel-ui bg-brand-cardDay dark:bg-brand-cardNight border border-brand-borderDay dark:border-brand-borderNight btn-press w-full text-left p-6 flex items-center gap-6 rounded-[2rem] shadow-sm">
+                    <i class="check-icon ph ph-square text-3xl text-brand-subtextDay/50 dark:text-brand-subtextNight/50 transition-colors"></i>
                     <div>
                         <span class="font-tech font-medium text-lg block mb-1">Progressiva Sem Formol / Selagem</span>
-                        <span class="font-tech text-xs subtitle-text text-clinical-subtext dark:text-luxury-subtext leading-relaxed">Ácidos, progressiva orgânica, botox ou alinhamento.</span>
+                        <span class="font-tech text-xs subtitle-text text-brand-subtextDay dark:text-brand-subtextNight leading-relaxed">Ácidos, progressiva orgânica, botox ou alinhamento.</span>
                     </div>
                 </button>
-                <button onclick="toggleOption('quimica', 'Formol', this)" class="option-btn glass-panel bg-clinical-card dark:bg-luxury-card border border-clinical-border dark:border-luxury-border btn-press w-full text-left p-6 flex items-center gap-6 rounded-[2rem] shadow-sm">
-                    <i class="check-icon ph ph-square text-3xl text-clinical-subtext/50 dark:text-luxury-subtext/50 transition-colors"></i>
+                <button onclick="toggleOption('quimica', 'Formol', this)" class="option-btn panel-ui bg-brand-cardDay dark:bg-brand-cardNight border border-brand-borderDay dark:border-brand-borderNight btn-press w-full text-left p-6 flex items-center gap-6 rounded-[2rem] shadow-sm">
+                    <i class="check-icon ph ph-square text-3xl text-brand-subtextDay/50 dark:text-brand-subtextNight/50 transition-colors"></i>
                     <div>
                         <span class="font-tech font-medium text-lg block mb-1">Progressiva Com Formol</span>
-                        <span class="font-tech text-xs subtitle-text text-clinical-subtext dark:text-luxury-subtext leading-relaxed">Escova inteligente tradicional, marroquina, etc.</span>
+                        <span class="font-tech text-xs subtitle-text text-brand-subtextDay dark:text-brand-subtextNight leading-relaxed">Escova inteligente tradicional, marroquina, etc.</span>
                     </div>
                 </button>
-                <button onclick="toggleOption('quimica', 'Coloração', this)" class="option-btn glass-panel bg-clinical-card dark:bg-luxury-card border border-clinical-border dark:border-luxury-border btn-press w-full text-left p-6 flex items-center gap-6 rounded-[2rem] shadow-sm">
-                    <i class="check-icon ph ph-square text-3xl text-clinical-subtext/50 dark:text-luxury-subtext/50 transition-colors"></i>
+                <button onclick="toggleOption('quimica', 'Coloração', this)" class="option-btn panel-ui bg-brand-cardDay dark:bg-brand-cardNight border border-brand-borderDay dark:border-brand-borderNight btn-press w-full text-left p-6 flex items-center gap-6 rounded-[2rem] shadow-sm">
+                    <i class="check-icon ph ph-square text-3xl text-brand-subtextDay/50 dark:text-brand-subtextNight/50 transition-colors"></i>
                     <div>
                         <span class="font-tech font-medium text-lg block mb-1">Tinta ou Tonalizante</span>
-                        <span class="font-tech text-xs subtitle-text text-clinical-subtext dark:text-luxury-subtext leading-relaxed">Coloração permanente, retoque de raiz ou cobrir brancos.</span>
+                        <span class="font-tech text-xs subtitle-text text-brand-subtextDay dark:text-brand-subtextNight leading-relaxed">Coloração permanente, retoque de raiz ou cobrir brancos.</span>
                     </div>
                 </button>
-                <button onclick="toggleOption('quimica', 'Virgem', this)" class="option-btn glass-panel bg-clinical-card dark:bg-luxury-card border border-clinical-border dark:border-luxury-border btn-press w-full text-left p-6 flex items-center gap-6 rounded-[2rem] shadow-sm" id="btn-virgem">
-                    <i class="check-icon ph ph-square text-3xl text-clinical-subtext/50 dark:text-luxury-subtext/50 transition-colors"></i>
+                <button onclick="toggleOption('quimica', 'Virgem', this)" class="option-btn panel-ui bg-brand-cardDay dark:bg-brand-cardNight border border-brand-borderDay dark:border-brand-borderNight btn-press w-full text-left p-6 flex items-center gap-6 rounded-[2rem] shadow-sm" id="btn-virgem">
+                    <i class="check-icon ph ph-square text-3xl text-brand-subtextDay/50 dark:text-brand-subtextNight/50 transition-colors"></i>
                     <div>
                         <span class="font-tech font-medium text-lg block mb-1">Cabelo Natural (Virgem)</span>
-                        <span class="font-tech text-xs subtitle-text text-clinical-subtext dark:text-luxury-subtext leading-relaxed">Nenhuma intervenção química registada na estrutura.</span>
+                        <span class="font-tech text-xs subtitle-text text-brand-subtextDay dark:text-brand-subtextNight leading-relaxed">Nenhuma intervenção química registada nos fios.</span>
                     </div>
                 </button>
             </div>
 
-            <button id="btnAdvance3" onclick="nextView(4)" class="btn-press w-full bg-clinical-accent text-white dark:bg-luxury-accent dark:text-black font-cta py-5 px-8 rounded-full uppercase tracking-[0.2em] text-[10px] font-bold transition-all mt-10 opacity-0 pointer-events-none transform translate-y-4 shadow-lg">
+            <button id="btnAdvance3" onclick="nextView(4)" class="btn-press w-full bg-brand-accentLight text-white dark:bg-brand-accentDark dark:text-black font-tech py-5 px-8 rounded-full uppercase tracking-[0.2em] text-[10px] font-bold transition-all mt-10 opacity-0 pointer-events-none transform translate-y-4 shadow-lg">
                 Confirmar Base Química
             </button>
         </section>
 
-        <!-- View 4: Sintomas (Neuro-copy: Quadro Clínico) -->
+        <!-- View 4: Sintomas (Múltipla) -->
         <section id="view-4" class="hidden flex-col justify-center py-20 mt-10 max-w-2xl mx-auto w-full">
             <div class="mb-10 text-center">
-                <span class="font-mono text-clinical-subtext dark:text-luxury-subtext text-[10px] tracking-[0.3em] uppercase block mb-4 border-b border-clinical-border dark:border-luxury-border pb-4 inline-block font-semibold">Passo 4 de 5</span>
-                <h2 class="font-editorial italic text-4xl md:text-5xl">O seu Quadro Clínico Atual?</h2>
-                <div class="inline-block mt-6 bg-clinical-text text-white dark:bg-white dark:text-black px-3 py-1 rounded font-mono text-[9px] uppercase tracking-widest">
-                    O que mais a incomoda hoje? (Seleção múltipla)
+                <span class="font-mono text-brand-subtextDay dark:text-brand-subtextNight text-[10px] tracking-[0.3em] uppercase block mb-4 border-b border-brand-borderDay dark:border-brand-borderNight pb-4 inline-block font-semibold">Passo 4 de 5</span>
+                <h2 class="font-editorial italic text-4xl md:text-5xl">Qual o seu Quadro Clínico Atual?</h2>
+                <div class="inline-block mt-6 bg-brand-textDay text-white dark:bg-white dark:text-black px-3 py-1 rounded font-mono text-[9px] uppercase tracking-widest">
+                    Pode selecionar mais de uma opção
                 </div>
             </div>
             
             <div class="space-y-4" id="options-dor">
-                <button onclick="toggleOption('dor', 'Amarelo_Pontas', this)" class="option-btn glass-panel bg-clinical-card dark:bg-luxury-card border border-clinical-border dark:border-luxury-border btn-press w-full text-left p-6 flex items-center gap-6 rounded-[2rem] shadow-sm">
-                    <i class="check-icon ph ph-square text-3xl text-clinical-subtext/50 dark:text-luxury-subtext/50 transition-colors"></i>
+                <button onclick="toggleOption('dor', 'Amarelo_Pontas', this)" class="option-btn panel-ui bg-brand-cardDay dark:bg-brand-cardNight border border-brand-borderDay dark:border-brand-borderNight btn-press w-full text-left p-6 flex items-center gap-6 rounded-[2rem] shadow-sm">
+                    <i class="check-icon ph ph-square text-3xl text-brand-subtextDay/50 dark:text-brand-subtextNight/50 transition-colors"></i>
                     <div>
                         <span class="font-tech font-medium text-lg block mb-1">Pontas Duplas e Espigadas</span>
-                        <span class="font-tech text-xs subtitle-text text-clinical-subtext dark:text-luxury-subtext leading-relaxed">As extremidades dividem-se e o pente enrosca com frequência.</span>
+                        <span class="font-tech text-xs subtitle-text text-brand-subtextDay dark:text-brand-subtextNight leading-relaxed">As extremidades dividem-se e o pente enrosca com frequência.</span>
                     </div>
                 </button>
-                <button onclick="toggleOption('dor', 'Vermelho_Ruptura', this)" class="option-btn glass-panel bg-clinical-card dark:bg-luxury-card border border-clinical-border dark:border-luxury-border btn-press w-full text-left p-6 flex items-center gap-6 rounded-[2rem] shadow-sm">
-                    <i class="check-icon ph ph-square text-3xl text-clinical-subtext/50 dark:text-luxury-subtext/50 transition-colors"></i>
+                <button onclick="toggleOption('dor', 'Vermelho_Ruptura', this)" class="option-btn panel-ui bg-brand-cardDay dark:bg-brand-cardNight border border-brand-borderDay dark:border-brand-borderNight btn-press w-full text-left p-6 flex items-center gap-6 rounded-[2rem] shadow-sm">
+                    <i class="check-icon ph ph-square text-3xl text-brand-subtextDay/50 dark:text-brand-subtextNight/50 transition-colors"></i>
                     <div>
                         <span class="font-tech font-medium text-lg block mb-1">Nível de Ruptura (Quebra)</span>
-                        <span class="font-tech text-xs subtitle-text text-clinical-subtext dark:text-luxury-subtext leading-relaxed">Ao passar a escova no fio seco, ele rompe e caem pedaços.</span>
+                        <span class="font-tech text-xs subtitle-text text-brand-subtextDay dark:text-brand-subtextNight leading-relaxed">Ao passar a escova no fio seco, ele rompe e caem pedaços.</span>
                     </div>
                 </button>
-                <button onclick="toggleOption('dor', 'Vermelho_Elastico', this)" class="option-btn glass-panel bg-clinical-card dark:bg-luxury-card border border-clinical-border dark:border-luxury-border btn-press w-full text-left p-6 flex items-center gap-6 rounded-[2rem] shadow-sm">
-                    <i class="check-icon ph ph-square text-3xl text-clinical-subtext/50 dark:text-luxury-subtext/50 transition-colors"></i>
+                <button onclick="toggleOption('dor', 'Vermelho_Elastico', this)" class="option-btn panel-ui bg-brand-cardDay dark:bg-brand-cardNight border border-brand-borderDay dark:border-brand-borderNight btn-press w-full text-left p-6 flex items-center gap-6 rounded-[2rem] shadow-sm">
+                    <i class="check-icon ph ph-square text-3xl text-brand-subtextDay/50 dark:text-brand-subtextNight/50 transition-colors"></i>
                     <div>
                         <span class="font-tech font-medium text-lg block mb-1">Emborrachado (Fadiga Elástica)</span>
-                        <span class="font-tech text-xs subtitle-text text-clinical-subtext dark:text-luxury-subtext leading-relaxed">Quando molhado, estica muito e não regressa à forma original.</span>
+                        <span class="font-tech text-xs subtitle-text text-brand-subtextDay dark:text-brand-subtextNight leading-relaxed">Quando molhado, estica muito e não regressa à forma original.</span>
                     </div>
                 </button>
-                <button onclick="toggleOption('dor', 'Amarelo_Porosidade', this)" class="option-btn glass-panel bg-clinical-card dark:bg-luxury-card border border-clinical-border dark:border-luxury-border btn-press w-full text-left p-6 flex items-center gap-6 rounded-[2rem] shadow-sm">
-                    <i class="check-icon ph ph-square text-3xl text-clinical-subtext/50 dark:text-luxury-subtext/50 transition-colors"></i>
+                <button onclick="toggleOption('dor', 'Amarelo_Porosidade', this)" class="option-btn panel-ui bg-brand-cardDay dark:bg-brand-cardNight border border-brand-borderDay dark:border-brand-borderNight btn-press w-full text-left p-6 flex items-center gap-6 rounded-[2rem] shadow-sm">
+                    <i class="check-icon ph ph-square text-3xl text-brand-subtextDay/50 dark:text-brand-subtextNight/50 transition-colors"></i>
                     <div>
                         <span class="font-tech font-medium text-lg block mb-1">Poroso, Áspero e com Frizz</span>
-                        <span class="font-tech text-xs subtitle-text text-clinical-subtext dark:text-luxury-subtext leading-relaxed">Superfície sem brilho, incha facilmente e apresenta toque seco.</span>
+                        <span class="font-tech text-xs subtitle-text text-brand-subtextDay dark:text-brand-subtextNight leading-relaxed">Superfície sem brilho, incha facilmente e apresenta toque seco.</span>
                     </div>
                 </button>
-                <button onclick="toggleOption('dor', 'Amarelo_Afinamento', this)" class="option-btn glass-panel bg-clinical-card dark:bg-luxury-card border border-clinical-border dark:border-luxury-border btn-press w-full text-left p-6 flex items-center gap-6 rounded-[2rem] shadow-sm">
-                    <i class="check-icon ph ph-square text-3xl text-clinical-subtext/50 dark:text-luxury-subtext/50 transition-colors"></i>
+                <button onclick="toggleOption('dor', 'Amarelo_Afinamento', this)" class="option-btn panel-ui bg-brand-cardDay dark:bg-brand-cardNight border border-brand-borderDay dark:border-brand-borderNight btn-press w-full text-left p-6 flex items-center gap-6 rounded-[2rem] shadow-sm">
+                    <i class="check-icon ph ph-square text-3xl text-brand-subtextDay/50 dark:text-brand-subtextNight/50 transition-colors"></i>
                     <div>
                         <span class="font-tech font-medium text-lg block mb-1">Perda de Matriz (Afinamento)</span>
-                        <span class="font-tech text-xs subtitle-text text-clinical-subtext dark:text-luxury-subtext leading-relaxed">Perda de densidade global. O cabelo perdeu o corpo e o volume.</span>
+                        <span class="font-tech text-xs subtitle-text text-brand-subtextDay dark:text-brand-subtextNight leading-relaxed">Perda de densidade global. O cabelo perdeu o corpo e o volume.</span>
                     </div>
                 </button>
-                <button onclick="toggleOption('dor', 'Verde_Saudavel', this)" class="option-btn glass-panel bg-clinical-card dark:bg-luxury-card border border-clinical-border dark:border-luxury-border btn-press w-full text-left p-6 flex items-center gap-6 rounded-[2rem] shadow-sm" id="btn-saudavel">
-                    <i class="check-icon ph ph-square text-3xl text-clinical-subtext/50 dark:text-luxury-subtext/50 transition-colors"></i>
+                <button onclick="toggleOption('dor', 'Verde_Saudavel', this)" class="option-btn panel-ui bg-brand-cardDay dark:bg-brand-cardNight border border-brand-borderDay dark:border-brand-borderNight btn-press w-full text-left p-6 flex items-center gap-6 rounded-[2rem] shadow-sm" id="btn-saudavel">
+                    <i class="check-icon ph ph-square text-3xl text-brand-subtextDay/50 dark:text-brand-subtextNight/50 transition-colors"></i>
                     <div>
                         <span class="font-tech font-medium text-lg block mb-1">Íntegro e Saudável</span>
-                        <span class="font-tech text-xs subtitle-text text-clinical-subtext dark:text-luxury-subtext leading-relaxed">Busco apenas blindagem térmica, brilho e manutenção preventiva.</span>
+                        <span class="font-tech text-xs subtitle-text text-brand-subtextDay dark:text-brand-subtextNight leading-relaxed">Busco apenas blindagem térmica, brilho e manutenção preventiva.</span>
                     </div>
                 </button>
             </div>
 
-            <button id="btnAdvance4" onclick="nextView(5)" class="btn-press w-full bg-clinical-accent text-white dark:bg-luxury-accent dark:text-black font-cta py-5 px-8 rounded-full uppercase tracking-[0.2em] text-[10px] font-bold transition-all mt-10 opacity-0 pointer-events-none transform translate-y-4 shadow-lg">
+            <button id="btnAdvance4" onclick="nextView(5)" class="btn-press w-full bg-brand-accentLight text-white dark:bg-brand-accentDark dark:text-black font-tech py-5 px-8 rounded-full uppercase tracking-[0.2em] text-[10px] font-bold transition-all mt-10 opacity-0 pointer-events-none transform translate-y-4 shadow-lg">
                 Consolidar Quadro Clínico
             </button>
         </section>
 
-        <!-- View 5: Procedimento Pretendido (Neuro-copy: Alvo de Intervenção) -->
+        <!-- View 5: Procedimento Pretendido -->
         <section id="view-5" class="hidden flex-col justify-center py-20 mt-10 max-w-2xl mx-auto w-full">
             <div class="mb-12 text-center">
-                <span class="font-mono text-clinical-subtext dark:text-luxury-subtext text-[10px] tracking-[0.3em] uppercase block mb-4 border-b border-clinical-border dark:border-luxury-border pb-4 inline-block font-semibold">Último Passo — 5 de 5</span>
+                <span class="font-mono text-brand-subtextDay dark:text-brand-subtextNight text-[10px] tracking-[0.3em] uppercase block mb-4 border-b border-brand-borderDay dark:border-brand-borderNight pb-4 inline-block font-semibold">Último Passo — 5 de 5</span>
                 <h2 class="font-editorial italic text-4xl md:text-5xl">Qual o seu Alvo de Intervenção hoje?</h2>
             </div>
             
             <div class="space-y-4">
-                <button onclick="saveSingleAnswer('objetivo', 'Tratamento', 6)" class="option-btn glass-panel bg-clinical-card dark:bg-luxury-card border border-clinical-border dark:border-luxury-border btn-press w-full text-left p-6 md:p-8 flex items-center justify-between group rounded-[2rem] hover:border-clinical-text dark:hover:border-white shadow-sm">
+                <button onclick="saveSingleAnswer('objetivo', 'Tratamento', 6)" class="option-btn btn-press panel-ui bg-brand-cardDay dark:bg-brand-cardNight border border-brand-borderDay dark:border-brand-borderNight w-full text-left p-6 md:p-8 flex items-center justify-between group rounded-[2rem] hover:border-brand-textDay dark:hover:border-white shadow-sm">
                     <div>
                         <span class="font-tech font-medium text-xl block mb-2">Recuperação Estrutural Profunda</span>
-                        <span class="font-tech text-xs subtitle-text text-clinical-subtext dark:text-luxury-subtext">Desejo um protocolo clínico para devolver massa, força e saúde ao fio.</span>
+                        <span class="font-tech text-xs subtitle-text text-brand-subtextDay dark:text-brand-subtextNight">Desejo um protocolo clínico para devolver massa, força e saúde ao fio.</span>
                     </div>
                     <i class="arrow-icon ph ph-arrow-right opacity-0 transition-all transform -translate-x-4 text-2xl"></i>
                 </button>
-                <button onclick="saveSingleAnswer('objetivo', 'Quimica', 6)" class="option-btn glass-panel bg-clinical-card dark:bg-luxury-card border border-clinical-border dark:border-luxury-border btn-press w-full text-left p-6 md:p-8 flex items-center justify-between group rounded-[2rem] hover:border-clinical-text dark:hover:border-white shadow-sm">
+                <button onclick="saveSingleAnswer('objetivo', 'Quimica', 6)" class="option-btn btn-press panel-ui bg-brand-cardDay dark:bg-brand-cardNight border border-brand-borderDay dark:border-brand-borderNight w-full text-left p-6 md:p-8 flex items-center justify-between group rounded-[2rem] hover:border-brand-textDay dark:hover:border-white shadow-sm">
                     <div>
                         <span class="font-tech font-medium text-xl block mb-2">Transformação (Cor ou Modelação)</span>
-                        <span class="font-tech text-xs subtitle-text text-clinical-subtext dark:text-luxury-subtext">Quero agendar luzes, coloração, selagem ou alteração química.</span>
+                        <span class="font-tech text-xs subtitle-text text-brand-subtextDay dark:text-brand-subtextNight">Quero agendar luzes, coloração, selagem ou alteração química.</span>
                     </div>
                     <i class="arrow-icon ph ph-arrow-right opacity-0 transition-all transform -translate-x-4 text-2xl"></i>
                 </button>
-                <button onclick="saveSingleAnswer('objetivo', 'Corte', 6)" class="option-btn glass-panel bg-clinical-card dark:bg-luxury-card border border-clinical-border dark:border-luxury-border btn-press w-full text-left p-6 md:p-8 flex items-center justify-between group rounded-[2rem] hover:border-clinical-text dark:hover:border-white shadow-sm">
+                <button onclick="saveSingleAnswer('objetivo', 'Corte', 6)" class="option-btn btn-press panel-ui bg-brand-cardDay dark:bg-brand-cardNight border border-brand-borderDay dark:border-brand-borderNight w-full text-left p-6 md:p-8 flex items-center justify-between group rounded-[2rem] hover:border-brand-textDay dark:hover:border-white shadow-sm">
                     <div>
                         <span class="font-tech font-medium text-xl block mb-2">Design de Corte Terapêutico</span>
-                        <span class="font-tech text-xs subtitle-text text-clinical-subtext dark:text-luxury-subtext">Preciso renovar a arquitetura do corte ou eliminar a oxidação das pontas.</span>
+                        <span class="font-tech text-xs subtitle-text text-brand-subtextDay dark:text-brand-subtextNight">Preciso renovar a arquitetura do corte ou eliminar a oxidação das pontas.</span>
                     </div>
                     <i class="arrow-icon ph ph-arrow-right opacity-0 transition-all transform -translate-x-4 text-2xl"></i>
                 </button>
-                <button onclick="saveSingleAnswer('objetivo', 'Mapeamento', 6)" class="option-btn glass-panel bg-clinical-card dark:bg-luxury-card border border-clinical-border dark:border-luxury-border btn-press w-full text-left p-6 md:p-8 flex items-center justify-between group rounded-[2rem] hover:border-clinical-text dark:hover:border-white shadow-sm">
+                <button onclick="saveSingleAnswer('objetivo', 'Mapeamento', 6)" class="option-btn btn-press panel-ui bg-brand-cardDay dark:bg-brand-cardNight border border-brand-borderDay dark:border-brand-borderNight w-full text-left p-6 md:p-8 flex items-center justify-between group rounded-[2rem] hover:border-brand-textDay dark:hover:border-white shadow-sm">
                     <div>
                         <span class="font-tech font-medium text-xl block mb-2">Apenas Mapeamento Analítico</span>
-                        <span class="font-tech text-xs subtitle-text text-clinical-subtext dark:text-luxury-subtext">Sem compromisso de serviço. Quero apenas o relatório de necessidades do fio.</span>
+                        <span class="font-tech text-xs subtitle-text text-brand-subtextDay dark:text-brand-subtextNight">Sem compromisso de serviço. Quero apenas o relatório de necessidades do fio.</span>
                     </div>
                     <i class="arrow-icon ph ph-arrow-right opacity-0 transition-all transform -translate-x-4 text-2xl"></i>
                 </button>
             </div>
         </section>
 
-        <!-- View 6: Lead (Captura Email & Efeito Zeigarnik) -->
+        <!-- View 6: Lead -->
         <section id="view-6" class="hidden flex-col justify-center py-20 mt-10 max-w-xl mx-auto w-full">
             <div class="mb-12 text-center">
-                <i class="ph ph-envelope-open text-4xl text-clinical-subtext dark:text-luxury-subtext mb-6"></i>
+                <i class="ph ph-envelope-open text-4xl text-brand-subtextDay dark:text-brand-subtextNight mb-6"></i>
                 <h2 class="font-editorial italic text-5xl mb-6">Emissão de Relatório</h2>
-                <p class="font-tech text-clinical-subtext dark:text-luxury-subtext text-base leading-relaxed font-light">
+                <p class="font-tech text-brand-subtextDay dark:text-brand-subtextNight text-base leading-relaxed font-light">
                     A Inteligência Artificial irá agora compilar as suas variáveis. Para onde enviamos a cópia confidencial do seu Dossiê?
                 </p>
             </div>
             
             <form id="leadForm" onsubmit="handleLeadSubmit(event)" class="space-y-5">
                 <div>
-                    <input type="text" id="nome" required oninput="validateForm()" class="input-glass w-full p-5 text-sm font-tech text-center border border-clinical-border dark:border-luxury-border bg-white/50 dark:bg-white/5 placeholder-clinical-subtext dark:placeholder-luxury-subtext shadow-sm" placeholder="O seu Nome Completo">
+                    <input type="text" id="nome" required oninput="validateForm()" class="input-ui w-full p-5 text-sm font-tech text-center border border-brand-borderDay dark:border-brand-borderNight bg-white dark:bg-white/5 placeholder-brand-subtextDay dark:placeholder-brand-subtextNight shadow-sm" placeholder="O seu Nome Completo">
                 </div>
                 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
                     <div>
-                        <input type="tel" id="whatsapp" oninput="formatPhone(this); validateForm()" required class="input-glass w-full p-5 text-sm font-tech text-center border border-clinical-border dark:border-luxury-border bg-white/50 dark:bg-white/5 placeholder-clinical-subtext dark:placeholder-luxury-subtext shadow-sm" placeholder="WhatsApp">
+                        <input type="tel" id="whatsapp" oninput="formatPhone(this); validateForm()" required class="input-ui w-full p-5 text-sm font-tech text-center border border-brand-borderDay dark:border-brand-borderNight bg-white dark:bg-white/5 placeholder-brand-subtextDay dark:placeholder-brand-subtextNight shadow-sm" placeholder="WhatsApp">
                     </div>
                     <div>
-                        <!-- NOVO CAMPO DE EMAIL -->
-                        <input type="email" id="email" required oninput="validateForm()" class="input-glass w-full p-5 text-sm font-tech text-center border border-clinical-border dark:border-luxury-border bg-white/50 dark:bg-white/5 placeholder-clinical-subtext dark:placeholder-luxury-subtext shadow-sm" placeholder="O seu melhor E-mail">
+                        <input type="email" id="email" required oninput="validateForm()" class="input-ui w-full p-5 text-sm font-tech text-center border border-brand-borderDay dark:border-brand-borderNight bg-white dark:bg-white/5 placeholder-brand-subtextDay dark:placeholder-brand-subtextNight shadow-sm" placeholder="O seu melhor E-mail">
                     </div>
                 </div>
 
-                <!-- Gatilho de Consistência e Comprometimento -->
                 <div class="flex items-start gap-3 mt-4 pt-2">
                     <div class="relative flex items-start mt-1">
-                        <input type="checkbox" id="lgpd" required onchange="validateForm()" class="peer h-4 w-4 shrink-0 appearance-none rounded-sm border border-clinical-subtext dark:border-luxury-subtext bg-transparent checked:bg-clinical-accent dark:checked:bg-white checked:border-clinical-accent dark:checked:border-white focus:outline-none transition-all cursor-pointer">
+                        <input type="checkbox" id="lgpd" required onchange="validateForm()" class="peer h-4 w-4 shrink-0 appearance-none rounded-sm border border-brand-subtextDay dark:border-brand-subtextNight bg-transparent checked:bg-brand-accentLight dark:checked:bg-white checked:border-brand-accentLight dark:checked:border-white focus:outline-none transition-all cursor-pointer">
                         <i class="ph ph-check absolute top-0.5 left-0.5 h-3 w-3 text-white dark:text-black text-xs font-bold text-center opacity-0 peer-checked:opacity-100 pointer-events-none"></i>
                     </div>
-                    <label for="lgpd" class="font-tech text-[11px] text-clinical-subtext dark:text-luxury-subtext opacity-80 leading-relaxed cursor-pointer font-medium">
-                        Declaro que o histórico químico assinalado é verdadeiro e autorizo a análise dos meus dados para emissão do protocolo clínico.
+                    <label for="lgpd" class="font-tech text-[11px] text-brand-subtextDay dark:text-brand-subtextNight opacity-80 leading-relaxed cursor-pointer font-medium">
+                        Declaro que o histórico assinalado é verdadeiro e autorizo a análise dos meus dados para emissão do protocolo clínico.
                     </label>
                 </div>
 
-                <button type="submit" id="submitBtn" disabled class="btn-press w-full glass-panel bg-clinical-card text-clinical-subtext dark:bg-luxury-card dark:text-luxury-subtext border border-clinical-border dark:border-luxury-border font-cta py-6 px-8 rounded-full uppercase tracking-[0.2em] text-[10px] font-bold transition-all mt-8 opacity-50 cursor-not-allowed shadow-sm">
+                <button type="submit" id="submitBtn" disabled class="btn-press w-full panel-ui bg-brand-cardDay text-brand-subtextDay dark:bg-brand-cardNight dark:text-brand-subtextNight border border-brand-borderDay dark:border-brand-borderNight font-tech py-6 px-8 rounded-full uppercase tracking-[0.2em] text-[10px] font-bold transition-all mt-8 opacity-50 cursor-not-allowed shadow-sm">
                     Descriptografar Dossiê
                 </button>
             </form>
         </section>
 
-        <!-- View 7: Loader (Neuro-Ansiedade & Autoridade) -->
+        <!-- View 7: Loader -->
         <section id="view-7" class="hidden flex-col items-center justify-center text-center py-32 mt-10 max-w-lg mx-auto w-full">
             <div class="relative mb-12">
-                <div class="w-24 h-24 rounded-full border border-clinical-border dark:border-luxury-border border-t-clinical-accent dark:border-t-white animate-spin absolute inset-0"></div>
-                <div class="w-24 h-24 rounded-full border border-clinical-border/50 dark:border-luxury-border/50 border-b-clinical-accent/50 dark:border-b-white/50 animate-spin absolute inset-0" style="animation-direction: reverse; animation-duration: 1.5s;"></div>
-                <i class="ph ph-microscope font-light text-4xl text-clinical-accent dark:text-white absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"></i>
+                <div class="w-24 h-24 rounded-full border border-brand-borderDay dark:border-brand-borderNight border-t-brand-accentLight dark:border-t-white animate-spin absolute inset-0"></div>
+                <div class="w-24 h-24 rounded-full border border-brand-borderDay/50 dark:border-brand-borderNight/50 border-b-brand-accentLight/50 dark:border-b-white/50 animate-spin absolute inset-0" style="animation-direction: reverse; animation-duration: 1.5s;"></div>
+                <i class="ph ph-microscope font-light text-4xl text-brand-accentLight dark:text-white absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"></i>
             </div>
             <h3 class="font-editorial italic text-4xl mb-4">Mapeamento em Curso</h3>
-            <p id="loadingText" class="font-mono text-clinical-subtext dark:text-luxury-subtext text-[10px] tracking-widest uppercase font-semibold">A processar biomarcadores de estrutura...</p>
+            <p id="loadingText" class="font-mono text-brand-subtextDay dark:text-brand-subtextNight text-[10px] tracking-widest uppercase font-semibold">A processar biomarcadores de estrutura...</p>
         </section>
 
-        <!-- View 8: Result (O Efeito Cliffhanger) -->
+        <!-- View 8: Result -->
         <section id="view-8" class="hidden flex-col justify-center py-20 mt-10 max-w-2xl mx-auto w-full text-center">
             
             <div class="mb-10">
-                <div class="inline-flex items-center gap-2 glass-panel bg-clinical-card dark:bg-luxury-card border border-clinical-border dark:border-luxury-border px-4 py-2 rounded-full mb-6 shadow-sm">
+                <div class="inline-flex items-center gap-2 panel-ui bg-brand-cardDay dark:bg-brand-cardNight border border-brand-borderDay dark:border-brand-borderNight px-4 py-2 rounded-full mb-6 shadow-sm">
                     <i class="ph ph-shield-check text-emerald-600 dark:text-emerald-400"></i>
-                    <span class="font-mono text-[9px] uppercase tracking-widest text-clinical-text dark:text-luxury-text font-semibold">Relatório Parcial Disparado</span>
+                    <span class="font-mono text-[9px] uppercase tracking-widest text-brand-textDay dark:text-brand-textNight font-semibold">Relatório Parcial Disparado</span>
                 </div>
                 
                 <h2 id="result-title" class="font-editorial italic text-4xl md:text-5xl mb-6 leading-tight"></h2>
                 
-                <p class="font-tech text-clinical-subtext dark:text-luxury-subtext text-sm md:text-base leading-relaxed font-medium mb-10 max-w-lg mx-auto">
-                    A Inteligência Artificial calculou as variáveis de saturação. <strong class="text-clinical-text dark:text-white font-semibold">Enviámos um resumo confidencial para o seu e-mail</strong>, no entanto, a fórmula magistral requer validação.
+                <p class="font-tech text-brand-subtextDay dark:text-brand-subtextNight text-sm md:text-base leading-relaxed font-medium mb-10 max-w-lg mx-auto">
+                    A Inteligência Artificial calculou as variáveis de saturação. <strong class="text-brand-textDay dark:text-white font-semibold">Enviámos um resumo confidencial para o seu e-mail</strong>, no entanto, a fórmula magistral requer validação.
                 </p>
             </div>
 
             <!-- Div para Alerta Químico de Bloqueio -->
             <div id="alert-container"></div>
 
-            <!-- Glass Receipt Box (A Receita Criptografada Zeigarnik Effect) -->
-            <div class="glass-panel p-8 md:p-12 rounded-[2.5rem] mb-10 relative overflow-hidden text-left bg-clinical-card dark:bg-luxury-card border border-clinical-border dark:border-luxury-border shadow-md">
-                <h4 class="font-mono text-[10px] uppercase tracking-[0.2em] text-clinical-subtext dark:text-luxury-subtext border-b border-clinical-border dark:border-luxury-border pb-4 mb-6 font-semibold">Matriz de Reconstrução Parcial</h4>
+            <!-- Glass Receipt Box -->
+            <div class="panel-ui p-8 md:p-12 rounded-[2.5rem] mb-10 relative overflow-hidden text-left bg-brand-cardDay dark:bg-brand-cardNight border border-brand-borderDay dark:border-brand-borderNight shadow-md">
+                <h4 class="font-mono text-[10px] uppercase tracking-[0.2em] text-brand-subtextDay dark:text-brand-subtextNight border-b border-brand-borderDay dark:border-brand-borderNight pb-4 mb-6 font-semibold">Matriz de Reconstrução Parcial</h4>
                 
-                <!-- Receita gerada dinamicamente via JS -->
-                <div id="dynamic-recipe" class="space-y-4 select-none pointer-events-none">
-                    <!-- A primeira linha será nítida, as outras serão embaçadas (gerado via JS) -->
-                </div>
+                <div id="dynamic-recipe" class="space-y-4 select-none pointer-events-none"></div>
                 
                 <div class="absolute inset-x-0 bottom-0 top-[40%] flex flex-col items-center justify-center text-center p-6 bg-gradient-to-t from-white/95 to-white/40 dark:from-black/95 dark:to-black/40 backdrop-blur-[4px]">
-                    <i class="ph ph-lock-key text-4xl text-clinical-text dark:text-white mb-4"></i>
-                    <span class="text-clinical-text dark:text-white text-sm font-tech font-medium max-w-sm leading-relaxed">
-                        Fases 2 e 3 Criptografadas. A nossa plataforma não prescreve químicas sem exames táteis. A Especialista de Matriz precisa avaliar a sua elasticidade presencialmente para libertar a dosagem exata.
+                    <i class="ph ph-lock-key text-4xl text-brand-textDay dark:text-white mb-4"></i>
+                    <span class="text-brand-textDay dark:text-white text-sm font-tech font-medium max-w-sm leading-relaxed">
+                        Fases 2 e 3 Criptografadas. A nossa plataforma não prescreve químicas sem exames táteis. A Especialista precisa avaliar a sua elasticidade presencialmente para libertar a dosagem exata.
                     </span>
                 </div>
             </div>
 
-            <button id="finalCtaBtn" onclick="schedulePhysical()" class="btn-press w-full max-w-md mx-auto bg-clinical-accent text-white dark:bg-luxury-accent dark:text-black font-cta py-5 px-8 rounded-full uppercase tracking-[0.2em] text-[10px] font-bold shadow-lg hover:shadow-xl transition-all block">
+            <button id="finalCtaBtn" onclick="schedulePhysical()" class="btn-press w-full max-w-md mx-auto bg-brand-accentLight text-white dark:bg-brand-accentDark dark:text-black font-tech py-5 px-8 rounded-full uppercase tracking-[0.2em] text-[10px] font-bold shadow-lg hover:shadow-xl transition-all block">
                 Agendar Teste de Tração na Matriz
             </button>
-            <p class="font-mono text-[9px] text-clinical-subtext dark:text-luxury-subtext mt-6 uppercase tracking-widest font-semibold opacity-80">Apenas 3 vagas de laboratório diárias.</p>
+            <p class="font-mono text-[9px] text-brand-subtextDay dark:text-brand-subtextNight mt-6 uppercase tracking-widest font-semibold opacity-80">Apenas 3 vagas de laboratório diárias.</p>
         </section>
 
     </main>
@@ -504,7 +513,7 @@
             }
         }
 
-        // --- 1. STATE MANAGEMENT (Adicionado E-mail) ---
+        // --- 1. STATE MANAGEMENT ---
         let patientData = {
             curvatura: '',
             espessura: '',
@@ -519,7 +528,7 @@
         let currentStep = 0;
         const totalSteps = 7; 
 
-        // --- 2. INPUT LOGIC & GLASS TOGGLE ---
+        // --- 2. INPUT LOGIC ---
         function saveSingleAnswer(key, value, nextStepIndex) {
             patientData[key] = value;
             nextView(nextStepIndex);
@@ -557,20 +566,20 @@
             const icon = element.querySelector('.check-icon');
             if(isSelected) {
                 element.classList.add('glass-selected');
-                element.classList.add('bg-clinical-text', 'text-white', 'dark:bg-white', 'dark:text-black');
-                element.classList.remove('bg-clinical-card', 'dark:bg-luxury-card', 'text-clinical-text', 'dark:text-luxury-text');
+                element.classList.add('bg-brand-accentLight', 'text-white', 'dark:bg-white', 'dark:text-black');
+                element.classList.remove('bg-brand-cardDay', 'dark:bg-brand-cardNight', 'text-brand-textDay', 'dark:text-brand-textNight');
                 icon.classList.replace('ph-square', 'ph-check-square');
                 
-                element.querySelectorAll('.subtitle-text').forEach(el => el.classList.replace('text-clinical-subtext', 'text-gray-300'));
-                element.querySelectorAll('.subtitle-text').forEach(el => el.classList.replace('dark:text-luxury-subtext', 'dark:text-gray-600'));
+                element.querySelectorAll('.subtitle-text').forEach(el => el.classList.replace('text-brand-subtextDay', 'text-gray-300'));
+                element.querySelectorAll('.subtitle-text').forEach(el => el.classList.replace('dark:text-brand-subtextNight', 'dark:text-gray-600'));
             } else {
                 element.classList.remove('glass-selected');
-                element.classList.remove('bg-clinical-text', 'text-white', 'dark:bg-white', 'dark:text-black');
-                element.classList.add('bg-clinical-card', 'dark:bg-luxury-card', 'text-clinical-text', 'dark:text-luxury-text');
+                element.classList.remove('bg-brand-accentLight', 'text-white', 'dark:bg-white', 'dark:text-black');
+                element.classList.add('bg-brand-cardDay', 'dark:bg-brand-cardNight', 'text-brand-textDay', 'dark:text-brand-textNight');
                 icon.classList.replace('ph-check-square', 'ph-square');
 
-                element.querySelectorAll('.subtitle-text').forEach(el => el.classList.replace('text-gray-300', 'text-clinical-subtext'));
-                element.querySelectorAll('.subtitle-text').forEach(el => el.classList.replace('dark:text-gray-600', 'dark:text-luxury-subtext'));
+                element.querySelectorAll('.subtitle-text').forEach(el => el.classList.replace('text-gray-300', 'text-brand-subtextDay'));
+                element.querySelectorAll('.subtitle-text').forEach(el => el.classList.replace('dark:text-gray-600', 'dark:text-brand-subtextNight'));
             }
         }
 
@@ -616,7 +625,7 @@
             nextView(prevStep);
         }
 
-        // --- 4. FORM VALIDATION (COM EMAIL) ---
+        // --- 4. FORM VALIDATION ---
         function formatPhone(input) {
             let value = input.value.replace(/\D/g, ''); 
             if (value.length > 11) value = value.slice(0, 11);
@@ -634,12 +643,12 @@
 
             if(nome.length > 2 && whats.length >= 14 && email.includes('@') && lgpd) {
                 btn.disabled = false;
-                btn.classList.remove('bg-clinical-card', 'dark:bg-luxury-card', 'text-clinical-subtext', 'dark:text-luxury-subtext', 'opacity-50', 'cursor-not-allowed');
-                btn.classList.add('bg-clinical-accent', 'text-white', 'dark:bg-luxury-accent', 'dark:text-black', 'opacity-100', 'shadow-md');
+                btn.classList.remove('bg-brand-cardDay', 'dark:bg-brand-cardNight', 'text-brand-subtextDay', 'dark:text-brand-subtextNight', 'opacity-50', 'cursor-not-allowed');
+                btn.classList.add('bg-brand-accentLight', 'text-white', 'dark:bg-brand-accentDark', 'dark:text-black', 'opacity-100', 'shadow-md');
             } else {
                 btn.disabled = true;
-                btn.classList.add('bg-clinical-card', 'dark:bg-luxury-card', 'text-clinical-subtext', 'dark:text-luxury-subtext', 'opacity-50', 'cursor-not-allowed');
-                btn.classList.remove('bg-clinical-accent', 'text-white', 'dark:bg-luxury-accent', 'dark:text-black', 'opacity-100', 'shadow-md');
+                btn.classList.add('bg-brand-cardDay', 'dark:bg-brand-cardNight', 'text-brand-subtextDay', 'dark:text-brand-subtextNight', 'opacity-50', 'cursor-not-allowed');
+                btn.classList.remove('bg-brand-accentLight', 'text-white', 'dark:bg-brand-accentDark', 'dark:text-black', 'opacity-100', 'shadow-md');
             }
         }
 
@@ -652,7 +661,7 @@
             simulateLoading();
         }
 
-        // --- 5. AI CONCIERGE LOADER & RESULT REVEAL ---
+        // --- 5. AI LOADER & RESULT REVEAL ---
         const loadingTexts = [
             "A processar biomarcadores de estrutura...",
             "A medir nível de porosidade declarada...",
@@ -691,7 +700,6 @@
             let statusText = '';
             let recipeItems = [];
 
-            // A Lógica do Diagnóstico (Escala Clínica)
             if(hasRed) { 
                 statusText = "Diagnóstico Grau 4:<br><span class='text-rose-600 dark:text-rose-500'>Ruptura e Colapso da Matriz</span>"; 
                 recipeItems.push("Infusão de Aminoácidos Catiônicos (Base)");
@@ -715,14 +723,13 @@
                 recipeItems.push("Design Terapêutico (Polimento de Tricoptilose Exata)");
             }
 
-            // GATILHO DE AUTORIDADE: Bloqueio Químico
             let alertMessage = "";
             if (patientData.objetivo === 'Quimica' && hasRed) {
                 alertMessage = `
                 <div class="bg-rose-50 dark:bg-rose-950/40 border border-rose-200 dark:border-rose-500/40 p-6 rounded-3xl mb-8 backdrop-blur-md relative overflow-hidden shadow-sm">
                     <div class="absolute left-0 top-0 w-1 h-full bg-rose-500"></div>
                     <span class="text-rose-600 dark:text-rose-400 font-bold text-[10px] uppercase tracking-[0.2em] block mb-3"><i class="ph ph-warning-octagon text-base align-middle mr-1"></i> Intervenção Química Suspensa</span>
-                    <span class="text-clinical-text dark:text-white/90 text-sm font-tech font-medium dark:font-light leading-relaxed block">
+                    <span class="text-brand-textDay dark:text-white/90 text-sm font-tech font-medium dark:font-light leading-relaxed block">
                         O sistema biométrico acusou alerta crítico de quebra. Qualquer procedimento químico neste momento (descoloração ou ácidos) resultará em <strong>corte químico irreversível</strong>. O seu objetivo prioritário foi redefinido automaticamente para SOS Reconstrução.
                     </span>
                 </div>`;
@@ -730,24 +737,31 @@
 
             document.getElementById('result-title').innerHTML = statusText;
             
-            // Injeta a Receita Gerada (A Mágica do Cliffhanger: Oculta após a linha 1)
             let recipeHTML = recipeItems.map((item, idx) => {
-                let blurClass = idx > 0 ? "opacity-30 blur-sm pointer-events-none" : "opacity-100"; // Apenas a fase 1 é visível
+                let blurClass = idx > 0 ? "opacity-30 blur-sm pointer-events-none" : "opacity-100"; 
                 let padlock = idx > 0 ? `<i class="ph ph-lock-key ml-2"></i>` : `<i class="ph ph-check text-emerald-500 ml-2"></i>`;
                 
                 return `
                 <div class="flex items-center gap-4 ${blurClass}">
-                    <div class="font-mono text-[9px] text-clinical-text dark:text-white/80 tracking-widest w-16 font-bold">[ FASE 0${idx+1} ]</div>
-                    <span class="font-tech text-base text-clinical-text dark:text-white/90 tracking-wide font-medium">${item} ${padlock}</span>
+                    <div class="font-mono text-[9px] text-brand-subtextDay/60 dark:text-white/40 tracking-widest w-16 font-bold">[ FASE 0${idx+1} ]</div>
+                    <span class="font-tech text-base text-brand-textDay dark:text-white/90 tracking-wide font-medium">${item} ${padlock}</span>
                 </div>
             `;
-            }).join('<div class="h-[1px] w-full bg-clinical-border dark:bg-white/5 my-3"></div>');
+            }).join('<div class="h-[1px] w-full bg-brand-borderDay dark:bg-white/5 my-3"></div>');
             
             document.getElementById('dynamic-recipe').innerHTML = recipeHTML;
             document.getElementById('alert-container').innerHTML = alertMessage;
 
-            // Adapta o CTA para preparar a chamada
             const ctaBtn = document.getElementById('finalCtaBtn');
+            // Geração da Mensagem Pronta de WhatsApp
+            const whatsappMsg = `Olá! Sou a ${patientData.nome}. Realizei a triagem da Inteligência Artificial no site e recebi um diagnóstico do grau do meu cabelo. Gostaria de agendar a minha validação presencial para desbloquear o protocolo completo.`;
+            // Redirecionamento Web
+            const whatsappUrl = `https://wa.me/5549999999999?text=` + encodeURIComponent(whatsappMsg);
+
+            ctaBtn.onclick = function() {
+                window.open(whatsappUrl, '_blank');
+            };
+
             if (patientData.objetivo === 'Mapeamento') {
                 ctaBtn.innerHTML = "Solicitar Validação Presencial <i class='ph ph-whatsapp-logo text-lg inline-block ml-2 align-middle'></i>";
             } else if (patientData.objetivo === 'Corte') {
@@ -757,13 +771,6 @@
             } else {
                 ctaBtn.innerHTML = "Agendar Teste de Tração <i class='ph ph-whatsapp-logo text-lg inline-block ml-2 align-middle'></i>";
             }
-        }
-
-        // --- 6. GITHUB HOOK (ENVIO DE EMAIL) ---
-        function schedulePhysical() {
-            console.log("=== PAYLOAD V.15.0 [NEUROVENDAS & EMAIL CAPTURE] ===");
-            console.log(JSON.stringify(patientData, null, 2));
-            alert(`Integração GitHub / Glitch OS:\n\n1. O e-mail marketing será disparado para: ${patientData.email}\n2. A paciente será redirecionada para o WhatsApp de Agendamento.\n\nO Zeigarnik Effect foi aplicado com sucesso na Receita Oculta.`);
         }
     </script>
 </body>
