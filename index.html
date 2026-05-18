@@ -146,13 +146,18 @@
             <h1 class="font-cta text-[10px] tracking-[0.5em] uppercase text-white font-light opacity-80">[GL.] PRO</h1>
         </div>
         <div class="w-10"></div> <!-- Spacer -->
+        
+        <!-- Progress Bar Line -->
+        <div class="absolute bottom-0 left-0 h-[1px] bg-white/10 w-full">
+            <div id="progressBar" class="h-full bg-white transition-all duration-500 ease-out" style="width: 0%;"></div>
+        </div>
     </header>
 
     <!-- FULLSCREEN MAIN AREA -->
     <main class="w-full max-w-4xl mx-auto px-6 flex-1 flex flex-col justify-center relative z-10" id="appContainer">
         
         <!-- View 0: Landing -->
-        <section id="view-0" class="fade-up-enter text-center py-20">
+        <section id="view-0" class="fade-up-enter text-center py-20 mt-10">
             <div class="mb-12">
                 <div class="inline-flex items-center gap-2 glass-panel px-4 py-2 rounded-full mb-8">
                     <span class="relative flex h-2 w-2">
@@ -175,7 +180,7 @@
         </section>
 
         <!-- View 1: Curvatura -->
-        <section id="view-1" class="hidden flex-col justify-center py-20 max-w-2xl mx-auto w-full">
+        <section id="view-1" class="hidden flex-col justify-center py-20 mt-10 max-w-2xl mx-auto w-full">
             <div class="mb-12 text-center">
                 <span class="font-mono text-luxury-gray text-[10px] tracking-[0.3em] uppercase block mb-4 border-b border-white/10 pb-4 inline-block">01 — Curvatura</span>
                 <h2 class="font-editorial italic text-4xl md:text-5xl text-white">Como é a forma natural do seu cabelo?</h2>
@@ -214,7 +219,7 @@
         </section>
 
         <!-- View 2: Espessura -->
-        <section id="view-2" class="hidden flex-col justify-center py-20 max-w-2xl mx-auto w-full">
+        <section id="view-2" class="hidden flex-col justify-center py-20 mt-10 max-w-2xl mx-auto w-full">
             <div class="mb-12 text-center">
                 <span class="font-mono text-luxury-gray text-[10px] tracking-[0.3em] uppercase block mb-4 border-b border-white/10 pb-4 inline-block">02 — Espessura</span>
                 <h2 class="font-editorial italic text-4xl md:text-5xl text-white">Ao pegar no fio, como o sente?</h2>
@@ -246,7 +251,7 @@
         </section>
 
         <!-- View 3: Histórico Químico -->
-        <section id="view-3" class="hidden flex-col justify-center py-20 max-w-2xl mx-auto w-full">
+        <section id="view-3" class="hidden flex-col justify-center py-20 mt-10 max-w-2xl mx-auto w-full">
             <div class="mb-10 text-center">
                 <span class="font-mono text-luxury-gray text-[10px] tracking-[0.3em] uppercase block mb-4 border-b border-white/10 pb-4 inline-block">03 — Sobreposição Química</span>
                 <h2 class="font-editorial italic text-4xl md:text-5xl text-white">O que já fez no cabelo?</h2>
@@ -296,15 +301,23 @@
             </button>
         </section>
 
-        <!-- View 4: Sintomas -->
-        <section id="view-4" class="hidden flex-col justify-center py-20 max-w-2xl mx-auto w-full">
+        <!-- View 4: Sintomas (Com Pontas Duplas) -->
+        <section id="view-4" class="hidden flex-col justify-center py-20 mt-10 max-w-2xl mx-auto w-full">
             <div class="mb-10 text-center">
                 <span class="font-mono text-luxury-gray text-[10px] tracking-[0.3em] uppercase block mb-4 border-b border-white/10 pb-4 inline-block">04 — O que mais incomoda</span>
-                <h2 class="font-editorial italic text-4xl md:text-5xl text-white">Qual a situação das pontas e do fio hoje?</h2>
+                <h2 class="font-editorial italic text-4xl md:text-5xl text-white">Qual a situação do fio e pontas hoje?</h2>
                 <p class="font-tech text-luxury-gray text-xs mt-6 opacity-70">Pode selecionar todas as dores que sentir.</p>
             </div>
             
             <div class="space-y-4" id="options-dor">
+                <!-- Nova Dor: Pontas Duplas -->
+                <button onclick="toggleOption('dor', 'Amarelo_Pontas', this)" class="option-btn glass-panel btn-press w-full text-left p-6 transition-all flex items-center gap-6 rounded-3xl">
+                    <i class="check-icon ph ph-circle text-3xl text-luxury-gray/50 transition-colors"></i>
+                    <div>
+                        <span class="font-tech font-light text-lg text-white block mb-1">Pontas Duplas e Espigadas</span>
+                        <span class="font-tech text-xs subtitle-text text-luxury-gray leading-relaxed">As extremidades dividem-se, o pente enrosca e as pontas são ásperas.</span>
+                    </div>
+                </button>
                 <button onclick="toggleOption('dor', 'Vermelho_Ruptura', this)" class="option-btn glass-panel btn-press w-full text-left p-6 transition-all flex items-center gap-6 rounded-3xl">
                     <i class="check-icon ph ph-circle text-3xl text-luxury-gray/50 transition-colors"></i>
                     <div>
@@ -343,17 +356,56 @@
             </div>
 
             <button id="btnAdvance4" onclick="nextView(5)" class="btn-press w-full bg-white text-black font-cta py-5 px-8 rounded-full uppercase tracking-[0.2em] text-[10px] font-bold transition-all mt-10 opacity-0 pointer-events-none transform translate-y-4">
-                Enviar para a Inteligência Artificial
+                Confirmar Sintomas
             </button>
         </section>
 
-        <!-- View 5: Lead -->
-        <section id="view-5" class="hidden flex-col justify-center py-20 max-w-xl mx-auto w-full">
+        <!-- View 5: Procedimento Pretendido (Nova Etapa de Ouro) -->
+        <section id="view-5" class="hidden flex-col justify-center py-20 mt-10 max-w-2xl mx-auto w-full">
+            <div class="mb-12 text-center">
+                <span class="font-mono text-luxury-gray text-[10px] tracking-[0.3em] uppercase block mb-4 border-b border-white/10 pb-4 inline-block">05 — Objetivo Clínico</span>
+                <h2 class="font-editorial italic text-4xl md:text-5xl text-white">Qual é a sua meta principal hoje?</h2>
+            </div>
+            
+            <div class="space-y-4">
+                <button onclick="saveSingleAnswer('objetivo', 'Tratamento', 6)" class="btn-press glass-panel w-full text-left p-6 md:p-8 transition-all flex items-center justify-between group rounded-3xl">
+                    <div>
+                        <span class="font-tech font-light text-xl text-white block mb-2">Recuperação Estrutural</span>
+                        <span class="font-tech text-xs subtitle-text text-luxury-gray">Quero realizar um tratamento profundo para devolver saúde e brilho ao fio.</span>
+                    </div>
+                    <i class="arrow-icon ph ph-arrow-right opacity-0 transition-all text-white transform -translate-x-4 text-2xl"></i>
+                </button>
+                <button onclick="saveSingleAnswer('objetivo', 'Quimica', 6)" class="btn-press glass-panel w-full text-left p-6 md:p-8 transition-all flex items-center justify-between group rounded-3xl">
+                    <div>
+                        <span class="font-tech font-light text-xl text-white block mb-2">Transformação (Cor ou Forma)</span>
+                        <span class="font-tech text-xs subtitle-text text-luxury-gray">Desejo fazer luzes/mechas, coloração, selagem ou progressiva.</span>
+                    </div>
+                    <i class="arrow-icon ph ph-arrow-right opacity-0 transition-all text-white transform -translate-x-4 text-2xl"></i>
+                </button>
+                <button onclick="saveSingleAnswer('objetivo', 'Corte', 6)" class="btn-press glass-panel w-full text-left p-6 md:p-8 transition-all flex items-center justify-between group rounded-3xl">
+                    <div>
+                        <span class="font-tech font-light text-xl text-white block mb-2">Design de Corte</span>
+                        <span class="font-tech text-xs subtitle-text text-luxury-gray">Preciso apenas renovar o corte ou eliminar pontas duplas.</span>
+                    </div>
+                    <i class="arrow-icon ph ph-arrow-right opacity-0 transition-all text-white transform -translate-x-4 text-2xl"></i>
+                </button>
+                <button onclick="saveSingleAnswer('objetivo', 'Mapeamento', 6)" class="btn-press glass-panel w-full text-left p-6 md:p-8 transition-all flex items-center justify-between group rounded-3xl">
+                    <div>
+                        <span class="font-tech font-light text-xl text-white block mb-2">Apenas Mapeamento Capilar</span>
+                        <span class="font-tech text-xs subtitle-text text-luxury-gray">Não quero procedimentos agora. Quero apenas descobrir como cuidar do meu cabelo.</span>
+                    </div>
+                    <i class="arrow-icon ph ph-arrow-right opacity-0 transition-all text-white transform -translate-x-4 text-2xl"></i>
+                </button>
+            </div>
+        </section>
+
+        <!-- View 6: Lead -->
+        <section id="view-6" class="hidden flex-col justify-center py-20 mt-10 max-w-xl mx-auto w-full">
             <div class="mb-12 text-center">
                 <i class="ph ph-sparkle text-4xl text-white/50 mb-6"></i>
-                <h2 class="font-editorial italic text-5xl mb-6 text-white">Para onde enviamos a prescrição?</h2>
+                <h2 class="font-editorial italic text-5xl mb-6 text-white">A sua Assinatura</h2>
                 <p class="font-tech text-luxury-gray text-base leading-relaxed font-light">
-                    A nossa Concierge IA já cruzou as suas respostas. Deixe o seu nome para desbloquearmos o nível de alerta e o protocolo gerado.
+                    A nossa Inteligência Artificial irá agora processar as suas escolhas. Identifique-se para desbloquear o laudo e descobrir a sua receita capilar.
                 </p>
             </div>
             
@@ -367,13 +419,13 @@
                 </div>
 
                 <button type="submit" id="submitBtn" disabled class="btn-press w-full glass-panel text-luxury-gray font-cta py-6 px-8 rounded-full uppercase tracking-[0.2em] text-[10px] font-bold transition-all mt-8 opacity-50 cursor-not-allowed">
-                    Revelar o meu Diagnóstico
+                    Sintetizar Diagnóstico
                 </button>
             </form>
         </section>
 
-        <!-- View 6: Loader (IA Thinking) -->
-        <section id="view-6" class="hidden flex-col items-center justify-center text-center py-32 max-w-lg mx-auto w-full">
+        <!-- View 7: Loader (IA Thinking) -->
+        <section id="view-7" class="hidden flex-col items-center justify-center text-center py-32 mt-10 max-w-lg mx-auto w-full">
             <div class="relative mb-12">
                 <!-- Loader Glass/Orbital -->
                 <div class="w-24 h-24 rounded-full border border-white/10 border-t-white/80 animate-spin absolute inset-0"></div>
@@ -381,11 +433,11 @@
                 <i class="ph ph-brain font-light text-4xl text-white/80 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"></i>
             </div>
             <h3 class="font-editorial italic text-4xl mb-4 text-white">Concierge IA em Análise</h3>
-            <p id="loadingText" class="font-mono text-luxury-gray text-[10px] tracking-widest uppercase">Mapeando curvatura e espessura...</p>
+            <p id="loadingText" class="font-mono text-luxury-gray text-[10px] tracking-widest uppercase">A cruzar histórico e sintomas...</p>
         </section>
 
-        <!-- View 7: Result -->
-        <section id="view-7" class="hidden flex-col justify-center py-20 max-w-2xl mx-auto w-full text-center">
+        <!-- View 8: Result -->
+        <section id="view-8" class="hidden flex-col justify-center py-20 mt-10 max-w-2xl mx-auto w-full text-center">
             
             <div class="mb-10">
                 <div class="inline-flex items-center gap-2 glass-panel px-4 py-2 rounded-full mb-6">
@@ -393,34 +445,35 @@
                     <span class="font-mono text-[9px] uppercase tracking-widest text-luxury-platinum">Processamento Clínico Concluído</span>
                 </div>
                 
-                <!-- Aqui entra o Choque de Autoridade (O sistema devolve um nome técnico) -->
+                <!-- Status gerado via JavaScript -->
                 <h2 id="result-title" class="font-editorial italic text-5xl md:text-6xl text-white mb-6 leading-tight"></h2>
                 
                 <p class="font-tech text-luxury-gray text-base leading-relaxed font-light mb-10 max-w-lg mx-auto">
-                    A Inteligência Artificial cruzou o histórico do seu cabelo e montou a arquitetura de recuperação necessária.
+                    Baseado no seu histórico químico e nos sintomas, a nossa Inteligência Artificial estruturou as suas necessidades biológicas urgentes.
                 </p>
             </div>
+
+            <!-- Div para Alerta Químico de Bloqueio -->
+            <div id="alert-container"></div>
 
             <!-- Glass Receipt Box (A Receita Oculta) -->
             <div class="glass-panel p-8 md:p-12 rounded-[2.5rem] mb-12 relative overflow-hidden text-left">
                 <h4 class="font-mono text-[10px] uppercase tracking-[0.2em] text-white/50 border-b border-white/10 pb-4 mb-6">Arquitetura Protocolar Exigida</h4>
                 
-                <div class="space-y-4 blur-md opacity-30 select-none pointer-events-none">
-                    <div class="flex items-center gap-4"><div class="w-2 h-2 bg-white rounded-full"></div><span class="font-tech text-lg text-white">Infusão de Lipídios Hidrofóbicos</span></div>
-                    <div class="flex items-center gap-4"><div class="w-2 h-2 bg-white rounded-full"></div><span class="font-tech text-lg text-white">Reposição de Matriz de Córtex</span></div>
-                    <div class="flex items-center gap-4"><div class="w-2 h-2 bg-white rounded-full"></div><span class="font-tech text-lg text-white">Blindagem Térmica Polimérica</span></div>
+                <!-- Receita gerada dinamicamente via JS -->
+                <div id="dynamic-recipe" class="space-y-4 blur-md opacity-30 select-none pointer-events-none">
                 </div>
                 
                 <div class="absolute inset-0 flex flex-col items-center justify-center text-center p-6 bg-black/20">
                     <i class="ph ph-lock-key text-3xl text-white mb-3"></i>
                     <span class="text-white text-sm font-tech font-light max-w-sm">
-                        Para a sua segurança, a química exata da receita foi retida. A Bio-Arquiteta necessita validar o seu cabelo pessoalmente para libertar a dosagem milimétrica.
+                        Para a sua segurança, a química exata da receita foi retida. A nossa Bio-Arquiteta necessita realizar o Teste Tátil presencialmente para libertar a dosagem exata.
                     </span>
                 </div>
             </div>
 
-            <button onclick="schedulePhysical()" class="btn-press w-full max-w-md mx-auto bg-white text-black font-cta py-5 px-8 rounded-full uppercase tracking-[0.2em] text-[10px] font-bold hover:shadow-[0_0_30px_rgba(255,255,255,0.3)] transition-all block">
-                Agendar Teste de Tração Físico
+            <button id="finalCtaBtn" onclick="schedulePhysical()" class="btn-press w-full max-w-md mx-auto bg-white text-black font-cta py-5 px-8 rounded-full uppercase tracking-[0.2em] text-[10px] font-bold hover:shadow-[0_0_30px_rgba(255,255,255,0.3)] transition-all block">
+                Agendar Validação na Matriz
             </button>
             <p class="font-mono text-[9px] text-luxury-gray mt-6 uppercase tracking-widest">Avaliação na Matriz Chapecó</p>
         </section>
@@ -428,18 +481,19 @@
     </main>
 
     <script>
-        // --- 1. STATE MANAGEMENT (Adicionado "curvatura") ---
+        // --- 1. STATE MANAGEMENT ---
         let patientData = {
             curvatura: '',
             espessura: '',
             quimica: [],
             dor: [],
+            objetivo: '', // Nova variável (Procedimento pretendido)
             nome: '',
             whatsapp: ''
         };
 
         let currentStep = 0;
-        const totalSteps = 6; // Agora temos do view-0 ao view-6 (antes de carregar)
+        const totalSteps = 7; // Formulário termina no passo 6 (Lead). View-7 é Loader.
 
         // --- 2. INPUT LOGIC & GLASS TOGGLE ---
         function saveSingleAnswer(key, value, nextStepIndex) {
@@ -450,7 +504,6 @@
         function toggleOption(category, value, element) {
             const arr = patientData[category];
             const index = arr.indexOf(value);
-            // btnAdvance3 para Química, btnAdvance4 para Dor
             const btnAdvance = document.getElementById(category === 'quimica' ? 'btnAdvance3' : 'btnAdvance4');
 
             if(value === 'Virgem' || value === 'Verde_Saudavel') {
@@ -501,10 +554,16 @@
             const currentSection = document.getElementById(`view-${currentStep}`);
             const nextSection = document.getElementById(`view-${stepIndex}`);
             const backBtn = document.getElementById('backBtn');
+            const progress = document.getElementById('progressBar');
 
-            // Header/Back button display logic
-            if(stepIndex > 0 && stepIndex < totalSteps) backBtn.classList.remove('hidden');
-            else backBtn.classList.add('hidden');
+            // Header/Back button and Progress logic
+            if(stepIndex > 0 && stepIndex < totalSteps) {
+                backBtn.classList.remove('hidden');
+                progress.style.width = `${(stepIndex / 6) * 100}%`; // 6 passos até ao form
+            } else {
+                backBtn.classList.add('hidden');
+                if(stepIndex === 0) progress.style.width = `0%`;
+            }
 
             window.scrollTo({ top: 0, behavior: 'smooth' });
 
@@ -555,16 +614,17 @@
             e.preventDefault();
             patientData.nome = document.getElementById('nome').value;
             patientData.whatsapp = document.getElementById('whatsapp').value;
-            nextView(6); // Go to Loader
+            nextView(7); // Vai para o Loader
             simulateLoading();
         }
 
         // --- 5. AI CONCIERGE LOADER & RESULT REVEAL ---
         const loadingTexts = [
             "A ler morfologia da base...",
-            "A processar conflitos químicos...",
-            "A decodificar quadro sintomático...",
-            "A estruturar fórmula protetiva..."
+            "A analisar intenção clínica...",
+            "A validar resistibilidade capilar...",
+            "A cruzar perfil sintomático...",
+            "A compilar protocolo biológico..."
         ];
 
         function simulateLoading() {
@@ -585,29 +645,78 @@
             setTimeout(() => {
                 clearInterval(interval);
                 generateResult();
-                nextView(7); // Show result
-            }, 5500);
+                nextView(8); // Mostra o Resultado
+            }, 6500);
         }
 
         function generateResult() {
             const hasRed = patientData.dor.some(d => d.includes('Vermelho'));
             const hasYellow = patientData.dor.some(d => d.includes('Amarelo'));
+            const hasPontas = patientData.dor.includes('Amarelo_Pontas');
             
             let statusText = '';
+            let recipeItems = [];
 
-            // O sistema transforma as escolhas fáceis da cliente num laudo médico assustador/de autoridade
-            if(hasRed) { statusText = "Alerta Clínico:<br>Colapso Cortical"; }
-            else if(hasYellow) { statusText = "Atenção:<br>Fadiga Cuticular"; }
-            else { statusText = "Estabilidade<br>Homeostática"; }
+            // A Lógica do Diagnóstico e da Prescrição Dinâmica
+            if(hasRed) { 
+                statusText = "Alerta Clínico:<br>Colapso Cortical"; 
+                recipeItems.push("Infusão de Aminoácidos (Baixo Peso Molecular)");
+                recipeItems.push("Reconstrução de Matriz Interna");
+            }
+            else if(hasYellow) { 
+                statusText = "Atenção:<br>Fadiga Cuticular"; 
+                recipeItems.push("Carga Lipídica Hidrofóbica");
+                recipeItems.push("Selamento Cuticular Avançado");
+            }
+            else { 
+                statusText = "Estabilidade<br>Homeostática"; 
+                recipeItems.push("Proteção Antioxidante Botânica");
+                recipeItems.push("Manutenção Hídrica Profunda");
+            }
 
+            // Se ela tem pontas duplas OU pediu um corte
+            if(hasPontas || patientData.objetivo === 'Corte') {
+                recipeItems.push("Design de Corte Terapêutico (Remoção de Tricoptilose)");
+            }
+
+            // GATILHO DE AUTORIDADE: O Sistema Bloqueia a Química se o cabelo não aguenta.
+            let alertMessage = "";
+            if (patientData.objetivo === 'Quimica' && hasRed) {
+                alertMessage = `
+                <div class="bg-red-500/10 border border-red-500/30 p-6 rounded-3xl mb-8 backdrop-blur-md">
+                    <span class="text-red-400 font-bold text-xs uppercase tracking-widest block mb-2"><i class="ph ph-warning"></i> Restrição Química Aplicada</span>
+                    <span class="text-white text-sm font-tech font-light leading-relaxed">A transformação química que deseja realizar foi <strong>bloqueada preventivamente</strong> pelo sistema. O seu fio apresenta sintomas de quebra e não possui resistência elástica para suportar descoloração ou ácidos neste momento. A prioridade é a recuperação do córtex.</span>
+                </div>`;
+            }
+
+            // Injeta o Título
             document.getElementById('result-title').innerHTML = statusText;
+            
+            // Injeta a Receita Gerada
+            let recipeHTML = recipeItems.map(item => `
+                <div class="flex items-center gap-4"><div class="w-2 h-2 bg-white rounded-full"></div><span class="font-tech text-lg text-white">${item}</span></div>
+            `).join('');
+            document.getElementById('dynamic-recipe').innerHTML = recipeHTML;
+            
+            // Injeta a Caixa de Alerta (se existir)
+            document.getElementById('alert-container').innerHTML = alertMessage;
+
+            // Adapta o Botão de Chamada para Ação (CTA) com base no Objetivo dela
+            const ctaBtn = document.getElementById('finalCtaBtn');
+            if (patientData.objetivo === 'Mapeamento') {
+                ctaBtn.innerText = "Agendar Laudo Físico (Sem Compromisso)";
+            } else if (patientData.objetivo === 'Corte') {
+                ctaBtn.innerText = "Agendar Corte Terapêutico";
+            } else {
+                ctaBtn.innerText = "Agendar Validação na Matriz";
+            }
         }
 
         // --- 6. GITHUB HOOK ---
         function schedulePhysical() {
-            console.log("=== PAYLOAD V.11.0 [UX CLIENT-FRIENDLY & AI LUXURY] ===");
+            console.log("=== PAYLOAD V.12.0 [UX CLIENT-FRIENDLY & DYNAMIC PRESCRIPTION] ===");
             console.log(JSON.stringify(patientData, null, 2));
-            alert(`Aviso do Sistema (Glitch OS):\n\nA paciente ${patientData.nome} será redirecionada para o WhatsApp da Jô ou para a agenda. Payload gerado com Curvatura, Espessura, Química e Dor.`);
+            alert(`Aviso do Sistema (Glitch OS):\n\nLead e Diagnóstico gerados com sucesso.\nO Payload inclui Objetivo: ${patientData.objetivo} e Dor: ${patientData.dor.join(', ')}.`);
         }
     </script>
 </body>
