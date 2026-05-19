@@ -3,12 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Auditoria Biométrica Capilar | [GL.] PRO</title>
+    <!-- Título otimizado -->
+    <title>Auditoria Biométrica | [GL.] PRO</title>
     
-    <meta name="description" content="Substitua alisamentos e progressivas pela verdadeira Bio-Arquitetura Capilar. Diagnóstico digital avançado.">
-    <meta name="theme-color" content="#F5F5F7">
+    <!-- Meta tags ocultas (SEO) -->
+    <meta name="description" content="Auditoria capilar avançada [GL.] PRO. Diagnóstico da estrutura do fio para tratamentos de bio-arquitetura e liso espelhado.">
+    <meta name="robots" content="noindex, nofollow">
 
-    <!-- Tailwind CSS -->
+    <!-- Tailwind CSS with Dark Mode Class Strategy -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -18,697 +20,704 @@
                     fontFamily: {
                         editorial: ['"Playfair Display"', 'serif'],
                         tech: ['Inter', 'sans-serif'],
-                        cta: ['Montserrat', 'sans-serif'],
                         mono: ['"JetBrains Mono"', 'monospace'],
                     },
                     colors: {
                         brand: {
-                            bgDay: '#F5F5F7', 
-                            surfaceDay: 'rgba(255, 255, 255, 0.5)', 
-                            borderDay: 'rgba(0, 0, 0, 0.08)', 
-                            textDay: '#1C1C1E',
-                            subtextDay: '#555555', 
-                            accentDay: '#111111',
-                            
-                            bgNight: '#040303',
-                            surfaceNight: 'rgba(18, 18, 18, 0.4)',
-                            borderNight: 'rgba(255, 255, 255, 0.08)',
-                            textNight: '#F2F2F7',
-                            subtextNight: '#8E8E93',
-                            accentNight: '#FFFFFF',
+                            /* Fundos Globais */
+                            surfaceDay: '#F1F5F9', /* Cinza gelo ultra claro para destacar o branco dos cartões */
+                            surfaceNight: '#040303', /* Preto absoluto */
+                            /* Textos com Contraste Pesado */
+                            textDay: '#000000', 
+                            subtextDay: '#334155', /* Chumbo escuro para legibilidade máxima */
+                            borderDay: '#CBD5E1',
+                            textNight: '#FFFFFF',
+                            subtextNight: '#E2E8F0', /* Prata claro para estourar no fundo preto */
+                            borderNight: 'rgba(255,255,255,0.15)',
+                            /* Cores de Ação */
+                            accentLight: '#000000',
+                            accentDark: '#FFFFFF',
                         }
+                    },
+                    boxShadow: {
+                        'clinic': '0 20px 40px -15px rgba(0,0,0,0.08)',
+                        'clinic-dark': '0 20px 40px -15px rgba(255,255,255,0.04)',
+                        'heavy': '0 25px 50px -12px rgba(0, 0, 0, 0.35)',
                     }
                 }
             }
         }
     </script>
-    
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@300;500;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-    <script src="https://unpkg.com/lucide@latest" defer></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
     
     <style>
         body { 
-            min-height: 100vh; overflow-x: hidden; -webkit-tap-highlight-color: transparent;
-            display: flex; flex-direction: column; transition: background-color 0.8s ease, color 0.8s ease;
-            background-color: #F5F5F7;
+            min-height: 100vh;
+            overflow-x: hidden;
+            -webkit-tap-highlight-color: transparent;
+            display: flex;
+            flex-direction: column;
+            background-color: var(--brand-surfaceDay);
+            transition: background-color 0.4s ease;
         }
-        .dark body { background-color: #040303; }
+        .dark body { background-color: var(--brand-surfaceNight); }
 
-        /* Fundo de Monograma (Fixo) */
+        /* Fundo Padrão (Monograma Grelha) e Lanterna Central */
         .pattern-layer {
-            position: fixed; inset: -50%; width: 200%; height: 200%;
+            position: fixed; inset: -50%; width: 200%; height: 200%; z-index: -2;
             background-image: url('https://imagensagata.carrd.co/assets/images/image03.jpg?v=6b4b2f98');
             background-size: 70px; background-repeat: repeat; transform: rotate(-12deg);
-            opacity: 0.18; filter: grayscale(1) contrast(1.3); mix-blend-mode: multiply;
-            z-index: -2; pointer-events: none;
+            opacity: 0.15; mix-blend-mode: multiply; filter: grayscale(1) contrast(1.3); pointer-events: none;
         }
-        .dark .pattern-layer { mix-blend-mode: screen; opacity: 0.18; filter: grayscale(1); }
+        .dark .pattern-layer { mix-blend-mode: screen; opacity: 0.12; filter: grayscale(1); }
 
-        /* Lanterna (Spotlight Fixo Central) */
         .spotlight {
             position: fixed; inset: 0; z-index: -1; pointer-events: none;
-            background: radial-gradient(circle 600px at 50% 20%, rgba(255, 255, 255, 0.8) 0%, transparent 70%);
+            background: radial-gradient(circle 600px at 50% 20%, rgba(255, 255, 255, 0.4) 0%, transparent 70%);
         }
-        .dark .spotlight { background: radial-gradient(circle 600px at 50% 20%, rgba(255, 255, 255, 0.05) 0%, transparent 70%); }
+        .dark .spotlight { background: radial-gradient(circle 600px at 50% 20%, rgba(255, 255, 255, 0.06) 0%, transparent 70%); }
 
-        /* Painel de Vidro (Botões Inativos Jateados) */
+        /* Efeito Joia: Contraste Pesado (Acrílico no Dia, Ónix na Noite) */
         .glass-panel {
-            background: var(--bg-surface, rgba(255, 255, 255, 0.4)); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
-            border: 1px solid var(--border-glass, rgba(0, 0, 0, 0.06)); border-radius: 1.5rem; transform: translateZ(0); 
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); box-shadow: 0 10px 30px rgba(0,0,0,0.02);
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.95), rgba(245, 245, 250, 0.85)); 
+            backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(0, 0, 0, 0.08); /* Borda escura leve para recortar do fundo */
+            border-radius: 1.5rem; transform: translateZ(0); 
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); 
+            box-shadow: inset 0 2px 4px rgba(255, 255, 255, 1), 0 10px 30px rgba(0,0,0,0.04);
         }
-        .dark .glass-panel { --bg-surface: rgba(30, 30, 30, 0.3); --border-glass: rgba(255, 255, 255, 0.06); box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
-        .glass-panel:hover:not(.no-hover) { transform: translateY(-2px); }
-
-        /* Botão Luxo (CTA Principal) */
-        .btn-luxury {
-            background: linear-gradient(145deg, #18181b, #09090b); color: #FFFFFF;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.3), inset 0 1px 1px rgba(255, 255, 255, 0.15); transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-            border: 1px solid #27272a; cursor: pointer;
+        .dark .glass-panel { 
+            background: linear-gradient(145deg, rgba(30, 30, 35, 0.9), rgba(15, 15, 20, 0.7)); 
+            border: 1px solid rgba(255, 255, 255, 0.12); /* Borda prata brilhante */
+            box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.1), inset 0 -1px 1px rgba(0,0,0,0.5), 0 15px 35px rgba(0,0,0,0.4); 
         }
-        .btn-luxury:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 15px 35px rgba(0,0,0,0.4); background: linear-gradient(145deg, #27272a, #18181b); }
-        
-        .dark .btn-luxury {
-            background: linear-gradient(145deg, #ffffff, #e4e4e7); color: #000000; 
-            box-shadow: 0 10px 25px rgba(255,255,255,0.15), inset 0 1px 1px rgba(255, 255, 255, 0.8);
-            border: 1px solid #ffffff;
+        .glass-panel:hover:not(.no-hover) { 
+            transform: translateY(-2px); 
+            border-color: rgba(0, 0, 0, 0.2);
+            box-shadow: inset 0 2px 4px rgba(255, 255, 255, 1), 0 15px 40px rgba(0,0,0,0.08);
         }
-        .dark .btn-luxury:hover:not(:disabled) { box-shadow: 0 15px 35px rgba(255,255,255,0.25); background: #ffffff; }
+        .dark .glass-panel:hover:not(.no-hover) {
+            border-color: rgba(255, 255, 255, 0.3);
+            box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.2), 0 20px 45px rgba(0,0,0,0.6);
+        }
 
-        /* Animação Pulsante para Botões Livres */
-        @keyframes pulse-ready { 0% { box-shadow: 0 0 0 0 rgba(0,0,0,0.4); } 70% { box-shadow: 0 0 0 12px rgba(0,0,0,0); } 100% { box-shadow: 0 0 0 0 rgba(0,0,0,0); } }
-        .dark @keyframes pulse-ready { 0% { box-shadow: 0 0 0 0 rgba(255,255,255,0.4); } 70% { box-shadow: 0 0 0 12px rgba(255,255,255,0); } 100% { box-shadow: 0 0 0 0 rgba(255,255,255,0); } }
-        .btn-pulse { animation: pulse-ready 2s infinite; }
-
-        /* Contraste Absoluto Premium na Seleção (Click) */
+        /* Contraste Absoluto na Seleção */
         .option-selected {
-            background: #000000 !important; 
+            background: #000000 !important;
             border-color: #000000 !important;
-            transform: translateY(-3px) scale(1.01); 
-            box-shadow: 0 15px 35px rgba(0,0,0,0.25) !important;
+            color: #FFFFFF !important;
+            transform: translateY(-2px);
+            box-shadow: inset 0 2px 4px rgba(255,255,255,0.2), 0 20px 40px -10px rgba(0,0,0,0.4) !important;
         }
-        .option-selected span { color: #FFFFFF !important; opacity: 1 !important; }
-        .option-selected .subtitle-text { color: rgba(255,255,255,0.7) !important; }
-        .option-selected .check-icon { opacity: 1 !important; color: #FFFFFF !important; }
-
-        .dark .option-selected { 
-            background: #FFFFFF !important; 
-            border-color: #FFFFFF !important; 
-            box-shadow: 0 15px 35px rgba(255,255,255,0.2) !important; 
+        .dark .option-selected {
+            background: #FFFFFF !important;
+            border-color: #FFFFFF !important;
+            color: #000000 !important;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.1), 0 20px 40px -10px rgba(255,255,255,0.3) !important;
         }
-        .dark .option-selected span { color: #000000 !important; opacity: 1 !important; }
-        .dark .option-selected .subtitle-text { color: rgba(0,0,0,0.7) !important; }
-        .dark .option-selected .check-icon { opacity: 1 !important; color: #000000 !important; }
+        .option-selected .subtitle-text { color: #94A3B8 !important; }
+        .dark .option-selected .subtitle-text { color: #475569 !important; }
+        .option-selected .check-icon { color: #FFFFFF !important; }
+        .dark .option-selected .check-icon { color: #000000 !important; }
 
-        .fade-up-enter { animation: fadeUpEnter 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
-        .fade-up-exit { animation: fadeUpExit 0.4s ease-out forwards; }
-        @keyframes fadeUpEnter { from { opacity: 0; transform: translateY(30px); filter: blur(4px); } to { opacity: 1; transform: translateY(0); filter: blur(0); } }
-        @keyframes fadeUpExit { from { opacity: 1; transform: translateY(0); } to { opacity: 0; transform: translateY(-20px); filter: blur(2px); } }
+        /* Animações UI Fullscreen */
+        .fade-up-enter { animation: fadeUpEnter 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
+        .fade-up-exit { animation: fadeUpExit 0.3s ease-out forwards; }
+        @keyframes fadeUpEnter { from { opacity: 0; transform: translateY(20px); filter: blur(4px); } to { opacity: 1; transform: translateY(0); filter: blur(0); } }
+        @keyframes fadeUpExit { from { opacity: 1; transform: translateY(0); } to { opacity: 0; transform: translateY(-10px); filter: blur(2px); } }
 
-        .logo-image { mix-blend-mode: multiply; filter: invert(1) brightness(0.2); transition: all 0.8s ease; }
-        .dark .logo-image { filter: none; mix-blend-mode: screen; }
+        .btn-press { transition: transform 0.1s ease-out, box-shadow 0.3s ease, background-color 0.3s ease, color 0.3s ease; }
+        .btn-press:active { transform: scale(0.97); }
 
-        /* Estilo Documento Clínico e Inputs */
-        .doc-paper { background: rgba(255, 255, 255, 0.6); border: 1px solid rgba(0, 0, 0, 0.05); }
-        .dark .doc-paper { background: rgba(10, 10, 10, 0.6); border: 1px solid rgba(255, 255, 255, 0.05); }
+        /* Spinner Matemático Centralizado e Perfeito */
+        .clinical-spinner-container { position: relative; width: 100px; height: 100px; margin: 0 auto; display: flex; align-items: center; justify-content: center; }
+        .clinical-spinner {
+            position: absolute; inset: 0;
+            border: 2px solid rgba(0,0,0,0.05);
+            border-top: 2px solid #000000;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        .dark .clinical-spinner {
+            border: 2px solid rgba(255,255,255,0.05);
+            border-top: 2px solid #FFFFFF;
+        }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+        /* Formulário Clínico (Baixo Relevo) */
+        .input-ui { 
+            border-radius: 1rem; transition: all 0.3s ease; 
+            background: rgba(255,255,255,0.6);
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
+        }
+        .input-ui:focus { outline: none; border-color: #000000; background: #FFFFFF; box-shadow: 0 0 0 4px rgba(0,0,0,0.05), inset 0 2px 4px rgba(0,0,0,0.02); }
+        .dark .input-ui { background: rgba(0,0,0,0.2); box-shadow: inset 0 2px 4px rgba(0,0,0,0.3); }
+        .dark .input-ui:focus { border-color: #FFFFFF; background: rgba(0,0,0,0.4); box-shadow: 0 0 0 4px rgba(255,255,255,0.1), inset 0 2px 4px rgba(0,0,0,0.3); }
+
+        /* Botão Pulsante */
+        .btn-ready { animation: gentlePulse 2s infinite; }
+        @keyframes gentlePulse {
+            0% { box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.2); }
+            70% { box-shadow: 0 0 0 15px rgba(0, 0, 0, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(0, 0, 0, 0); }
+        }
+        .dark .btn-ready { animation: gentlePulseDark 2s infinite; }
+        @keyframes gentlePulseDark {
+            0% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.2); }
+            70% { box-shadow: 0 0 0 15px rgba(255, 255, 255, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0); }
+        }
+
+        .icon-sun { opacity: 0; transform: rotate(-90deg); transition: all 0.5s ease; position: absolute; }
+        .icon-moon { opacity: 1; transform: rotate(0); transition: all 0.5s ease; position: absolute; }
+        .dark .icon-sun { opacity: 1; transform: rotate(0); }
+        .dark .icon-moon { opacity: 0; transform: rotate(90deg); }
         
-        input:focus ~ label, input:not(:placeholder-shown) ~ label { color: var(--brand-accentDay); transform: translateY(-2rem) scale(0.75); }
-        .dark input:focus ~ label, .dark input:not(:placeholder-shown) ~ label { color: var(--brand-accentNight); }
+        .logo-image { mix-blend-mode: multiply; filter: contrast(1.2); }
+        .dark .logo-image { filter: invert(1) brightness(0.9); mix-blend-mode: screen; }
 
-        /* Recipe Blur Locking */
-        .locked-step { filter: blur(6px); opacity: 0.4; user-select: none; pointer-events: none; transition: filter 0.3s ease; }
+        ::-webkit-scrollbar { width: 0px; background: transparent; }
     </style>
 </head>
-<body class="text-brand-textDay dark:text-brand-textNight">
+<body class="font-tech text-brand-textDay dark:text-brand-textNight">
 
-    <!-- Fundos Fixos -->
+    <!-- Fundo Fixo -->
     <div class="pattern-layer"></div>
     <div class="spotlight"></div>
 
-    <!-- Navegação Ultra Slim (Translúcido Jateado) -->
-    <nav id="top-nav" class="fixed top-0 w-full py-2.5 md:py-3 px-4 md:px-8 flex justify-between items-center z-50 bg-white/30 dark:bg-black/30 backdrop-blur-2xl border-b border-black/5 dark:border-white/5 shadow-sm" role="navigation">
-        <div class="flex-1 flex justify-start">
-            <a href="index.html" class="flex items-center gap-1.5 text-[9px] md:text-[10px] uppercase tracking-widest font-bold opacity-60 hover:opacity-100 transition-opacity p-2 -ml-2">
-                <i data-lucide="chevron-left" class="w-3.5 h-3.5"></i>
-                <span class="hidden sm:inline">Site Principal</span>
-                <span class="sm:hidden">Sair</span>
-            </a>
-        </div>
-        <div class="flex-1 flex justify-center">
-            <a href="index.html" class="hover:opacity-80 transition-opacity flex items-center justify-center p-2" aria-label="Voltar para a Home">
-                <img src="https://imagensagata.carrd.co/assets/images/image34.png?v=6b4b2f98" alt="Logotipo [GL.] PRO" class="h-3.5 md:h-4 object-contain logo-image">
-            </a>
-        </div>
-        <div class="flex-1 flex justify-end">
-            <button id="theme-toggle-btn" onclick="toggleTheme()" class="w-8 h-8 rounded-full border border-black/10 dark:border-white/10 flex items-center justify-center hover:scale-105 transition-all bg-white/40 dark:bg-black/40 shadow-sm">
-                <i id="theme-icon" data-lucide="moon" class="w-3.5 h-3.5 opacity-80"></i>
-            </button>
-        </div>
-        <div class="absolute bottom-0 left-0 h-[2px] w-full bg-black/5 dark:bg-white/5">
-            <div id="progressBar" class="h-full bg-black dark:bg-white transition-all duration-700 ease-out" style="width: 0%;"></div>
-        </div>
-    </nav>
-
-    <!-- ÁREA PRINCIPAL -->
-    <main class="w-full max-w-4xl mx-auto px-5 md:px-6 flex-1 flex flex-col justify-center relative z-10 pt-20 pb-20" id="appContainer">
+    <!-- Barra Superior Ultra Slim -->
+    <header class="w-full px-4 md:px-6 py-2.5 flex items-center justify-between z-50 fixed top-0 bg-white/40 dark:bg-black/40 backdrop-blur-2xl border-b border-black/5 dark:border-white/5 shadow-sm" id="mainHeader">
+        <!-- Voltar para o Site Principal (Ancorado no index.html) -->
+        <a href="index.html" id="backBtn" class="group flex items-center gap-1.5 text-[9px] font-bold uppercase tracking-widest text-brand-subtextDay dark:text-brand-subtextNight hover:text-brand-textDay dark:hover:text-white transition-colors outline-none focus:outline-none">
+            <i class="ph ph-arrow-left text-sm group-hover:-translate-x-1 transition-transform"></i>
+            <span class="hidden sm:inline">Site Principal</span>
+            <span class="sm:hidden">Sair</span>
+        </a>
         
-        <section id="view-0" class="fade-up-enter text-center py-8 md:py-10 mt-6 md:mt-10 w-full max-w-3xl mx-auto">
-            <div class="mb-10 relative w-full pt-6 md:pt-10">
-                <h1 class="font-editorial text-4xl md:text-6xl mb-6 leading-[1.1] tracking-tight text-brand-textDay dark:text-brand-textNight drop-shadow-sm">
-                    Auditoria Biométrica<br><span class="italic font-light opacity-80">Capilar</span>
+        <div class="flex-1 flex justify-center">
+            <img src="https://imagensagata.carrd.co/assets/images/image34.png?v=6b4b2f98" alt="[GL.] PRO" class="h-4 md:h-5 object-contain logo-image" loading="lazy">
+        </div>
+        
+        <button onclick="toggleTheme()" class="w-7 h-7 rounded-full border border-black/10 dark:border-white/20 bg-white dark:bg-black flex items-center justify-center shadow-sm text-brand-textDay dark:text-brand-textNight focus:outline-none relative overflow-hidden transition-transform hover:scale-105">
+            <i class="ph ph-moon text-[11px] icon-moon"></i>
+            <i class="ph ph-sun text-[11px] icon-sun"></i>
+        </button>
+        
+        <!-- Barra de Progresso Ultra Fina no Fundo do Header -->
+        <div class="absolute bottom-0 left-0 h-[1.5px] bg-transparent w-full">
+            <div id="progressBar" class="h-full bg-brand-textDay dark:bg-white transition-all duration-700 ease-out" style="width: 0%;"></div>
+        </div>
+    </header>
+
+    <main class="w-full max-w-2xl mx-auto px-5 flex-1 flex flex-col justify-center relative z-10 pt-16 pb-10" id="appContainer">
+        
+        <!-- View 0: Hero Inicial -->
+        <section id="view-0" class="fade-up-enter flex flex-col justify-center min-h-[75vh] text-center w-full">
+            <div class="mb-10">
+                <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-8 bg-brand-textDay dark:bg-white shadow-xl">
+                    <span class="relative flex h-2 w-2">
+                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                    </span>
+                    <span class="font-mono text-[9px] uppercase tracking-widest text-white dark:text-black font-bold">Inteligência Clínica Ativa</span>
+                </div>
+                
+                <h1 class="font-editorial text-5xl md:text-6xl mb-6 leading-[1.1] tracking-tight font-bold">
+                    Auditoria Biométrica<br><span class="italic font-light text-brand-subtextDay dark:text-brand-subtextNight">Capilar</span>
                 </h1>
-                <p class="font-tech text-sm md:text-base mb-8 font-light leading-relaxed max-w-xl mx-auto opacity-70 px-2">
-                    A engenharia clínica da modelagem. A nossa Inteligência Artificial vai cruzar as suas variáveis para entregar a prescrição exata que a matriz do seu fio exige.
+                <p class="font-tech text-brand-subtextDay dark:text-brand-subtextNight text-sm md:text-base mb-8 font-medium leading-relaxed max-w-md mx-auto">
+                    A evolução exata da engenharia capilar. O nosso algoritmo vai cruzar o seu histórico de saturação com a sua matriz natural para prescrever o protocolo seguro de intervenção.
                 </p>
-                <div class="flex items-center justify-center gap-6 opacity-60 mb-10">
-                    <div class="flex flex-col items-center gap-2">
-                        <i data-lucide="microscope" class="w-5 h-5"></i>
-                        <span class="font-tech text-[8px] uppercase tracking-widest font-bold">Análise Estrutural</span>
-                    </div>
-                    <div class="w-px h-8 bg-black/20 dark:bg-white/20"></div>
-                    <div class="flex flex-col items-center gap-2">
-                        <i data-lucide="shield-check" class="w-5 h-5"></i>
-                        <span class="font-tech text-[8px] uppercase tracking-widest font-bold">Laudo Clínico</span>
-                    </div>
-                </div>
+                <div class="w-12 h-px bg-black/10 dark:bg-white/10 mx-auto"></div>
             </div>
             
-            <button onclick="nextView(1)" class="w-full max-w-sm mx-auto py-4 md:py-5 rounded-2xl font-cta font-black text-[10px] uppercase tracking-[0.4em] text-center btn-luxury flex items-center justify-center gap-2 px-4 shadow-xl">
-                Iniciar Mapeamento <i data-lucide="arrow-right" class="w-4 h-4"></i>
+            <button onclick="nextView(1)" class="btn-press w-full bg-brand-textDay text-white dark:bg-white dark:text-black font-tech py-5 px-8 rounded-2xl uppercase tracking-[0.2em] text-[10px] font-bold shadow-heavy transition-all duration-300 block">
+                Iniciar Mapeamento da Fibra
             </button>
         </section>
 
-        <section id="view-1" class="hidden flex-col justify-center py-8 md:py-10 w-full max-w-3xl mx-auto">
-            <div class="mb-10 text-center relative w-full pt-10">
-                <button onclick="goBack()" class="absolute left-0 top-8 w-10 h-10 md:w-12 md:h-12 rounded-full flex items-center justify-center hover:bg-black/5 dark:hover:bg-white/5 transition-colors glass-panel no-hover shadow-sm z-10">
-                    <i data-lucide="arrow-left" class="w-4 h-4 md:w-5 md:h-5 opacity-70"></i>
-                </button>
-                <span class="font-tech text-[9px] md:text-[10px] tracking-[0.3em] uppercase block mb-3 font-bold opacity-50">Passo 1 de 5</span>
-                <h2 class="font-editorial italic text-3xl md:text-5xl">Arquitetura Natural da Fibra</h2>
+        <!-- View 1: Arquitetura da Fibra -->
+        <section id="view-1" class="hidden flex-col justify-center min-h-[75vh] w-full">
+            <div class="mb-10 text-center">
+                <!-- Nomenclatura Pílula Sólida (Contraste Pesado) -->
+                <div class="inline-block mb-4 px-4 py-1.5 rounded-full bg-brand-textDay dark:bg-white text-white dark:text-black font-mono text-[9px] tracking-[0.3em] uppercase font-bold shadow-md">
+                    Passo 1 de 5
+                </div>
+                <h2 class="font-editorial italic text-3xl md:text-4xl font-bold">Qual a Arquitetura Natural da sua fibra?</h2>
             </div>
             
-            <div class="space-y-4 md:space-y-5 relative z-10">
-                <button onclick="saveSingleAnswer('curvatura', 'Liso', 2, this)" class="option-btn glass-panel w-full text-left p-6 md:p-8 flex items-center justify-between group cursor-pointer">
+            <div class="space-y-4">
+                <button onclick="saveSingleAnswer('curvatura', 'Liso', 2)" class="option-btn btn-press glass-panel w-full text-left p-5 md:p-6 flex items-center justify-between group">
                     <div>
-                        <span class="font-tech font-bold text-sm md:text-lg block mb-1 uppercase tracking-widest transition-colors">Liso e Retilíneo</span>
-                        <span class="font-tech text-xs subtitle-text opacity-60 transition-colors">Sem ondas naturais, reflete bastante luz e tende à oleosidade na base.</span>
+                        <span class="font-tech font-bold text-base md:text-lg block mb-1">Liso e Retilíneo</span>
+                        <span class="font-tech text-xs font-medium subtitle-text text-brand-subtextDay dark:text-brand-subtextNight">Ausência de ondas naturais na estrutura do fio.</span>
                     </div>
                 </button>
-                <button onclick="saveSingleAnswer('curvatura', 'Ondulado', 2, this)" class="option-btn glass-panel w-full text-left p-6 md:p-8 flex items-center justify-between group cursor-pointer">
+                <button onclick="saveSingleAnswer('curvatura', 'Ondulado', 2)" class="option-btn btn-press glass-panel w-full text-left p-5 md:p-6 flex items-center justify-between group">
                     <div>
-                        <span class="font-tech font-bold text-sm md:text-lg block mb-1 uppercase tracking-widest transition-colors">Ondulado (Sinuoso)</span>
-                        <span class="font-tech text-xs subtitle-text opacity-60 transition-colors">Forma leves ondas em "S", especialmente nas pontas, podendo armar.</span>
+                        <span class="font-tech font-bold text-base md:text-lg block mb-1">Ondulado (Sinuoso)</span>
+                        <span class="font-tech text-xs font-medium subtitle-text text-brand-subtextDay dark:text-brand-subtextNight">Apresenta formato leve em "S", visível ao secar natural.</span>
                     </div>
                 </button>
-                <button onclick="saveSingleAnswer('curvatura', 'Cacheado', 2, this)" class="option-btn glass-panel w-full text-left p-6 md:p-8 flex items-center justify-between group cursor-pointer">
+                <button onclick="saveSingleAnswer('curvatura', 'Cacheado', 2)" class="option-btn btn-press glass-panel w-full text-left p-5 md:p-6 flex items-center justify-between group">
                     <div>
-                        <span class="font-tech font-bold text-sm md:text-lg block mb-1 uppercase tracking-widest transition-colors">Cacheado (Espiral)</span>
-                        <span class="font-tech text-xs subtitle-text opacity-60 transition-colors">Cachos definidos, formato de mola, com maior facilidade em perder hidratação.</span>
+                        <span class="font-tech font-bold text-base md:text-lg block mb-1">Cacheado (Espiral)</span>
+                        <span class="font-tech text-xs font-medium subtitle-text text-brand-subtextDay dark:text-brand-subtextNight">Formação de anéis definidos com tendência a ressecamento.</span>
                     </div>
                 </button>
-                <button onclick="saveSingleAnswer('curvatura', 'Crespo', 2, this)" class="option-btn glass-panel w-full text-left p-6 md:p-8 flex items-center justify-between group cursor-pointer">
+                <button onclick="saveSingleAnswer('curvatura', 'Crespo', 2)" class="option-btn btn-press glass-panel w-full text-left p-5 md:p-6 flex items-center justify-between group">
                     <div>
-                        <span class="font-tech font-bold text-sm md:text-lg block mb-1 uppercase tracking-widest transition-colors">Crespo / Volumoso</span>
-                        <span class="font-tech text-xs subtitle-text opacity-60 transition-colors">Cachos muito apertados ou zigue-zague desde a matriz. Volume estrutural alto.</span>
+                        <span class="font-tech font-bold text-base md:text-lg block mb-1">Crespo / Volumoso</span>
+                        <span class="font-tech text-xs font-medium subtitle-text text-brand-subtextDay dark:text-brand-subtextNight">Curvatura fechada desde a matriz com volume estrutural alto.</span>
                     </div>
                 </button>
+            </div>
+            
+            <div class="mt-8 text-left">
+                <button onclick="goBack()" class="inline-flex items-center gap-2 text-[10px] uppercase tracking-widest font-bold opacity-50 hover:opacity-100 transition-opacity"><i class="ph ph-arrow-left"></i> Voltar</button>
             </div>
         </section>
 
-        <section id="view-2" class="hidden flex-col justify-center py-8 md:py-10 w-full max-w-3xl mx-auto">
-            <div class="mb-10 text-center w-full relative pt-10">
-                <button onclick="goBack()" class="absolute left-0 top-8 w-10 h-10 md:w-12 md:h-12 rounded-full flex items-center justify-center hover:bg-black/5 dark:hover:bg-white/5 transition-colors glass-panel no-hover shadow-sm z-10">
-                    <i data-lucide="arrow-left" class="w-4 h-4 md:w-5 md:h-5 opacity-70"></i>
-                </button>
-                <span class="font-tech text-[9px] md:text-[10px] tracking-[0.3em] uppercase block mb-3 font-bold opacity-50">Passo 2 de 5</span>
-                <h2 class="font-editorial italic text-3xl md:text-5xl px-4">Calibre e Densidade do Fio</h2>
+        <!-- View 2: Densidade/Volume -->
+        <section id="view-2" class="hidden flex-col justify-center min-h-[75vh] w-full">
+            <div class="mb-10 text-center">
+                <div class="inline-block mb-4 px-4 py-1.5 rounded-full bg-brand-textDay dark:bg-white text-white dark:text-black font-mono text-[9px] tracking-[0.3em] uppercase font-bold shadow-md">
+                    Passo 2 de 5
+                </div>
+                <h2 class="font-editorial italic text-3xl md:text-4xl font-bold">Qual a Densidade e o Volume da fibra?</h2>
             </div>
             
-            <div class="space-y-4 md:space-y-5 relative z-10">
-                <button onclick="saveSingleAnswer('espessura', 'Fino', 3, this)" class="option-btn glass-panel w-full text-left p-6 md:p-8 flex items-center justify-between group cursor-pointer">
+            <div class="space-y-4">
+                <button onclick="saveSingleAnswer('espessura', 'Fina', 3)" class="option-btn btn-press glass-panel w-full text-left p-5 md:p-6 flex items-center justify-between group">
                     <div>
-                        <span class="font-tech font-bold text-sm md:text-lg block mb-1 uppercase tracking-widest transition-colors">Fio Fino (Cabelo Ralo)</span>
-                        <span class="font-tech text-xs subtitle-text opacity-60 transition-colors">Sem muita resistência, abaixa o volume rápido e embaraça com extrema facilidade.</span>
+                        <span class="font-tech font-bold text-base md:text-lg block mb-1">Fio Fino e Ralo</span>
+                        <span class="font-tech text-xs font-medium subtitle-text text-brand-subtextDay dark:text-brand-subtextNight">Perde o volume rápido, pouco peso e embaraça com facilidade.</span>
                     </div>
                 </button>
-                <button onclick="saveSingleAnswer('espessura', 'Médio', 3, this)" class="option-btn glass-panel w-full text-left p-6 md:p-8 flex items-center justify-between group cursor-pointer">
+                <button onclick="saveSingleAnswer('espessura', 'Média', 3)" class="option-btn btn-press glass-panel w-full text-left p-5 md:p-6 flex items-center justify-between group">
                     <div>
-                        <span class="font-tech font-bold text-sm md:text-lg block mb-1 uppercase tracking-widest transition-colors">Fio Médio (Densidade Normal)</span>
-                        <span class="font-tech text-xs subtitle-text opacity-60 transition-colors">Nem muito fino, nem muito pesado. Um equilíbrio de quantidade e corpo.</span>
+                        <span class="font-tech font-bold text-base md:text-lg block mb-1">Espessura Média / Normal</span>
+                        <span class="font-tech text-xs font-medium subtitle-text text-brand-subtextDay dark:text-brand-subtextNight">Densidade equilibrada, nem muito pesado nem excessivamente frágil.</span>
                     </div>
                 </button>
-                <button onclick="saveSingleAnswer('espessura', 'Grosso', 3, this)" class="option-btn glass-panel w-full text-left p-6 md:p-8 flex items-center justify-between group cursor-pointer">
+                <button onclick="saveSingleAnswer('espessura', 'Grossa', 3)" class="option-btn btn-press glass-panel w-full text-left p-5 md:p-6 flex items-center justify-between group">
                     <div>
-                        <span class="font-tech font-bold text-sm md:text-lg block mb-1 uppercase tracking-widest transition-colors">Fio Grosso (Cabelo Cheio)</span>
-                        <span class="font-tech text-xs subtitle-text opacity-60 transition-colors">Estrutura rígida e encorpada. Mais difícil de modelar e pesa bastante na base.</span>
+                        <span class="font-tech font-bold text-base md:text-lg block mb-1">Fio Grosso e Cheio</span>
+                        <span class="font-tech text-xs font-medium subtitle-text text-brand-subtextDay dark:text-brand-subtextNight">Estrutura pesada, muito volume na base e resistente à modelação.</span>
                     </div>
                 </button>
+            </div>
+            <div class="mt-8 text-left">
+                <button onclick="goBack()" class="inline-flex items-center gap-2 text-[10px] uppercase tracking-widest font-bold opacity-50 hover:opacity-100 transition-opacity"><i class="ph ph-arrow-left"></i> Voltar</button>
             </div>
         </section>
 
-        <section id="view-3" class="hidden flex-col justify-center py-8 md:py-10 w-full max-w-3xl mx-auto">
-            <div class="mb-8 text-center w-full relative pt-10">
-                <button onclick="goBack()" class="absolute left-0 top-8 w-10 h-10 md:w-12 md:h-12 rounded-full flex items-center justify-center hover:bg-black/5 dark:hover:bg-white/5 transition-colors glass-panel no-hover shadow-sm z-10">
-                    <i data-lucide="arrow-left" class="w-4 h-4 md:w-5 md:h-5 opacity-70"></i>
-                </button>
-                <span class="font-tech text-[9px] md:text-[10px] tracking-[0.3em] uppercase block mb-3 font-bold opacity-50">Passo 3 de 5</span>
-                <h2 class="font-editorial italic text-3xl md:text-5xl mb-3">Saturação Química (Histórico)</h2>
-                <div class="inline-block bg-black/5 dark:bg-white/10 px-3 py-1 rounded font-tech text-[8px] md:text-[9px] uppercase tracking-widest shadow-sm font-bold opacity-80 backdrop-blur-md">
-                    Múltiplas opções permitidas
+        <!-- View 3: Histórico Químico -->
+        <section id="view-3" class="hidden flex-col justify-center min-h-[75vh] w-full">
+            <div class="mb-8 text-center">
+                <div class="inline-block mb-4 px-4 py-1.5 rounded-full bg-brand-textDay dark:bg-white text-white dark:text-black font-mono text-[9px] tracking-[0.3em] uppercase font-bold shadow-md">
+                    Passo 3 de 5
+                </div>
+                <h2 class="font-editorial italic text-3xl md:text-4xl font-bold">O seu Histórico de Saturação Química?</h2>
+                <div class="inline-block mt-4 bg-brand-textDay/10 dark:bg-white/10 border border-black/10 dark:border-white/20 px-3 py-1 rounded text-[9px] uppercase tracking-widest font-bold text-brand-textDay dark:text-white">
+                    <i class="ph ph-list-plus align-middle mr-1"></i> Múltiplas opções permitidas
                 </div>
             </div>
             
-            <div class="space-y-4 relative z-10" id="options-quimica">
-                <button onclick="toggleOption('quimica', 'Descoloração', this)" class="option-btn glass-panel w-full text-left p-6 md:p-7 flex items-center gap-4 md:gap-5 cursor-pointer">
-                    <i data-lucide="square" class="check-icon w-5 h-5 md:w-6 md:h-6 opacity-50 transition-colors flex-shrink-0"></i>
+            <div class="space-y-4" id="options-quimica">
+                <button onclick="toggleOption('quimica', 'Descoloração', this)" class="option-btn glass-panel btn-press w-full text-left p-5 flex items-center gap-4">
+                    <i class="check-icon ph ph-square text-xl text-black/40 dark:text-white/40"></i>
                     <div>
-                        <span class="font-tech font-bold text-sm block mb-1 uppercase tracking-widest transition-colors">Luzes, Mechas ou Descoloração</span>
-                        <span class="font-tech text-xs subtitle-text opacity-60 leading-relaxed block transition-colors">Qualquer técnica que exigiu pó descolorante ou oxidação severa para clarear.</span>
+                        <span class="font-tech font-bold text-sm md:text-base block mb-0.5">Mechas ou Descoloração</span>
+                        <span class="font-tech text-[11px] font-medium subtitle-text text-brand-subtextDay dark:text-brand-subtextNight leading-relaxed">Qualquer técnica que usou pó descolorante ou alta oxidação.</span>
                     </div>
                 </button>
-                <button onclick="toggleOption('quimica', 'Acida', this)" class="option-btn glass-panel w-full text-left p-6 md:p-7 flex items-center gap-4 md:gap-5 cursor-pointer">
-                    <i data-lucide="square" class="check-icon w-5 h-5 md:w-6 md:h-6 opacity-50 transition-colors flex-shrink-0"></i>
+                <button onclick="toggleOption('quimica', 'Acida', this)" class="option-btn glass-panel btn-press w-full text-left p-5 flex items-center gap-4">
+                    <i class="check-icon ph ph-square text-xl text-black/40 dark:text-white/40"></i>
                     <div>
-                        <span class="font-tech font-bold text-sm block mb-1 uppercase tracking-widest transition-colors">Alinhamento Ácido (Orgânicas)</span>
-                        <span class="font-tech text-xs subtitle-text opacity-60 leading-relaxed block transition-colors">Inclui histórico de: Selagem, Progressiva sem formol ou Botox ácido.</span>
+                        <span class="font-tech font-bold text-sm md:text-base block mb-0.5">Alinhamento Ácido</span>
+                        <span class="font-tech text-[11px] font-medium subtitle-text text-brand-subtextDay dark:text-brand-subtextNight leading-relaxed">Selagem, Progressiva sem formol, Botox ou Realinhamento.</span>
                     </div>
                 </button>
-                <button onclick="toggleOption('quimica', 'Formol', this)" class="option-btn glass-panel w-full text-left p-6 md:p-7 flex items-center gap-4 md:gap-5 cursor-pointer">
-                    <i data-lucide="square" class="check-icon w-5 h-5 md:w-6 md:h-6 opacity-50 transition-colors flex-shrink-0"></i>
+                <button onclick="toggleOption('quimica', 'Formol', this)" class="option-btn glass-panel btn-press w-full text-left p-5 flex items-center gap-4">
+                    <i class="check-icon ph ph-square text-xl text-black/40 dark:text-white/40"></i>
                     <div>
-                        <span class="font-tech font-bold text-sm block mb-1 uppercase tracking-widest transition-colors">Polímeros Sintéticos (Formol)</span>
-                        <span class="font-tech text-xs subtitle-text opacity-60 leading-relaxed block transition-colors">Inclui histórico de: Progressiva tradicional ou Alisamento definitivo.</span>
+                        <span class="font-tech font-bold text-sm md:text-base block mb-0.5">Polímeros Antigos (Formol)</span>
+                        <span class="font-tech text-[11px] font-medium subtitle-text text-brand-subtextDay dark:text-brand-subtextNight leading-relaxed">Progressiva tradicional ou Escova Inteligente de fixação pesada.</span>
                     </div>
                 </button>
-                <button onclick="toggleOption('quimica', 'Coloração', this)" class="option-btn glass-panel w-full text-left p-6 md:p-7 flex items-center gap-4 md:gap-5 cursor-pointer">
-                    <i data-lucide="square" class="check-icon w-5 h-5 md:w-6 md:h-6 opacity-50 transition-colors flex-shrink-0"></i>
+                <button onclick="toggleOption('quimica', 'Coloração', this)" class="option-btn glass-panel btn-press w-full text-left p-5 flex items-center gap-4">
+                    <i class="check-icon ph ph-square text-xl text-black/40 dark:text-white/40"></i>
                     <div>
-                        <span class="font-tech font-bold text-sm block mb-1 uppercase tracking-widest transition-colors">Tinta ou Tonalizante Global</span>
-                        <span class="font-tech text-xs subtitle-text opacity-60 leading-relaxed block transition-colors">Coloração permanente, tintura escura ou cobertura de brancos.</span>
+                        <span class="font-tech font-bold text-sm md:text-base block mb-0.5">Tinta ou Tonalizante</span>
+                        <span class="font-tech text-[11px] font-medium subtitle-text text-brand-subtextDay dark:text-brand-subtextNight leading-relaxed">Coloração de base inteira ou cobertura de brancos.</span>
                     </div>
                 </button>
-                <button onclick="toggleOption('quimica', 'Virgem', this)" class="option-btn glass-panel w-full text-left p-6 md:p-7 flex items-center gap-4 md:gap-5 cursor-pointer" id="btn-virgem">
-                    <i data-lucide="square" class="check-icon w-5 h-5 md:w-6 md:h-6 opacity-50 transition-colors flex-shrink-0"></i>
+                <button onclick="toggleOption('quimica', 'Virgem', this)" class="option-btn glass-panel btn-press w-full text-left p-5 flex items-center gap-4" id="btn-virgem">
+                    <i class="check-icon ph ph-square text-xl text-black/40 dark:text-white/40"></i>
                     <div>
-                        <span class="font-tech font-bold text-sm block mb-1 uppercase tracking-widest transition-colors">Matriz Virgem (Cabelo Natural)</span>
-                        <span class="font-tech text-xs subtitle-text opacity-60 leading-relaxed block transition-colors">Nenhuma intervenção química de cor ou alisamento feita na vida do fio atual.</span>
+                        <span class="font-tech font-bold text-sm md:text-base block mb-0.5">Cabelo Natural (Virgem)</span>
+                        <span class="font-tech text-[11px] font-medium subtitle-text text-brand-subtextDay dark:text-brand-subtextNight leading-relaxed">Nenhuma intervenção química registada nos fios.</span>
                     </div>
                 </button>
             </div>
 
-            <button id="btnAdvance3" onclick="nextView(4)" class="w-full max-w-sm mx-auto py-5 rounded-2xl font-cta font-black text-[10px] uppercase tracking-[0.4em] text-center btn-luxury transition-all mt-10 opacity-0 pointer-events-none transform translate-y-4 relative z-10 shadow-xl">
-                Confirmar Seleções
-            </button>
+            <div class="flex items-center gap-4 mt-8">
+                <button onclick="goBack()" class="inline-flex items-center gap-2 text-[10px] uppercase tracking-widest font-bold opacity-50 hover:opacity-100 transition-opacity"><i class="ph ph-arrow-left"></i> Voltar</button>
+                <button id="btnAdvance3" onclick="nextView(4)" class="flex-1 btn-press bg-brand-textDay text-white dark:bg-white dark:text-black font-tech py-5 px-6 rounded-2xl uppercase tracking-[0.2em] text-[10px] font-bold transition-all opacity-0 pointer-events-none transform translate-y-4 shadow-heavy">
+                    Confirmar Seleção
+                </button>
+            </div>
         </section>
 
-        <section id="view-4" class="hidden flex-col justify-center py-8 md:py-10 w-full max-w-3xl mx-auto">
-            <div class="mb-8 text-center w-full relative pt-10">
-                <button onclick="goBack()" class="absolute left-0 top-8 w-10 h-10 md:w-12 md:h-12 rounded-full flex items-center justify-center hover:bg-black/5 dark:hover:bg-white/5 transition-colors glass-panel no-hover shadow-sm z-10">
-                    <i data-lucide="arrow-left" class="w-4 h-4 md:w-5 md:h-5 opacity-70"></i>
-                </button>
-                <span class="font-tech text-[9px] md:text-[10px] tracking-[0.3em] uppercase block mb-3 font-bold opacity-50">Passo 4 de 5</span>
-                <h2 class="font-editorial italic text-3xl md:text-5xl mb-3">Mapeamento Clínico (Anomalias)</h2>
-                <div class="inline-block bg-black/5 dark:bg-white/10 px-3 py-1 rounded font-tech text-[8px] md:text-[9px] uppercase tracking-widest shadow-sm font-bold opacity-80 backdrop-blur-md">
-                    Múltiplos sintomas permitidos
+        <!-- View 4: Sintomas -->
+        <section id="view-4" class="hidden flex-col justify-center min-h-[75vh] w-full">
+            <div class="mb-8 text-center">
+                <div class="inline-block mb-4 px-4 py-1.5 rounded-full bg-brand-textDay dark:bg-white text-white dark:text-black font-mono text-[9px] tracking-[0.3em] uppercase font-bold shadow-md">
+                    Passo 4 de 5
+                </div>
+                <h2 class="font-editorial italic text-3xl md:text-4xl font-bold">Mapeamento Sintomático</h2>
+                <div class="inline-block mt-4 bg-brand-textDay/10 dark:bg-white/10 border border-black/10 dark:border-white/20 px-3 py-1 rounded text-[9px] uppercase tracking-widest font-bold text-brand-textDay dark:text-white">
+                    <i class="ph ph-list-plus align-middle mr-1"></i> Múltiplas opções permitidas
                 </div>
             </div>
             
-            <div class="space-y-4 relative z-10" id="options-dor">
-                <button onclick="toggleOption('dor', 'Amarelo_Pontas', this)" class="option-btn glass-panel w-full text-left p-6 md:p-7 flex items-center gap-4 md:gap-5 cursor-pointer">
-                    <i data-lucide="square" class="check-icon w-5 h-5 md:w-6 md:h-6 opacity-50 transition-colors flex-shrink-0"></i>
+            <div class="space-y-4" id="options-dor">
+                <button onclick="toggleOption('dor', 'Amarelo_Pontas', this)" class="option-btn glass-panel btn-press w-full text-left p-5 flex items-center gap-4">
+                    <i class="check-icon ph ph-square text-xl text-black/40 dark:text-white/40"></i>
                     <div>
-                        <span class="font-tech font-bold text-sm block mb-1 uppercase tracking-widest transition-colors">Tricoptilose (Pontas Duplas/Espigadas)</span>
-                        <span class="font-tech text-xs subtitle-text opacity-60 leading-relaxed block transition-colors">As extremidades dividem-se, o pente enrosca com frequência nas pontas.</span>
+                        <span class="font-tech font-bold text-sm md:text-base block mb-0.5">Pontas Duplas e Espigadas</span>
+                        <span class="font-tech text-[11px] font-medium subtitle-text text-brand-subtextDay dark:text-brand-subtextNight leading-relaxed">As extremidades dividem-se e embaraçam facilmente ao pentear.</span>
                     </div>
                 </button>
-                <button onclick="toggleOption('dor', 'Vermelho_Ruptura', this)" class="option-btn glass-panel w-full text-left p-6 md:p-7 flex items-center gap-4 md:gap-5 cursor-pointer">
-                    <i data-lucide="square" class="check-icon w-5 h-5 md:w-6 md:h-6 opacity-50 transition-colors flex-shrink-0"></i>
+                <button onclick="toggleOption('dor', 'Vermelho_Ruptura', this)" class="option-btn glass-panel btn-press w-full text-left p-5 flex items-center gap-4">
+                    <i class="check-icon ph ph-square text-xl text-black/40 dark:text-white/40"></i>
                     <div>
-                        <span class="font-tech font-bold text-sm block mb-1 uppercase tracking-widest transition-colors">Nível de Ruptura Severa (Quebra)</span>
-                        <span class="font-tech text-xs subtitle-text opacity-60 leading-relaxed block transition-colors">Ao passar a escova, o fio seco rompe e caem pedaços. Falta de resistência.</span>
+                        <span class="font-tech font-bold text-sm md:text-base block mb-0.5">Ruptura (Quebra do Fio Seco)</span>
+                        <span class="font-tech text-[11px] font-medium subtitle-text text-brand-subtextDay dark:text-brand-subtextNight leading-relaxed">Fio rompe com facilidade e caem pedaços ao passar a escova.</span>
                     </div>
                 </button>
-                <button onclick="toggleOption('dor', 'Vermelho_Elastico', this)" class="option-btn glass-panel w-full text-left p-6 md:p-7 flex items-center gap-4 md:gap-5 cursor-pointer">
-                    <i data-lucide="square" class="check-icon w-5 h-5 md:w-6 md:h-6 opacity-50 transition-colors flex-shrink-0"></i>
+                <button onclick="toggleOption('dor', 'Vermelho_Elastico', this)" class="option-btn glass-panel btn-press w-full text-left p-5 flex items-center gap-4">
+                    <i class="check-icon ph ph-square text-xl text-black/40 dark:text-white/40"></i>
                     <div>
-                        <span class="font-tech font-bold text-sm block mb-1 uppercase tracking-widest transition-colors">Fadiga Elástica (Emborrachado)</span>
-                        <span class="font-tech text-xs subtitle-text opacity-60 leading-relaxed block transition-colors">Ao molhar, o fio estica como elástico e perde a forma.</span>
+                        <span class="font-tech font-bold text-sm md:text-base block mb-0.5">Emborrachado (Fadiga Elástica)</span>
+                        <span class="font-tech text-[11px] font-medium subtitle-text text-brand-subtextDay dark:text-brand-subtextNight leading-relaxed">Quando molhado, o fio estica como elástico e não volta à forma normal.</span>
                     </div>
                 </button>
-                <button onclick="toggleOption('dor', 'Amarelo_Porosidade', this)" class="option-btn glass-panel w-full text-left p-6 md:p-7 flex items-center gap-4 md:gap-5 cursor-pointer">
-                    <i data-lucide="square" class="check-icon w-5 h-5 md:w-6 md:h-6 opacity-50 transition-colors flex-shrink-0"></i>
+                <button onclick="toggleOption('dor', 'Amarelo_Porosidade', this)" class="option-btn glass-panel btn-press w-full text-left p-5 flex items-center gap-4">
+                    <i class="check-icon ph ph-square text-xl text-black/40 dark:text-white/40"></i>
                     <div>
-                        <span class="font-tech font-bold text-sm block mb-1 uppercase tracking-widest transition-colors">Porosidade, Frizz e Opacidade</span>
-                        <span class="font-tech text-xs subtitle-text opacity-60 leading-relaxed block transition-colors">Superfície extremamente áspera, cutículas abertas que incham e armam com a umidade.</span>
+                        <span class="font-tech font-bold text-sm md:text-base block mb-0.5">Frizz e Porosidade Extrema</span>
+                        <span class="font-tech text-[11px] font-medium subtitle-text text-brand-subtextDay dark:text-brand-subtextNight leading-relaxed">Superfície áspera sem brilho e fios que incham com a umidade do ar.</span>
                     </div>
                 </button>
-                <button onclick="toggleOption('dor', 'Verde_Saudavel', this)" class="option-btn glass-panel w-full text-left p-6 md:p-7 flex items-center gap-4 md:gap-5 cursor-pointer" id="btn-saudavel">
-                    <i data-lucide="square" class="check-icon w-5 h-5 md:w-6 md:h-6 opacity-50 transition-colors flex-shrink-0"></i>
+                <button onclick="toggleOption('dor', 'Amarelo_Afinamento', this)" class="option-btn glass-panel btn-press w-full text-left p-5 flex items-center gap-4">
+                    <i class="check-icon ph ph-square text-xl text-black/40 dark:text-white/40"></i>
                     <div>
-                        <span class="font-tech font-bold text-sm block mb-1 uppercase tracking-widest transition-colors">Íntegro e Estável</span>
-                        <span class="font-tech text-xs subtitle-text opacity-60 leading-relaxed block transition-colors">O fio está perfeitamente saudável. Busco apenas blindagem térmica ou alinhamento por especialistas.</span>
+                        <span class="font-tech font-bold text-sm md:text-base block mb-0.5">Afinamento (Perda de Matriz)</span>
+                        <span class="font-tech text-[11px] font-medium subtitle-text text-brand-subtextDay dark:text-brand-subtextNight leading-relaxed">O cabelo perdeu o volume e a densidade ao longo do tempo.</span>
+                    </div>
+                </button>
+                <button onclick="toggleOption('dor', 'Verde_Saudavel', this)" class="option-btn glass-panel btn-press w-full text-left p-5 flex items-center gap-4" id="btn-saudavel">
+                    <i class="check-icon ph ph-square text-xl text-black/40 dark:text-white/40"></i>
+                    <div>
+                        <span class="font-tech font-bold text-sm md:text-base block mb-0.5">Íntegro e Saudável</span>
+                        <span class="font-tech text-[11px] font-medium subtitle-text text-brand-subtextDay dark:text-brand-subtextNight leading-relaxed">Procuro apenas alinhamento perfeito, brilho e prevenção térmica.</span>
                     </div>
                 </button>
             </div>
 
-            <button id="btnAdvance4" onclick="nextView(5)" class="w-full max-w-sm mx-auto py-5 rounded-2xl font-cta font-black text-[10px] uppercase tracking-[0.4em] text-center btn-luxury transition-all mt-10 opacity-0 pointer-events-none transform translate-y-4 relative z-10 shadow-xl">
-                Consolidar Análise de Risco
-            </button>
+            <div class="flex items-center gap-4 mt-8">
+                <button onclick="goBack()" class="inline-flex items-center gap-2 text-[10px] uppercase tracking-widest font-bold opacity-50 hover:opacity-100 transition-opacity"><i class="ph ph-arrow-left"></i> Voltar</button>
+                <button id="btnAdvance4" onclick="nextView(5)" class="flex-1 btn-press bg-brand-textDay text-white dark:bg-white dark:text-black font-tech py-5 px-6 rounded-2xl uppercase tracking-[0.2em] text-[10px] font-bold transition-all opacity-0 pointer-events-none transform translate-y-4 shadow-heavy">
+                    Consolidar Análise
+                </button>
+            </div>
         </section>
 
-        <section id="view-5" class="hidden flex-col justify-center py-8 md:py-10 w-full max-w-3xl mx-auto">
-            <div class="mb-10 text-center w-full relative pt-10">
-                <button onclick="goBack()" class="absolute left-0 top-8 w-10 h-10 md:w-12 md:h-12 rounded-full flex items-center justify-center hover:bg-black/5 dark:hover:bg-white/5 transition-colors glass-panel no-hover shadow-sm z-10">
-                    <i data-lucide="arrow-left" class="w-4 h-4 md:w-5 md:h-5 opacity-70"></i>
-                </button>
-                <span class="font-tech text-[9px] md:text-[10px] tracking-[0.3em] uppercase block mb-3 font-bold opacity-50">Último Passo — 5 de 5</span>
-                <h2 class="font-editorial italic text-3xl md:text-5xl px-2">Qual o seu Alvo Clínico hoje?</h2>
+        <!-- View 5: Alvo (Objetivo) -->
+        <section id="view-5" class="hidden flex-col justify-center min-h-[75vh] w-full">
+            <div class="mb-10 text-center">
+                <div class="inline-block mb-4 px-4 py-1.5 rounded-full bg-brand-textDay dark:bg-white text-white dark:text-black font-mono text-[9px] tracking-[0.3em] uppercase font-bold shadow-md">
+                    Último Passo — 5 de 5
+                </div>
+                <h2 class="font-editorial italic text-3xl md:text-4xl font-bold">Qual o seu Alvo de Intervenção hoje?</h2>
             </div>
             
-            <div class="space-y-4 md:space-y-5 relative z-10">
-                <button onclick="saveSingleAnswer('objetivo', 'Tratamento', 6, this)" class="option-btn glass-panel w-full text-left p-6 md:p-8 flex items-center justify-between group cursor-pointer">
+            <div class="space-y-4">
+                <button onclick="saveSingleAnswer('objetivo', 'Tratamento', 6)" class="option-btn btn-press glass-panel w-full text-left p-5 md:p-6 flex items-center justify-between group">
                     <div>
-                        <span class="font-tech font-bold text-sm md:text-lg block mb-1 uppercase tracking-widest transition-colors">Recuperação Estrutural Capilar Profunda</span>
-                        <span class="font-tech text-xs subtitle-text opacity-60 block transition-colors">Tratamentos biotecnológicos para devolver massa, força e estabilidade à fibra.</span>
+                        <span class="font-tech font-bold text-base md:text-lg block mb-1">Recuperação Estrutural Profunda</span>
+                        <span class="font-tech text-xs font-medium subtitle-text text-brand-subtextDay dark:text-brand-subtextNight">Devolver força estrutural, vitaminas e saúde absoluta à matriz do fio.</span>
                     </div>
                 </button>
-                <button onclick="saveSingleAnswer('objetivo', 'Quimica', 6, this)" class="option-btn glass-panel w-full text-left p-6 md:p-8 flex items-center justify-between group cursor-pointer">
+                <button onclick="saveSingleAnswer('objetivo', 'Quimica', 6)" class="option-btn btn-press glass-panel w-full text-left p-5 md:p-6 flex items-center justify-between group">
                     <div>
-                        <span class="font-tech font-bold text-sm md:text-lg block mb-1 uppercase tracking-widest transition-colors">Transformação Segura (Bio-Arquitetura)</span>
-                        <span class="font-tech text-xs subtitle-text opacity-60 block transition-colors">Agendar um alinhamento térmico perfeito ou coloração com laudo de segurança.</span>
+                        <span class="font-tech font-bold text-base md:text-lg block mb-1">Modelação Lisa ou Coloração</span>
+                        <span class="font-tech text-xs font-medium subtitle-text text-brand-subtextDay dark:text-brand-subtextNight">Quero realizar um alisamento ou alterar a cor com laudo de segurança.</span>
                     </div>
                 </button>
-                <button onclick="saveSingleAnswer('objetivo', 'Corte', 6, this)" class="option-btn glass-panel w-full text-left p-6 md:p-8 flex items-center justify-between group cursor-pointer">
+                <button onclick="saveSingleAnswer('objetivo', 'Corte', 6)" class="option-btn btn-press glass-panel w-full text-left p-5 md:p-6 flex items-center justify-between group">
                     <div>
-                        <span class="font-tech font-bold text-sm md:text-lg block mb-1 uppercase tracking-widest transition-colors">Design de Corte Terapêutico</span>
-                        <span class="font-tech text-xs subtitle-text opacity-60 block transition-colors">Renovar a arquitetura do corte e polir a oxidação severa das pontas com precisão.</span>
+                        <span class="font-tech font-bold text-base md:text-lg block mb-1">Design de Corte Terapêutico</span>
+                        <span class="font-tech text-xs font-medium subtitle-text text-brand-subtextDay dark:text-brand-subtextNight">Renovar a arquitetura do corte e eliminar pontas oxidadas.</span>
                     </div>
                 </button>
-                <button onclick="saveSingleAnswer('objetivo', 'Mapeamento', 6, this)" class="option-btn glass-panel w-full text-left p-6 md:p-8 flex items-center justify-between group cursor-pointer">
+                <button onclick="saveSingleAnswer('objetivo', 'Mapeamento', 6)" class="option-btn btn-press glass-panel w-full text-left p-5 md:p-6 flex items-center justify-between group">
                     <div>
-                        <span class="font-tech font-bold text-sm md:text-lg block mb-1 uppercase tracking-widest transition-colors">Apenas Mapeamento Analítico</span>
-                        <span class="font-tech text-xs subtitle-text opacity-60 block transition-colors">Sem compromisso de serviço hoje. Receber apenas o relatório prescritivo digital do meu fio.</span>
+                        <span class="font-tech font-bold text-base md:text-lg block mb-1">Apenas Mapeamento Analítico</span>
+                        <span class="font-tech text-xs font-medium subtitle-text text-brand-subtextDay dark:text-brand-subtextNight">Apenas recolher o laudo biométrico do fio para análise e conhecimento.</span>
                     </div>
                 </button>
             </div>
+            
+            <div class="mt-8 text-left">
+                <button onclick="goBack()" class="inline-flex items-center gap-2 text-[10px] uppercase tracking-widest font-bold opacity-50 hover:opacity-100 transition-opacity"><i class="ph ph-arrow-left"></i> Voltar</button>
+            </div>
         </section>
 
-        <section id="view-6" class="hidden flex-col justify-center py-8 md:py-10 max-w-2xl mx-auto w-full">
-            <div class="mb-10 text-center w-full relative pt-10">
-                <button onclick="goBack()" class="absolute left-0 top-8 w-10 h-10 md:w-12 md:h-12 rounded-full flex items-center justify-center hover:bg-black/5 dark:hover:bg-white/5 transition-colors glass-panel no-hover shadow-sm z-10">
-                    <i data-lucide="arrow-left" class="w-4 h-4 md:w-5 md:h-5 opacity-70"></i>
-                </button>
-                
-                <div class="inline-flex items-center justify-center gap-2 px-4 py-1.5 rounded-full mb-6 border border-black/10 dark:border-white/10 bg-black/5 dark:bg-white/5 shadow-sm">
-                    <i data-lucide="lock-keyhole" class="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400"></i>
-                    <span class="font-tech text-[8px] md:text-[9px] uppercase tracking-widest font-bold">Conexão Segura</span>
+        <!-- View 6: Captura de Dados (Gatilho de Credencial) -->
+        <section id="view-6" class="hidden flex-col justify-center py-10 min-h-[75vh] w-full">
+            <div class="mb-10 text-center">
+                <div class="bg-black dark:bg-white p-4 rounded-full inline-block mb-6 shadow-xl border border-black/10 dark:border-white/20">
+                    <i class="ph ph-lock-key text-4xl text-white dark:text-black"></i>
                 </div>
-                
-                <h2 class="font-editorial italic text-3xl md:text-5xl mb-4 relative z-10">Laudo Criptografado</h2>
-                <div id="lead-dynamic-hook" class="font-tech text-xs md:text-sm font-bold uppercase tracking-widest opacity-60 mb-2 text-brand-accentDay dark:text-brand-accentNight"></div>
-                <p class="font-tech text-sm md:text-base leading-relaxed font-light opacity-80 relative z-10 px-4 max-w-lg mx-auto">
-                    A arquitetura dos seus fios foi processada. O seu laudo contém dados sensíveis sobre a estrutura capilar. <strong>Insira as suas credenciais abaixo para descriptografar o resultado na tela.</strong>
+                <h2 class="font-editorial italic text-3xl md:text-4xl mb-3 font-bold">Laudo Criptografado</h2>
+                <div class="inline-block bg-white/60 dark:bg-black/40 border border-black/10 dark:border-white/10 px-4 py-2 rounded-xl mb-4 shadow-sm backdrop-blur-md">
+                    <p id="dynamic-summary-pre" class="font-mono text-[9px] uppercase tracking-widest font-bold text-brand-textDay dark:text-white"></p>
+                </div>
+                <p class="font-tech text-brand-subtextDay dark:text-brand-subtextNight text-xs md:text-sm leading-relaxed font-medium">
+                    A arquitetura dos seus fios foi cruzada e processada. Insira as suas credenciais para descriptografar o protocolo de segurança no ecrã e receber uma cópia via WhatsApp.
                 </p>
             </div>
             
-            <form id="leadForm" onsubmit="handleLeadSubmit(event)" class="space-y-6 md:space-y-8 w-full glass-panel p-8 md:p-12 shadow-2xl relative z-10">
-                <div class="relative group">
-                    <input type="text" id="nome" name="name" autocomplete="name" autocapitalize="words" required oninput="validateForm()" placeholder=" " class="block w-full bg-transparent border-0 border-b border-black/20 dark:border-white/20 py-3 md:py-4 text-base md:text-lg focus:ring-0 outline-none focus:border-black dark:focus:border-white transition-all peer font-tech h-14">
-                    <label for="nome" class="absolute text-[10px] font-bold uppercase tracking-[0.3em] opacity-50 duration-300 transform -translate-y-8 scale-75 top-5 -z-10 origin-[0] peer-focus:opacity-100 cursor-text">Seu Nome Completo</label>
+            <form id="leadForm" onsubmit="handleLeadSubmit(event)" class="space-y-5">
+                <div>
+                    <input type="text" id="nome" autocomplete="name" autocapitalize="words" required oninput="validateForm()" class="input-ui w-full p-4 text-sm font-tech border border-black/10 dark:border-white/10 text-brand-textDay dark:text-white placeholder-brand-subtextDay/60 dark:placeholder-white/40 font-medium" placeholder="Nome Completo">
                 </div>
-                
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
-                    <div class="relative group">
-                        <input type="tel" id="whatsapp" name="phone" autocomplete="tel" oninput="formatPhone(this); validateForm()" required placeholder=" " class="block w-full bg-transparent border-0 border-b border-black/20 dark:border-white/20 py-3 md:py-4 text-base md:text-lg focus:ring-0 outline-none focus:border-black dark:focus:border-white transition-all peer font-tech h-14">
-                        <label for="whatsapp" class="absolute text-[10px] font-bold uppercase tracking-[0.3em] opacity-50 duration-300 transform -translate-y-8 scale-75 top-5 -z-10 origin-[0] peer-focus:opacity-100 cursor-text">WhatsApp</label>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                    <div>
+                        <input type="tel" id="whatsapp" autocomplete="tel" inputmode="tel" oninput="formatPhone(this); validateForm()" required class="input-ui w-full p-4 text-sm font-tech border border-black/10 dark:border-white/10 text-brand-textDay dark:text-white placeholder-brand-subtextDay/60 dark:placeholder-white/40 font-medium" placeholder="WhatsApp (DDD)">
                     </div>
-                    <div class="relative group">
-                        <input type="email" id="email" name="email" autocomplete="email" inputmode="email" required oninput="validateForm()" placeholder=" " class="block w-full bg-transparent border-0 border-b border-black/20 dark:border-white/20 py-3 md:py-4 text-base md:text-lg focus:ring-0 outline-none focus:border-black dark:focus:border-white transition-all peer font-tech h-14">
-                        <label for="email" class="absolute text-[10px] font-bold uppercase tracking-[0.3em] opacity-50 duration-300 transform -translate-y-8 scale-75 top-5 -z-10 origin-[0] peer-focus:opacity-100 cursor-text">E-mail Principal</label>
+                    <div>
+                        <input type="email" id="email" autocomplete="email" inputmode="email" autocapitalize="off" required oninput="validateForm()" class="input-ui w-full p-4 text-sm font-tech border border-black/10 dark:border-white/10 text-brand-textDay dark:text-white placeholder-brand-subtextDay/60 dark:placeholder-white/40 font-medium" placeholder="O seu melhor E-mail">
                     </div>
                 </div>
 
-                <div class="flex items-start gap-4 mt-6 pt-2 md:mt-8 md:pt-4">
-                    <div class="relative flex items-start mt-0.5 min-w-[24px] min-h-[24px]">
-                        <input type="checkbox" id="lgpd" required onchange="validateForm()" class="peer h-6 w-6 shrink-0 appearance-none rounded border border-black/30 dark:border-white/30 bg-transparent checked:bg-black dark:checked:bg-white focus:outline-none transition-all cursor-pointer">
-                        <i data-lucide="check" class="absolute top-1 left-1 h-4 w-4 text-white dark:text-black opacity-0 peer-checked:opacity-100 pointer-events-none"></i>
+                <div class="flex items-start gap-3 mt-4 pt-2">
+                    <div class="relative flex items-start mt-0.5">
+                        <input type="checkbox" id="lgpd" required onchange="validateForm()" class="peer h-4 w-4 shrink-0 appearance-none rounded border border-black/30 dark:border-white/50 bg-transparent checked:bg-brand-textDay dark:checked:bg-white checked:border-brand-textDay dark:checked:border-white focus:outline-none transition-all cursor-pointer">
+                        <i class="ph ph-check absolute top-[1px] left-[1px] h-3 w-3 text-white dark:text-black text-xs font-bold text-center opacity-0 peer-checked:opacity-100 pointer-events-none"></i>
                     </div>
-                    <label for="lgpd" class="font-tech text-xs md:text-sm opacity-80 leading-relaxed cursor-pointer font-medium pt-0.5">
-                        Autorizo a Inteligência Clínica a cruzar a minha biometria capilar para emitir o laudo de segurança.
+                    <label for="lgpd" class="font-tech text-[10px] text-brand-subtextDay dark:text-brand-subtextNight font-semibold leading-relaxed cursor-pointer">
+                        Autorizo a Inteligência Clínica a cruzar a minha biometria capilar para emissão do laudo de segurança.
                     </label>
                 </div>
 
-                <button type="submit" id="submitBtn" disabled class="w-full py-5 md:py-6 rounded-2xl font-cta font-black text-[10px] md:text-[11px] uppercase tracking-[0.4em] text-center border border-black/20 dark:border-white/20 bg-transparent opacity-40 cursor-not-allowed transition-all duration-300 shadow-none mt-8 text-inherit">
-                    Desbloquear Laudo Digital
-                </button>
+                <div class="flex items-center gap-4 mt-6">
+                    <button type="button" onclick="goBack()" class="inline-flex items-center gap-2 text-[10px] uppercase tracking-widest font-bold opacity-50 hover:opacity-100 transition-opacity"><i class="ph ph-arrow-left"></i> Voltar</button>
+                    <button type="submit" id="submitBtn" disabled class="flex-1 btn-press glass-panel text-brand-subtextDay/50 dark:text-white/30 font-tech py-5 px-6 rounded-2xl uppercase tracking-[0.2em] text-[10px] font-bold transition-all shadow-sm no-hover pointer-events-none">
+                        Desbloquear Laudo Preliminar
+                    </button>
+                </div>
             </form>
         </section>
 
-        <section id="view-7" class="hidden flex-col items-center justify-center text-center py-20 mt-10 max-w-lg mx-auto w-full relative z-10">
-            <!-- Perfect Centered Loader -->
-            <div class="relative mb-8 flex items-center justify-center w-24 h-24 mx-auto">
-                <!-- Outer Spinner -->
-                <div class="absolute inset-0 w-full h-full rounded-full border-[3px] border-black/5 dark:border-white/5 border-t-black dark:border-t-white animate-spin"></div>
-                <!-- Inner Icon -->
-                <i data-lucide="dna" class="w-10 h-10 text-brand-textDay dark:text-white animate-pulse relative z-10"></i>
+        <!-- View 7: Loader IA perfeitamente centralizado -->
+        <section id="view-7" class="hidden flex-col items-center justify-center text-center min-h-[75vh] w-full">
+            <div class="clinical-spinner-container mb-10">
+                <div class="clinical-spinner"></div>
+                <i class="ph ph-dna font-light text-4xl text-brand-textDay dark:text-white animate-pulse"></i>
             </div>
-            
-            <h3 class="font-editorial italic text-3xl md:text-4xl mb-3 md:mb-4">Processando Arquitetura</h3>
-            <p id="loadingText" class="font-mono text-[9px] md:text-[10px] uppercase tracking-widest font-bold transition-opacity duration-300 opacity-70">Extraindo algoritmos estruturais...</p>
+            <h3 class="font-editorial italic text-3xl mb-3 font-bold">Escaneamento Ativo</h3>
+            <p id="loadingText" class="font-mono text-brand-subtextDay dark:text-brand-subtextNight text-[9px] tracking-widest uppercase font-bold">A mapear integridade cortical...</p>
         </section>
 
-        <section id="view-8" class="hidden flex-col justify-center py-10 mt-6 max-w-3xl mx-auto w-full text-center relative z-10">
+        <!-- View 8: Resultado Dinâmico de Luxo -->
+        <section id="view-8" class="hidden flex-col justify-start py-10 w-full text-center">
             
-            <div class="mb-8 md:mb-10 text-left">
-                <!-- Título Faseamento -->
-                <div class="inline-flex items-center gap-2 px-4 py-2 md:px-5 md:py-2.5 rounded-full mb-6 md:mb-8 border border-black/10 dark:border-white/10 bg-white/50 dark:bg-black/50 shadow-sm backdrop-blur-md">
-                    <i data-lucide="shield-check" class="w-3.5 h-3.5 md:w-4 md:h-4 text-emerald-600 dark:text-emerald-400"></i>
-                    <span class="font-tech text-[8px] md:text-[9px] uppercase tracking-widest font-bold">Laudo Preliminar (Fase 1 de 2)</span>
+            <div class="mb-8">
+                <div class="inline-flex items-center gap-2 glass-panel px-4 py-1.5 rounded-full mb-6 shadow-sm border border-emerald-500/20">
+                    <i class="ph ph-shield-check text-emerald-600 dark:text-emerald-400 text-base"></i>
+                    <span class="font-mono text-[9px] uppercase tracking-widest text-brand-textDay dark:text-brand-textNight font-bold">Laudo Preliminar (Fase 1/2)</span>
                 </div>
                 
-                <h2 id="result-title" class="font-editorial italic text-4xl md:text-5xl lg:text-6xl mb-6 md:mb-8 leading-tight"></h2>
-                
-                <!-- Barra de Progresso do Laudo -->
-                <div class="mb-8 md:mb-10">
-                    <div class="flex justify-between font-tech text-[8px] md:text-[9px] uppercase tracking-widest font-bold opacity-60 mb-2">
-                        <span>Análise Digital (Concluída)</span>
-                        <span class="hidden sm:inline">Auditoria Tátil Presencial (Pendente)</span>
-                        <span class="sm:hidden">Tátil (Pendente)</span>
-                    </div>
-                    <div class="w-full h-1.5 md:h-2 bg-black/5 dark:bg-white/10 rounded-full overflow-hidden flex">
-                        <div class="w-1/2 h-full bg-black dark:bg-white relative overflow-hidden">
-                            <div class="absolute inset-0 bg-white/20 w-full transform -translate-x-full animate-[shimmer_2s_infinite]"></div>
-                        </div>
-                    </div>
-                    <style>@keyframes shimmer { 100% { transform: translateX(100%); } }</style>
+                <!-- Barra de Progresso Falsa (Efeito Zeigarnik) -->
+                <div class="w-full max-w-sm mx-auto mb-8 bg-black/10 dark:bg-white/10 h-1.5 rounded-full overflow-hidden flex border border-black/5 dark:border-white/5">
+                    <div class="h-full bg-emerald-500 w-1/2"></div>
                 </div>
-
-                <!-- Resumo Dinâmico (Causa e Efeito) -->
-                <div class="glass-panel p-6 md:p-10 mb-8 md:mb-10 text-left border-l-4" id="summary-panel" style="border-left-color: #111;">
-                    <p id="dynamic-summary" class="font-tech text-sm md:text-base leading-relaxed font-light italic opacity-90"></p>
+                <div class="flex justify-between max-w-sm mx-auto font-mono text-[8px] uppercase tracking-widest text-brand-subtextDay dark:text-brand-subtextNight px-2 font-bold">
+                    <span>Análise Digital</span>
+                    <span class="opacity-40">Auditoria Tátil</span>
                 </div>
             </div>
 
-            <!-- Div para Alerta Químico de Bloqueio -->
-            <div id="alert-container" class="text-left mb-8 md:mb-10"></div>
-
-            <!-- Receita / Prescrição Robusta -->
-            <div class="doc-paper p-6 md:p-12 rounded-[2rem] md:rounded-[2.5rem] mb-10 md:mb-12 relative overflow-hidden text-left shadow-2xl backdrop-blur-3xl">
-                <!-- Cabeçalho do Laudo -->
-                <div class="flex justify-between items-start border-b border-black/10 dark:border-white/10 pb-5 md:pb-6 mb-6 md:mb-8">
-                    <div>
-                        <h4 class="font-editorial text-2xl md:text-3xl italic mb-2">Prescrição Clínica</h4>
-                        <p class="font-tech text-[8px] md:text-[9px] uppercase tracking-widest opacity-60 font-bold">Protocolo: <span id="protocol-number" class="font-mono text-black dark:text-white"></span></p>
-                    </div>
-                    <div class="text-right flex flex-col items-end">
-                        <i data-lucide="microscope" class="w-5 h-5 md:w-6 md:h-6 opacity-30 mb-1 block"></i>
-                        <span class="font-tech text-[7px] md:text-[8px] uppercase tracking-widest opacity-40 font-bold">Válido por 7 dias</span>
-                    </div>
+            <!-- Resumo Clínico do Paciente (Prontuário) -->
+            <div class="glass-panel p-5 rounded-2xl mb-8 relative text-left border-l-4 border-l-brand-textDay dark:border-l-white">
+                <div class="flex justify-between items-center border-b border-black/10 dark:border-white/10 pb-3 mb-4">
+                    <span class="font-mono text-[10px] font-bold tracking-widest uppercase text-brand-textDay dark:text-white">Protocolo <span id="protocol-number"></span></span>
+                    <button onclick="restartTest()" class="text-[9px] uppercase tracking-widest font-bold opacity-40 hover:opacity-100 transition-opacity text-brand-textDay dark:text-white"><i class="ph ph-arrows-clockwise align-middle"></i> Refazer</button>
                 </div>
-
-                <!-- Quadro Clínico (Boletim) -->
-                <div class="bg-black/5 dark:bg-white/5 rounded-2xl p-5 md:p-6 mb-6 md:mb-8 grid grid-cols-2 gap-y-4 gap-x-4 md:gap-x-8 border border-black/5 dark:border-white/5">
-                    <div>
-                        <span class="block font-tech text-[7px] md:text-[8px] uppercase tracking-widest opacity-50 mb-1 font-bold">Matriz Natural</span>
-                        <span id="chart-curvatura" class="font-tech text-[10px] md:text-xs font-semibold"></span>
-                    </div>
-                    <div>
-                        <span class="block font-tech text-[7px] md:text-[8px] uppercase tracking-widest opacity-50 mb-1 font-bold">Calibre / Densidade</span>
-                        <span id="chart-espessura" class="font-tech text-[10px] md:text-xs font-semibold"></span>
-                    </div>
-                    <div>
-                        <span class="block font-tech text-[7px] md:text-[8px] uppercase tracking-widest opacity-50 mb-1 font-bold">Saturação</span>
-                        <span id="chart-quimica" class="font-tech text-[10px] md:text-xs font-semibold"></span>
-                    </div>
-                    <div>
-                        <span class="block font-tech text-[7px] md:text-[8px] uppercase tracking-widest opacity-50 mb-1 font-bold">Anomalia Principal</span>
-                        <span id="chart-dor" class="font-tech text-[10px] md:text-xs font-semibold"></span>
-                    </div>
-                </div>
-                
-                <!-- Título das Fases Calculadas Dinamicamente -->
-                <div class="mb-5 flex justify-between items-center">
-                    <span id="recipe-count-title" class="font-tech text-[10px] uppercase tracking-widest font-black text-brand-accentDay dark:text-brand-accentNight"></span>
-                    <span class="font-mono text-[8px] opacity-40 uppercase tracking-widest">Acesso Restrito</span>
-                </div>
-
-                <!-- Fases da Receita Injetadas -->
-                <div id="dynamic-recipe" class="space-y-4 md:space-y-6 mb-8 md:mb-10 relative">
-                    <!-- Conteúdo injetado via JS -->
-                </div>
-                
-                <!-- Assinatura -->
-                <div class="pt-6 md:pt-8 border-t border-black/10 dark:border-white/10 border-dashed flex justify-between items-end opacity-60">
-                    <div class="w-1/2">
-                        <div class="w-full h-px bg-current opacity-30 mb-2"></div>
-                        <span class="font-tech text-[7px] md:text-[8px] uppercase tracking-widest font-bold">Assinatura Especialista Matriz</span>
-                    </div>
-                    <div class="text-right">
-                        <div class="inline-block border border-current rounded-md px-2 py-1 rotate-[-5deg] opacity-50">
-                            <span class="font-mono text-[6px] md:text-[7px] uppercase tracking-widest font-bold block leading-tight">Homologado I.A<br>GL PRO Tech</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Máscara de Cadeado Clínico para Borrar as fases -->
-                <div class="absolute inset-x-0 bottom-0 top-[45%] md:top-[50%] flex flex-col items-center justify-center text-center p-6 md:p-8 bg-gradient-to-t from-brand-bgDay via-brand-bgDay/95 to-transparent dark:from-brand-bgNight dark:via-brand-bgNight/95 border-t border-black/5 dark:border-white/5 pointer-events-none">
-                    <div class="w-12 h-12 md:w-14 md:h-14 rounded-full border border-black/10 dark:border-white/20 bg-brand-surfaceDay dark:bg-brand-surfaceNight flex items-center justify-center mb-4 md:mb-6 shadow-xl backdrop-blur-md">
-                        <i data-lucide="lock" class="w-5 h-5 md:w-6 md:h-6 opacity-80"></i>
-                    </div>
-                    <span class="text-xs md:text-sm font-tech font-medium max-w-md leading-relaxed opacity-90 drop-shadow-sm px-2">
-                        O laudo digital exibe o diagnóstico e a fase preparatória. Por normas clínicas, as fases de reposição exata (nutrição/reconstrução/selamento) e sua ordem estão <strong>bloqueadas</strong> até à avaliação tátil presencial da elasticidade do córtex.
-                    </span>
+                <div class="grid grid-cols-2 gap-4 text-xs font-tech text-brand-textDay dark:text-white">
+                    <div><span class="block opacity-50 text-[8px] uppercase tracking-widest font-bold mb-1">Matriz Natural</span><span id="res-curv" class="font-bold"></span></div>
+                    <div><span class="block opacity-50 text-[8px] uppercase tracking-widest font-bold mb-1">Densidade</span><span id="res-esp" class="font-bold"></span></div>
+                    <div class="col-span-2 pt-2 border-t border-black/5 dark:border-white/5"><span class="block opacity-50 text-[8px] uppercase tracking-widest font-bold mb-1">Saturação e Anomalia</span><span id="res-dor" class="font-bold"></span></div>
                 </div>
             </div>
-
-            <!-- Chamada para Ação Final -->
-            <button id="finalCtaBtn" class="btn-pulse w-full max-w-md mx-auto py-5 md:py-6 rounded-2xl font-cta font-black text-[10px] md:text-[11px] uppercase tracking-[0.4em] text-center btn-luxury flex items-center justify-center gap-2 md:gap-3 transition-transform relative z-10 px-4 shadow-2xl">
-                Finalizar Auditoria na Matriz <i data-lucide="arrow-right" class="w-4 h-4 hidden md:block"></i>
-            </button>
-            <p class="font-tech text-[8px] md:text-[9px] mt-5 md:mt-6 uppercase tracking-widest font-bold opacity-50 flex flex-col items-center gap-1 px-4">
-                <i data-lucide="alert-circle" class="w-3 h-3"></i> Apenas 3 vagas diárias liberadas para laudo tátil.
+            
+            <h2 id="result-title" class="font-editorial italic text-3xl md:text-4xl mb-6 font-bold text-brand-textDay dark:text-white"></h2>
+            
+            <!-- Explicação Causa/Efeito da IA -->
+            <p id="dynamic-summary" class="font-tech text-brand-subtextDay dark:text-white/90 text-sm leading-[1.8] font-medium mb-8 text-left px-2">
             </p>
 
-            <button onclick="restartTest()" class="mt-10 text-[9px] font-tech uppercase tracking-widest font-bold opacity-40 hover:opacity-100 transition-opacity flex items-center justify-center gap-1.5 mx-auto p-2">
-                <i data-lucide="rotate-ccw" class="w-3 h-3"></i> Reiniciar Auditoria
+            <div id="alert-container"></div>
+
+            <!-- Receituário Mágico (Cadeado Parcial Blur) -->
+            <div class="glass-panel p-6 md:p-8 rounded-[2rem] mb-10 relative overflow-hidden text-left shadow-clinic border border-black/10 dark:border-white/10">
+                <div class="flex justify-between items-center border-b border-black/10 dark:border-white/10 pb-4 mb-6">
+                    <h4 class="font-mono text-[10px] uppercase tracking-[0.2em] font-bold text-brand-textDay dark:text-white">Prescrição da IA</h4>
+                    <i class="ph ph-file-text text-xl opacity-30 text-brand-textDay dark:text-white"></i>
+                </div>
+                
+                <div id="dynamic-recipe" class="space-y-4"></div>
+            </div>
+
+            <button id="finalCtaBtn" class="btn-press w-full btn-ready bg-brand-textDay text-white dark:bg-white dark:text-black font-tech py-5 px-6 rounded-2xl uppercase tracking-[0.2em] text-[10px] font-bold transition-all block text-center flex items-center justify-center gap-2 shadow-heavy">
             </button>
+            <p class="font-mono text-[8px] text-brand-subtextDay dark:text-brand-subtextNight mt-4 uppercase tracking-widest font-bold opacity-60">Apenas 3 vagas de auditoria tátil libertadas por dia.</p>
         </section>
 
     </main>
 
     <script>
+        // === 1. LÓGICA DE TEMA (DARK/LIGHT) ===
         function toggleTheme() {
             const htmlClasses = document.documentElement.classList;
-            const themeIcon = document.getElementById('theme-icon');
             if (htmlClasses.contains('dark')) {
                 htmlClasses.remove('dark');
-                themeIcon.setAttribute('data-lucide', 'moon');
             } else {
                 htmlClasses.add('dark');
-                themeIcon.setAttribute('data-lucide', 'sun');
             }
-            if (typeof lucide !== 'undefined') lucide.createIcons();
         }
 
-        document.addEventListener('DOMContentLoaded', () => { 
-            if (typeof lucide !== 'undefined') lucide.createIcons(); 
-        });
-
-        let patientData = { 
-            curvatura: '', 
-            espessura: '', 
-            quimica: [], 
-            dor: [], 
-            objetivo: '', 
-            nome: '', 
-            whatsapp: '', 
-            email: '' 
+        // === 2. GESTÃO DE ESTADO (DATA) ===
+        let patientData = {
+            curvatura: '',
+            espessura: '',
+            quimica: [],
+            dor: [],
+            objetivo: '',
+            nome: '',
+            whatsapp: '',
+            email: ''
         };
-        let currentStep = 0; 
-        const totalSteps = 7; 
-        let isAnimating = false;
 
-        function saveSingleAnswer(key, value, nextStepIndex, btnElement) {
-            if(isAnimating) return;
+        let currentStep = 0;
+        const totalSteps = 7; 
+
+        // Função de Restart Rigoroso
+        function restartTest() {
+            patientData = { curvatura: '', espessura: '', quimica: [], dor: [], objetivo: '', nome: '', whatsapp: '', email: '' };
+            clearCategory('quimica');
+            clearCategory('dor');
+            document.getElementById('leadForm').reset();
+            validateForm();
+            nextView(0);
+        }
+
+        // === 3. LÓGICA DE SELEÇÃO E MEMÓRIA ===
+        function saveSingleAnswer(key, value, nextStepIndex) {
             patientData[key] = value;
-            
-            const stepDiv = document.getElementById(`view-${currentStep}`);
-            stepDiv.querySelectorAll('.option-btn').forEach(btn => btn.classList.remove('option-selected'));
-            if (btnElement) btnElement.classList.add('option-selected');
-            
-            setTimeout(() => nextView(nextStepIndex), 350);
+            document.querySelectorAll(`#view-${currentStep} .option-btn`).forEach(b => setVisualState(b, false));
+            const btn = event.currentTarget;
+            setVisualState(btn, true);
+            setTimeout(() => nextView(nextStepIndex), 300);
         }
 
         function toggleOption(category, value, element) {
             const arr = patientData[category];
-            const index = arr.indexOf(value);
+            const isExclusive = (value === 'Virgem' || value === 'Verde_Saudavel');
+            const exclusiveOption = category === 'quimica' ? 'Virgem' : 'Verde_Saudavel';
             const btnAdvance = document.getElementById(category === 'quimica' ? 'btnAdvance3' : 'btnAdvance4');
 
-            // Lógica de Exclusividade (Virgem / Saudável apaga as outras)
-            if(value === 'Virgem' || value === 'Verde_Saudavel') {
-                clearCategory(category);
-                if (index === -1) { arr.push(value); setVisualState(element, true); }
+            // Lógica rigorosa de Exclusividade (Impede misturar "Virgem" com "Química")
+            if(isExclusive) {
+                const wasSelected = arr.includes(value);
+                clearCategory(category); // Limpa tudo
+                if (!wasSelected) { 
+                    arr.push(value); 
+                    setVisualState(element, true); 
+                }
             } else {
-                const exclusiveIndex = arr.indexOf(category === 'quimica' ? 'Virgem' : 'Verde_Saudavel');
+                // Se clicou num sintoma, desmarca o exclusivo automaticamente
+                const exclusiveIndex = arr.indexOf(exclusiveOption);
                 if (exclusiveIndex > -1) {
                     arr.splice(exclusiveIndex, 1);
                     setVisualState(document.getElementById(category === 'quimica' ? 'btn-virgem' : 'btn-saudavel'), false);
                 }
-                if (index > -1) { arr.splice(index, 1); setVisualState(element, false); } 
-                else { arr.push(value); setVisualState(element, true); }
+                
+                const index = arr.indexOf(value);
+                if (index > -1) { 
+                    arr.splice(index, 1); 
+                    setVisualState(element, false); 
+                } else { 
+                    arr.push(value); 
+                    setVisualState(element, true); 
+                }
             }
 
-            // Atualiza e pulsa o botão de avanço
-            const count = patientData[category].length;
-            if (count > 0) {
-                btnAdvance.innerHTML = `Confirmar (${count}) Seleções`;
+            // Atualiza Botão Avançar Dinâmico (Neurovendas)
+            if (arr.length > 0) {
                 btnAdvance.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-4');
-                btnAdvance.classList.add('opacity-100', 'translate-y-0', 'btn-pulse');
+                btnAdvance.classList.add('opacity-100', 'translate-y-0', 'btn-ready');
+                btnAdvance.innerHTML = `Confirmar (${arr.length}) Seleções`;
             } else {
-                btnAdvance.innerHTML = `Confirmar Seleções`;
                 btnAdvance.classList.add('opacity-0', 'pointer-events-none', 'translate-y-4');
-                btnAdvance.classList.remove('opacity-100', 'translate-y-0', 'btn-pulse');
+                btnAdvance.classList.remove('opacity-100', 'translate-y-0', 'btn-ready');
             }
         }
 
         function setVisualState(element, isSelected) {
+            if(!element) return;
             const icon = element.querySelector('.check-icon');
             if(isSelected) {
                 element.classList.add('option-selected');
-                icon.setAttribute('data-lucide', 'check-square');
-                icon.classList.replace('opacity-50', 'opacity-100');
+                if(icon) icon.classList.replace('ph-square', 'ph-check-square');
             } else {
                 element.classList.remove('option-selected');
-                icon.setAttribute('data-lucide', 'square');
-                icon.classList.replace('opacity-100', 'opacity-50');
+                if(icon) icon.classList.replace('ph-check-square', 'ph-square');
             }
-            if (typeof lucide !== 'undefined') lucide.createIcons();
         }
 
         function clearCategory(category) {
             patientData[category] = [];
             const container = document.getElementById(`options-${category}`);
+            if(!container) return;
             const buttons = container.querySelectorAll('.option-btn');
             buttons.forEach(btn => setVisualState(btn, false));
         }
 
+        // === 4. LÓGICA DE NAVEGAÇÃO ENTRE PASSOS ===
         function nextView(stepIndex) {
-            if(currentStep === stepIndex || isAnimating) return;
-            isAnimating = true;
-
             const currentSection = document.getElementById(`view-${currentStep}`);
             const nextSection = document.getElementById(`view-${stepIndex}`);
             const progress = document.getElementById('progressBar');
 
-            if(stepIndex > 0 && stepIndex < totalSteps) progress.style.width = `${(stepIndex / 6) * 100}%`; 
-            else if(stepIndex === 0) progress.style.width = `0%`;
-            else progress.style.width = `100%`;
-            
-            // Texto Âncora no Form baseado nas escolhas
-            if(stepIndex === 6 && patientData.curvatura && patientData.espessura) {
-                document.getElementById('lead-dynamic-hook').innerHTML = `Estrutura ${patientData.curvatura} processada.`;
+            if(stepIndex > 0 && stepIndex < totalSteps) {
+                progress.style.width = `${(stepIndex / 6) * 100}%`; 
+            } else {
+                if(stepIndex === 0) progress.style.width = `0%`;
+            }
+
+            // Gatilho de Ancoragem (Mostra à cliente que memorizamos os dados)
+            if(stepIndex === 6) {
+                document.getElementById('dynamic-summary-pre').innerText = `Estrutura ${patientData.curvatura} de densidade ${patientData.espessura} processada.`;
             }
 
             window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -716,54 +725,29 @@
             if(currentSection) {
                 currentSection.classList.remove('fade-up-enter');
                 currentSection.classList.add('fade-up-exit');
-            }
-            
-            setTimeout(() => {
-                if(currentSection){
+                setTimeout(() => {
                     currentSection.classList.add('hidden');
                     currentSection.classList.remove('fade-up-exit');
-                }
-                nextSection.classList.remove('hidden');
-                nextSection.classList.add('fade-up-enter');
-                currentStep = stepIndex;
-                isAnimating = false;
-            }, 400); 
-        }
-
-        function goBack() { 
-            if(isAnimating) return;
-            if(currentStep > 0 && currentStep !== 7 && currentStep !== 8) {
-                nextView(currentStep - 1); 
-            } else {
-                window.location.href = 'index.html';
+                    if(nextSection) {
+                        nextSection.classList.remove('hidden');
+                        nextSection.classList.add('fade-up-enter');
+                    }
+                    currentStep = stepIndex;
+                }, 300);
             }
         }
 
-        function restartTest() {
-            if(isAnimating) return;
-            patientData = { curvatura: '', espessura: '', quimica: [], dor: [], objetivo: '', nome: '', whatsapp: '', email: '' };
-            
-            document.querySelectorAll('.option-selected').forEach(el => {
-                if (el.querySelector('.check-icon')) setVisualState(el, false);
-                else el.classList.remove('option-selected');
-            });
-            
-            const btn3 = document.getElementById('btnAdvance3');
-            const btn4 = document.getElementById('btnAdvance4');
-            btn3.classList.add('opacity-0', 'pointer-events-none', 'translate-y-4');
-            btn3.classList.remove('btn-pulse', 'opacity-100', 'translate-y-0');
-            btn4.classList.add('opacity-0', 'pointer-events-none', 'translate-y-4');
-            btn4.classList.remove('btn-pulse', 'opacity-100', 'translate-y-0');
-            
-            document.getElementById('nome').value = '';
-            document.getElementById('whatsapp').value = '';
-            document.getElementById('email').value = '';
-            document.getElementById('lgpd').checked = false;
-            validateForm();
-            
-            nextView(0);
+        function goBack() {
+            if(currentStep === 0) {
+                window.location.href = "index.html";
+                return;
+            }
+            if(currentStep === 8 || currentStep === 7) return; // Impede voltar no loader
+            let prevStep = currentStep - 1;
+            nextView(prevStep);
         }
 
+        // === 5. VALIDAÇÃO E GERAÇÃO DO LAUDO ===
         function formatPhone(input) {
             let value = input.value.replace(/\D/g, ''); 
             if (value.length > 11) value = value.slice(0, 11);
@@ -781,12 +765,12 @@
 
             if(nome.length > 2 && whats.length >= 14 && email.includes('@') && lgpd) {
                 btn.disabled = false;
-                btn.classList.remove('bg-transparent', 'opacity-40', 'cursor-not-allowed', 'shadow-none', 'text-inherit');
-                btn.classList.add('btn-luxury', 'btn-pulse', 'text-white');
+                btn.classList.remove('glass-panel', 'no-hover', 'text-brand-subtextDay/50', 'dark:text-white/30', 'pointer-events-none');
+                btn.classList.add('btn-ready', 'bg-brand-textDay', 'text-white', 'dark:bg-white', 'dark:text-black', 'pointer-events-auto');
             } else {
                 btn.disabled = true;
-                btn.classList.add('bg-transparent', 'opacity-40', 'cursor-not-allowed', 'shadow-none', 'text-inherit');
-                btn.classList.remove('btn-luxury', 'btn-pulse', 'text-white');
+                btn.classList.add('glass-panel', 'no-hover', 'text-brand-subtextDay/50', 'dark:text-white/30', 'pointer-events-none');
+                btn.classList.remove('btn-ready', 'bg-brand-textDay', 'text-white', 'dark:bg-white', 'dark:text-black', 'pointer-events-auto');
             }
         }
 
@@ -800,11 +784,11 @@
         }
 
         const loadingTexts = [
-            "Mapeando geometria da matriz natural...",
-            "Calculando densidade estrutural da fibra...",
-            "Cruzando saturação química com nível de oxidação...",
-            "Aferindo risco e anomalias cuticulares...",
-            "Criptografando laudo de Bio-Arquitetura..."
+            "A processar base orgânica e densidade do fio...",
+            "A cruzar histórico com nível de oxidação química...",
+            "A calcular compatibilidade estrutural das pontas...",
+            "A estruturar arquitetura de reversão clínica...",
+            "A gerar protocolo criptografado [GL.] PRO..."
         ];
 
         function simulateLoading() {
@@ -814,36 +798,41 @@
                 i++;
                 if(i < loadingTexts.length) {
                     textElement.style.opacity = 0;
-                    setTimeout(() => { textElement.innerText = loadingTexts[i]; textElement.style.opacity = 1; }, 300);
+                    setTimeout(() => {
+                        textElement.innerText = loadingTexts[i];
+                        textElement.style.opacity = 1;
+                    }, 300);
                 }
-            }, 1400); 
+            }, 1200); 
 
             setTimeout(() => {
                 clearInterval(interval);
                 generateResult();
                 nextView(8);
-            }, 7500);
+            }, 6000);
         }
 
+        // Tradutores Clínicos para a IA
         const traduzQuimica = (arr) => {
-            if(arr.includes('Virgem')) return "ausência de processos oxidativos";
+            if(arr.includes('Virgem')) return "ausência de químicas (matriz virgem)";
             let nomes = arr.map(q => {
                 if(q === 'Acida') return 'progressivas/selagens ácidas';
-                if(q === 'Formol') return 'polímeros sintéticos (formol)';
-                if(q === 'Descoloração') return 'saturação por descoloração';
-                if(q === 'Coloração') return 'colorações globais';
+                if(q === 'Formol') return 'progressivas pesadas (formol)';
+                if(q === 'Descoloração') return 'descoloração/luzes';
+                if(q === 'Coloração') return 'oxidação por coloração';
                 return q;
             });
             return "histórico de " + nomes.join(' e ');
         }
         
-        const traduzSintoma = (arr) => {
-            if(arr.includes('Verde_Saudavel')) return "Estabilidade Estrutural";
+        const traduzDor = (arr) => {
+            if(arr.includes('Verde_Saudavel')) return "Estabilidade Estrutural Garantida";
             let nomes = arr.map(q => {
-                if(q.includes('Ruptura')) return 'Ruptura Severa (Quebra)';
-                if(q.includes('Elastico')) return 'Fadiga Elástica (Emborrachamento)';
-                if(q.includes('Porosidade')) return 'Desalinhamento Cuticular (Alta Porosidade)';
-                if(q.includes('Pontas')) return 'Tricoptilose Crônica (Pontas Duplas)';
+                if(q.includes('Ruptura')) return 'Ruptura Cortical';
+                if(q.includes('Elastico')) return 'Fadiga Elástica Crítica';
+                if(q.includes('Porosidade')) return 'Desalinhamento Cuticular & Frizz';
+                if(q.includes('Afinamento')) return 'Perda de Massa Estrutural';
+                if(q.includes('Pontas')) return 'Tricoptilose (Pontas Duplas)';
                 return q;
             });
             return nomes.join(', ');
@@ -852,109 +841,92 @@
         function generateResult() {
             const hasRed = patientData.dor.some(d => d.includes('Vermelho'));
             const hasYellow = patientData.dor.some(d => d.includes('Amarelo'));
-            const hasPontas = patientData.dor.includes('Amarelo_Pontas');
-            const isVirgem = patientData.quimica.includes('Virgem');
+            const isHealthy = patientData.dor.includes('Verde_Saudavel');
             
-            // Gerar Número de Protocolo
-            const protocolNum = 'GL-' + new Date().getFullYear() + ((new Date().getMonth()+1).toString().padStart(2, '0')) + '-' + Math.floor(Math.random() * 10000).toString().padStart(4, '0');
-            document.getElementById('protocol-number').innerText = protocolNum;
+            // Popula Prontuário Clínico
+            const protNumber = `GL-${new Date().getTime().toString().slice(-6)}`;
+            document.getElementById('protocol-number').innerText = protNumber;
+            document.getElementById('res-curv').innerText = patientData.curvatura;
+            document.getElementById('res-esp').innerText = patientData.espessura;
+            document.getElementById('res-dor').innerText = isHealthy ? "Ausência de Anomalias" : traduzDor(patientData.dor);
 
-            // Preencher Boletim
-            document.getElementById('chart-curvatura').innerText = patientData.curvatura;
-            document.getElementById('chart-espessura').innerText = patientData.espessura;
-            document.getElementById('chart-quimica').innerText = isVirgem ? "Matriz Limpa" : "Saturação Positiva";
-            document.getElementById('chart-dor').innerText = traduzSintoma(patientData.dor);
+            let statusText = '';
+            let recipeItems = [];
 
-            let statusText = ''; let protocolSteps = []; let borderColor = '';
-
-            // Copywriting Causa e Efeito (Cruzamento Real)
-            const baseIntro = `Olá, <strong>${patientData.nome.split(' ')[0]}</strong>. A nossa Inteligência processou a sua biometria. Você sinalizou que o seu fio apresenta sintomas claros de <strong>${traduzSintoma(patientData.dor)}</strong>.`;
-            
-            let causaEfeito = '';
-            if (hasRed) causaEfeito = `O algoritmo identificou que a raiz deste problema é a incompatibilidade do seu ${traduzQuimica(patientData.quimica)} aplicado numa estrutura de espessura ${patientData.espessura.toLowerCase()}. O córtex sofreu fissuras graves e perdeu massa essencial.`;
-            else if (hasYellow) causaEfeito = `A nossa análise aponta que isto ocorreu porque o seu ${traduzQuimica(patientData.quimica)} dilatou as escamas protetoras do seu fio de calibre ${patientData.espessura.toLowerCase()}, gerando perda crônica de lipídios e hidratação.`;
-            else causaEfeito = `O seu cabelo encontra-se estável. O foco do protocolo será garantir que o seu fio ${patientData.espessura.toLowerCase()} receba blindagem térmica contínua e polimento perfeito.`;
-
-            const dynamicSummary = `${baseIntro} ${causaEfeito} Abaixo está a arquitetura prescriptiva gerada para o seu caso:`;
-
-            // Lógica Exata de Procedimentos Prescritos
-            protocolSteps.push({ phase: 1, name: "Higienização Preparatória", desc: "Banho Repair Master (Abertura zero cuticular)", visible: true });
+            const dynamicSummary = `Olá, <strong>${patientData.nome.split(' ')[0]}</strong>. A nossa inteligência processou as suas métricas. A soma do seu ${traduzQuimica(patientData.quimica)} aplicados num fio de densidade ${patientData.espessura} resultou num quadro de ${traduzDor(patientData.dor).toLowerCase()}. Para reverter e garantir a segurança do seu património visual, desenhamos a seguinte prescrição exclusiva:`;
 
             if(hasRed) { 
-                statusText = "Risco Clínico:<br><span class='text-rose-600 dark:text-rose-500 font-bold text-3xl md:text-5xl lg:text-6xl tracking-tight'>Grau 4 (Colapso Cortical)</span>"; 
-                borderColor = '#e11d48'; 
-                protocolSteps.push({ phase: 2, name: "Reconstrução do Córtex", desc: "Infusão de Aminoácidos Catiônicos e Proteína", visible: false });
-                protocolSteps.push({ phase: 3, name: "Estabilizador Químico", desc: "Neutralização de pH e Bloqueio de Ruptura", visible: false });
-                protocolSteps.push({ phase: 4, name: "Escudo Térmico Cimentante", desc: "Blindagem de Matriz", visible: false });
-            } else if(hasYellow) { 
-                statusText = "Risco Clínico:<br><span class='text-amber-600 dark:text-amber-500 font-bold text-3xl md:text-5xl lg:text-6xl tracking-tight'>Grau 2 (Fadiga Cuticular)</span>"; 
-                borderColor = '#d97706'; 
-                protocolSteps.push({ phase: 2, name: "Nutrição Intracelular", desc: "Ampola Ouro Repair Gloss (Reposição de Massa)", visible: false });
-                protocolSteps.push({ phase: 3, name: "Selamento Cuticular", desc: "Fechamento Termo-Ativado Anti-Frizz", visible: false });
-                protocolSteps.push({ phase: 4, name: "Polimento Extra-Brilho", desc: "American Argan Oil", visible: false });
-            } else { 
-                statusText = "Risco Clínico:<br><span class='text-emerald-600 dark:text-emerald-500 font-bold text-3xl md:text-5xl lg:text-6xl tracking-tight'>Grau 1 (Estabilidade)</span>"; 
-                borderColor = '#10b981'; 
-                protocolSteps.push({ phase: 2, name: "Manutenção Preventiva", desc: "Máscara de Hidratação Profunda", visible: false });
-                protocolSteps.push({ phase: 3, name: "Alinhamento Espelhado", desc: "Sérum Fotoprotetor", visible: false });
+                statusText = "Nível Crítico:<br><span class='text-rose-600 dark:text-rose-500'>Risco de Colapso Cortical</span>"; 
+                recipeItems.push("Higienização Catiônica Base");
+                recipeItems.push("Infusão de Massa de Baixo Peso Molecular");
+                recipeItems.push("Estabilização do pH Cortical (Anti-Ruptura)");
+                recipeItems.push("Blindagem Termoprotetora Absoluta");
             }
-
-            if(hasPontas || patientData.objetivo === 'Corte') {
-                protocolSteps.push({ phase: protocolSteps.length + 1, name: "Design Terapêutico", desc: "Remoção cirúrgica de oxidação", visible: false });
+            else if(hasYellow) { 
+                statusText = "Nível Alerta:<br><span class='text-amber-600 dark:text-amber-500'>Fadiga Cuticular Crônica</span>"; 
+                recipeItems.push("Banho Repair Anti-Resíduo Suave");
+                recipeItems.push("Reposição Lipídica Hidrofóbica (Cimento)");
+                recipeItems.push("Selamento Termo-Ativado (Anti-Frizz)");
+            }
+            else { 
+                statusText = "Nível Seguro:<br><span class='text-emerald-600 dark:text-emerald-500'>Estabilidade Confirmada</span>"; 
+                recipeItems.push("Higienização Protetora Neutra");
+                recipeItems.push("Manutenção de Polímeros Hídricos");
+                recipeItems.push("Alinhamento e Finalização Espelhada");
             }
 
             let alertMessage = "";
             if (patientData.objetivo === 'Quimica' && hasRed) {
                 alertMessage = `
-                <div class="glass-panel p-6 md:p-8 rounded-3xl relative overflow-hidden shadow-sm" style="background: rgba(225,29,72,0.05); border-color: rgba(225,29,72,0.2);">
-                    <div class="absolute left-0 top-0 w-1.5 h-full bg-rose-600"></div>
-                    <span class="text-rose-600 dark:text-rose-500 font-bold text-[10px] md:text-[11px] uppercase tracking-[0.2em] flex items-center gap-2 mb-3"><i data-lucide="alert-triangle" class="w-5 h-5"></i> Procedimento Suspenso</span>
-                    <span class="text-sm md:text-base font-tech font-medium leading-relaxed block opacity-90 text-brand-textDay dark:text-white">
-                        O algoritmo detectou alerta crítico de quebra. Qualquer procedimento químico agressivo neste momento resultará em <strong>corte químico irreversível</strong>. O seu protocolo foi alterado obrigatoriamente para Resgate Estrutural (SOS Bio-Arquitetura).
+                <div class="bg-rose-50 dark:bg-rose-950/30 border border-rose-200 dark:border-rose-500/30 p-5 rounded-2xl mb-6 relative overflow-hidden text-left">
+                    <span class="text-rose-600 dark:text-rose-400 font-bold text-[10px] uppercase tracking-[0.2em] block mb-2"><i class="ph ph-warning-octagon text-base align-middle mr-1"></i> Intervenção Química Suspensa</span>
+                    <span class="text-brand-textDay dark:text-white/90 text-sm font-tech font-bold dark:font-medium leading-relaxed block">
+                        Alerta Crítico: O procedimento químico/alisamento está vetado. O seu fio não suporta tração térmica neste momento sem risco de corte químico. Objetivo redirecionado para SOS Bio-Arquitetura.
                     </span>
                 </div>`;
             }
 
-            // Aplicar os Dados na Tela
             document.getElementById('result-title').innerHTML = statusText;
             document.getElementById('dynamic-summary').innerHTML = dynamicSummary;
-            document.getElementById('summary-panel').style.borderLeftColor = borderColor;
-            document.getElementById('recipe-count-title').innerText = `Protocolo Estimado: ${protocolSteps.length} Fases`;
             
-            // Montar HTML da Receita
-            let recipeHTML = protocolSteps.map((step) => {
-                let lockedClass = step.visible ? "" : "locked-step";
-                let iconHtml = step.visible ? `<i data-lucide="check-circle" class="w-5 h-5 text-emerald-500 shrink-0"></i>` : `<i data-lucide="lock" class="w-5 h-5 opacity-40 shrink-0"></i>`;
-                
-                return `
-                <div class="flex items-center gap-4 ${lockedClass}">
-                    <div class="font-mono text-[10px] md:text-[11px] uppercase tracking-widest w-16 md:w-20 font-bold opacity-50 shrink-0 border border-current rounded px-2 py-1 text-center">[F 0${step.phase}]</div>
-                    <div class="flex-1">
-                        <h5 class="font-tech text-sm md:text-base font-bold leading-tight">${step.name}</h5>
-                        <p class="font-tech text-xs opacity-70 mt-0.5">${step.desc}</p>
-                    </div>
-                    ${iconHtml}
-                </div>`;
-            }).join('<div class="h-[1px] w-full bg-current opacity-10 my-4"></div>');
+            // Ocultação Parcial da Receita (Mágica do Blur)
+            let recipeHTML = recipeItems.map((item, idx) => {
+                if (idx === 0) {
+                    // Passo 1 100% visível
+                    return `
+                    <div class="flex items-center gap-3 p-4 rounded-xl border border-emerald-500/40 bg-emerald-500/10">
+                        <div class="font-mono text-[10px] text-emerald-700 dark:text-emerald-400 tracking-widest w-16 font-bold">[ FASE 01 ]</div>
+                        <span class="font-tech text-sm text-brand-textDay dark:text-white/90 tracking-wide font-bold leading-tight flex-1">${item}</span>
+                        <i class="ph ph-check-circle text-emerald-600 dark:text-emerald-400 text-lg"></i>
+                    </div>`;
+                } else {
+                    // Passos 2 em diante borrados com cadeado
+                    return `
+                    <div class="flex items-center gap-3 p-4 rounded-xl border border-black/10 dark:border-white/10 bg-black/5 dark:bg-white/5 relative overflow-hidden group">
+                        <div class="absolute inset-0 backdrop-blur-md z-10 flex items-center justify-center transition-all">
+                            <div class="flex items-center gap-2 bg-brand-textDay dark:bg-white px-3 py-1.5 rounded-full shadow-md">
+                                <i class="ph ph-lock-key text-white dark:text-black text-xs font-bold"></i>
+                                <span class="text-[8px] font-mono uppercase tracking-widest font-bold text-white dark:text-black">Auditoria Tátil Necessária</span>
+                            </div>
+                        </div>
+                        <div class="font-mono text-[10px] text-brand-subtextDay dark:text-white/40 tracking-widest w-16 font-bold">[ FASE 0${idx+1} ]</div>
+                        <span class="font-tech text-sm text-brand-textDay dark:text-white tracking-wide font-bold leading-tight filter blur-[5px] select-none opacity-40">${item}</span>
+                    </div>`;
+                }
+            }).join('');
             
             document.getElementById('dynamic-recipe').innerHTML = recipeHTML;
             document.getElementById('alert-container').innerHTML = alertMessage;
 
-            // CTA WhatsApp
             const ctaBtn = document.getElementById('finalCtaBtn');
-            const whatsappMsg = `Olá! Sou a ${patientData.nome.split(' ')[0]}. Concluí a Fase 1 do meu Diagnóstico Capilar (Protocolo: ${protocolNum}).\n\nIdentificaram que eu tenho ${traduzSintoma(patientData.dor)}.\n\nPreciso agendar a *Fase 2 (Avaliação Tátil Presencial)* para desbloquear as fases da minha receita na Matriz.`;
+            const whatsappMsg = `Olá, Equipa GL PRO. Concluí a Fase 1 da minha Auditoria Digital (Protocolo ${protNumber}). Preciso agendar a Auditoria Tátil (Fase 2) na Matriz para finalizar o meu laudo e descobrir o meu protocolo de Bio-Arquitetura.`;
             const whatsappUrl = `https://wa.me/5549991618389?text=` + encodeURIComponent(whatsappMsg);
 
-            ctaBtn.onclick = function() { window.open(whatsappUrl, '_blank'); };
+            ctaBtn.onclick = function() {
+                window.open(whatsappUrl, '_blank');
+            };
 
-            if (patientData.objetivo === 'Mapeamento') {
-                ctaBtn.innerHTML = "Agendar Avaliação Tátil (Fase 2) <i data-lucide='external-link' class='w-4 h-4 ml-1 hidden md:block'></i>";
-            } else if (patientData.objetivo === 'Quimica' && hasRed) {
-                ctaBtn.innerHTML = "Agendar SOS Resgate na Matriz <i data-lucide='external-link' class='w-4 h-4 ml-1 hidden md:block'></i>";
-            } else {
-                ctaBtn.innerHTML = "Finalizar Auditoria na Matriz <i data-lucide='external-link' class='w-4 h-4 ml-1 hidden md:block'></i>";
-            }
-            if (typeof lucide !== 'undefined') lucide.createIcons();
+            ctaBtn.innerHTML = `Finalizar Auditoria na Matriz <i class="ph ph-arrow-right text-base"></i>`;
         }
     </script>
 </body>
